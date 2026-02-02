@@ -7,7 +7,6 @@ Tests the BaseLogGenerator abstract class.
 import pytest
 from datetime import datetime
 from typing import Any, Dict
-from unittest.mock import MagicMock
 
 from mmofakelog.generators.base import BaseLogGenerator
 from mmofakelog.core.types import (
@@ -124,12 +123,6 @@ class TestBaseLogGenerator:
         # Should return entry with error info
         assert "error" in entry.data
         assert "Generation failed" in entry.data["error"]
-
-    def test_ai_client_injection(self, mock_ai_client):
-        """Should accept AI client."""
-        generator = ConcreteGenerator(ai_client=mock_ai_client)
-
-        assert generator._ai_client is mock_ai_client
 
     def test_repr_without_metadata(self, generator):
         """Should have repr without metadata."""

@@ -182,7 +182,6 @@ class LogTypeMetadata:
         recurrence: How often this log type typically fires
         description: Human-readable description
         text_template: Printf-style template for text output
-        requires_ai: Whether this log type uses AI generation
         tags: Optional tags for filtering/organization
     """
 
@@ -192,7 +191,6 @@ class LogTypeMetadata:
     recurrence: RecurrencePattern
     description: str
     text_template: str
-    requires_ai: bool = False
     tags: tuple = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
@@ -380,39 +378,6 @@ class NetworkMetrics:
 # =============================================================================
 # PROTOCOLS (for dependency injection)
 # =============================================================================
-
-
-class AIClientProtocol(Protocol):
-    """
-    Protocol defining the AI client interface.
-
-    Allows for dependency injection and easy mocking in tests.
-    """
-
-    def generate_chat_message(
-        self,
-        context: str,
-        player_name: str,
-        channel: str,
-    ) -> str:
-        """Generate a realistic chat message."""
-        ...
-
-    def generate_quest_text(
-        self,
-        quest_type: str,
-        difficulty: str,
-    ) -> str:
-        """Generate quest-related text."""
-        ...
-
-    def generate_item_description(
-        self,
-        item_type: str,
-        rarity: str,
-    ) -> str:
-        """Generate an item description."""
-        ...
 
 
 class FormatterProtocol(Protocol):

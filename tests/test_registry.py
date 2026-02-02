@@ -226,24 +226,6 @@ class TestLogTypeRegistry:
         info_types = empty_registry.get_by_severity(LogSeverity.INFO)
         assert len(info_types) == 2
 
-    def test_get_ai_required(self, empty_registry):
-        """Should filter AI-required types."""
-        for i, requires_ai in enumerate([False, True, False]):
-            metadata = LogTypeMetadata(
-                name=f"test.type{i}",
-                category=LogCategory.PLAYER,
-                severity=LogSeverity.INFO,
-                recurrence=RecurrencePattern.NORMAL,
-                description="Test",
-                text_template="Test",
-                requires_ai=requires_ai,
-            )
-            empty_registry.register(f"test.type{i}", metadata, DummyGenerator)
-
-        ai_types = empty_registry.get_ai_required()
-        assert len(ai_types) == 1
-        assert "test.type1" in ai_types
-
     def test_get_by_tag(self, empty_registry):
         """Should filter by tag."""
         tags_list = [("tag1",), ("tag2",), ("tag1", "tag2")]
@@ -376,7 +358,6 @@ class TestRegisterLogTypeDecorator:
             recurrence=RecurrencePattern.NORMAL,
             description="Decorated test",
             text_template="Test: {message}",
-            requires_ai=True,
             tags=["tag1", "tag2"],
         )
         class DecoratedGenerator(BaseLogGenerator):
@@ -385,7 +366,6 @@ class TestRegisterLogTypeDecorator:
 
         registry = get_registry()
         metadata = registry.get_metadata("decorated.test")
-        assert metadata.requires_ai is True
         assert "tag1" in metadata.tags
 
 

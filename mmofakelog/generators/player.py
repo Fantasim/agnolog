@@ -388,7 +388,6 @@ class PlayerInventoryFullGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.FREQUENT,
     description="Local chat message",
     text_template="[{timestamp}] [SAY] {char_name}: {message}",
-    requires_ai=True,
 )
 class PlayerChatSayGenerator(BaseLogGenerator):
     """Generates local chat log entries."""
@@ -397,18 +396,9 @@ class PlayerChatSayGenerator(BaseLogGenerator):
         char_name = kwargs.get("char_name") or generate_character_name()
         zone = kwargs.get("zone") or generate_zone()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context=f"casual gameplay in {zone}",
-                player_name=char_name,
-                channel="say",
-            )
-        else:
-            message = get_chat_message("say")
-
         return {
             "char_name": char_name,
-            "message": message,
+            "message": get_chat_message("say"),
             "zone": zone,
         }
 
@@ -420,7 +410,6 @@ class PlayerChatSayGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.NORMAL,
     description="Yell chat message",
     text_template="[{timestamp}] [YELL] {char_name}: {message}",
-    requires_ai=True,
 )
 class PlayerChatYellGenerator(BaseLogGenerator):
     """Generates yell chat log entries."""
@@ -428,18 +417,9 @@ class PlayerChatYellGenerator(BaseLogGenerator):
     def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
         char_name = kwargs.get("char_name") or generate_character_name()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context="exciting moment",
-                player_name=char_name,
-                channel="yell",
-            )
-        else:
-            message = get_chat_message("yell")
-
         return {
             "char_name": char_name,
-            "message": message,
+            "message": get_chat_message("yell"),
             "zone": generate_zone(),
         }
 
@@ -451,7 +431,6 @@ class PlayerChatYellGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.FREQUENT,
     description="Private whisper message",
     text_template="[{timestamp}] [WHISPER] {from_char} -> {to_char}: {message}",
-    requires_ai=True,
 )
 class PlayerChatWhisperGenerator(BaseLogGenerator):
     """Generates whisper log entries."""
@@ -460,19 +439,10 @@ class PlayerChatWhisperGenerator(BaseLogGenerator):
         from_char = kwargs.get("from_char") or generate_character_name()
         to_char = kwargs.get("to_char") or generate_character_name()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context="private conversation",
-                player_name=from_char,
-                channel="whisper",
-            )
-        else:
-            message = get_chat_message("whisper")
-
         return {
             "from_char": from_char,
             "to_char": to_char,
-            "message": message,
+            "message": get_chat_message("whisper"),
         }
 
 
@@ -483,7 +453,6 @@ class PlayerChatWhisperGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.FREQUENT,
     description="Party chat message",
     text_template="[{timestamp}] [PARTY] {char_name}: {message}",
-    requires_ai=True,
 )
 class PlayerChatPartyGenerator(BaseLogGenerator):
     """Generates party chat log entries."""
@@ -491,18 +460,9 @@ class PlayerChatPartyGenerator(BaseLogGenerator):
     def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
         char_name = kwargs.get("char_name") or generate_character_name()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context="dungeon group",
-                player_name=char_name,
-                channel="party",
-            )
-        else:
-            message = get_chat_message("party")
-
         return {
             "char_name": char_name,
-            "message": message,
+            "message": get_chat_message("party"),
             "party_size": random.randint(2, 5),
         }
 
@@ -514,7 +474,6 @@ class PlayerChatPartyGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.FREQUENT,
     description="Guild chat message",
     text_template="[{timestamp}] [GUILD:{guild}] {char_name}: {message}",
-    requires_ai=True,
 )
 class PlayerChatGuildGenerator(BaseLogGenerator):
     """Generates guild chat log entries."""
@@ -523,19 +482,10 @@ class PlayerChatGuildGenerator(BaseLogGenerator):
         char_name = kwargs.get("char_name") or generate_character_name()
         guild = kwargs.get("guild") or generate_guild_name()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context="guild socializing",
-                player_name=char_name,
-                channel="guild",
-            )
-        else:
-            message = get_chat_message("guild")
-
         return {
             "char_name": char_name,
             "guild": guild,
-            "message": message,
+            "message": get_chat_message("guild"),
         }
 
 
@@ -546,7 +496,6 @@ class PlayerChatGuildGenerator(BaseLogGenerator):
     recurrence=RecurrencePattern.NORMAL,
     description="Trade chat message",
     text_template="[{timestamp}] [TRADE] {char_name}: {message}",
-    requires_ai=True,
 )
 class PlayerChatTradeGenerator(BaseLogGenerator):
     """Generates trade chat log entries."""
@@ -554,18 +503,9 @@ class PlayerChatTradeGenerator(BaseLogGenerator):
     def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
         char_name = kwargs.get("char_name") or generate_character_name()
 
-        if self._ai_client:
-            message = self._ai_client.generate_chat_message(
-                context="trading",
-                player_name=char_name,
-                channel="trade",
-            )
-        else:
-            message = get_chat_message("trade")
-
         return {
             "char_name": char_name,
-            "message": message,
+            "message": get_chat_message("trade"),
             "city": random.choice(["Stormwind", "Orgrimmar", "Ironforge", "Thunder Bluff"]),
         }
 

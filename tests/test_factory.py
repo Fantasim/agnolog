@@ -6,7 +6,6 @@ Tests the LogFactory class for creating log entries.
 
 import pytest
 from datetime import datetime
-from unittest.mock import MagicMock
 
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry
@@ -151,30 +150,6 @@ class TestLogFactoryRandom:
 
         # Entry should exist
         assert entry is not None
-
-
-class TestLogFactoryWithAI:
-    """Tests for AI client integration."""
-
-    def test_set_ai_client(self, factory, mock_ai_client):
-        """Should set AI client."""
-        factory.set_ai_client(mock_ai_client)
-        assert factory._ai_client is mock_ai_client
-
-    def test_ai_client_passed_to_generator(self, factory_registry, mock_ai_client):
-        """Should pass AI client to generators."""
-        factory = LogFactory(
-            registry=factory_registry,
-            ai_client=mock_ai_client,
-        )
-
-        # Create entry to instantiate generator
-        entry = factory.create("test.simple")
-
-        # Generator should have AI client
-        generator = factory._generator_instances.get("test.simple")
-        assert generator is not None
-        assert generator._ai_client is mock_ai_client
 
 
 class TestLogFactoryCache:

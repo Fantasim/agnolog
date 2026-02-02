@@ -15,7 +15,6 @@ from mmofakelog.core.registry import LogTypeRegistry, get_registry
 from mmofakelog.core.types import LogCategory, LogEntry, LogTypeMetadata, RecurrencePattern
 
 if TYPE_CHECKING:
-    from mmofakelog.ai.client import AIClient
     from mmofakelog.generators.base import BaseLogGenerator
 
 
@@ -24,11 +23,10 @@ class LogFactory:
     Factory for creating log entries.
 
     Uses the Factory pattern to abstract log creation and enable
-    consistent log generation across all types. Dependencies
-    (AI client, config) are injected for testability.
+    consistent log generation across all types.
 
     Usage:
-        factory = LogFactory(ai_client=my_ai_client)
+        factory = LogFactory()
         entry = factory.create("player.login")
         entries = factory.create_batch("player.login", count=10)
     """
@@ -36,7 +34,6 @@ class LogFactory:
     def __init__(
         self,
         registry: Optional[LogTypeRegistry] = None,
-        ai_client: Optional[AIClient] = None,
         server_id: Optional[str] = None,
     ) -> None:
         """
@@ -44,11 +41,9 @@ class LogFactory:
 
         Args:
             registry: Log type registry (uses singleton if None)
-            ai_client: Optional AI client for dynamic content
             server_id: Optional default server ID for entries
         """
         self._registry = registry or get_registry()
-        self._ai_client = ai_client
         self._server_id = server_id
         self._generator_instances: Dict[str, BaseLogGenerator] = {}
 
@@ -81,10 +76,8 @@ class LogFactory:
                 self._get_logger().warning(f"Generator not found for log type: {log_type}")
                 return None
 
-            # Create generator with injected dependencies
-            self._generator_instances[log_type] = generator_class(
-                ai_client=self._ai_client,
-            )
+            # Create generator instance
+            self._generator_instances[log_type] = generator_class()
             self._get_logger().debug(f"Created generator instance for: {log_type}")
 
         return self._generator_instances[log_type]
@@ -246,20 +239,6 @@ class LogFactory:
             List of log type names in the category
         """
         return self._registry.get_by_category(category)
-
-    def set_ai_client(self, ai_client: AIClient) -> None:
-        """
-        Set or update the AI client.
-
-        This will update all existing generator instances.
-
-        Args:
-            ai_client: The AI client to use
-        """
-        self._ai_client = ai_client
-        # Update existing generators
-        for generator in self._generator_instances.values():
-            generator._ai_client = ai_client  # type: ignore
 
     def clear_cache(self) -> None:
         """Clear cached generator instances."""

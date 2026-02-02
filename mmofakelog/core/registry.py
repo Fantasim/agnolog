@@ -203,15 +203,6 @@ class LogTypeRegistry:
             name for name, meta in self._registry.items() if meta.severity == severity
         ]
 
-    def get_ai_required(self) -> List[str]:
-        """
-        Get all log types that require AI generation.
-
-        Returns:
-            List of log type names requiring AI
-        """
-        return [name for name, meta in self._registry.items() if meta.requires_ai]
-
     def get_by_tag(self, tag: str) -> List[str]:
         """
         Get all log types with a specific tag.
@@ -283,7 +274,6 @@ def register_log_type(
     recurrence: RecurrencePattern,
     description: str,
     text_template: str,
-    requires_ai: bool = False,
     tags: Optional[List[str]] = None,
 ) -> Callable[[Type[BaseLogGenerator]], Type[BaseLogGenerator]]:
     """
@@ -312,7 +302,6 @@ def register_log_type(
         recurrence: How often this log type fires
         description: Human-readable description
         text_template: Printf-style template for text output
-        requires_ai: Whether this log type uses AI generation
         tags: Optional list of tags for filtering
 
     Returns:
@@ -328,7 +317,6 @@ def register_log_type(
             recurrence=recurrence,
             description=description,
             text_template=text_template,
-            requires_ai=requires_ai,
             tags=tuple(tags) if tags else (),
         )
         registry.register(name, metadata, cls)

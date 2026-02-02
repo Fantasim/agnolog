@@ -4,7 +4,6 @@ Command-line interface for the MMORPG Fake Log Generator.
 Usage:
     mmofakelog -n 100 -f json          # Generate 100 JSON logs
     mmofakelog -n 1000 -f text -o out.log  # Generate text logs to file
-    mmofakelog --ai -n 500             # Use AI for chat messages
     mmofakelog --list-types            # List all available log types
 """
 
@@ -59,8 +58,7 @@ def list_types() -> None:
             for log_type in sorted(types):
                 meta = registry.get_metadata(log_type)
                 if meta:
-                    ai_marker = " [AI]" if meta.requires_ai else ""
-                    print(f"  {log_type:<35} {meta.recurrence.name:<15}{ai_marker}")
+                    print(f"  {log_type:<35} {meta.recurrence.name:<15}")
 
 
 def main(args: Optional[List[str]] = None) -> int:
@@ -72,7 +70,6 @@ def main(args: Optional[List[str]] = None) -> int:
 Examples:
   mmofakelog -n 100                    Generate 100 logs (JSON to stdout)
   mmofakelog -n 1000 -f text -o out.log  Generate text logs to file
-  mmofakelog --ai -n 50                Use AI for chat messages
   mmofakelog --categories player combat  Filter to specific categories
   mmofakelog --list-types              List all available log types
         """,
@@ -149,12 +146,6 @@ Examples:
     )
 
     parser.add_argument(
-        "--ai",
-        action="store_true",
-        help="Enable AI for dynamic content generation",
-    )
-
-    parser.add_argument(
         "--pretty",
         action="store_true",
         help="Pretty-print JSON output",
@@ -217,21 +208,8 @@ Examples:
 
     logger.info(f"Starting log generation: {parsed.count} logs")
 
-    # Setup AI client if enabled
-    ai_client = None
-    if parsed.ai:
-        try:
-            from mmofakelog.ai import AIClient
-            ai_client = AIClient()
-            if ai_client.is_available:
-                logger.info("AI content generation enabled")
-            else:
-                logger.warning("AI requested but not available (no API key?)")
-        except Exception as e:
-            logger.warning(f"Failed to initialize AI client: {e}")
-
     # Create factory and scheduler
-    factory = LogFactory(ai_client=ai_client, server_id=parsed.server_id)
+    factory = LogFactory(server_id=parsed.server_id)
     scheduler = LogScheduler(factory, time_scale=parsed.time_scale)
 
     # Configure enabled log types

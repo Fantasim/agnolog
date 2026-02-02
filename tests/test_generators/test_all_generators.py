@@ -369,6 +369,7 @@ class TestAllGeneratorsDataQuality:
         optional_fields = {
             "error", "zone", "guild", "target_guild",
             "previous_bidder",  # auction_bid: first bid has no previous bidder
+            "buyout",  # auction_list: not all auctions have buyout
         }
 
         for log_type in populated_registry.all_types():

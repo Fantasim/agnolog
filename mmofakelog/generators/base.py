@@ -7,13 +7,10 @@ the _generate_data method to produce log-specific data.
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Any, Dict, Optional, TYPE_CHECKING
+from typing import Any, Dict, Optional
 
 from mmofakelog.core.types import LogEntry, LogTypeMetadata
 from mmofakelog.logging import InternalLoggerMixin
-
-if TYPE_CHECKING:
-    from mmofakelog.ai.client import AIClient
 
 
 class BaseLogGenerator(ABC, InternalLoggerMixin):
@@ -38,17 +35,9 @@ class BaseLogGenerator(ABC, InternalLoggerMixin):
     # Metadata is set by the @register_log_type decorator
     _log_type_metadata: Optional[LogTypeMetadata] = None
 
-    def __init__(
-        self,
-        ai_client: Optional["AIClient"] = None,
-    ) -> None:
-        """
-        Initialize generator with optional dependencies.
-
-        Args:
-            ai_client: Optional AI client for dynamic content
-        """
-        self._ai_client = ai_client
+    def __init__(self) -> None:
+        """Initialize generator."""
+        pass
 
     def generate(
         self,

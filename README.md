@@ -1,13 +1,12 @@
 # mmofakelog
 
-A Python program that generates 100+ realistic MMORPG server log types with varied formats, smart recurrence patterns, and optional OpenAI integration for dynamic content.
+A Python program that generates 100+ realistic MMORPG server log types with varied formats and smart recurrence patterns.
 
 ## Features
 
 - **104 log types** across 6 categories (Player, Server, Security, Economy, Combat, Technical)
 - **Multiple output formats**: JSON and human-readable text
 - **Realistic timing patterns**: Very frequent (packets) to rare (server restarts)
-- **Optional AI integration**: OpenAI for dynamic chat messages and quest text
 - **Extensible design**: Easy to add new log types via decorator registration
 
 ## Installation
@@ -30,9 +29,6 @@ mmofakelog --list-types
 
 # Filter by category
 mmofakelog --categories player combat
-
-# Enable AI for dynamic content
-mmofakelog -n 500 --ai
 ```
 
 ## Log Categories
@@ -85,7 +81,7 @@ usage: mmofakelog [-h] [-n COUNT] [-f {json,text}] [-o OUTPUT]
                   [--categories CATEGORIES] [--types TYPES]
                   [--exclude-types EXCLUDE] [--start-time TIME]
                   [--duration SECONDS] [--time-scale SCALE]
-                  [--seed SEED] [--ai] [--pretty] [--quiet]
+                  [--seed SEED] [--pretty] [--quiet]
                   [--list-types] [--version]
 
 Options:
@@ -99,7 +95,6 @@ Options:
   --duration          Duration in seconds
   --time-scale        Time scaling factor
   --seed              Random seed for reproducibility
-  --ai                Enable AI-generated content
   --pretty            Pretty-print JSON output
   --quiet             Suppress progress messages
   --list-types        List all available log types

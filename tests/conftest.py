@@ -6,7 +6,6 @@ import importlib
 import pytest
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
-from unittest.mock import MagicMock
 
 from mmofakelog.core.registry import LogTypeRegistry, register_log_type
 from mmofakelog.core.types import (
@@ -73,7 +72,6 @@ def sample_metadata():
         recurrence=RecurrencePattern.NORMAL,
         description="Sample test log type",
         text_template="[{timestamp}] TEST: {message}",
-        requires_ai=False,
         tags=("test", "sample"),
     )
 
@@ -114,17 +112,6 @@ def sample_log_entries(sample_timestamp):
             )
         )
     return entries
-
-
-@pytest.fixture
-def mock_ai_client():
-    """Provide a mock AI client."""
-    mock = MagicMock()
-    mock.is_available = True
-    mock.generate_chat_message.return_value = "Hello, fellow adventurer!"
-    mock.generate_quest_text.return_value = "Defeat 10 monsters"
-    mock.generate_item_description.return_value = "A mysterious artifact"
-    return mock
 
 
 class SampleGenerator(BaseLogGenerator):

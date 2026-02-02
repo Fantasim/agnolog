@@ -169,7 +169,6 @@ class TestLogTypeMetadata:
         )
         assert meta.name == "player.login"
         assert meta.category == LogCategory.PLAYER
-        assert meta.requires_ai is False
         assert meta.tags == ()
 
     def test_with_optional_fields(self):
@@ -180,10 +179,8 @@ class TestLogTypeMetadata:
             recurrence=RecurrencePattern.FREQUENT,
             description="Player chat message",
             text_template="[{timestamp}] CHAT: {message}",
-            requires_ai=True,
             tags=("chat", "social"),
         )
-        assert meta.requires_ai is True
         assert "chat" in meta.tags
 
     def test_is_frozen(self):
