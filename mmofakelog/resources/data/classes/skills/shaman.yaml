@@ -1,0 +1,24 @@
+version: "1.0"
+metadata:
+  description: "Shaman class skills"
+  class: Shaman
+
+data:
+  - Lightning Bolt
+  - Chain Lightning
+  - Lava Burst
+  - Earth Shock
+  - Flame Shock
+  - Frost Shock
+  - Stormstrike
+  - Lava Lash
+  - Healing Wave
+  - Lesser Healing Wave
+  - Chain Heal
+  - Riptide
+  - Earth Shield
+  - Water Shield
+  - Lightning Shield
+  - Totemic Recall
+  - Fire Elemental
+  - Earth Elemental

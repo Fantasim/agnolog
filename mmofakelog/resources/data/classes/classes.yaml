@@ -1,0 +1,30 @@
+version: "1.0"
+metadata:
+  description: "Character class definitions"
+
+data:
+  classes:
+    - name: Warrior
+      roles: [Tank, DPS]
+    - name: Paladin
+      roles: [Tank, Healer, DPS]
+    - name: Hunter
+      roles: [DPS]
+    - name: Rogue
+      roles: [DPS]
+    - name: Priest
+      roles: [Healer, DPS]
+    - name: Shaman
+      roles: [Healer, DPS]
+    - name: Mage
+      roles: [DPS]
+    - name: Warlock
+      roles: [DPS]
+    - name: Druid
+      roles: [Tank, Healer, DPS]
+    - name: Death Knight
+      roles: [Tank, DPS]
+    - name: Monk
+      roles: [Tank, Healer, DPS]
+    - name: Demon Hunter
+      roles: [Tank, DPS]

@@ -1,0 +1,25 @@
+version: "1.0"
+metadata:
+  description: "Rogue class skills"
+  class: Rogue
+
+data:
+  - Sinister Strike
+  - Eviscerate
+  - Backstab
+  - Ambush
+  - Mutilate
+  - Envenom
+  - Rupture
+  - Garrote
+  - Slice and Dice
+  - Adrenaline Rush
+  - Blade Flurry
+  - Shadowstep
+  - Vanish
+  - Cloak of Shadows
+  - Evasion
+  - Kidney Shot
+  - Cheap Shot
+  - Blind
+  - Sap

@@ -1,0 +1,51 @@
+version: "1.0"
+metadata:
+  description: "Capital cities"
+
+data:
+  - name: Stormwind City
+    faction: Alliance
+    subzones:
+      - Trade District
+      - Cathedral Square
+      - Mage Quarter
+      - Old Town
+      - Dwarven District
+
+  - name: Ironforge
+    faction: Alliance
+    subzones:
+      - The Commons
+      - Mystic Ward
+      - Military Ward
+      - The Great Forge
+
+  - name: Darnassus
+    faction: Alliance
+
+  - name: The Exodar
+    faction: Alliance
+
+  - name: Orgrimmar
+    faction: Horde
+    subzones:
+      - Valley of Strength
+      - The Drag
+      - Valley of Wisdom
+      - Valley of Honor
+      - Cleft of Shadow
+
+  - name: Thunder Bluff
+    faction: Horde
+
+  - name: Undercity
+    faction: Horde
+
+  - name: Silvermoon City
+    faction: Horde
+
+  - name: Shattrath City
+    faction: Neutral
+
+  - name: Dalaran
+    faction: Neutral

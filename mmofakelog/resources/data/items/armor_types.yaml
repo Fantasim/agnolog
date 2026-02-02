@@ -1,0 +1,29 @@
+version: "1.0"
+metadata:
+  description: "Armor type definitions"
+
+data:
+  - Cloth Helm
+  - Cloth Chest
+  - Cloth Legs
+  - Cloth Gloves
+  - Cloth Boots
+  - Leather Helm
+  - Leather Chest
+  - Leather Legs
+  - Leather Gloves
+  - Leather Boots
+  - Mail Helm
+  - Mail Chest
+  - Mail Legs
+  - Mail Gloves
+  - Mail Boots
+  - Plate Helm
+  - Plate Chest
+  - Plate Legs
+  - Plate Gloves
+  - Plate Boots
+  - Shield
+  - Cloak
+  - Belt
+  - Bracers

@@ -1,0 +1,25 @@
+version: "1.0"
+metadata:
+  description: "Warlock class skills"
+  class: Warlock
+
+data:
+  - Shadow Bolt
+  - Incinerate
+  - Chaos Bolt
+  - Soul Fire
+  - Immolate
+  - Corruption
+  - Unstable Affliction
+  - Curse of Agony
+  - Drain Life
+  - Drain Soul
+  - Haunt
+  - Shadowflame
+  - Rain of Fire
+  - Hellfire
+  - Seed of Corruption
+  - Fear
+  - Howl of Terror
+  - Death Coil
+  - Shadowfury

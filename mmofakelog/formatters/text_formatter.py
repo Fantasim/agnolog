@@ -11,7 +11,7 @@ from mmofakelog.core.constants import SHORT_TIMESTAMP_FORMAT
 from mmofakelog.core.registry import LogTypeRegistry, get_registry
 from mmofakelog.core.types import LogEntry
 from mmofakelog.formatters.base import BaseFormatter
-from mmofakelog.logging import get_internal_logger
+from mmofakelog.logutils import get_internal_logger
 
 
 class TextFormatter(BaseFormatter):

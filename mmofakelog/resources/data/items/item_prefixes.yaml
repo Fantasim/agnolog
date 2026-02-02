@@ -1,0 +1,35 @@
+version: "1.0"
+metadata:
+  description: "Item name prefixes by rarity"
+
+data:
+  Common:
+    - Worn
+    - Old
+    - Simple
+    - Basic
+    - Plain
+  Uncommon:
+    - Fine
+    - Sturdy
+    - Solid
+    - Tempered
+    - Crafted
+  Rare:
+    - Superior
+    - Exceptional
+    - Masterwork
+    - Enchanted
+    - Blessed
+  Epic:
+    - Heroic
+    - Legendary
+    - Ancient
+    - Mythical
+    - Divine
+  Legendary:
+    - Godforged
+    - Eternal
+    - Celestial
+    - Primordial
+    - Worldbreaker

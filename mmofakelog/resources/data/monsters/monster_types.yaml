@@ -1,0 +1,151 @@
+version: "1.0"
+metadata:
+  description: "Monster type definitions with name components"
+
+data:
+  types:
+    - Beast
+    - Humanoid
+    - Undead
+    - Demon
+    - Elemental
+    - Dragon
+    - Giant
+    - Mechanical
+    - Aberration
+    - Dragonkin
+
+  prefixes:
+    Beast:
+      - Wild
+      - Rabid
+      - Feral
+      - Savage
+      - Dire
+    Humanoid:
+      - Defias
+      - Scarlet
+      - Syndicate
+      - Dark Iron
+      - Bloodsail
+    Undead:
+      - Rotting
+      - Skeletal
+      - Spectral
+      - Plagued
+      - Risen
+    Demon:
+      - Fel
+      - Burning
+      - Shadowy
+      - Corrupted
+      - Void
+    Elemental:
+      - Raging
+      - Primal
+      - Ancient
+      - Volatile
+      - Infused
+    Dragon:
+      - Young
+      - Adult
+      - Elder
+      - Ancient
+      - Twilight
+    Giant:
+      - Mountain
+      - Forest
+      - Sea
+      - Storm
+      - Fire
+    Mechanical:
+      - Defective
+      - Upgraded
+      - Prototype
+      - Combat
+      - Assault
+    Aberration:
+      - Twisted
+      - Mutated
+      - Eldritch
+      - Faceless
+      - Void
+    Dragonkin:
+      - Blackwing
+      - Bronze
+      - Blue
+      - Green
+      - Red
+
+  names:
+    Beast:
+      - Wolf
+      - Bear
+      - Spider
+      - Boar
+      - Cat
+      - Raptor
+      - Gorilla
+      - Bat
+    Humanoid:
+      - Bandit
+      - Cultist
+      - Pirate
+      - Thug
+      - Scout
+      - Assassin
+    Undead:
+      - Zombie
+      - Skeleton
+      - Ghost
+      - Ghoul
+      - Wraith
+      - Banshee
+    Demon:
+      - Imp
+      - Felguard
+      - Doomguard
+      - Succubus
+      - Infernal
+    Elemental:
+      - Fire Elemental
+      - Water Elemental
+      - Earth Elemental
+      - Air Elemental
+    Dragon:
+      - Drake
+      - Whelp
+      - Dragon
+      - Wyrm
+    Giant:
+      - Ogre
+      - Ettin
+      - Gronn
+      - Titan
+      - Colossus
+    Mechanical:
+      - Golem
+      - Harvester
+      - Shredder
+      - Walker
+    Aberration:
+      - Tentacle
+      - Eye
+      - Ooze
+      - Horror
+    Dragonkin:
+      - Dragonspawn
+      - Drakonid
+      - Wyrmkin
+
+  elite_titles:
+    - Champion
+    - Warlord
+    - Commander
+    - Chieftain
+    - Alpha
+    - Overlord
+    - Deathlord
+    - Archon
+    - Enforcer
+    - Executioner

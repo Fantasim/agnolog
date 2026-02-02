@@ -1,5 +1,5 @@
 """
-Configuration management for the MMORPG Fake Log Generator.
+Configuration management for the Fake Log Generator.
 
 Handles loading configuration from environment variables,
 files, and programmatic settings.
@@ -7,52 +7,17 @@ files, and programmatic settings.
 
 import os
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from mmofakelog.core.constants import (
-    AI_CACHE_TTL,
-    AI_MAX_TOKENS,
-    AI_REQUEST_TIMEOUT,
-    AI_TEMPERATURE,
-    DEFAULT_AI_MODEL,
     DEFAULT_LOG_COUNT,
     DEFAULT_OUTPUT_FORMAT,
     DEFAULT_SERVER_ID,
     DEFAULT_TIME_SCALE,
     INTERNAL_LOG_LEVEL,
 )
-from mmofakelog.core.errors import InvalidConfigValueError, MissingConfigError
+from mmofakelog.core.errors import InvalidConfigValueError
 from mmofakelog.core.types import LogCategory, LogFormat
-
-
-@dataclass
-class AIConfig:
-    """Configuration for AI/OpenAI integration."""
-
-    enabled: bool = False
-    api_key: Optional[str] = None
-    model: str = DEFAULT_AI_MODEL
-    max_tokens: int = AI_MAX_TOKENS
-    temperature: float = AI_TEMPERATURE
-    cache_enabled: bool = True
-    cache_ttl: int = AI_CACHE_TTL
-    timeout: int = AI_REQUEST_TIMEOUT
-
-    def validate(self) -> None:
-        """Validate AI configuration."""
-        if self.enabled and not self.api_key:
-            raise MissingConfigError(
-                "OPENAI_API_KEY",
-                hint="Set the OPENAI_API_KEY environment variable or disable AI",
-            )
-        if self.max_tokens < 1:
-            raise InvalidConfigValueError(
-                "max_tokens", self.max_tokens, "positive integer"
-            )
-        if not 0.0 <= self.temperature <= 2.0:
-            raise InvalidConfigValueError(
-                "temperature", self.temperature, "float between 0.0 and 2.0"
-            )
 
 
 @dataclass
@@ -100,7 +65,6 @@ class Config:
     Can be loaded from environment variables or set programmatically.
     """
 
-    ai: AIConfig = field(default_factory=AIConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
     generation: GenerationConfig = field(default_factory=GenerationConfig)
     logging: LoggingConfig = field(default_factory=LoggingConfig)
@@ -111,8 +75,6 @@ class Config:
         Create configuration from environment variables.
 
         Environment variables:
-            OPENAI_API_KEY: OpenAI API key
-            OPENAI_MODEL: Model to use (default: gpt-3.5-turbo)
             LOG_LEVEL: Internal log level (DEBUG, INFO, WARNING, ERROR)
             LOG_FILE: Optional file for internal logs
             OUTPUT_FORMAT: json or text
@@ -122,13 +84,6 @@ class Config:
             Config instance populated from environment
         """
         config = cls()
-
-        # AI configuration
-        api_key = os.environ.get("OPENAI_API_KEY")
-        if api_key:
-            config.ai.enabled = True
-            config.ai.api_key = api_key
-        config.ai.model = os.environ.get("OPENAI_MODEL", DEFAULT_AI_MODEL)
 
         # Logging configuration
         config.logging.level = os.environ.get("LOG_LEVEL", INTERNAL_LOG_LEVEL)
@@ -153,8 +108,6 @@ class Config:
         Raises:
             ConfigurationError: If any validation fails
         """
-        self.ai.validate()
-
         if self.generation.count < 1:
             raise InvalidConfigValueError(
                 "count", self.generation.count, "positive integer"
@@ -167,13 +120,6 @@ class Config:
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""
         return {
-            "ai": {
-                "enabled": self.ai.enabled,
-                "model": self.ai.model,
-                "max_tokens": self.ai.max_tokens,
-                "temperature": self.ai.temperature,
-                "cache_enabled": self.ai.cache_enabled,
-            },
             "output": {
                 "format": self.output.format.name,
                 "pretty_print": self.output.pretty_print,

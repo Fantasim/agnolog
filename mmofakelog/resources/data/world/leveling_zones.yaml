@@ -1,0 +1,146 @@
+version: "1.0"
+metadata:
+  description: "Leveling zones (low, mid, high level)"
+
+data:
+  low_level:
+    - name: Westfall
+      level_min: 10
+      level_max: 20
+      faction: Alliance
+    - name: Loch Modan
+      level_min: 10
+      level_max: 20
+      faction: Alliance
+    - name: Darkshore
+      level_min: 10
+      level_max: 20
+      faction: Alliance
+    - name: Silverpine Forest
+      level_min: 10
+      level_max: 20
+      faction: Horde
+    - name: The Barrens
+      level_min: 10
+      level_max: 25
+      faction: Horde
+    - name: Ghostlands
+      level_min: 10
+      level_max: 20
+      faction: Horde
+    - name: Bloodmyst Isle
+      level_min: 10
+      level_max: 20
+      faction: Alliance
+    - name: Redridge Mountains
+      level_min: 15
+      level_max: 25
+      faction: Alliance
+
+  mid_level:
+    - name: Duskwood
+      level_min: 20
+      level_max: 30
+      faction: Contested
+    - name: Wetlands
+      level_min: 20
+      level_max: 30
+      faction: Contested
+    - name: Ashenvale
+      level_min: 20
+      level_max: 30
+      faction: Contested
+    - name: Stonetalon Mountains
+      level_min: 25
+      level_max: 35
+      faction: Contested
+    - name: Thousand Needles
+      level_min: 25
+      level_max: 35
+      faction: Contested
+    - name: Hillsbrad Foothills
+      level_min: 20
+      level_max: 30
+      faction: Contested
+    - name: Arathi Highlands
+      level_min: 30
+      level_max: 40
+      faction: Contested
+    - name: Stranglethorn Vale
+      level_min: 30
+      level_max: 45
+      faction: Contested
+      subzones:
+        - Booty Bay
+        - "Grom'gol Base Camp"
+        - "Nesingwary's Expedition"
+    - name: Desolace
+      level_min: 30
+      level_max: 40
+      faction: Contested
+    - name: Dustwallow Marsh
+      level_min: 35
+      level_max: 45
+      faction: Contested
+    - name: Feralas
+      level_min: 40
+      level_max: 50
+      faction: Contested
+    - name: Tanaris
+      level_min: 40
+      level_max: 50
+      faction: Contested
+    - name: The Hinterlands
+      level_min: 40
+      level_max: 50
+      faction: Contested
+    - name: Swamp of Sorrows
+      level_min: 35
+      level_max: 45
+      faction: Contested
+
+  high_level:
+    - name: Searing Gorge
+      level_min: 45
+      level_max: 55
+      faction: Contested
+    - name: Blasted Lands
+      level_min: 45
+      level_max: 55
+      faction: Contested
+    - name: Burning Steppes
+      level_min: 50
+      level_max: 60
+      faction: Contested
+    - name: Felwood
+      level_min: 48
+      level_max: 55
+      faction: Contested
+    - name: "Un'Goro Crater"
+      level_min: 48
+      level_max: 55
+      faction: Contested
+    - name: Azshara
+      level_min: 48
+      level_max: 55
+      faction: Contested
+    - name: Winterspring
+      level_min: 55
+      level_max: 60
+      faction: Contested
+    - name: Silithus
+      level_min: 55
+      level_max: 60
+      faction: Contested
+    - name: Western Plaguelands
+      level_min: 50
+      level_max: 60
+      faction: Contested
+    - name: Eastern Plaguelands
+      level_min: 55
+      level_max: 60
+      faction: Contested
+    - name: Deadwind Pass
+      level_min: 55
+      level_max: 60
+      faction: Contested

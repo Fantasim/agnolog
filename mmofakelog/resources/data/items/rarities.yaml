@@ -1,0 +1,42 @@
+version: "1.0"
+metadata:
+  description: "Item rarity definitions with weights and colors"
+
+data:
+  - id: Poor
+    drop_weight: 0.10
+    color: "#9d9d9d"
+    value_multiplier: 0.1
+
+  - id: Common
+    drop_weight: 0.40
+    color: "#ffffff"
+    value_multiplier: 1.0
+
+  - id: Uncommon
+    drop_weight: 0.30
+    color: "#1eff00"
+    value_multiplier: 3.0
+
+  - id: Rare
+    drop_weight: 0.14
+    color: "#0070dd"
+    value_multiplier: 10.0
+
+  - id: Epic
+    drop_weight: 0.05
+    color: "#a335ee"
+    value_multiplier: 50.0
+    bound_on_pickup: true
+
+  - id: Legendary
+    drop_weight: 0.009
+    color: "#ff8000"
+    value_multiplier: 500.0
+    bound_on_pickup: true
+
+  - id: Artifact
+    drop_weight: 0.001
+    color: "#e6cc80"
+    value_multiplier: 5000.0
+    bound_on_pickup: true

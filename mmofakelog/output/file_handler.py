@@ -10,7 +10,7 @@ from typing import Optional
 
 from mmofakelog.core.constants import FILE_ENCODING, FILE_ROTATION_COUNT, FILE_ROTATION_SIZE
 from mmofakelog.core.errors import FileWriteError, PermissionDeniedError, DirectoryNotFoundError
-from mmofakelog.logging import get_internal_logger
+from mmofakelog.logutils import get_internal_logger
 from mmofakelog.output.base import BaseOutputHandler
 
 

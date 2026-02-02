@@ -1,0 +1,23 @@
+version: "1.0"
+metadata:
+  description: "Demon Hunter class skills"
+  class: Demon Hunter
+
+data:
+  - "Demon's Bite"
+  - Chaos Strike
+  - Blade Dance
+  - Eye Beam
+  - Fel Rush
+  - Vengeful Retreat
+  - Metamorphosis
+  - Throw Glaive
+  - Immolation Aura
+  - Soul Cleave
+  - Sigil of Flame
+  - Fiery Brand
+  - Demon Spikes
+  - Darkness
+  - Spectral Sight
+  - Consume Magic
+  - Imprison

@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 
 from mmofakelog.core.types import LogEntry, LogTypeMetadata
-from mmofakelog.logging import InternalLoggerMixin
+from mmofakelog.logutils import InternalLoggerMixin
 
 
 class BaseLogGenerator(ABC, InternalLoggerMixin):

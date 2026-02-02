@@ -1,0 +1,75 @@
+version: "1.0"
+metadata:
+  description: "Error codes and messages"
+
+data:
+  errors:
+    E001: Connection timeout
+    E002: Authentication failed
+    E003: Character not found
+    E004: Invalid packet format
+    E005: Database connection lost
+    E006: Rate limit exceeded
+    E007: Insufficient permissions
+    E008: Resource not found
+    E009: Internal server error
+    E010: Service unavailable
+    E011: Invalid session
+    E012: Duplicate request
+    E013: Inventory full
+    E014: Insufficient funds
+    E015: Item not tradeable
+    E016: Target not found
+    E017: Cooldown active
+    E018: Level requirement not met
+    E019: Quest already completed
+    E020: Guild full
+
+  risk_levels:
+    - low
+    - medium
+    - high
+    - critical
+
+  risk_thresholds:
+    low: 25
+    medium: 50
+    high: 75
+    critical: 90
+
+  admin_actions:
+    - ban
+    - unban
+    - mute
+    - unmute
+    - kick
+    - warn
+    - teleport
+    - summon
+    - grant_item
+    - remove_item
+    - set_level
+    - add_gold
+    - remove_gold
+    - freeze
+    - unfreeze
+
+  db_query_types:
+    - SELECT
+    - INSERT
+    - UPDATE
+    - DELETE
+    - TRANSACTION
+    - STORED_PROC
+    - INDEX_SCAN
+    - TABLE_SCAN
+
+  cache_types:
+    - player_data
+    - item_data
+    - quest_data
+    - guild_data
+    - zone_data
+    - session_data
+    - auction_data
+    - leaderboard

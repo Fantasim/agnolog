@@ -1,0 +1,59 @@
+version: "1.0"
+metadata:
+  description: "NPC name components"
+
+data:
+  titles:
+    - Merchant
+    - Innkeeper
+    - Blacksmith
+    - Armorer
+    - Weaponsmith
+    - Alchemist
+    - Herbalist
+    - Enchanter
+    - Jeweler
+    - Tailor
+    - Guard Captain
+    - Commander
+    - General
+    - Lord
+    - Lady
+    - Elder
+    - Sage
+    - Seer
+    - Oracle
+    - High Priest
+    - Priestess
+
+  first_names:
+    - Aldric
+    - Bertram
+    - Cedric
+    - Duncan
+    - Edmund
+    - Frederick
+    - Geoffrey
+    - Harold
+    - Ignatius
+    - Jasper
+    - Kenneth
+    - Leopold
+    - Magnus
+    - Norbert
+    - Oswald
+    - Percival
+    - Quentin
+    - Reginald
+    - Helena
+    - Isabella
+    - Josephine
+    - Katherine
+    - Lucinda
+    - Margaret
+    - Nathaniel
+    - Ophelia
+    - Penelope
+    - Rosalind
+    - Seraphina
+    - Theodora

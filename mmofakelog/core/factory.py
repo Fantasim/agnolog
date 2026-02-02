@@ -53,7 +53,7 @@ class LogFactory:
     def _get_logger(self) -> Any:
         """Get internal logger, initializing if needed."""
         if self._logger is None:
-            from mmofakelog.logging import get_internal_logger
+            from mmofakelog.logutils import get_internal_logger
 
             self._logger = get_internal_logger()
         return self._logger

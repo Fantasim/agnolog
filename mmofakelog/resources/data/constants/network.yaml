@@ -1,0 +1,44 @@
+version: "1.0"
+metadata:
+  description: "Network-related constants"
+
+data:
+  latency:
+    min_ms: 10
+    max_ms: 500
+    typical_ms: 50
+    spike_ms: 1000
+
+  packet:
+    size_min: 32
+    size_max: 4096
+
+  connection:
+    timeout_ms: 30000
+
+  packet_types:
+    - CMSG_AUTH
+    - SMSG_AUTH_RESPONSE
+    - CMSG_HEARTBEAT
+    - SMSG_HEARTBEAT
+    - CMSG_MOVE
+    - SMSG_MOVE
+    - CMSG_CHAT
+    - SMSG_CHAT
+    - CMSG_SPELL_CAST
+    - SMSG_SPELL_START
+    - SMSG_SPELL_GO
+    - CMSG_ITEM_USE
+    - SMSG_ITEM_UPDATE
+    - CMSG_LOOT
+    - SMSG_LOOT_RESPONSE
+    - CMSG_TRADE_INITIATE
+    - SMSG_TRADE_STATUS
+    - CMSG_GUILD_ROSTER
+    - SMSG_GUILD_ROSTER
+    - CMSG_QUEST_LOG
+    - SMSG_QUEST_UPDATE
+    - CMSG_AUCTION_LIST
+    - SMSG_AUCTION_LIST
+    - CMSG_MAIL_LIST
+    - SMSG_MAIL_LIST

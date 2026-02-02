@@ -1,0 +1,46 @@
+version: "1.0"
+metadata:
+  description: "Item name suffixes by category"
+
+data:
+  weapon:
+    - of Strength
+    - of Agility
+    - of Power
+    - of the Bear
+    - of the Tiger
+    - of the Eagle
+    - of Slaying
+    - of Destruction
+    - of the Phoenix
+    - of Thunder
+    - of Frost
+    - of Flames
+
+  armor:
+    - of Defense
+    - of Protection
+    - of the Turtle
+    - of Fortitude
+    - of the Sentinel
+    - of Warding
+    - of the Guardian
+    - of Resilience
+    - of the Mountain
+    - of Iron Will
+    - of Vitality
+    - of Endurance
+
+  accessory:
+    - of Wisdom
+    - of Intelligence
+    - of Spirit
+    - of the Owl
+    - of Clarity
+    - of Focus
+    - of Insight
+    - of the Sage
+    - of Magic
+    - of the Arcane
+    - of Mysticism
+    - of Sorcery

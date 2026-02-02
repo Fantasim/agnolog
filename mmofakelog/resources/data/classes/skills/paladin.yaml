@@ -1,0 +1,23 @@
+version: "1.0"
+metadata:
+  description: "Paladin class skills"
+  class: Paladin
+
+data:
+  - Crusader Strike
+  - "Templar's Verdict"
+  - Divine Storm
+  - Hammer of Wrath
+  - "Avenger's Shield"
+  - Shield of the Righteous
+  - Flash of Light
+  - Holy Light
+  - Holy Shock
+  - Word of Glory
+  - Lay on Hands
+  - Divine Shield
+  - Blessing of Protection
+  - Consecration
+  - Judgment
+  - Exorcism
+  - Avenging Wrath

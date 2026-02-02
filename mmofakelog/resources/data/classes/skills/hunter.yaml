@@ -1,0 +1,24 @@
+version: "1.0"
+metadata:
+  description: "Hunter class skills"
+  class: Hunter
+
+data:
+  - Aimed Shot
+  - Arcane Shot
+  - Multi-Shot
+  - Steady Shot
+  - Kill Shot
+  - Chimera Shot
+  - Black Arrow
+  - Explosive Shot
+  - Serpent Sting
+  - Concussive Shot
+  - Distracting Shot
+  - Freezing Trap
+  - Explosive Trap
+  - Aspect of the Hawk
+  - Rapid Fire
+  - Bestial Wrath
+  - Kill Command
+  - Cobra Shot

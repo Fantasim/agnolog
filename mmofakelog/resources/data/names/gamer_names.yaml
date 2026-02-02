@@ -1,0 +1,60 @@
+version: "1.0"
+metadata:
+  description: "Gamer-style name components"
+
+data:
+  adjectives:
+    - Epic
+    - Pro
+    - Elite
+    - Ultra
+    - Mega
+    - Super
+    - Hyper
+    - Neo
+    - Dark
+    - Shadow
+    - Silent
+    - Deadly
+    - Swift
+    - Fierce
+    - Savage
+    - Crazy
+    - Mad
+    - Wild
+    - Lone
+    - Noble
+    - Royal
+    - Ancient
+
+  nouns:
+    - Slayer
+    - Killer
+    - Hunter
+    - Sniper
+    - Ninja
+    - Samurai
+    - Knight
+    - Warrior
+    - Mage
+    - Wizard
+    - Archer
+    - Assassin
+    - Reaper
+    - Demon
+    - Dragon
+    - Wolf
+    - Tiger
+    - Lion
+    - Eagle
+    - Hawk
+    - Phoenix
+    - Raven
+    - Blade
+    - Sword
+    - Shield
+    - Hammer
+    - Axe
+    - Bow
+    - Staff
+    - Wand

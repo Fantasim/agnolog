@@ -1,0 +1,19 @@
+version: "1.0"
+metadata:
+  description: "Battlegrounds and arenas"
+
+data:
+  battlegrounds:
+    - Warsong Gulch
+    - Arathi Basin
+    - Alterac Valley
+    - Eye of the Storm
+    - Strand of the Ancients
+    - Isle of Conquest
+
+  arenas:
+    - "Blade's Edge Arena"
+    - Nagrand Arena
+    - Ruins of Lordaeron
+    - Ring of Valor
+    - Dalaran Sewers

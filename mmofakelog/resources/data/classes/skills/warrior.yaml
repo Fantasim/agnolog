@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Warrior class skills"
+  class: Warrior
+
+data:
+  - Heroic Strike
+  - Mortal Strike
+  - Execute
+  - Whirlwind
+  - Charge
+  - Intercept
+  - Shield Slam
+  - Devastate
+  - Thunder Clap
+  - Cleave
+  - Rend
+  - Overpower
+  - Battle Shout
+  - Commanding Shout
+  - Shield Wall
+  - Last Stand
+  - Berserker Rage
+  - Bloodthirst
+  - Rampage
+  - Victory Rush

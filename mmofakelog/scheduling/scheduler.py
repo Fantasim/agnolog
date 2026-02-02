@@ -14,7 +14,7 @@ from typing import Dict, Iterator, List, Optional, Set
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry, get_registry
 from mmofakelog.core.types import LogCategory, LogEntry, RecurrencePattern
-from mmofakelog.logging import InternalLoggerMixin
+from mmofakelog.logutils import InternalLoggerMixin
 from mmofakelog.scheduling.patterns import RecurrenceCalculator
 
 

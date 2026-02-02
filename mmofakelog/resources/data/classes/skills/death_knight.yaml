@@ -1,0 +1,24 @@
+version: "1.0"
+metadata:
+  description: "Death Knight class skills"
+  class: Death Knight
+
+data:
+  - Icy Touch
+  - Plague Strike
+  - Blood Strike
+  - Heart Strike
+  - Obliterate
+  - Frost Strike
+  - Howling Blast
+  - Death Strike
+  - Death and Decay
+  - Blood Boil
+  - Pestilence
+  - Death Grip
+  - Chains of Ice
+  - Strangulate
+  - Mind Freeze
+  - Anti-Magic Shell
+  - Icebound Fortitude
+  - Army of the Dead

@@ -1,0 +1,94 @@
+version: "1.0"
+metadata:
+  description: "Quest type definitions"
+
+data:
+  types:
+    - Kill
+    - Collect
+    - Escort
+    - Delivery
+    - Exploration
+    - Dungeon
+    - Raid
+    - PvP
+    - Daily
+    - Weekly
+    - Story
+
+  verbs:
+    - Defeat
+    - Slay
+    - Vanquish
+    - Eliminate
+    - Destroy
+    - Collect
+    - Gather
+    - Retrieve
+    - Find
+    - Recover
+    - Deliver
+    - Escort
+    - Protect
+    - Rescue
+    - Save
+    - Explore
+    - Investigate
+    - Scout
+    - Discover
+    - Uncover
+    - Stop
+    - Prevent
+    - Thwart
+    - Foil
+    - End
+
+  targets:
+    - the Wolves
+    - the Bandits
+    - the Undead
+    - the Orcs
+    - the Trolls
+    - the Ancient Evil
+    - the Dark Lord
+    - the Dragon
+    - the Demon
+    - the Cursed Artifacts
+    - the Sacred Relics
+    - the Lost Treasure
+    - the Missing Supplies
+    - the Stolen Goods
+    - the Ancient Texts
+    - the Lost Explorer
+    - the Captured Villagers
+    - the Wounded Soldier
+    - the Hidden Shrine
+    - the Forgotten Temple
+    - the Secret Cave
+
+  locations:
+    - in the Forest
+    - at the Cave
+    - near the River
+    - by the Mountain
+    - in the Dungeon
+    - at the Tower
+    - within the Ruins
+    - beyond the Gate
+    - across the Bridge
+    - through the Valley
+    - inside the Castle
+
+  givers:
+    - Village Elder
+    - Town Guard
+    - Mysterious Stranger
+    - Royal Messenger
+    - Wounded Traveler
+    - Local Merchant
+    - Guild Master
+    - Ancient Spirit
+    - Wise Sage
+    - Battle Commander
+    - Concerned Farmer
+    - Desperate Mother

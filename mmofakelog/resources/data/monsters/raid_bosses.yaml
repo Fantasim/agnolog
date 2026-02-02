@@ -1,0 +1,48 @@
+version: "1.0"
+metadata:
+  description: "Raid boss definitions"
+
+data:
+  Molten Core:
+    - Lucifron
+    - Magmadar
+    - Gehennas
+    - Garr
+    - Shazzrah
+    - Baron Geddon
+    - Golemagg the Incinerator
+    - Sulfuron Harbinger
+    - Majordomo Executus
+    - Ragnaros
+
+  Blackwing Lair:
+    - Razorgore the Untamed
+    - Vaelastrasz the Corrupt
+    - Broodlord Lashlayer
+    - Firemaw
+    - Ebonroc
+    - Flamegor
+    - Chromaggus
+    - Nefarian
+
+  "Temple of Ahn'Qiraj":
+    - The Prophet Skeram
+    - Battleguard Sartura
+    - Fankriss the Unyielding
+    - Princess Huhuran
+    - Twin Emperors
+    - Ouro
+    - "C'Thun"
+
+  Naxxramas:
+    - "Anub'Rekhan"
+    - Grand Widow Faerlina
+    - Maexxna
+    - Patchwerk
+    - Grobbulus
+    - Gluth
+    - Thaddius
+    - Gothik the Harvester
+    - The Four Horsemen
+    - Sapphiron
+    - "Kel'Thuzad"

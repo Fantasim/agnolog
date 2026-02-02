@@ -1,0 +1,43 @@
+version: "1.0"
+metadata:
+  description: "Dungeon boss definitions"
+
+data:
+  Deadmines:
+    - "Rhahk'Zor"
+    - Sneed
+    - Gilnid
+    - Mr. Smite
+    - Edwin VanCleef
+
+  Wailing Caverns:
+    - Lady Anacondra
+    - Lord Pythas
+    - Lord Cobrahn
+    - Mutanus the Devourer
+
+  Shadowfang Keep:
+    - Baron Silverlaine
+    - Commander Springvale
+    - Lord Walden
+    - Lord Godfrey
+
+  Scarlet Monastery:
+    - High Inquisitor Whitemane
+    - Scarlet Commander Mograine
+    - Herod
+
+  Blackrock Depths:
+    - Emperor Dagran Thaurissan
+    - Princess Moira
+    - High Priestess of Thaurissan
+
+  Stratholme:
+    - Baron Rivendare
+    - Ramstein the Gorger
+    - Magistrate Barthilas
+
+  Scholomance:
+    - Darkmaster Gandling
+    - Rattlegore
+    - Instructor Malicia

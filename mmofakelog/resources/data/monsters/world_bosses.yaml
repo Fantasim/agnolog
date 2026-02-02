@@ -1,0 +1,13 @@
+version: "1.0"
+metadata:
+  description: "World boss definitions"
+
+data:
+  - Azuregos
+  - Lord Kazzak
+  - Emeriss
+  - Lethon
+  - Taerar
+  - Ysondre
+  - Doom Lord Kazzak
+  - Doomwalker

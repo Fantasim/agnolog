@@ -1,0 +1,27 @@
+version: "1.0"
+metadata:
+  description: "Druid class skills"
+  class: Druid
+
+data:
+  - Wrath
+  - Starfire
+  - Moonfire
+  - Insect Swarm
+  - Mangle
+  - Shred
+  - Rake
+  - Rip
+  - Ferocious Bite
+  - Maul
+  - Lacerate
+  - Swipe
+  - Thrash
+  - Rejuvenation
+  - Regrowth
+  - Lifebloom
+  - Wild Growth
+  - Nourish
+  - Healing Touch
+  - Tranquility
+  - Barkskin

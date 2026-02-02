@@ -1,0 +1,25 @@
+version: "1.0"
+metadata:
+  description: "Monk class skills"
+  class: Monk
+
+data:
+  - Jab
+  - Tiger Palm
+  - Blackout Kick
+  - Rising Sun Kick
+  - Fists of Fury
+  - Spinning Crane Kick
+  - Keg Smash
+  - Breath of Fire
+  - Soothing Mist
+  - Enveloping Mist
+  - Renewing Mist
+  - Uplift
+  - Roll
+  - Flying Serpent Kick
+  - Transcendence
+  - Touch of Death
+  - Fortifying Brew
+  - Zen Meditation
+  - Life Cocoon

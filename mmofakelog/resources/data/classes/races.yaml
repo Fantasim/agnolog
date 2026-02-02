@@ -1,0 +1,23 @@
+version: "1.0"
+metadata:
+  description: "Character race definitions"
+
+data:
+  alliance:
+    - Human
+    - Dwarf
+    - Night Elf
+    - Gnome
+    - Draenei
+    - Worgen
+
+  horde:
+    - Orc
+    - Undead
+    - Tauren
+    - Troll
+    - Blood Elf
+    - Goblin
+
+  neutral:
+    - Pandaren

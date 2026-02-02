@@ -1,0 +1,62 @@
+version: "1.0"
+metadata:
+  description: "Starting zones (levels 1-10)"
+
+data:
+  - name: Elwynn Forest
+    level_min: 1
+    level_max: 10
+    faction: Alliance
+    subzones:
+      - Goldshire
+      - Northshire Valley
+      - Stone Cairn Lake
+
+  - name: Durotar
+    level_min: 1
+    level_max: 10
+    faction: Horde
+    subzones:
+      - "Sen'jin Village"
+      - Valley of Trials
+      - Razor Hill
+
+  - name: Mulgore
+    level_min: 1
+    level_max: 10
+    faction: Horde
+
+  - name: Teldrassil
+    level_min: 1
+    level_max: 10
+    faction: Alliance
+
+  - name: Tirisfal Glades
+    level_min: 1
+    level_max: 10
+    faction: Horde
+
+  - name: Dun Morogh
+    level_min: 1
+    level_max: 10
+    faction: Alliance
+
+  - name: Eversong Woods
+    level_min: 1
+    level_max: 10
+    faction: Horde
+
+  - name: Azuremyst Isle
+    level_min: 1
+    level_max: 10
+    faction: Alliance
+
+  - name: Gilneas
+    level_min: 1
+    level_max: 10
+    faction: Alliance
+
+  - name: Kezan
+    level_min: 1
+    level_max: 10
+    faction: Horde

@@ -1,0 +1,19 @@
+version: "1.0"
+metadata:
+  description: "Weapon type definitions"
+
+data:
+  - Sword
+  - Axe
+  - Mace
+  - Dagger
+  - Staff
+  - Wand
+  - Bow
+  - Crossbow
+  - Gun
+  - Polearm
+  - Fist Weapon
+  - Two-Handed Sword
+  - Two-Handed Axe
+  - Two-Handed Mace

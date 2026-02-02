@@ -1,0 +1,52 @@
+version: "1.0"
+metadata:
+  description: "Fantasy name prefixes for player name generation"
+
+data:
+  - Aer
+  - Bal
+  - Cor
+  - Dra
+  - Eld
+  - Fae
+  - Gor
+  - Hel
+  - Ire
+  - Jax
+  - Kel
+  - Lor
+  - Mor
+  - Nyx
+  - Ori
+  - Pyr
+  - Quin
+  - Rav
+  - Sor
+  - Thal
+  - Umb
+  - Val
+  - Wyr
+  - Xan
+  - Yar
+  - Zeph
+  - Ash
+  - Blaz
+  - Cyn
+  - Dusk
+  - Ech
+  - Frost
+  - Glim
+  - Hawk
+  - Iron
+  - Jade
+  - Krag
+  - Luna
+  - Mist
+  - Night
+  - Oak
+  - Storm
+  - Shadow
+  - Silver
+  - Thunder
+  - Void
+  - Wolf

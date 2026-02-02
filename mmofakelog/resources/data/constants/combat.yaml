@@ -1,0 +1,60 @@
+version: "1.0"
+metadata:
+  description: "Combat-related constants"
+
+data:
+  damage:
+    min: 1
+    max: 50000
+    crit_multiplier: 2.0
+
+  healing:
+    min: 1
+    max: 30000
+
+  chances:
+    crit: 0.05
+    dodge: 0.05
+    parry: 0.05
+    block: 0.10
+
+  buff_duration:
+    min_seconds: 5
+    max_seconds: 3600
+
+  experience:
+    mob_xp_min: 10
+    mob_xp_max: 5000
+    quest_xp_min: 100
+    quest_xp_max: 50000
+
+  damage_types:
+    - Physical
+    - Fire
+    - Frost
+    - Arcane
+    - Nature
+    - Shadow
+    - Holy
+
+  skill_types:
+    - Attack
+    - Defense
+    - Heal
+    - Buff
+    - Debuff
+    - AoE
+    - DoT
+    - HoT
+    - CC
+    - Utility
+
+  generic_skills:
+    - Auto Attack
+    - Sprint
+    - Mount
+    - Hearthstone
+    - Bandage
+    - Use Item
+    - Interact
+    - Trade

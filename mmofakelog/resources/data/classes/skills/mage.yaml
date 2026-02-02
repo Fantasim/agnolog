@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Mage class skills"
+  class: Mage
+
+data:
+  - Fireball
+  - Frostbolt
+  - Arcane Blast
+  - Arcane Missiles
+  - Pyroblast
+  - Ice Lance
+  - Frostfire Bolt
+  - Living Bomb
+  - Blizzard
+  - Flamestrike
+  - Arcane Explosion
+  - Cone of Cold
+  - Fire Blast
+  - Frost Nova
+  - Blink
+  - Ice Block
+  - Mirror Image
+  - Combustion
+  - Icy Veins
+  - Arcane Power

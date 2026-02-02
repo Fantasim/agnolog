@@ -1,0 +1,24 @@
+version: "1.0"
+metadata:
+  description: "Priest class skills"
+  class: Priest
+
+data:
+  - Smite
+  - Mind Blast
+  - "Shadow Word: Pain"
+  - "Shadow Word: Death"
+  - Mind Flay
+  - Vampiric Touch
+  - Devouring Plague
+  - Flash Heal
+  - Greater Heal
+  - Prayer of Healing
+  - Circle of Healing
+  - "Power Word: Shield"
+  - Renew
+  - Prayer of Mending
+  - Dispel Magic
+  - Mass Dispel
+  - Psychic Scream
+  - Fade

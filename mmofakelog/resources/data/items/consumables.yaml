@@ -1,0 +1,34 @@
+version: "1.0"
+metadata:
+  description: "Consumable and material types"
+
+data:
+  consumables:
+    - Health Potion
+    - Mana Potion
+    - Elixir
+    - Flask
+    - Food
+    - Drink
+    - Bandage
+    - Scroll
+    - Rune
+
+  materials:
+    - Ore
+    - Herb
+    - Leather
+    - Cloth
+    - Gem
+    - Essence
+    - Dust
+    - Shard
+    - Crystal
+    - Ingot
+
+  accessories:
+    - Ring
+    - Necklace
+    - Trinket
+    - Earring
+    - Relic

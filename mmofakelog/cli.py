@@ -5,20 +5,24 @@ Usage:
     mmofakelog -n 100 -f json          # Generate 100 JSON logs
     mmofakelog -n 1000 -f text -o out.log  # Generate text logs to file
     mmofakelog --list-types            # List all available log types
+    mmofakelog validate                # Validate all YAML/Lua resources
+    mmofakelog --use-lua               # Use Lua generators (default)
+    mmofakelog --use-python            # Use Python generators only
 """
 
 import argparse
 import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import List, Optional
 
 from mmofakelog.core.config import Config
 from mmofakelog.core.constants import DEFAULT_LOG_COUNT, DEFAULT_TIME_SCALE, VERSION
 from mmofakelog.core.factory import LogFactory
-from mmofakelog.core.registry import get_registry
+from mmofakelog.core.registry import get_registry, register_lua_generators
 from mmofakelog.core.types import LogCategory, LogFormat
 from mmofakelog.formatters import JSONFormatter, TextFormatter
-from mmofakelog.logging import setup_internal_logging, get_internal_logger
+from mmofakelog.logutils import setup_internal_logging, get_internal_logger
 from mmofakelog.output import FileOutputHandler, StreamOutputHandler
 from mmofakelog.scheduling import LogScheduler
 
@@ -39,15 +43,28 @@ def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[LogCat
     return categories if categories else None
 
 
-def list_types() -> None:
+def list_types(use_lua: bool = True, resources_path: Optional[str] = None) -> None:
     """List all available log types."""
-    # Import generators to register them
+    # Import Python generators to register them
     from mmofakelog import generators  # noqa
+
+    # Load Lua generators if requested
+    if use_lua:
+        try:
+            lua_count = register_lua_generators(resources_path)
+        except Exception as e:
+            print(f"Warning: Failed to load Lua generators: {e}", file=sys.stderr)
+            lua_count = 0
+    else:
+        lua_count = 0
 
     registry = get_registry()
     print(f"\nMMORPG Fake Log Generator v{VERSION}")
     print(f"{'=' * 50}")
-    print(f"Total registered log types: {registry.count()}\n")
+    print(f"Total registered log types: {registry.count()}")
+    if use_lua and lua_count > 0:
+        print(f"(including {lua_count} Lua generators)")
+    print()
 
     # Group by category
     for category in LogCategory:
@@ -61,6 +78,79 @@ def list_types() -> None:
                     print(f"  {log_type:<35} {meta.recurrence.name:<15}")
 
 
+def validate_resources(resources_path: Optional[str] = None) -> int:
+    """Validate all YAML and Lua resources."""
+    from mmofakelog.core.resource_loader import ResourceLoader
+    from mmofakelog.core.lua_runtime import LuaSandbox, LUPA_AVAILABLE
+
+    print(f"\nMMORPG Fake Log Generator v{VERSION}")
+    print(f"{'=' * 50}")
+    print("Validating resources...\n")
+
+    errors = []
+    warnings = []
+
+    # Validate YAML data files
+    print("Checking YAML data files...")
+    try:
+        loader = ResourceLoader(resource_path=Path(resources_path) if resources_path else None)
+        data = loader.load_all_nested()
+        yaml_count = sum(len(v) if isinstance(v, dict) else 1 for v in data.values())
+        print(f"  Loaded {yaml_count} data entries from {len(data)} categories")
+    except Exception as e:
+        errors.append(f"YAML loading error: {e}")
+        print(f"  ERROR: {e}")
+
+    # Validate Lua generators
+    print("\nChecking Lua generators...")
+    if not LUPA_AVAILABLE:
+        warnings.append("Lua support not available (lupa not installed)")
+        print("  WARNING: Lua support not available (install lupa)")
+    else:
+        try:
+            sandbox = LuaSandbox(
+                resource_loader=ResourceLoader(
+                    resource_path=Path(resources_path) if resources_path else None
+                )
+            )
+            metadata = sandbox.load_all_generators()
+            print(f"  Loaded {len(metadata)} Lua generators")
+
+            # Test each generator
+            test_errors = 0
+            for name in metadata:
+                try:
+                    sandbox.generate(name)
+                except Exception as e:
+                    test_errors += 1
+                    errors.append(f"Generator {name}: {e}")
+
+            if test_errors:
+                print(f"  {test_errors} generators failed validation")
+            else:
+                print("  All generators passed validation")
+
+        except Exception as e:
+            errors.append(f"Lua loading error: {e}")
+            print(f"  ERROR: {e}")
+
+    # Summary
+    print(f"\n{'=' * 50}")
+    if errors:
+        print(f"FAILED: {len(errors)} error(s) found")
+        for err in errors:
+            print(f"  - {err}")
+        return 1
+    elif warnings:
+        print(f"PASSED with {len(warnings)} warning(s)")
+        for warn in warnings:
+            print(f"  - {warn}")
+        return 0
+    else:
+        print("PASSED: All resources validated successfully")
+        return 0
+
+
 def main(args: Optional[List[str]] = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -72,6 +162,8 @@ Examples:
   mmofakelog -n 1000 -f text -o out.log  Generate text logs to file
   mmofakelog --categories player combat  Filter to specific categories
   mmofakelog --list-types              List all available log types
+  mmofakelog validate                  Validate all resources
+  mmofakelog --use-python              Use Python generators only
         """,
     )
 
@@ -183,11 +275,46 @@ Examples:
         help="Random seed for reproducible output",
     )
 
+    parser.add_argument(
+        "--resources",
+        type=str,
+        default=None,
+        help="Custom resources directory path",
+    )
+
+    parser.add_argument(
+        "--use-lua",
+        action="store_true",
+        default=True,
+        help="Use Lua generators (default: enabled)",
+    )
+
+    parser.add_argument(
+        "--use-python",
+        action="store_true",
+        help="Use only Python generators (disable Lua)",
+    )
+
+    # Subcommands
+    parser.add_argument(
+        "command",
+        nargs="?",
+        choices=["validate"],
+        help="Subcommand to run (validate: check all resources)",
+    )
+
     parsed = parser.parse_args(args)
+
+    # Handle validate subcommand
+    if parsed.command == "validate":
+        return validate_resources(parsed.resources)
+
+    # Determine whether to use Lua
+    use_lua = parsed.use_lua and not parsed.use_python
 
     # Handle list-types early
     if parsed.list_types:
-        list_types()
+        list_types(use_lua=use_lua, resources_path=parsed.resources)
         return 0
 
     # Set random seed if provided
@@ -203,8 +330,18 @@ Examples:
     )
     logger = get_internal_logger()
 
-    # Import generators to register them
+    # Import Python generators to register them
     from mmofakelog import generators  # noqa
+
+    # Load Lua generators if enabled
+    if use_lua:
+        try:
+            lua_count = register_lua_generators(parsed.resources)
+            logger.info(f"Loaded {lua_count} Lua generators")
+        except Exception as e:
+            logger.warning(f"Failed to load Lua generators: {e}")
+            if not parsed.quiet:
+                print(f"Warning: Failed to load Lua generators: {e}", file=sys.stderr)
 
     logger.info(f"Starting log generation: {parsed.count} logs")
 

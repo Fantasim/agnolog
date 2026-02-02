@@ -1,0 +1,74 @@
+version: "1.0"
+metadata:
+  description: "Guild name components"
+
+data:
+  prefixes:
+    - Order of
+    - Knights of
+    - Brotherhood of
+    - Legion of
+    - Council of
+    - Circle of
+    - Guild of
+    - House of
+    - Clan of
+    - Alliance of
+    - The
+    - Ancient
+    - Eternal
+    - Sacred
+    - Divine
+    - Mystic
+    - Royal
+
+  names:
+    - Phoenix
+    - Dragon
+    - Shadow
+    - Light
+    - Darkness
+    - Storm
+    - Fire
+    - Frost
+    - Thunder
+    - Iron
+    - Steel
+    - Silver
+    - Gold
+    - Crystal
+    - Crimson
+    - Azure
+    - Emerald
+    - Obsidian
+    - Valor
+    - Honor
+    - Glory
+    - Destiny
+    - Fate
+    - Fortune
+    - Vengeance
+    - Justice
+    - Mercy
+    - Wrath
+
+  suffixes:
+    - Legion
+    - Order
+    - Brotherhood
+    - Alliance
+    - Covenant
+    - Crusade
+    - Guard
+    - Watch
+    - Sentinels
+    - Defenders
+    - Champions
+    - Warriors
+    - Knights
+    - Hunters
+    - Seekers
+    - Walkers
+    - Riders
+    - Lords
+    - Masters

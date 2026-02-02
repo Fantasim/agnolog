@@ -1,0 +1,23 @@
+version: "1.0"
+metadata:
+  description: "Economy-related constants"
+
+data:
+  gold:
+    min: 0
+    max: 999999999
+
+  vendor:
+    price_min: 1
+    price_max: 100000
+
+  auction:
+    price_min: 1
+    price_max: 10000000
+    fee_percent: 0.05
+
+  trade:
+    tax_percent: 0.0
+
+  repair:
+    cost_percent: 0.10

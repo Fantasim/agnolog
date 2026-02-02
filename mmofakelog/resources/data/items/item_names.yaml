@@ -1,0 +1,44 @@
+version: "1.0"
+metadata:
+  description: "Named weapon and armor components"
+
+data:
+  weapon_names:
+    - Blade
+    - Edge
+    - Fang
+    - Claw
+    - Talon
+    - Sting
+    - Cleaver
+    - Render
+    - Splitter
+    - Crusher
+    - Smasher
+    - Whisper
+    - Shadow
+    - Storm
+    - Thunder
+    - Lightning
+    - Fury
+    - Rage
+    - Wrath
+    - Vengeance
+    - Justice
+
+  armor_names:
+    - Aegis
+    - Bulwark
+    - Bastion
+    - Rampart
+    - Fortress
+    - Mantle
+    - Shroud
+    - Veil
+    - Cloak
+    - Ward
+    - Shell
+    - Carapace
+    - Hide
+    - Skin
+    - Scale

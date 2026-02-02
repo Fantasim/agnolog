@@ -1,0 +1,37 @@
+version: "1.0"
+metadata:
+  description: "Common fantasy name roots"
+
+data:
+  - Dragon
+  - Shadow
+  - Storm
+  - Fire
+  - Ice
+  - Dark
+  - Light
+  - Night
+  - Blood
+  - Death
+  - Soul
+  - Spirit
+  - Thunder
+  - Wolf
+  - Raven
+  - Eagle
+  - Phoenix
+  - Demon
+  - Angel
+  - Chaos
+  - Order
+  - War
+  - Peace
+  - Doom
+  - Frost
+  - Flame
+  - Stone
+  - Steel
+  - Iron
+  - Silver
+  - Gold
+  - Crystal

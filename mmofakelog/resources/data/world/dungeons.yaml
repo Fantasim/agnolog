@@ -1,0 +1,84 @@
+version: "1.0"
+metadata:
+  description: "Dungeon definitions with level ranges"
+
+data:
+  - name: Ragefire Chasm
+    level_min: 13
+    level_max: 18
+
+  - name: Deadmines
+    level_min: 17
+    level_max: 26
+
+  - name: Wailing Caverns
+    level_min: 17
+    level_max: 24
+
+  - name: Shadowfang Keep
+    level_min: 22
+    level_max: 30
+
+  - name: Blackfathom Deeps
+    level_min: 24
+    level_max: 32
+
+  - name: Stormwind Stockade
+    level_min: 24
+    level_max: 32
+
+  - name: Gnomeregan
+    level_min: 29
+    level_max: 38
+
+  - name: Razorfen Kraul
+    level_min: 29
+    level_max: 38
+
+  - name: Scarlet Monastery
+    level_min: 34
+    level_max: 45
+
+  - name: Razorfen Downs
+    level_min: 37
+    level_max: 46
+
+  - name: Uldaman
+    level_min: 41
+    level_max: 51
+
+  - name: "Zul'Farrak"
+    level_min: 44
+    level_max: 54
+
+  - name: Maraudon
+    level_min: 46
+    level_max: 55
+
+  - name: "Temple of Atal'Hakkar"
+    level_min: 50
+    level_max: 56
+
+  - name: Blackrock Depths
+    level_min: 52
+    level_max: 60
+
+  - name: Lower Blackrock Spire
+    level_min: 55
+    level_max: 60
+
+  - name: Upper Blackrock Spire
+    level_min: 55
+    level_max: 60
+
+  - name: Dire Maul
+    level_min: 55
+    level_max: 60
+
+  - name: Stratholme
+    level_min: 58
+    level_max: 60
+
+  - name: Scholomance
+    level_min: 58
+    level_max: 60

@@ -1,9 +1,8 @@
 """
-All error types for the MMORPG Fake Log Generator.
+Error types for the Fake Log Generator.
 
-This file contains ALL custom exceptions used throughout
-the application, organized by category. Each exception
-includes helpful context for debugging.
+Contains custom exceptions used throughout the application,
+organized by category. Each exception includes helpful context.
 """
 
 from typing import Any, Dict, List, Optional
@@ -208,90 +207,6 @@ class GeneratorNotFoundError(GeneratorError):
 
 
 # =============================================================================
-# AI CLIENT ERRORS
-# =============================================================================
-
-
-class AIClientError(MMOFakeLogError):
-    """Base error for AI/OpenAI operations."""
-
-    pass
-
-
-class AIConnectionError(AIClientError):
-    """Raised when connection to AI service fails."""
-
-    def __init__(self, service: str, reason: str) -> None:
-        super().__init__(
-            f"Failed to connect to {service}: {reason}",
-            details={"service": service, "reason": reason},
-        )
-        self.service = service
-        self.reason = reason
-
-
-class AIRateLimitError(AIClientError):
-    """Raised when AI API rate limit is exceeded."""
-
-    def __init__(
-        self,
-        retry_after: Optional[int] = None,
-        limit_type: str = "requests",
-    ) -> None:
-        message = f"AI rate limit exceeded ({limit_type})"
-        details: Dict[str, Any] = {"limit_type": limit_type}
-        if retry_after is not None:
-            message += f". Retry after {retry_after} seconds"
-            details["retry_after"] = retry_after
-        super().__init__(message, details=details)
-        self.retry_after = retry_after
-        self.limit_type = limit_type
-
-
-class AIResponseError(AIClientError):
-    """Raised when AI response is invalid or unexpected."""
-
-    def __init__(
-        self,
-        reason: str,
-        response: Optional[str] = None,
-    ) -> None:
-        message = f"Invalid AI response: {reason}"
-        details: Dict[str, Any] = {"reason": reason}
-        if response:
-            # Truncate long responses
-            truncated = response[:200] + "..." if len(response) > 200 else response
-            details["response_preview"] = truncated
-        super().__init__(message, details=details)
-        self.reason = reason
-        self.response = response
-
-
-class AIQuotaExceededError(AIClientError):
-    """Raised when AI API quota is exceeded."""
-
-    def __init__(self, quota_type: str = "monthly") -> None:
-        super().__init__(
-            f"AI API {quota_type} quota exceeded. "
-            "Check your billing settings or wait for quota reset.",
-            details={"quota_type": quota_type},
-        )
-        self.quota_type = quota_type
-
-
-class AIConfigurationError(AIClientError):
-    """Raised when AI client is not properly configured."""
-
-    def __init__(self, reason: str) -> None:
-        super().__init__(
-            f"AI client configuration error: {reason}. "
-            "Ensure OPENAI_API_KEY environment variable is set.",
-            details={"reason": reason},
-        )
-        self.reason = reason
-
-
-# =============================================================================
 # FORMATTER ERRORS
 # =============================================================================
 
@@ -459,13 +374,13 @@ class SchedulerNotInitializedError(SchedulingError):
 
 
 class DataError(MMOFakeLogError):
-    """Base error for game data operations."""
+    """Base error for data operations."""
 
     pass
 
 
 class DataNotFoundError(DataError):
-    """Raised when requested game data is not found."""
+    """Raised when requested data is not found."""
 
     def __init__(self, data_type: str, identifier: str) -> None:
         super().__init__(
@@ -477,7 +392,7 @@ class DataNotFoundError(DataError):
 
 
 class InvalidDataError(DataError):
-    """Raised when game data is invalid or corrupted."""
+    """Raised when data is invalid or corrupted."""
 
     def __init__(self, data_type: str, reason: str) -> None:
         super().__init__(

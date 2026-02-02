@@ -8,7 +8,8 @@ This promotes extensibility and maintainability.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Callable, Dict, List, Optional, Type
+from pathlib import Path
+from typing import TYPE_CHECKING, Callable, Dict, List, Optional, Type, Union
 
 from mmofakelog.core.errors import DuplicateLogTypeError, InvalidLogTypeError, LogTypeNotFoundError
 from mmofakelog.core.types import LogCategory, LogSeverity, LogTypeMetadata, RecurrencePattern
@@ -336,3 +337,49 @@ def get_registry() -> LogTypeRegistry:
         The singleton LogTypeRegistry instance
     """
     return LogTypeRegistry()
+
+
+def register_lua_generators(resources_path: Optional[Union[str, Path]] = None) -> int:
+    """
+    Load and register all Lua generators.
+
+    This function loads all Lua generators and registers them
+    with the main LogTypeRegistry, making them available alongside
+    Python generators.
+
+    Args:
+        resources_path: Optional path to resources directory
+
+    Returns:
+        Number of Lua generators registered
+    """
+    from mmofakelog.core.lua_adapter import get_lua_registry, LuaGeneratorAdapter
+
+    lua_registry = get_lua_registry()
+    main_registry = get_registry()
+
+    # Load generators
+    generators_path = None
+    if resources_path:
+        generators_path = Path(resources_path) / "generators"
+
+    count = lua_registry.load_generators(generators_path)
+
+    # Register adapters with main registry
+    for name in lua_registry.all_types():
+        adapter = lua_registry.get_adapter(name)
+        metadata = lua_registry.get_metadata(name)
+
+        if adapter and metadata and not main_registry.is_registered(name):
+            # Create a wrapper class that returns the adapter instance
+            # This allows the factory to work with both Python classes and Lua adapters
+            class _LuaGeneratorWrapper:
+                _adapter = adapter
+                _log_type_metadata = metadata
+
+                def __new__(cls) -> LuaGeneratorAdapter:
+                    return cls._adapter
+
+            main_registry.register(name, metadata, _LuaGeneratorWrapper)
+
+    return count

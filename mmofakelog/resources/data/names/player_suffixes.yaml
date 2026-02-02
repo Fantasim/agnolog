@@ -1,0 +1,43 @@
+version: "1.0"
+metadata:
+  description: "Fantasy name suffixes for player name generation"
+
+data:
+  - ion
+  - ius
+  - ara
+  - ora
+  - iel
+  - ael
+  - wen
+  - wyn
+  - mir
+  - dir
+  - las
+  - ras
+  - dor
+  - thor
+  - gar
+  - kar
+  - rin
+  - lin
+  - eth
+  - oth
+  - ix
+  - ax
+  - us
+  - "is"
+  - os
+  - an
+  - en
+  - "in"
+  - "on"
+  - un
+  - fire
+  - blade
+  - heart
+  - soul
+  - bane
+  - born
+  - wing
+  - claw

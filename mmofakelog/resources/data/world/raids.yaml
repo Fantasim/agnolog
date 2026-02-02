@@ -1,0 +1,32 @@
+version: "1.0"
+metadata:
+  description: "Raid definitions"
+
+data:
+  - name: Molten Core
+    raid_size: 40
+    level: 60
+
+  - name: "Onyxia's Lair"
+    raid_size: 40
+    level: 60
+
+  - name: Blackwing Lair
+    raid_size: 40
+    level: 60
+
+  - name: "Zul'Gurub"
+    raid_size: 20
+    level: 60
+
+  - name: "Ruins of Ahn'Qiraj"
+    raid_size: 20
+    level: 60
+
+  - name: "Temple of Ahn'Qiraj"
+    raid_size: 40
+    level: 60
+
+  - name: Naxxramas
+    raid_size: 40
+    level: 60
