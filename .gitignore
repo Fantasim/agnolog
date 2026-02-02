@@ -81,4 +81,4 @@ Thumbs.db
 
 # Project specific
 *.log
-output/
+/output/
