@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Type
 
 from mmofakelog.core.errors import GeneratorNotFoundError, LogTypeNotFoundError
 from mmofakelog.core.registry import LogTypeRegistry, get_registry
-from mmofakelog.core.types import LogCategory, LogEntry, LogTypeMetadata, RecurrencePattern
+from mmofakelog.core.types import LogEntry, LogTypeMetadata, RecurrencePattern
 
 if TYPE_CHECKING:
     from mmofakelog.generators.base import BaseLogGenerator
@@ -184,7 +184,7 @@ class LogFactory:
 
     def create_random(
         self,
-        category: Optional[LogCategory] = None,
+        category: Optional[str] = None,
         recurrence: Optional[RecurrencePattern] = None,
         timestamp: Optional[datetime] = None,
         **kwargs: Any,
@@ -228,7 +228,7 @@ class LogFactory:
         """
         return self._registry.all_types()
 
-    def get_types_by_category(self, category: LogCategory) -> List[str]:
+    def get_types_by_category(self, category: str) -> List[str]:
         """
         Get log types in a category.
 

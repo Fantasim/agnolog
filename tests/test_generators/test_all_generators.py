@@ -57,7 +57,7 @@ class TestPlayerGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.PLAYER
+        assert entry.category == "PLAYER"
 
     def test_player_login_has_required_fields(self, factory):
         """player.login should have expected fields."""
@@ -120,7 +120,7 @@ class TestServerGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.SERVER
+        assert entry.category == "SERVER"
 
     def test_server_cpu_usage_has_percent(self, factory):
         """cpu_usage should have percentage."""
@@ -169,7 +169,7 @@ class TestSecurityGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.SECURITY
+        assert entry.category == "SECURITY"
 
     def test_security_login_failed_has_reason(self, factory):
         """login_failed should have failure reason."""
@@ -219,7 +219,7 @@ class TestEconomyGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.ECONOMY
+        assert entry.category == "ECONOMY"
 
     def test_economy_gold_gain_has_amount(self, factory):
         """gold_gain should have amount."""
@@ -272,7 +272,7 @@ class TestCombatGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.COMBAT
+        assert entry.category == "COMBAT"
 
     def test_combat_damage_dealt_has_damage(self, factory):
         """damage_dealt should have damage info."""
@@ -331,7 +331,7 @@ class TestTechnicalGenerators:
         assert entry is not None, f"Failed to create {log_type}"
         assert isinstance(entry, LogEntry)
         assert entry.log_type == log_type
-        assert entry.category == LogCategory.TECHNICAL
+        assert entry.category == "TECHNICAL"
 
     def test_technical_latency_has_ms(self, factory):
         """latency should have milliseconds."""
@@ -400,5 +400,5 @@ class TestGeneratorCount:
         for category in LogCategory:
             types = populated_registry.get_by_category(category)
             assert len(types) >= 10, (
-                f"Category {category.name} has only {len(types)} types"
+                f"Category {category} has only {len(types)} types"
             )

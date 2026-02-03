@@ -17,7 +17,7 @@ from mmofakelog.core.constants import (
     INTERNAL_LOG_LEVEL,
 )
 from mmofakelog.core.errors import InvalidConfigValueError
-from mmofakelog.core.types import LogCategory, LogFormat
+from mmofakelog.core.types import LogFormat
 
 
 @dataclass
@@ -40,10 +40,8 @@ class GenerationConfig:
     count: int = DEFAULT_LOG_COUNT
     time_scale: float = DEFAULT_TIME_SCALE
     server_id: str = DEFAULT_SERVER_ID
-    enabled_categories: Set[LogCategory] = field(
-        default_factory=lambda: set(LogCategory)
-    )
-    enabled_types: Optional[Set[str]] = None  # None means all
+    enabled_categories: Optional[Set[str]] = None  # None means all categories
+    enabled_types: Optional[Set[str]] = None  # None means all types
     disabled_types: Set[str] = field(default_factory=set)
 
 

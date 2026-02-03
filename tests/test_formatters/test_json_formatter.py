@@ -142,7 +142,7 @@ class TestJSONFormatterSerialization:
             log_type="test.type",
             timestamp=sample_timestamp,
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"event_time": sample_timestamp},
         )
 
@@ -158,7 +158,7 @@ class TestJSONFormatterSerialization:
             log_type="test.type",
             timestamp=sample_timestamp,
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"severity_ref": LogSeverity.ERROR},
         )
 
@@ -173,7 +173,7 @@ class TestJSONFormatterSerialization:
             log_type="test.type",
             timestamp=sample_timestamp,
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"nested": {"key": "value", "number": 42}},
         )
 
@@ -189,7 +189,7 @@ class TestJSONFormatterSerialization:
             log_type="test.type",
             timestamp=sample_timestamp,
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"items": ["a", "b", "c"]},
         )
 
@@ -228,7 +228,7 @@ class TestJSONFormatterOptions:
             log_type="test.type",
             timestamp=sample_timestamp,
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"message": "Hello \u4e16\u754c"},  # "Hello World" in Chinese
         )
 

@@ -13,7 +13,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Type
 
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
@@ -24,15 +23,6 @@ logger = logging.getLogger(__name__)
 
 
 # String to enum mappings
-CATEGORY_MAP = {
-    "PLAYER": LogCategory.PLAYER,
-    "SERVER": LogCategory.SERVER,
-    "SECURITY": LogCategory.SECURITY,
-    "ECONOMY": LogCategory.ECONOMY,
-    "COMBAT": LogCategory.COMBAT,
-    "TECHNICAL": LogCategory.TECHNICAL,
-}
-
 SEVERITY_MAP = {
     "DEBUG": LogSeverity.DEBUG,
     "INFO": LogSeverity.INFO,
@@ -67,10 +57,8 @@ def metadata_from_lua(lua_metadata: Dict[str, Any]) -> LogTypeMetadata:
     if not name:
         raise ValueError("Lua metadata missing 'name'")
 
-    category_str = lua_metadata.get("category", "PLAYER")
-    category = CATEGORY_MAP.get(category_str.upper())
-    if category is None:
-        raise ValueError(f"Invalid category: {category_str}")
+    # Category is now a flexible string
+    category = lua_metadata.get("category", "GENERAL").upper()
 
     severity_str = lua_metadata.get("severity", "INFO")
     severity = SEVERITY_MAP.get(severity_str.upper())
@@ -306,7 +294,7 @@ class LuaGeneratorRegistry:
         """Get number of registered generators."""
         return len(self._adapters)
 
-    def get_by_category(self, category: LogCategory) -> List[str]:
+    def get_by_category(self, category: str) -> List[str]:
         """Get all generator names in a category."""
         return [
             name for name, meta in self._metadata.items()

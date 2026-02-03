@@ -13,7 +13,7 @@ from typing import Dict, Iterator, List, Optional, Set
 
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry, get_registry
-from mmofakelog.core.types import LogCategory, LogEntry, RecurrencePattern
+from mmofakelog.core.types import LogEntry, RecurrencePattern
 from mmofakelog.logutils import InternalLoggerMixin
 from mmofakelog.scheduling.patterns import RecurrenceCalculator
 
@@ -69,7 +69,7 @@ class LogScheduler(InternalLoggerMixin):
     def enable_log_types(
         self,
         log_types: Optional[List[str]] = None,
-        categories: Optional[List[LogCategory]] = None,
+        categories: Optional[List[str]] = None,
     ) -> None:
         """
         Enable specific log types for generation.

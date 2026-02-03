@@ -33,7 +33,7 @@ def text_formatter_registry(reset_registry):
 
     metadata = LogTypeMetadata(
         name="test.formatted",
-        category=LogCategory.PLAYER,
+        category="PLAYER",
         severity=LogSeverity.INFO,
         recurrence=RecurrencePattern.NORMAL,
         description="Test type",
@@ -59,7 +59,7 @@ class TestTextFormatterBasic:
             log_type="test.formatted",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"username": "TestPlayer", "level": 42},
         )
 
@@ -76,7 +76,7 @@ class TestTextFormatterBasic:
             log_type="unknown.type",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"key": "value"},
         )
 
@@ -92,7 +92,7 @@ class TestTextFormatterBasic:
             log_type="test.formatted",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={},  # Missing username and level
         )
 
@@ -115,7 +115,7 @@ class TestTextFormatterOptions:
             log_type="test.formatted",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"username": "Test", "level": 1},
         )
 
@@ -133,7 +133,7 @@ class TestTextFormatterOptions:
             log_type="unknown.type",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.WARNING,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={},
         )
 
@@ -151,7 +151,7 @@ class TestTextFormatterOptions:
             log_type="unknown.type",
             timestamp=datetime(2024, 1, 15, 12, 30, 45),
             severity=LogSeverity.INFO,
-            category=LogCategory.COMBAT,
+            category="COMBAT",
             data={},
         )
 
@@ -168,7 +168,7 @@ class TestTextFormatterDataValues:
             log_type="unknown.type",
             timestamp=datetime.now(),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"active": True},
         )
 
@@ -181,7 +181,7 @@ class TestTextFormatterDataValues:
             log_type="unknown.type",
             timestamp=datetime.now(),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"active": False},
         )
 
@@ -194,7 +194,7 @@ class TestTextFormatterDataValues:
             log_type="unknown.type",
             timestamp=datetime.now(),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"value": 3.14159},
         )
 
@@ -207,7 +207,7 @@ class TestTextFormatterDataValues:
             log_type="unknown.type",
             timestamp=datetime.now(),
             severity=LogSeverity.INFO,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"items": ["a", "b", "c"]},
         )
 
@@ -247,7 +247,7 @@ class TestColorTextFormatter:
             log_type="test.formatted",
             timestamp=datetime.now(),
             severity=LogSeverity.ERROR,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={"username": "Test", "level": 1},
         )
 
@@ -274,7 +274,7 @@ class TestTextFormatterColors:
             log_type="unknown.type",
             timestamp=datetime.now(),
             severity=LogSeverity.ERROR,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             data={},
         )
 

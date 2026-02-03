@@ -2,12 +2,11 @@
 Pytest fixtures and configuration for mmofakelog tests.
 """
 
-import importlib
 import pytest
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
 
-from mmofakelog.core.registry import LogTypeRegistry, register_log_type
+from mmofakelog.core.registry import LogTypeRegistry, register_lua_generators
 from mmofakelog.core.types import (
     LogCategory,
     LogEntry,
@@ -21,21 +20,12 @@ from mmofakelog.generators.base import BaseLogGenerator
 def _ensure_generators_registered():
     """Ensure all generators are registered in the registry.
 
-    This is needed because after reset_registry() is called, the
-    singleton is cleared but Python's module cache still has the
-    generators imported. This function forces re-registration by
-    reloading the generator modules.
+    This function loads Lua generators into the registry if it's empty.
     """
     registry = LogTypeRegistry()
     if registry.count() == 0:
-        # Registry is empty, need to reload generators
-        from mmofakelog.generators import player, server, security, economy, combat, technical
-        importlib.reload(player)
-        importlib.reload(server)
-        importlib.reload(security)
-        importlib.reload(economy)
-        importlib.reload(combat)
-        importlib.reload(technical)
+        # Registry is empty, load Lua generators
+        register_lua_generators()
 
 
 # Ensure generators are registered at module load time
@@ -67,7 +57,7 @@ def sample_metadata():
     """Provide sample log type metadata."""
     return LogTypeMetadata(
         name="test.sample",
-        category=LogCategory.PLAYER,
+        category="PLAYER",
         severity=LogSeverity.INFO,
         recurrence=RecurrencePattern.NORMAL,
         description="Sample test log type",
@@ -83,7 +73,7 @@ def sample_log_entry(sample_timestamp):
         log_type="player.login",
         timestamp=sample_timestamp,
         severity=LogSeverity.INFO,
-        category=LogCategory.PLAYER,
+        category="PLAYER",
         data={
             "username": "TestPlayer",
             "character_name": "DragonSlayer",
@@ -106,7 +96,7 @@ def sample_log_entries(sample_timestamp):
                 log_type=f"test.type{i}",
                 timestamp=sample_timestamp + timedelta(seconds=i),
                 severity=LogSeverity.INFO,
-                category=LogCategory.PLAYER,
+                category="PLAYER",
                 data={"index": i, "message": f"Test message {i}"},
                 server_id="server-01",
             )
@@ -145,9 +135,8 @@ def registered_sample_generator(empty_registry, sample_metadata):
 def populated_registry():
     """Provide the global registry with all log types registered.
 
-    This fixture ensures all generators are registered, even if
-    a previous test reset the registry. It uses importlib.reload
-    to force re-registration of all generator modules.
+    This fixture ensures all Lua generators are registered, even if
+    a previous test reset the registry.
     """
     _ensure_generators_registered()
     return LogTypeRegistry()

@@ -92,7 +92,7 @@ class TextFormatter(BaseFormatter):
         format_dict: Dict[str, str] = {
             "timestamp": entry.timestamp.strftime(self._timestamp_format),
             "severity": entry.severity.name,
-            "category": entry.category.name,
+            "category": entry.category,  # Category is now a string
             "log_type": entry.log_type,
         }
 

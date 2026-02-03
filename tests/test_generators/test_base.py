@@ -46,7 +46,7 @@ def metadata():
     """Create test metadata."""
     return LogTypeMetadata(
         name="test.generator",
-        category=LogCategory.PLAYER,
+        category="PLAYER",
         severity=LogSeverity.INFO,
         recurrence=RecurrencePattern.NORMAL,
         description="Test generator",
@@ -67,7 +67,7 @@ class TestBaseLogGenerator:
         assert entry.log_type == "test.generator"
         assert entry.timestamp == timestamp
         assert entry.severity == LogSeverity.INFO
-        assert entry.category == LogCategory.PLAYER
+        assert entry.category == "PLAYER"
 
     def test_generate_includes_data(self, generator, metadata):
         """Should include generated data."""

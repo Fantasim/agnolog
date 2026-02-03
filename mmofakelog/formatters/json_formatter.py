@@ -79,7 +79,7 @@ class JSONFormatter(BaseFormatter):
             "timestamp": self._serialize_value(entry.timestamp),
             "type": entry.log_type,
             "severity": entry.severity.name,
-            "category": entry.category.name,
+            "category": entry.category,  # Category is now a string
         }
 
         # Add all data fields

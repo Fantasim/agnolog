@@ -10,7 +10,6 @@ from io import StringIO
 from unittest.mock import patch
 
 from mmofakelog.cli import main, parse_categories
-from mmofakelog.core.types import LogCategory
 
 
 class TestParseCategories:
@@ -21,7 +20,7 @@ class TestParseCategories:
         result = parse_categories(["player"])
 
         assert result is not None
-        assert LogCategory.PLAYER in result
+        assert "PLAYER" in result
 
     def test_parse_multiple_categories(self):
         """Should parse multiple categories."""
@@ -29,9 +28,9 @@ class TestParseCategories:
 
         assert result is not None
         assert len(result) == 3
-        assert LogCategory.PLAYER in result
-        assert LogCategory.COMBAT in result
-        assert LogCategory.SERVER in result
+        assert "PLAYER" in result
+        assert "COMBAT" in result
+        assert "SERVER" in result
 
     def test_parse_none_returns_none(self):
         """Should return None for None input."""
@@ -44,19 +43,23 @@ class TestParseCategories:
         assert result is None
 
     def test_parse_case_insensitive(self):
-        """Should be case insensitive."""
+        """Should be case insensitive and convert to uppercase."""
         result = parse_categories(["PLAYER", "Player", "player"])
 
         assert result is not None
-        # Should deduplicate
-        assert len([c for c in result if c == LogCategory.PLAYER]) == 3
+        # All should be uppercase
+        assert len([c for c in result if c == "PLAYER"]) == 3
 
-    def test_parse_invalid_ignored(self):
-        """Should ignore invalid categories."""
+    def test_parse_all_categories(self):
+        """Should parse all category strings."""
         result = parse_categories(["player", "invalid", "combat"])
 
         assert result is not None
-        assert len(result) == 2
+        # Now passes through all strings (converted to uppercase)
+        assert len(result) == 3
+        assert "PLAYER" in result
+        assert "INVALID" in result
+        assert "COMBAT" in result
 
 
 class TestCLIMain:

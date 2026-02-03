@@ -43,7 +43,7 @@ def scheduler_registry(reset_registry):
     for name, pattern in patterns:
         metadata = LogTypeMetadata(
             name=name,
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=pattern,
             description=f"Test {pattern.name}",
@@ -226,12 +226,12 @@ class TestLogScheduler:
             factory=scheduler_factory,
             registry=scheduler_registry,
         )
-        scheduler.enable_log_types(categories=[LogCategory.PLAYER])
+        scheduler.enable_log_types(categories=["PLAYER"])
 
         assert scheduler.get_type_count() == 3
 
         # SERVER category should have none
-        scheduler.enable_log_types(categories=[LogCategory.SERVER])
+        scheduler.enable_log_types(categories=["SERVER"])
         assert scheduler.get_type_count() == 0
 
     def test_disable_log_types(self, scheduler):

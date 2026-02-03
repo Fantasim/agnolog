@@ -27,19 +27,13 @@ from mmofakelog.output import FileOutputHandler, StreamOutputHandler
 from mmofakelog.scheduling import LogScheduler
 
 
-def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[LogCategory]]:
-    """Parse category strings to LogCategory enums."""
+def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[str]]:
+    """Parse category strings to uppercase category names."""
     if not category_strs:
         return None
 
-    categories = []
-    category_map = {c.name.lower(): c for c in LogCategory}
-
-    for cat_str in category_strs:
-        cat_lower = cat_str.lower()
-        if cat_lower in category_map:
-            categories.append(category_map[cat_lower])
-
+    # Convert to uppercase (category strings are stored uppercase)
+    categories = [cat.upper() for cat in category_strs]
     return categories if categories else None
 
 
@@ -70,7 +64,7 @@ def list_types(use_lua: bool = True, resources_path: Optional[str] = None) -> No
     for category in LogCategory:
         types = registry.get_by_category(category)
         if types:
-            print(f"\n{category.name} ({len(types)} types)")
+            print(f"\n{category} ({len(types)} types)")
             print("-" * 40)
             for log_type in sorted(types):
                 meta = registry.get_metadata(log_type)

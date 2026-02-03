@@ -11,7 +11,7 @@ from mmofakelog.core.registry import (
     get_registry,
 )
 from mmofakelog.core.types import (
-    LogCategory,
+    LogCategory,  # String constants class
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
@@ -51,7 +51,7 @@ class TestLogTypeRegistry:
         """Should register valid log type."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -66,7 +66,7 @@ class TestLogTypeRegistry:
         """Should raise on duplicate registration."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -81,7 +81,7 @@ class TestLogTypeRegistry:
         """Should raise on empty name."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -94,7 +94,7 @@ class TestLogTypeRegistry:
         """Should raise on non-namespaced name."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -107,7 +107,7 @@ class TestLogTypeRegistry:
         """Should unregister existing type."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -128,7 +128,7 @@ class TestLogTypeRegistry:
         """Should return metadata for registered type."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -153,7 +153,7 @@ class TestLogTypeRegistry:
         """Should return generator class."""
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test type",
@@ -176,7 +176,7 @@ class TestLogTypeRegistry:
 
     def test_get_by_category(self, empty_registry):
         """Should filter by category."""
-        for i, cat in enumerate([LogCategory.PLAYER, LogCategory.SERVER, LogCategory.PLAYER]):
+        for i, cat in enumerate(["PLAYER", "SERVER", "PLAYER"]):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
                 category=cat,
@@ -187,7 +187,7 @@ class TestLogTypeRegistry:
             )
             empty_registry.register(f"test.type{i}", metadata, DummyGenerator)
 
-        player_types = empty_registry.get_by_category(LogCategory.PLAYER)
+        player_types = empty_registry.get_by_category("PLAYER")
         assert len(player_types) == 2
         assert "test.type0" in player_types
         assert "test.type2" in player_types
@@ -198,7 +198,7 @@ class TestLogTypeRegistry:
         for i, pattern in enumerate(patterns):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
-                category=LogCategory.PLAYER,
+                category="PLAYER",
                 severity=LogSeverity.INFO,
                 recurrence=pattern,
                 description="Test",
@@ -215,7 +215,7 @@ class TestLogTypeRegistry:
         for i, severity in enumerate(severities):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
-                category=LogCategory.PLAYER,
+                category="PLAYER",
                 severity=severity,
                 recurrence=RecurrencePattern.NORMAL,
                 description="Test",
@@ -232,7 +232,7 @@ class TestLogTypeRegistry:
         for i, tags in enumerate(tags_list):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
-                category=LogCategory.PLAYER,
+                category="PLAYER",
                 severity=LogSeverity.INFO,
                 recurrence=RecurrencePattern.NORMAL,
                 description="Test",
@@ -249,7 +249,7 @@ class TestLogTypeRegistry:
         for i in range(3):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
-                category=LogCategory.PLAYER,
+                category="PLAYER",
                 severity=LogSeverity.INFO,
                 recurrence=RecurrencePattern.NORMAL,
                 description="Test",
@@ -266,7 +266,7 @@ class TestLogTypeRegistry:
 
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test",
@@ -281,7 +281,7 @@ class TestLogTypeRegistry:
 
         metadata = LogTypeMetadata(
             name="test.type",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Test",
@@ -292,7 +292,7 @@ class TestLogTypeRegistry:
 
     def test_categories_summary(self, empty_registry):
         """Should return category summary."""
-        categories = [LogCategory.PLAYER, LogCategory.SERVER, LogCategory.PLAYER]
+        categories = ["PLAYER", "SERVER", "PLAYER"]
         for i, cat in enumerate(categories):
             metadata = LogTypeMetadata(
                 name=f"test.type{i}",
@@ -305,8 +305,8 @@ class TestLogTypeRegistry:
             empty_registry.register(f"test.type{i}", metadata, DummyGenerator)
 
         summary = empty_registry.categories_summary()
-        assert summary[LogCategory.PLAYER] == 2
-        assert summary[LogCategory.SERVER] == 1
+        assert summary["PLAYER"] == 2
+        assert summary["SERVER"] == 1
 
 
 class TestRegisterLogTypeDecorator:
@@ -317,7 +317,7 @@ class TestRegisterLogTypeDecorator:
 
         @register_log_type(
             name="decorated.test",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Decorated test",
@@ -335,7 +335,7 @@ class TestRegisterLogTypeDecorator:
 
         @register_log_type(
             name="decorated.test",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Decorated test",
@@ -353,7 +353,7 @@ class TestRegisterLogTypeDecorator:
 
         @register_log_type(
             name="decorated.test",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Decorated test",
@@ -398,7 +398,7 @@ class TestPopulatedRegistry:
         """Each category should have registered types."""
         for category in LogCategory:
             types = populated_registry.get_by_category(category)
-            assert len(types) > 0, f"Category {category.name} has no types"
+            assert len(types) > 0, f"Category {category} has no types"
 
     def test_player_types_exist(self, populated_registry):
         """Should have player types."""

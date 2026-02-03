@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Callable, Dict, List, Optional, Type, Union
 
 from mmofakelog.core.errors import DuplicateLogTypeError, InvalidLogTypeError, LogTypeNotFoundError
-from mmofakelog.core.types import LogCategory, LogSeverity, LogTypeMetadata, RecurrencePattern
+from mmofakelog.core.types import LogSeverity, LogTypeMetadata, RecurrencePattern
 
 if TYPE_CHECKING:
     from mmofakelog.generators.base import BaseLogGenerator
@@ -162,12 +162,12 @@ class LogTypeRegistry:
             raise LogTypeNotFoundError(name, available=list(self._generators.keys()))
         return generator
 
-    def get_by_category(self, category: LogCategory) -> List[str]:
+    def get_by_category(self, category: str) -> List[str]:
         """
         Get all log types in a category.
 
         Args:
-            category: The category to filter by
+            category: The category string to filter by
 
         Returns:
             List of log type names in the category
@@ -255,14 +255,14 @@ class LogTypeRegistry:
         """
         return name in self._registry
 
-    def categories_summary(self) -> Dict[LogCategory, int]:
+    def categories_summary(self) -> Dict[str, int]:
         """
         Get a summary of log types by category.
 
         Returns:
-            Dictionary mapping categories to counts
+            Dictionary mapping category strings to counts
         """
-        summary: Dict[LogCategory, int] = {}
+        summary: Dict[str, int] = {}
         for meta in self._registry.values():
             summary[meta.category] = summary.get(meta.category, 0) + 1
         return summary
@@ -270,7 +270,7 @@ class LogTypeRegistry:
 
 def register_log_type(
     name: str,
-    category: LogCategory,
+    category: str,
     severity: LogSeverity,
     recurrence: RecurrencePattern,
     description: str,
@@ -286,7 +286,7 @@ def register_log_type(
     Usage:
         @register_log_type(
             name="player.login",
-            category=LogCategory.PLAYER,
+            category="PLAYER",
             severity=LogSeverity.INFO,
             recurrence=RecurrencePattern.NORMAL,
             description="Player login event",

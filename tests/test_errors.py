@@ -23,13 +23,6 @@ from mmofakelog.core.errors import (
     DataGenerationError,
     MissingFieldError,
     GeneratorNotFoundError,
-    # AI
-    AIClientError,
-    AIConnectionError,
-    AIRateLimitError,
-    AIResponseError,
-    AIQuotaExceededError,
-    AIConfigurationError,
     # Formatter
     FormatterError,
     TemplateError,
@@ -100,9 +93,9 @@ class TestConfigurationErrors:
         assert error.key == "API_KEY"
 
     def test_missing_config_error_with_hint(self):
-        error = MissingConfigError("API_KEY", "Set OPENAI_API_KEY env var")
-        assert "Set OPENAI_API_KEY" in str(error)
-        assert error.hint == "Set OPENAI_API_KEY env var"
+        error = MissingConfigError("API_KEY", "Set the environment variable")
+        assert "Set the environment variable" in str(error)
+        assert error.hint == "Set the environment variable"
 
     def test_invalid_config_value_error(self):
         error = InvalidConfigValueError("timeout", -1, "positive integer")
@@ -180,48 +173,6 @@ class TestGeneratorErrors:
     def test_generator_not_found_error(self):
         error = GeneratorNotFoundError("player.invalid")
         assert "player.invalid" in str(error)
-
-
-class TestAIClientErrors:
-    """Tests for AI client exceptions."""
-
-    def test_ai_client_error_inherits(self):
-        error = AIClientError("AI error")
-        assert isinstance(error, MMOFakeLogError)
-
-    def test_ai_connection_error(self):
-        error = AIConnectionError("OpenAI", "Connection refused")
-        assert "OpenAI" in str(error)
-        assert "Connection refused" in str(error)
-        assert error.service == "OpenAI"
-
-    def test_ai_rate_limit_error(self):
-        error = AIRateLimitError(retry_after=60)
-        assert "rate limit" in str(error).lower()
-        assert "60" in str(error)
-        assert error.retry_after == 60
-
-    def test_ai_rate_limit_error_with_type(self):
-        error = AIRateLimitError(limit_type="tokens")
-        assert "tokens" in str(error)
-        assert error.limit_type == "tokens"
-
-    def test_ai_response_error(self):
-        error = AIResponseError("Empty response")
-        assert "Empty response" in str(error)
-
-    def test_ai_response_error_with_response(self):
-        error = AIResponseError("Invalid format", response="bad data")
-        assert error.response == "bad data"
-
-    def test_ai_quota_exceeded_error(self):
-        error = AIQuotaExceededError()
-        assert "quota" in str(error).lower()
-
-    def test_ai_configuration_error(self):
-        error = AIConfigurationError("Missing API key")
-        assert "Missing API key" in str(error)
-        assert "OPENAI_API_KEY" in str(error)
 
 
 class TestFormatterErrors:
@@ -362,12 +313,10 @@ class TestErrorHierarchy:
 
     def test_all_errors_inherit_from_base(self):
         """All custom errors should inherit from MMOFakeLogError."""
-        # Base error classes that take just a message
         error_classes = [
             ConfigurationError,
             RegistryError,
             GeneratorError,
-            AIClientError,
             FormatterError,
             OutputError,
             SchedulingError,
@@ -387,7 +336,6 @@ class TestErrorHierarchy:
             MissingConfigError("key"),
             LogTypeNotFoundError("type"),
             DataGenerationError("type", "reason"),
-            AIConnectionError("service", "reason"),
             TemplateError("template", []),
             FileWriteError("path", "reason"),
             InvalidPatternError("pattern"),

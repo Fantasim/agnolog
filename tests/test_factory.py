@@ -10,7 +10,6 @@ from datetime import datetime
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
@@ -38,7 +37,7 @@ def factory_registry(reset_registry):
     # Register a test type
     metadata = LogTypeMetadata(
         name="test.simple",
-        category=LogCategory.PLAYER,
+        category="PLAYER",
         severity=LogSeverity.INFO,
         recurrence=RecurrencePattern.NORMAL,
         description="Simple test type",
@@ -65,7 +64,7 @@ class TestLogFactoryBasic:
         assert entry is not None
         assert entry.log_type == "test.simple"
         assert entry.severity == LogSeverity.INFO
-        assert entry.category == LogCategory.PLAYER
+        assert entry.category == "PLAYER"
         assert "message" in entry.data
 
     def test_create_with_timestamp(self, factory):
@@ -139,10 +138,10 @@ class TestLogFactoryRandom:
 
     def test_create_random_with_category(self, factory):
         """Should respect category filter."""
-        entry = factory.create_random(category=LogCategory.PLAYER)
+        entry = factory.create_random(category="PLAYER")
 
         assert entry is not None
-        assert entry.category == LogCategory.PLAYER
+        assert entry.category == "PLAYER"
 
     def test_create_random_with_recurrence(self, factory):
         """Should respect recurrence filter."""
@@ -183,7 +182,7 @@ class TestLogFactoryHelpers:
 
     def test_get_types_by_category(self, factory):
         """Should filter types by category."""
-        types = factory.get_types_by_category(LogCategory.PLAYER)
+        types = factory.get_types_by_category("PLAYER")
 
         assert "test.simple" in types
 
