@@ -94,10 +94,53 @@ Generic utilities (no theme data):
 
 To create a completely different theme (e.g., sci-fi, banking, e-commerce):
 
-1. Create new YAML data files in `resources/data/`
-2. Create Lua generators in `resources/generators/`
-3. Use any category names you want - they're discovered dynamically
-4. Python code requires **no changes**
+1. Create directory: `resources/<theme>/` with `data/` and `generators/` subdirs
+2. Add YAML data files in `resources/<theme>/data/`
+3. Add Lua generators in `resources/<theme>/generators/<category>/`
+4. Use any category names - they're discovered dynamically
+5. Python code requires **no changes**
+
+**See [docs/adding-resources.md](docs/adding-resources.md) for detailed instructions.**
+
+### Theme Directory Structure
+
+```
+resources/<theme>/
+├── data/
+│   ├── names/          # Character names, guild names
+│   ├── items/          # Items, rarities, modifiers
+│   ├── world/          # Zones, dungeons, locations
+│   └── constants/      # Game/domain constants
+└── generators/
+    ├── <category1>/    # e.g., player/, combat/, economy/
+    │   ├── event1.lua
+    │   └── event2.lua
+    └── <category2>/
+        └── ...
+```
+
+### Lua Generator Template
+
+```lua
+return {
+    metadata = {
+        name = "category.action_name",
+        category = "CATEGORY",
+        severity = "INFO",              -- DEBUG, INFO, WARNING, ERROR, CRITICAL
+        recurrence = "NORMAL",          -- VERY_FREQUENT, FREQUENT, NORMAL, INFREQUENT, RARE
+        description = "What this log represents",
+        text_template = "[{timestamp}] MESSAGE: {field1} {field2}",
+        tags = {"tag1", "tag2"},
+        merge_groups = {"group_name"}   -- Optional: for DB schema design
+    },
+    generate = function(ctx, args)
+        return {
+            field1 = ctx.gen.character_name(),
+            field2 = ctx.random.int(1, 100)
+        }
+    end
+}
+```
 
 ## Constants
 
@@ -117,6 +160,31 @@ categories = ["player", "server"]  # DON'T hardcode categories!
 # GOOD
 from agnolog.core.constants import DEFAULT_TIMEOUT
 categories = registry.get_categories()  # Dynamic!
+```
+
+## Merge Groups
+
+Merge groups define which log templates could share a single database table. Used for data warehouse schema design.
+
+**Design Principles** - Only group templates if they satisfy ALL:
+1. **Same grain** - One row = same "thing" (e.g., one transaction, one session)
+2. **Schema overlap** - Templates share most core fields
+3. **Query together** - Analysts would JOIN/UNION in same queries
+
+**Don't force grouping** - Leave templates ungrouped if they have unique schemas.
+
+```lua
+-- Example: login and logout share the same grain
+merge_groups = {"sessions"}
+
+-- Example: all chat messages can share one table
+merge_groups = {"chat"}
+```
+
+**Validate merge groups:**
+```bash
+python -m agnolog --resources ./resources/mmorpg --show-merge-groups
+make merge-groups
 ```
 
 ## Error Handling
@@ -212,15 +280,17 @@ Before every commit, verify:
 ## Quick Commands
 
 ```bash
-make check       # Full validation (lint, test, validate)
-make test-cov    # Tests with coverage report
-make validate    # Validate YAML/Lua resources
-make lint        # Ruff linting
-make format      # Auto-format code
-make run         # Generate 100 logs (uses default RESOURCES)
+make check        # Full validation (lint, test, validate)
+make test-cov     # Tests with coverage report
+make validate     # Validate YAML/Lua resources
+make lint         # Ruff linting
+make format       # Auto-format code
+make run          # Generate 100 logs (uses default RESOURCES)
+make merge-groups # Show merge groups for DB schema validation
 
 # CLI (--resources is required)
 python -m agnolog --resources ./resources/mmorpg --list-types
+python -m agnolog --resources ./resources/mmorpg --show-merge-groups
 python -m agnolog --resources ./resources/mmorpg -n 100 -f text
 make run RESOURCES=./resources/mmorpg  # Override default
 ```

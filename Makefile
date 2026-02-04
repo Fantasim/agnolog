@@ -25,6 +25,7 @@ help:
 	@echo "  run-text    Generate 100 logs (text format)"
 	@echo "  run-loghub  Generate loghub format (3 files)"
 	@echo "  list        List all available log types"
+	@echo "  merge-groups Show merge groups for DB schema validation"
 	@echo ""
 	@echo "Documentation:"
 	@echo "  docs        Show documentation location"
@@ -82,6 +83,9 @@ run-loghub:
 
 list:
 	python -m agnolog --resources $(RESOURCES) --list-types
+
+merge-groups:
+	python -m agnolog --resources $(RESOURCES) --show-merge-groups
 
 # Building
 build: clean

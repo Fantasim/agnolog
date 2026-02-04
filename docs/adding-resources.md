@@ -169,7 +169,8 @@ return {
         recurrence = "NORMAL",               -- Required: VERY_FREQUENT, FREQUENT, NORMAL, INFREQUENT, RARE
         description = "What this log represents",
         text_template = "[{timestamp}] MESSAGE: {field1} {field2}",
-        tags = {"tag1", "tag2"}              -- Optional: for filtering
+        tags = {"tag1", "tag2"},             -- Optional: for filtering
+        merge_groups = {"group_name"}        -- Optional: for database schema design
     },
 
     generate = function(ctx, args)
@@ -344,6 +345,60 @@ The `recurrence` field controls how often the log type appears when using the sc
 | `WARNING` | Suspicious but not critical (failed logins) |
 | `ERROR` | Errors that need attention (database errors) |
 | `CRITICAL` | Severe issues (server crash, security breach) |
+
+## Merge Groups
+
+The `merge_groups` field defines which templates could share a single database table. This is useful for data warehouse design and log aggregation.
+
+### When to Use Merge Groups
+
+Templates should be in the same merge group **only** if they satisfy:
+
+1. **Same grain** - One row represents the same "thing" (e.g., one transaction, one session)
+2. **Schema overlap** - Templates share most core fields
+3. **Query together** - Analysts would JOIN or UNION these in the same queries
+
+If a template has a unique schema, leave `merge_groups` empty.
+
+### Examples
+
+```lua
+-- Login and logout share the same grain (session events)
+-- resources/generators/player/login.lua
+merge_groups = {"sessions"}
+
+-- resources/generators/player/logout.lua
+merge_groups = {"sessions"}
+
+-- All chat messages can share one table with a "channel" column
+-- resources/generators/player/chat_say.lua
+merge_groups = {"chat"}
+
+-- Gold gain and spend are symmetric (credit/debit)
+-- resources/generators/economy/gold_gain.lua
+merge_groups = {"gold_flow"}
+```
+
+### Common Merge Groups
+
+| Group | Templates | Rationale |
+|-------|-----------|-----------|
+| `sessions` | login, logout | Session lifecycle bookends |
+| `gold_flow` | gold_gain, gold_spend | Symmetric credit/debit |
+| `chat` | chat_say, chat_yell, chat_party, ... | All chat with channel column |
+| `damage` | damage_dealt, damage_taken | Two views of combat tick |
+| `item_events` | item_pickup, item_drop, item_equip, item_use | Player-item interactions |
+| `quests` | quest_accept, quest_complete, quest_abandon | Quest lifecycle |
+
+### Viewing Merge Groups
+
+```bash
+# Show all merge groups for validation
+python -m agnolog --resources ./resources/mmorpg --show-merge-groups
+
+# Or with make
+make merge-groups
+```
 
 ## Validating Your Resources
 

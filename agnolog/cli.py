@@ -125,24 +125,63 @@ def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None
         else:
             ungrouped.append((name, meta.text_template))
 
-    # Output in LLM-readable format
-    print("# Merge Groups Analysis\n")
-    print("Templates in the same merge group are expected to be")
-    print("semantically similar and could share a database table.\n")
+    # Output as LLM prompt for validation
+    print("# Merge Groups Validation Prompt")
+    print()
+    print("## Goal")
+    print()
+    print("You are a data warehouse architect with 20 years of experience.")
+    print("Review the merge groups below and validate whether templates are grouped correctly.")
+    print()
+    print("A **merge group** defines templates that could **share a single database table**.")
+    print("The goal is pragmatic schema design - only group templates that naturally belong together.")
+    print()
+    print("## Design Principles")
+    print()
+    print("Templates should be in the same merge group ONLY if they satisfy ALL of these:")
+    print()
+    print("1. **Same grain** - One row represents the same \"thing\" (e.g., one transaction, one session)")
+    print("2. **Schema overlap** - Templates share most core fields")
+    print("3. **Query together** - Analysts would JOIN or UNION these in the same queries")
+    print("4. **Don't force it** - Leave templates ungrouped if they're unique enough")
+    print()
+    print("## Current State")
+    print()
+    print(f"- **{len(groups)}** merge groups")
+    print(f"- **{sum(len(t) for t in groups.values())}** templates in groups")
+    print(f"- **{len(ungrouped)}** intentionally ungrouped templates")
+    print()
 
+    print("## Grouped Templates")
+    print()
     for group_name in sorted(groups.keys()):
         templates = groups[group_name]
-        print(f"## Merge Group: {group_name}")
-        print(f"Templates ({len(templates)}):")
+        print(f"### {group_name} ({len(templates)} templates)")
         for name, template in sorted(templates):
-            print(f"  - {name}")
-            print(f"    Template: {template}")
+            print(f"- `{name}`: {template}")
         print()
 
     if ungrouped:
-        print(f"## Ungrouped Templates ({len(ungrouped)})")
+        print("## Ungrouped Templates")
+        print()
+        print("These templates are intentionally ungrouped - they have unique schemas")
+        print("or represent fundamentally different events that don't fit elsewhere.")
+        print()
         for name, template in sorted(ungrouped):
-            print(f"  - {name}: {template}")
+            print(f"- `{name}`: {template}")
+        print()
+
+    print("## Your Task")
+    print()
+    print("Review the groupings above and answer:")
+    print()
+    print("1. Are there any templates that are **incorrectly grouped** (different grain/schema)?")
+    print("2. Are there any **ungrouped templates** that should be grouped together?")
+    print("3. Are there any groups that should be **split** into separate tables?")
+    print("4. Are there any groups that should be **merged** into one?")
+    print()
+    print("If everything looks correct, confirm the groupings are valid.")
+    print("If changes are needed, specify which templates to move and why.")
 
 
 def validate_resources(resources_path: Optional[str] = None) -> int:

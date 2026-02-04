@@ -122,6 +122,46 @@ agnolog --resources ./resources/mmorpg --types player.login player.logout -n 100
 agnolog --resources ./resources/mmorpg --list-types
 ```
 
+### Exclude Specific Types
+
+```bash
+agnolog --resources ./resources/mmorpg --exclude-types technical.packet_recv technical.packet_send -n 100
+```
+
+## Merge Groups
+
+Merge groups define which log templates could share a single database table. This is useful for data warehouse design and log aggregation.
+
+### View Merge Groups
+
+```bash
+agnolog --resources ./resources/mmorpg --show-merge-groups
+```
+
+This outputs a validation prompt showing:
+- All merge groups with their templates
+- Ungrouped templates (intentionally unique)
+- Design principles for grouping
+
+### Design Principles
+
+Templates should be in the same merge group only if they satisfy:
+
+1. **Same grain** - One row represents the same "thing" (e.g., one transaction, one session)
+2. **Schema overlap** - Templates share most core fields
+3. **Query together** - Analysts would JOIN or UNION these in the same queries
+
+Templates with unique schemas are intentionally left ungrouped.
+
+### Example Groups
+
+| Group | Templates | Rationale |
+|-------|-----------|-----------|
+| `sessions` | login, logout | Session lifecycle bookends |
+| `gold_flow` | gold_gain, gold_spend | Symmetric credit/debit |
+| `chat` | chat_say, chat_yell, chat_party, ... | All chat with `channel` column |
+| `damage` | damage_dealt, damage_taken | Two views of combat tick |
+
 ## CLI Reference
 
 ```
@@ -140,16 +180,25 @@ Output options:
 Filtering:
   --categories CAT ...   Filter by categories
   --types TYPE ...       Filter by specific log types
+  --exclude-types TYPE   Exclude specific log types
 
 Time control:
   --duration SECONDS     Time window for generation (default: 3600)
   --start-time ISO       Start timestamp (default: now)
+  --time-scale FLOAT     Time scale multiplier (default: 1.0)
 
-Other:
+Reproducibility:
+  --seed INT             Random seed for reproducible output
+
+Inspection:
   --list-types           List all available log types
   --list-categories      List all categories
+  --show-merge-groups    Show merge groups for database schema design
+
+Other:
   --server-id ID         Server identifier for logs
   -q, --quiet            Suppress progress messages
+  -v, --verbose          Show internal debug logs
   validate               Validate all resources
 ```
 
@@ -160,6 +209,7 @@ make run           # Generate 100 JSON logs
 make run-text      # Generate 100 text logs
 make run-loghub    # Generate loghub format (1000 logs)
 make list          # List available log types
+make merge-groups  # Show merge groups for DB schema validation
 make validate      # Validate resources
 ```
 
