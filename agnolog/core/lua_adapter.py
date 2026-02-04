@@ -224,20 +224,27 @@ class LuaGeneratorRegistry:
         """
         self._lua_sandbox = sandbox
 
-    def load_generators(self, generators_path: Optional[Path] = None) -> int:
+    def load_generators(
+        self,
+        generators_path: Optional[Path] = None,
+        resources_path: Optional[Path] = None,
+    ) -> int:
         """
         Load all Lua generators.
 
         Args:
             generators_path: Path to generators directory
+            resources_path: Path to resources directory (for ResourceLoader)
 
         Returns:
             Number of generators loaded
         """
         if self._lua_sandbox is None:
             from agnolog.core.lua_runtime import LuaSandbox
+            from agnolog.core.resource_loader import ResourceLoader
 
-            self._lua_sandbox = LuaSandbox()
+            resource_loader = ResourceLoader(resource_path=resources_path)
+            self._lua_sandbox = LuaSandbox(resource_loader=resource_loader)
 
         # Load generators through sandbox
         all_metadata = self._lua_sandbox.load_all_generators(generators_path)

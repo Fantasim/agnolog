@@ -1,12 +1,14 @@
 """
-Pytest fixtures and configuration for mmofakelog tests.
+Pytest fixtures and configuration for agnolog tests.
 """
 
 import pytest
 from datetime import datetime, timedelta
-from typing import Dict, Any, List
+from pathlib import Path
+from typing import Dict, Any
 
 from agnolog.core.registry import LogTypeRegistry, register_lua_generators
+
 from agnolog.core.types import (
     LogEntry,
     LogSeverity,
@@ -15,16 +17,20 @@ from agnolog.core.types import (
 )
 from agnolog.generators.base import BaseLogGenerator
 
+# Resources path for testing (relative to this file)
+TEST_RESOURCES_PATH = str(Path(__file__).parent.parent / "resources" / "mmorpg")
+
 
 def _ensure_generators_registered():
     """Ensure all generators are registered in the registry.
 
     This function loads Lua generators into the registry if it's empty.
+    Uses the test resources path for testing.
     """
     registry = LogTypeRegistry()
     if registry.count() == 0:
-        # Registry is empty, load Lua generators
-        register_lua_generators()
+        # Registry is empty, load Lua generators with test resources path
+        register_lua_generators(TEST_RESOURCES_PATH)
 
 
 # Ensure generators are registered at module load time

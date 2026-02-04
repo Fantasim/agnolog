@@ -45,14 +45,19 @@ class ResourceLoader:
 
         Args:
             resource_path: Path to the resources directory.
-                          Defaults to mmofakelog/resources.
+                          Must be provided - there is no default.
+
+        Raises:
+            ValueError: If resource_path is None and no instance exists.
         """
         if self._initialized and resource_path is None:
             return
 
         if resource_path is None:
-            # Default to package resources directory
-            resource_path = Path(__file__).parent.parent / "resources"
+            raise ValueError(
+                "resource_path is required. "
+                "Use --resources CLI argument to specify the resources directory."
+            )
 
         self._resource_path = resource_path
         self._data_path = resource_path / "data"

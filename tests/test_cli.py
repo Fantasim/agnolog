@@ -1,15 +1,18 @@
 """
-Tests for mmofakelog.cli module.
+Tests for agnolog.cli module.
 
 Tests the command-line interface.
 """
 
 import pytest
-import sys
 from io import StringIO
+from pathlib import Path
 from unittest.mock import patch
 
 from agnolog.cli import main, parse_categories
+
+# Resources path for testing
+TEST_RESOURCES = str(Path(__file__).parent.parent / "resources" / "mmorpg")
 
 
 class TestParseCategories:
@@ -68,7 +71,7 @@ class TestCLIMain:
     def test_list_types(self, populated_registry):
         """--list-types should list all types."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["--list-types"])
+            result = main(["--resources", TEST_RESOURCES, "--list-types"])
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -85,7 +88,7 @@ class TestCLIMain:
     def test_generate_default(self, populated_registry):
         """Should generate logs with defaults."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["-n", "5"])
+            result = main(["--resources", TEST_RESOURCES, "-n", "5"])
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -95,7 +98,7 @@ class TestCLIMain:
     def test_generate_text_format(self, populated_registry):
         """Should generate text format."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["-n", "5", "-f", "text"])
+            result = main(["--resources", TEST_RESOURCES, "-n", "5", "-f", "text"])
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -105,14 +108,14 @@ class TestCLIMain:
     def test_generate_with_categories(self, populated_registry):
         """Should filter by categories."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["-n", "10", "--categories", "player"])
+            result = main(["--resources", TEST_RESOURCES, "-n", "10", "--categories", "player"])
 
         assert result == 0
 
     def test_generate_with_types(self, populated_registry):
         """Should filter by specific types."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["-n", "5", "--types", "player.login", "player.logout"])
+            result = main(["--resources", TEST_RESOURCES, "-n", "5", "--types", "player.login", "player.logout"])
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -124,11 +127,11 @@ class TestCLIMain:
         start_time = "2024-01-15T12:00:00"
 
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout1:
-            main(["-n", "5", "--seed", "42", "--start-time", start_time])
+            main(["--resources", TEST_RESOURCES, "-n", "5", "--seed", "42", "--start-time", start_time])
         output1 = mock_stdout1.getvalue()
 
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout2:
-            main(["-n", "5", "--seed", "42", "--start-time", start_time])
+            main(["--resources", TEST_RESOURCES, "-n", "5", "--seed", "42", "--start-time", start_time])
         output2 = mock_stdout2.getvalue()
 
         # Same seed and start time should produce same output
@@ -136,7 +139,7 @@ class TestCLIMain:
 
     def test_invalid_start_time(self, populated_registry):
         """Should handle invalid start time."""
-        result = main(["-n", "5", "--start-time", "invalid"])
+        result = main(["--resources", TEST_RESOURCES, "-n", "5", "--start-time", "invalid"])
         assert result == 1
 
     def test_quiet_mode(self, populated_registry, tmp_path):
@@ -145,6 +148,7 @@ class TestCLIMain:
 
         with patch("sys.stderr", new_callable=StringIO) as mock_stderr:
             result = main([
+                "--resources", TEST_RESOURCES,
                 "-n", "5",
                 "-o", str(output_file),
                 "--quiet",
@@ -162,7 +166,7 @@ class TestCLIOutputFile:
         """Should write to output file."""
         output_file = tmp_path / "test.log"
 
-        result = main(["-n", "10", "-o", str(output_file)])
+        result = main(["--resources", TEST_RESOURCES, "-n", "10", "-o", str(output_file)])
 
         assert result == 0
         assert output_file.exists()
@@ -176,7 +180,7 @@ class TestCLIOutputFile:
 
         output_file = tmp_path / "test.json"
 
-        result = main(["-n", "5", "-f", "json", "-o", str(output_file)])
+        result = main(["--resources", TEST_RESOURCES, "-n", "5", "-f", "json", "-o", str(output_file)])
 
         assert result == 0
 
@@ -193,7 +197,7 @@ class TestCLIPrettyPrint:
     def test_pretty_print(self, populated_registry):
         """--pretty should indent JSON."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["-n", "1", "-f", "json", "--pretty"])
+            result = main(["--resources", TEST_RESOURCES, "-n", "1", "-f", "json", "--pretty"])
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -208,6 +212,7 @@ class TestCLIExcludeTypes:
         """--exclude-types should exclude specified types."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
             result = main([
+                "--resources", TEST_RESOURCES,
                 "-n", "100",
                 "--categories", "player",
                 "--exclude-types", "player.login",
@@ -226,6 +231,7 @@ class TestCLITimeOptions:
         """--start-time should set starting time."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
             result = main([
+                "--resources", TEST_RESOURCES,
                 "-n", "5",
                 "--start-time", "2024-01-15T12:00:00",
             ])
@@ -236,10 +242,10 @@ class TestCLITimeOptions:
 
     def test_duration(self, populated_registry):
         """--duration should limit time range."""
-        result = main(["-n", "5", "--duration", "60"])
+        result = main(["--resources", TEST_RESOURCES, "-n", "5", "--duration", "60"])
         assert result == 0
 
     def test_time_scale(self, populated_registry):
         """--time-scale should affect timing."""
-        result = main(["-n", "5", "--time-scale", "2.0"])
+        result = main(["--resources", TEST_RESOURCES, "-n", "5", "--time-scale", "2.0"])
         assert result == 0

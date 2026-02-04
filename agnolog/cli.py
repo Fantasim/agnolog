@@ -1,13 +1,13 @@
 """
-Command-line interface for the MMORPG Fake Log Generator.
+Command-line interface for the Agnolog Fake Log Generator.
+
+Resources are external to the package and must be provided via --resources.
 
 Usage:
-    mmofakelog -n 100 -f json          # Generate 100 JSON logs
-    mmofakelog -n 1000 -f text -o out.log  # Generate text logs to file
-    mmofakelog --list-types            # List all available log types
-    mmofakelog validate                # Validate all YAML/Lua resources
-    mmofakelog --use-lua               # Use Lua generators (default)
-    mmofakelog --use-python            # Use Python generators only
+    agnolog --resources /path/to/resources -n 100
+    agnolog --resources ~/mygame/resources -f text -o out.log
+    agnolog --resources ./resources --list-types
+    agnolog --resources ./resources validate
 """
 
 import argparse
@@ -174,12 +174,11 @@ def main(args: Optional[List[str]] = None) -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  mmofakelog -n 100                    Generate 100 logs (JSON to stdout)
-  mmofakelog -n 1000 -f text -o out.log  Generate text logs to file
-  mmofakelog --categories player combat  Filter to specific categories
-  mmofakelog --list-types              List all available log types
-  mmofakelog validate                  Validate all resources
-  mmofakelog --use-python              Use Python generators only
+  agnolog --resources ./res -n 100                   Generate 100 logs (JSON to stdout)
+  agnolog --resources ./res -n 1000 -f text -o out.log  Generate text logs to file
+  agnolog --resources ./res --categories player combat  Filter to specific categories
+  agnolog --resources ./res --list-types             List all available log types
+  agnolog --resources ./res validate                 Validate all resources
         """,
     )
 
@@ -299,8 +298,8 @@ Examples:
     parser.add_argument(
         "--resources",
         type=str,
-        default=None,
-        help="Custom resources directory path",
+        required=True,
+        help="Path to resources directory (contains data/ and generators/ subdirectories)",
     )
 
     parser.add_argument(

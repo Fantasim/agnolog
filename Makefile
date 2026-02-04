@@ -1,10 +1,15 @@
 .PHONY: help install dev test lint format validate run clean build publish docs
 
+# Resources path (override with: make run RESOURCES=/path/to/resources)
+RESOURCES ?= ./resources/mmorpg
+
 # Default target
 help:
 	@echo "agnolog - Theme-agnostic Fake Log Generator"
 	@echo ""
-	@echo "Usage: make <target>"
+	@echo "Usage: make <target> [RESOURCES=/path/to/resources]"
+	@echo ""
+	@echo "Current RESOURCES: $(RESOURCES)"
 	@echo ""
 	@echo "Development:"
 	@echo "  install     Install package in development mode"
@@ -56,20 +61,20 @@ format:
 
 # Validation
 validate:
-	python -m agnolog validate
+	python -m agnolog --resources $(RESOURCES) validate
 
 # Running
 run:
-	python -m agnolog -n 100 --pretty
+	python -m agnolog --resources $(RESOURCES) -n 100 --pretty
 
 run-text:
-	python -m agnolog -n 100 -f text
+	python -m agnolog --resources $(RESOURCES) -n 100 -f text
 
 run-many:
-	python -m agnolog -n 1000
+	python -m agnolog --resources $(RESOURCES) -n 1000
 
 list:
-	python -m agnolog --list-types
+	python -m agnolog --resources $(RESOURCES) --list-types
 
 # Building
 build: clean

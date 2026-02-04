@@ -375,10 +375,15 @@ def register_lua_generators(resources_path: Optional[Union[str, Path]] = None) -
 
     # Load generators
     generators_path = None
+    resources_path_obj = None
     if resources_path:
-        generators_path = Path(resources_path) / "generators"
+        resources_path_obj = Path(resources_path)
+        generators_path = resources_path_obj / "generators"
 
-    count = lua_registry.load_generators(generators_path)
+    count = lua_registry.load_generators(
+        generators_path=generators_path,
+        resources_path=resources_path_obj,
+    )
 
     # Register adapters with main registry
     for name in lua_registry.all_types():
