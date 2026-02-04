@@ -11,11 +11,11 @@ Python Engine (theme-agnostic)
     ├── formatters/     # JSON/text output
     └── output/         # File/stream handlers
 
-Lua Generators (theme-specific)
-    └── resources/generators/*.lua   # Define log types, categories, templates
+Lua Generators (theme-specific, external)
+    └── resources/<theme>/generators/*.lua   # Define log types, categories, templates
 
-YAML Data (theme-specific)
-    └── resources/data/*.yaml        # Names, items, zones, skills, etc.
+YAML Data (theme-specific, external)
+    └── resources/<theme>/data/*.yaml        # Names, items, zones, skills, etc.
 ```
 
 **Key Principle:** Python code is 100% theme-agnostic. All themed content (names, categories, log types) comes from Lua/YAML resources.
@@ -85,8 +85,8 @@ Generic utilities (no theme data):
 | Errors | `agnolog/core/errors.py` |
 | Registry | `agnolog/core/registry.py` |
 | Lua sandbox | `agnolog/core/lua_runtime.py` |
-| Theme data | `agnolog/resources/data/*.yaml` |
-| Generators | `agnolog/resources/generators/**/*.lua` |
+| Theme data | `resources/<theme>/data/*.yaml` (external) |
+| Generators | `resources/<theme>/generators/**/*.lua` (external) |
 | Logging utils | `agnolog/logutils/internal_logger.py` |
 | Test fixtures | `tests/conftest.py` |
 
@@ -185,6 +185,8 @@ make test-cov      # With coverage (must stay >80%)
 
 ## Git Workflow
 
+**Always commit after completing a task.** Don't wait for the user to ask.
+
 **Commit message format:**
 ```
 type: short description
@@ -215,9 +217,10 @@ make test-cov    # Tests with coverage report
 make validate    # Validate YAML/Lua resources
 make lint        # Ruff linting
 make format      # Auto-format code
+make run         # Generate 100 logs (uses default RESOURCES)
 
-# CLI
-agnolog --list-categories    # Show available categories (dynamic)
-agnolog --list-types         # Show all log types
-agnolog -n 100 -f text       # Generate 100 text logs
+# CLI (--resources is required)
+python -m agnolog --resources ./resources/mmorpg --list-types
+python -m agnolog --resources ./resources/mmorpg -n 100 -f text
+make run RESOURCES=./resources/mmorpg  # Override default
 ```
