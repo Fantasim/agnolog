@@ -9,7 +9,7 @@ import pytest
 from datetime import datetime
 
 from mmofakelog.formatters.json_formatter import JSONFormatter
-from mmofakelog.core.types import LogCategory, LogEntry, LogSeverity
+from mmofakelog.core.types import LogEntry, LogSeverity
 
 
 @pytest.fixture

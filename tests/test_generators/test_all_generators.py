@@ -9,7 +9,7 @@ from datetime import datetime
 
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry
-from mmofakelog.core.types import LogCategory, LogEntry
+from mmofakelog.core.types import LogEntry
 
 
 @pytest.fixture
@@ -397,8 +397,9 @@ class TestGeneratorCount:
 
     def test_all_categories_represented(self, populated_registry):
         """All categories should have generators."""
-        for category in LogCategory:
-            types = populated_registry.get_by_category(category)
+        # Use dynamic categories from registry
+        for category in populated_registry.get_categories():
+            types = populated_registry.get_by_category(category.upper())
             assert len(types) >= 10, (
                 f"Category {category} has only {len(types)} types"
             )

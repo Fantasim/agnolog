@@ -13,7 +13,6 @@ from mmofakelog.scheduling.scheduler import ScheduledEvent
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,

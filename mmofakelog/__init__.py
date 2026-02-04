@@ -27,7 +27,6 @@ from mmofakelog.core.constants import VERSION
 from mmofakelog.core.factory import LogFactory
 from mmofakelog.core.registry import LogTypeRegistry, get_registry
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogFormat,
     LogSeverity,
@@ -42,7 +41,6 @@ __all__ = [
     "LogScheduler",
     "LogTypeRegistry",
     "get_registry",
-    "LogCategory",
     "LogEntry",
     "LogFormat",
     "LogSeverity",

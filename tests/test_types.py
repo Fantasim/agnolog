@@ -7,42 +7,12 @@ Tests all enums, dataclasses, and protocols.
 import pytest
 from datetime import datetime
 from mmofakelog.core.types import (
-    # Category string constants
-    LogCategory,
-    # Enums
     LogSeverity,
     LogFormat,
     RecurrencePattern,
-    # Dataclasses
     LogTypeMetadata,
     LogEntry,
 )
-
-
-class TestLogCategory:
-    """Tests for LogCategory string constants."""
-
-    def test_all_categories_exist(self):
-        expected = ["PLAYER", "SERVER", "SECURITY", "ECONOMY", "COMBAT", "TECHNICAL"]
-        for cat in expected:
-            assert hasattr(LogCategory, cat)
-
-    def test_category_count(self):
-        assert len(LogCategory) == 6
-
-    def test_category_values_are_strings(self):
-        assert LogCategory.PLAYER == "PLAYER"
-        assert LogCategory.SERVER == "SERVER"
-        assert LogCategory.SECURITY == "SECURITY"
-        assert LogCategory.ECONOMY == "ECONOMY"
-        assert LogCategory.COMBAT == "COMBAT"
-        assert LogCategory.TECHNICAL == "TECHNICAL"
-
-    def test_category_iteration(self):
-        categories = list(LogCategory)
-        assert len(categories) == 6
-        assert "PLAYER" in categories
-        assert "SERVER" in categories
 
 
 class TestLogSeverity:

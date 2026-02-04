@@ -13,7 +13,6 @@ This module provides:
 from mmofakelog.core.constants import VERSION
 from mmofakelog.core.errors import MMOFakeLogError
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogFormat,
     LogSeverity,
@@ -24,7 +23,6 @@ from mmofakelog.core.types import (
 __all__ = [
     "VERSION",
     "MMOFakeLogError",
-    "LogCategory",
     "LogSeverity",
     "LogFormat",
     "RecurrencePattern",

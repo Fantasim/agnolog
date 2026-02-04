@@ -10,7 +10,6 @@ from typing import Any, Dict
 
 from mmofakelog.generators.base import BaseLogGenerator
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,

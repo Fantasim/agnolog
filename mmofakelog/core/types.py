@@ -8,7 +8,7 @@ used throughout the application.
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum, auto
-from typing import Any, Callable, Dict, List, Optional, Protocol, Type
+from typing import Any, Dict, List, Optional
 
 
 # =============================================================================
@@ -120,88 +120,3 @@ class LogEntry:
         if self.session_id:
             result["session_id"] = self.session_id
         return result
-
-
-# =============================================================================
-# PROTOCOLS (for dependency injection)
-# =============================================================================
-
-
-class FormatterProtocol(Protocol):
-    """Protocol defining the log formatter interface."""
-
-    def format(self, entry: LogEntry) -> str:
-        """Format a single log entry."""
-        ...
-
-    def format_batch(self, entries: List[LogEntry]) -> str:
-        """Format multiple log entries."""
-        ...
-
-
-class OutputHandlerProtocol(Protocol):
-    """Protocol defining the output handler interface."""
-
-    def write(self, content: str) -> None:
-        """Write content to the output."""
-        ...
-
-    def close(self) -> None:
-        """Close the output handler."""
-        ...
-
-
-# =============================================================================
-# TYPE ALIASES
-# =============================================================================
-
-# Generator callable type
-GeneratorCallable = Callable[..., Dict[str, Any]]
-
-# Log type registry entry
-RegistryEntry = tuple[LogTypeMetadata, Type["BaseLogGenerator"]]  # type: ignore
-
-# Time range tuple
-TimeRange = tuple[datetime, datetime]
-
-# Callback for log entry events
-LogEntryCallback = Callable[[LogEntry], None]
-
-
-# =============================================================================
-# BACKWARDS COMPATIBILITY
-# =============================================================================
-
-# LogCategory is now just a string, but we provide common values as constants
-# for backwards compatibility and convenience
-
-class _LogCategoryMeta(type):
-    """Metaclass to make LogCategory iterable."""
-
-    def __iter__(cls):
-        return iter(cls._ALL)
-
-    def __len__(cls):
-        return len(cls._ALL)
-
-
-class LogCategory(metaclass=_LogCategoryMeta):
-    """
-    Common log category constants.
-
-    Categories are now flexible strings. These constants are provided
-    for convenience but you can use any string as a category.
-    """
-    PLAYER = "PLAYER"
-    SERVER = "SERVER"
-    SECURITY = "SECURITY"
-    ECONOMY = "ECONOMY"
-    COMBAT = "COMBAT"
-    TECHNICAL = "TECHNICAL"
-
-    # For iteration compatibility
-    _ALL = [PLAYER, SERVER, SECURITY, ECONOMY, COMBAT, TECHNICAL]
-
-    @classmethod
-    def __len__(cls):
-        return len(cls._ALL)

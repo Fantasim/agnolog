@@ -10,7 +10,6 @@ from datetime import datetime
 from mmofakelog.formatters.text_formatter import TextFormatter, ColorTextFormatter
 from mmofakelog.core.registry import LogTypeRegistry
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,

@@ -11,7 +11,6 @@ from mmofakelog.core.registry import (
     get_registry,
 )
 from mmofakelog.core.types import (
-    LogCategory,  # String constants class
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
@@ -396,8 +395,9 @@ class TestPopulatedRegistry:
 
     def test_all_categories_have_types(self, populated_registry):
         """Each category should have registered types."""
-        for category in LogCategory:
-            types = populated_registry.get_by_category(category)
+        # Use dynamic categories from registry
+        for category in populated_registry.get_categories():
+            types = populated_registry.get_by_category(category.upper())
             assert len(types) > 0, f"Category {category} has no types"
 
     def test_player_types_exist(self, populated_registry):

@@ -58,12 +58,12 @@ mmofakelog --categories player combat
 
 ```python
 from mmofakelog.core.registry import register_log_type
-from mmofakelog.core.types import LogCategory, LogSeverity, RecurrencePattern
+from mmofakelog.core.types import LogSeverity, RecurrencePattern
 from mmofakelog.generators.base import BaseLogGenerator
 
 @register_log_type(
     name="player.custom_event",
-    category=LogCategory.PLAYER,
+    category="PLAYER",
     severity=LogSeverity.INFO,
     recurrence=RecurrencePattern.NORMAL,
     description="Custom player event",

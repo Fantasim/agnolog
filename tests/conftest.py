@@ -8,7 +8,6 @@ from typing import Dict, Any, List
 
 from mmofakelog.core.registry import LogTypeRegistry, register_lua_generators
 from mmofakelog.core.types import (
-    LogCategory,
     LogEntry,
     LogSeverity,
     LogTypeMetadata,

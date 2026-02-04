@@ -1,15 +1,81 @@
 # mmofakelog Development Guide
 
-MMORPG fake log generator. Lua generators + YAML data + Python core.
+Theme-agnostic fake log generator. Python engine + Lua generators + YAML data.
+
+## Architecture Overview
+
+```
+Python Engine (theme-agnostic)
+    ├── core/           # Registry, factory, types - NO theme content
+    ├── scheduling/     # Log timing and generation
+    ├── formatters/     # JSON/text output
+    └── output/         # File/stream handlers
+
+Lua Generators (theme-specific)
+    └── resources/generators/*.lua   # Define log types, categories, templates
+
+YAML Data (theme-specific)
+    └── resources/data/*.yaml        # Names, items, zones, skills, etc.
+```
+
+**Key Principle:** Python code is 100% theme-agnostic. All themed content (names, categories, log types) comes from Lua/YAML resources.
 
 ## Golden Rules
 
-1. **Zero hardcoded values** - All magic numbers/strings go in `core/constants.py`
-2. **All errors inherit** `MMOFakeLogError` - Add new types in `core/errors.py`
-3. **Log everything** - Every function that can fail needs logging
-4. **Test everything** - No PR without tests
-5. **Commit often** - Small, atomic commits with clear messages
-6. **Docs stay current** - Update docs in the same commit as code changes
+1. **Zero hardcoded theme content in Python** - All theme data in YAML, all log types in Lua
+2. **Zero hardcoded values** - All magic numbers/strings go in `core/constants.py`
+3. **Categories are dynamic** - Discovered from loaded generators, not hardcoded
+4. **All errors inherit** `MMOFakeLogError` - Add new types in `core/errors.py`
+5. **Log everything** - Every function that can fail needs logging
+6. **Test everything** - No PR without tests
+7. **Remove deprecated code immediately** - When you see `DEPRECATED` comments or `DeprecationWarning`, remove that code entirely (class, function, imports, tests). Don't keep backwards compatibility shims.
+
+## Theme-Agnostic Design
+
+### Categories
+Categories are **not** hardcoded in Python. They come from Lua generators:
+
+```lua
+-- resources/generators/player/login.lua
+return {
+    metadata = {
+        name = "player.login",
+        category = "PLAYER",  -- Defines the category
+        ...
+    }
+}
+```
+
+Access categories dynamically:
+```python
+from mmofakelog.core.registry import get_registry
+
+registry = get_registry()
+categories = registry.get_categories()  # Returns ['combat', 'economy', 'player', ...]
+```
+
+### Theme Data (ctx.data)
+Lua generators access theme data via `ctx.data`:
+
+```lua
+-- Access YAML data in generators
+local zones = ctx.data.world.leveling_zones
+local skills = ctx.data.classes.skills.warrior
+local item_prefixes = ctx.data.items.item_prefixes
+```
+
+### Generator Utilities (ctx.gen)
+Theme-driven utilities read from YAML:
+
+| Function | Data Source |
+|----------|-------------|
+| `ctx.gen.character_name()` | `names.player_prefixes` + `names.player_suffixes` |
+| `ctx.gen.item_name()` | `items.item_prefixes` + `items.weapon_types` |
+| `ctx.gen.zone_name()` | `world.leveling_zones` |
+| `ctx.gen.skill_name()` | `classes.skills.<class>` |
+
+Generic utilities (no theme data):
+- `ctx.gen.ip_address()`, `ctx.gen.uuid()`, `ctx.gen.session_id()`, `ctx.gen.hex_string()`
 
 ## File Locations
 
@@ -17,9 +83,21 @@ MMORPG fake log generator. Lua generators + YAML data + Python core.
 |------|-------|
 | Constants | `mmofakelog/core/constants.py` |
 | Errors | `mmofakelog/core/errors.py` |
+| Registry | `mmofakelog/core/registry.py` |
+| Lua sandbox | `mmofakelog/core/lua_runtime.py` |
+| Theme data | `mmofakelog/resources/data/*.yaml` |
+| Generators | `mmofakelog/resources/generators/**/*.lua` |
 | Logging utils | `mmofakelog/logutils/internal_logger.py` |
 | Test fixtures | `tests/conftest.py` |
-| Resource docs | `docs/adding-resources.md` |
+
+## Adding New Themes
+
+To create a completely different theme (e.g., sci-fi, banking, e-commerce):
+
+1. Create new YAML data files in `resources/data/`
+2. Create Lua generators in `resources/generators/`
+3. Use any category names you want - they're discovered dynamically
+4. Python code requires **no changes**
 
 ## Constants
 
@@ -32,12 +110,13 @@ NEW_CONSTANT = "value"  # Brief description
 
 **Never do this:**
 ```python
-# BAD
+# BAD - hardcoded values
 timeout = 30
-if retries > 3:
+categories = ["player", "server"]  # DON'T hardcode categories!
 
 # GOOD
-from mmofakelog.core.constants import DEFAULT_TIMEOUT, MAX_RETRIES
+from mmofakelog.core.constants import DEFAULT_TIMEOUT
+categories = registry.get_categories()  # Dynamic!
 ```
 
 ## Error Handling
@@ -81,12 +160,6 @@ logger = get_internal_logger()
 | `ERROR` | Failures that stop an operation but not the app |
 | `CRITICAL` | App cannot continue, data corruption risk |
 
-**Required logging points:**
-- Function entry with key params: `logger.debug(f"Processing {item_id}")`
-- Success paths: `logger.info(f"Loaded {count} items")`
-- Failure paths: `logger.error(f"Failed to load: {reason}", exc_info=True)`
-- Performance concerns: `logger.warning(f"Slow query: {elapsed}ms")`
-
 ## Testing
 
 **Structure:**
@@ -110,36 +183,7 @@ make test          # All tests
 make test-cov      # With coverage (must stay >80%)
 ```
 
-## Documentation
-
-**Update in same commit:**
-- New feature → Update README.md usage section
-- New generator/resource → Update docs/adding-resources.md
-- API change → Update affected docstrings
-- New constant/error → Add inline comment
-
-**Docstring format:**
-```python
-def function(param: str) -> Result:
-    """One-line summary.
-
-    Args:
-        param: What it is.
-
-    Returns:
-        What comes back.
-
-    Raises:
-        SpecificError: When X fails.
-    """
-```
-
 ## Git Workflow
-
-**Commit frequency:**
-- After each logical change (don't batch unrelated changes)
-- Before any risky operation
-- When tests pass for a feature
 
 **Commit message format:**
 ```
@@ -151,17 +195,16 @@ type: short description
 
 **Types:** `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
 
-**Branch naming:** `type/short-description` (e.g., `feat/new-generator`)
-
 ## Pre-Commit Checklist
 
 Before every commit, verify:
 
+- [ ] No hardcoded theme content in Python
 - [ ] No hardcoded values (check for magic numbers/strings)
+- [ ] Categories accessed via `registry.get_categories()`, not hardcoded
 - [ ] New errors inherit from appropriate parent in `errors.py`
 - [ ] Logging at DEBUG (entry), INFO (success), ERROR (failure)
 - [ ] Tests written and passing (`make test`)
-- [ ] Docs updated if user-facing change
 - [ ] `make check` passes (lint + test + validate)
 
 ## Quick Commands
@@ -172,4 +215,9 @@ make test-cov    # Tests with coverage report
 make validate    # Validate YAML/Lua resources
 make lint        # Ruff linting
 make format      # Auto-format code
+
+# CLI
+mmofakelog --list-categories    # Show available categories (dynamic)
+mmofakelog --list-types         # Show all log types
+mmofakelog -n 100 -f text       # Generate 100 text logs
 ```
