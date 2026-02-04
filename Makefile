@@ -23,6 +23,7 @@ help:
 	@echo "Running:"
 	@echo "  run         Generate 100 logs (JSON)"
 	@echo "  run-text    Generate 100 logs (text format)"
+	@echo "  run-loghub  Generate loghub format (3 files)"
 	@echo "  list        List all available log types"
 	@echo ""
 	@echo "Documentation:"
@@ -72,6 +73,12 @@ run-text:
 
 run-many:
 	python -m agnolog --resources $(RESOURCES) -n 1000
+
+run-loghub:
+	python -m agnolog --resources $(RESOURCES) --loghub output -n 1000
+	@echo ""
+	@echo "Generated files:"
+	@ls -la output.log output_structured.csv output_templates.csv
 
 list:
 	python -m agnolog --resources $(RESOURCES) --list-types

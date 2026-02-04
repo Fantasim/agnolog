@@ -278,6 +278,7 @@ Examples:
   agnolog --resources ./res -n 100                   Generate 100 logs (JSON to stdout)
   agnolog --resources ./res -n 1000 -f text -o out.log  Generate text logs to file
   agnolog --resources ./res --categories player combat  Filter to specific categories
+  agnolog --resources ./res --loghub output -n 1000  Generate loghub format (3 files)
   agnolog --resources ./res --list-types             List all available log types
   agnolog --resources ./res validate                 Validate all resources
         """,
