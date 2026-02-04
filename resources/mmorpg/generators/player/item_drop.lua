@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Item dropped/destroyed",
         text_template = "[{timestamp}] DROP: {char_name} dropped {item_name} x{quantity}",
-        tags = {"player", "inventory"}
+        tags = {"player", "inventory"},
+        merge_groups = {"item_events"}
     },
 
     generate = function(ctx, args)

@@ -69,4 +69,4 @@ LOGHUB_CSV_COLUMNS: Final[Tuple[str, ...]] = (
     "EventId",
     "EventTemplate",
 )
-LOGHUB_TEMPLATE_COLUMNS: Final[Tuple[str, ...]] = ("EventId", "EventTemplate")
+LOGHUB_TEMPLATE_COLUMNS: Final[Tuple[str, ...]] = ("EventId", "EventTemplate", "MergeGroups")

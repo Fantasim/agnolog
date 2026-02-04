@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Warning issued",
         text_template = "[{timestamp}] WARNING: {admin} warned {target}: {message}",
-        tags = {"security", "admin", "warning"}
+        tags = {"security", "admin", "warning"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

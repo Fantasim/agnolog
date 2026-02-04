@@ -9,7 +9,8 @@ return {
         recurrence = "NORMAL",
         description = "Player logout event",
         text_template = "[{timestamp}] LOGOUT: {username} ({char_name}) reason: {reason} session: {session_duration}s",
-        tags = {"auth", "player", "session"}
+        tags = {"auth", "player", "session"},
+        merge_groups = {"sessions"}
     },
 
     generate = function(ctx, args)

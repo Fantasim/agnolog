@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Item consumed/used",
         text_template = "[{timestamp}] USE: {char_name} used {item_name}",
-        tags = {"player", "inventory", "consumable"}
+        tags = {"player", "inventory", "consumable"},
+        merge_groups = {"item_events"}
     },
 
     generate = function(ctx, args)

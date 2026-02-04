@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Online player count",
         text_template = "[{timestamp}] PLAYERS: {count} online (peak: {peak}, capacity: {capacity})",
-        tags = {"server", "players", "stats"}
+        tags = {"server", "players", "stats"},
+        merge_groups = {"server_metrics"}
     },
 
     generate = function(ctx, args)

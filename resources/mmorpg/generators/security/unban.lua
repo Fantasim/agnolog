@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Player unbanned",
         text_template = "[{timestamp}] UNBAN: {admin} unbanned {target} (reason: {reason})",
-        tags = {"security", "admin", "unban"}
+        tags = {"security", "admin", "unban"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

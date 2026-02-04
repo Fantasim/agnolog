@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Memory usage metrics",
         text_template = "[{timestamp}] MEMORY: {used_mb}MB / {total_mb}MB ({percent}%)",
-        tags = {"server", "performance", "memory"}
+        tags = {"server", "performance", "memory"},
+        merge_groups = {"server_metrics"}
     },
 
     generate = function(ctx, args)

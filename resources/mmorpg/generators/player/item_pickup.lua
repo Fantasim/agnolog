@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Item picked up",
         text_template = "[{timestamp}] PICKUP: {char_name} looted [{rarity}] {item_name} x{quantity}",
-        tags = {"player", "inventory", "loot"}
+        tags = {"player", "inventory", "loot"},
+        merge_groups = {"item_events"}
     },
 
     generate = function(ctx, args)

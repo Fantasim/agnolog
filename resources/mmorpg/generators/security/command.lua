@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Admin command executed",
         text_template = "[{timestamp}] ADMIN_CMD: {admin} executed: {command}",
-        tags = {"security", "admin", "command"}
+        tags = {"security", "admin", "command"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

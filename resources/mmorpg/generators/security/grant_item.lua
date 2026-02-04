@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Item granted by admin",
         text_template = "[{timestamp}] GRANT_ITEM: {admin} gave {target} [{rarity}] {item_name} x{quantity}",
-        tags = {"security", "admin", "item"}
+        tags = {"security", "admin", "item"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

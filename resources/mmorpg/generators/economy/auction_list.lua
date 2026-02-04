@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Item listed on auction",
         text_template = "[{timestamp}] AUCTION_LIST: {char_name} listed [{rarity}] {item_name} x{quantity} at {price}g",
-        tags = {"economy", "auction", "item"}
+        tags = {"economy", "auction", "item"},
+        merge_groups = {"auction_house"}
     },
 
     generate = function(ctx, args)

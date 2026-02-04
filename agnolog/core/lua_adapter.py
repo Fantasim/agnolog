@@ -79,6 +79,13 @@ def metadata_from_lua(lua_metadata: Dict[str, Any]) -> LogTypeMetadata:
         tags = list(tags.values())
     tags = tuple(str(t) for t in tags)
 
+    # Extract merge_groups (optional, defaults to empty tuple)
+    merge_groups = lua_metadata.get("merge_groups", [])
+    if isinstance(merge_groups, dict):
+        # Lua table converted to dict with integer keys
+        merge_groups = list(merge_groups.values())
+    merge_groups = tuple(str(g) for g in merge_groups)
+
     return LogTypeMetadata(
         name=name,
         category=category,
@@ -87,6 +94,7 @@ def metadata_from_lua(lua_metadata: Dict[str, Any]) -> LogTypeMetadata:
         description=description,
         text_template=text_template,
         tags=tags,
+        merge_groups=merge_groups,
     )
 
 

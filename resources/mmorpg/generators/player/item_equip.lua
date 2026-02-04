@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Equipment change",
         text_template = "[{timestamp}] EQUIP: {char_name} equipped [{rarity}] {item_name} in {slot}",
-        tags = {"player", "inventory", "equipment"}
+        tags = {"player", "inventory", "equipment"},
+        merge_groups = {"item_events"}
     },
 
     slots = {

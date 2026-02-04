@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Suspicious activity detected",
         text_template = "[{timestamp}] SUSPICIOUS: {char_name} - {activity_type} (score: {risk_score})",
-        tags = {"security", "cheat", "detection"}
+        tags = {"security", "cheat", "detection"},
+        merge_groups = {"security_violations"}
     },
 
     generate = function(ctx, args)

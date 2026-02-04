@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Unauthorized teleport detected",
         text_template = "[{timestamp}] TELEPORT_HACK: {char_name} unauthorized teleport {from_zone} -> {to_zone}",
-        tags = {"security", "cheat", "teleport"}
+        tags = {"security", "cheat", "teleport"},
+        merge_groups = {"security_violations"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "PvP death",
         text_template = "[{timestamp}] PVP_DEATH: {victim} killed by {killer}",
-        tags = {"combat", "pvp", "death"}
+        tags = {"combat", "pvp", "death"},
+        merge_groups = {"kills"}
     },
 
     generate = function(ctx, args)

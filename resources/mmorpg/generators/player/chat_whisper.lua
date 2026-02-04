@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Private whisper message",
         text_template = "[{timestamp}] [WHISPER] {from_char} -> {to_char}: {message}",
-        tags = {"player", "chat", "private"}
+        tags = {"player", "chat", "private"},
+        merge_groups = {"chat"}
     },
 
     generate = function(ctx, args)

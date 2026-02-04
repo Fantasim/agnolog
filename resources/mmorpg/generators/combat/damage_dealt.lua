@@ -9,7 +9,8 @@ return {
         recurrence = "VERY_FREQUENT",
         description = "Combat damage dealt event",
         text_template = "[{timestamp}] DMG: {attacker} -> {target} {damage} {damage_type} ({skill}) [{result}]",
-        tags = {"combat", "damage"}
+        tags = {"combat", "damage"},
+        merge_groups = {"damage"}
     },
 
     generate = function(ctx, args)

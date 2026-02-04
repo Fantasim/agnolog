@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Debuff applied",
         text_template = "[{timestamp}] DEBUFF: {target} afflicted with {debuff_name} from {source}",
-        tags = {"combat", "debuff", "aura"}
+        tags = {"combat", "debuff", "aura"},
+        merge_groups = {"combat_effects"}
     },
 
     generate = function(ctx, args)

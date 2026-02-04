@@ -9,7 +9,8 @@ return {
         recurrence = "FREQUENT",
         description = "Gold gained event",
         text_template = "[{timestamp}] GOLD+: {char_name} +{amount}g from {source}",
-        tags = {"economy", "gold", "gain"}
+        tags = {"economy", "gold", "gain"},
+        merge_groups = {"gold_flow"}
     },
 
     -- Gold sources with min/max amounts

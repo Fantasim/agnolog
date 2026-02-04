@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Database error",
         text_template = "[{timestamp}] DB_ERROR: {error_code} - {message}",
-        tags = {"technical", "database", "error"}
+        tags = {"technical", "database", "error"},
+        merge_groups = {"db_ops"}
     },
 
     generate = function(ctx, args)

@@ -78,20 +78,21 @@ class LoghubCSVFormatter(BaseFormatter):
         # Text formatter for generating Content column
         self._text_formatter = TextFormatter(registry=self._registry)
 
-        # Template mapping: log_type -> (EventId, EventTemplate)
-        self._template_map: Dict[str, Tuple[str, str]] = {}
+        # Template mapping: log_type -> (EventId, EventTemplate, MergeGroups)
+        self._template_map: Dict[str, Tuple[str, str, str]] = {}
         self._line_id = 0
 
         self._build_template_map()
 
     def _build_template_map(self) -> None:
-        """Build mapping from log types to EventIds and templates."""
+        """Build mapping from log types to EventIds, templates, and merge groups."""
         all_metadata = self._registry.all_metadata()
 
         for idx, (name, metadata) in enumerate(sorted(all_metadata.items()), start=1):
             event_id = f"E{idx}"
             event_template = template_to_loghub(metadata.text_template)
-            self._template_map[name] = (event_id, event_template)
+            merge_groups = ",".join(metadata.merge_groups) if metadata.merge_groups else ""
+            self._template_map[name] = (event_id, event_template, merge_groups)
 
         self._logger.debug(f"Built template map with {len(self._template_map)} entries")
 
@@ -128,7 +129,7 @@ class LoghubCSVFormatter(BaseFormatter):
         # Get template info
         template_info = self._template_map.get(entry.log_type)
         if template_info:
-            event_id, event_template = template_info
+            event_id, event_template, _ = template_info  # Ignore merge_groups for row output
         else:
             # Fallback for unknown log types
             event_id = "E0"
@@ -185,12 +186,12 @@ class LoghubCSVFormatter(BaseFormatter):
         lines.extend(self.format(entry) for entry in entries)
         return "\n".join(lines)
 
-    def get_templates(self) -> List[Tuple[str, str]]:
+    def get_templates(self) -> List[Tuple[str, str, str]]:
         """
         Get all templates for the templates.csv file.
 
         Returns:
-            List of (EventId, EventTemplate) tuples, sorted by EventId
+            List of (EventId, EventTemplate, MergeGroups) tuples, sorted by EventId
         """
         return sorted(self._template_map.values(), key=lambda x: int(x[0][1:]))
 
@@ -205,8 +206,8 @@ class LoghubCSVFormatter(BaseFormatter):
         writer = csv.writer(output)
         writer.writerow(LOGHUB_TEMPLATE_COLUMNS)
 
-        for event_id, event_template in self.get_templates():
-            writer.writerow([event_id, event_template])
+        for event_id, event_template, merge_groups in self.get_templates():
+            writer.writerow([event_id, event_template, merge_groups])
 
         return output.getvalue().rstrip("\r\n")
 

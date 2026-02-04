@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Boss engaged",
         text_template = "[{timestamp}] BOSS_ENGAGE: {party_leader}'s group engaged {boss_name}",
-        tags = {"combat", "boss", "encounter"}
+        tags = {"combat", "boss", "encounter"},
+        merge_groups = {"boss_fights"}
     },
 
     generate = function(ctx, args)

@@ -9,7 +9,8 @@ return {
         recurrence = "RARE",
         description = "Server startup event",
         text_template = "[{timestamp}] SERVER START: {server_id} v{version} region:{region}",
-        tags = {"server", "lifecycle"}
+        tags = {"server", "lifecycle"},
+        merge_groups = {"server_state"}
     },
 
     generate = function(ctx, args)

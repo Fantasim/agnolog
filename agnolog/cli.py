@@ -99,6 +99,52 @@ def list_categories(use_lua: bool = True, resources_path: Optional[str] = None) 
     print()
 
 
+def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None) -> None:
+    """Show merge groups in LLM-readable format for validation."""
+    # Import Python generators to register them
+    from agnolog import generators  # noqa
+    from typing import Dict, List, Tuple
+
+    # Load Lua generators if requested
+    if use_lua:
+        try:
+            register_lua_generators(resources_path)
+        except Exception as e:
+            print(f"Warning: Failed to load Lua generators: {e}", file=sys.stderr)
+
+    registry = get_registry()
+
+    # Group templates by merge_group
+    groups: Dict[str, List[Tuple[str, str]]] = {}  # group -> [(name, template), ...]
+    ungrouped: List[Tuple[str, str]] = []
+
+    for name, meta in registry.all_metadata().items():
+        if meta.merge_groups:
+            for group in meta.merge_groups:
+                groups.setdefault(group, []).append((name, meta.text_template))
+        else:
+            ungrouped.append((name, meta.text_template))
+
+    # Output in LLM-readable format
+    print("# Merge Groups Analysis\n")
+    print("Templates in the same merge group are expected to be")
+    print("semantically similar and could share a database table.\n")
+
+    for group_name in sorted(groups.keys()):
+        templates = groups[group_name]
+        print(f"## Merge Group: {group_name}")
+        print(f"Templates ({len(templates)}):")
+        for name, template in sorted(templates):
+            print(f"  - {name}")
+            print(f"    Template: {template}")
+        print()
+
+    if ungrouped:
+        print(f"## Ungrouped Templates ({len(ungrouped)})")
+        for name, template in sorted(ungrouped):
+            print(f"  - {name}: {template}")
+
+
 def validate_resources(resources_path: Optional[str] = None) -> int:
     """Validate all YAML and Lua resources."""
     from agnolog.core.resource_loader import ResourceLoader
@@ -399,6 +445,12 @@ Examples:
     )
 
     parser.add_argument(
+        "--show-merge-groups",
+        action="store_true",
+        help="Show merge groups in LLM-readable format for validation",
+    )
+
+    parser.add_argument(
         "--seed",
         type=int,
         default=None,
@@ -450,6 +502,11 @@ Examples:
     # Handle list-categories early
     if parsed.list_categories:
         list_categories(use_lua=use_lua, resources_path=parsed.resources)
+        return 0
+
+    # Handle show-merge-groups early
+    if parsed.show_merge_groups:
+        show_merge_groups(use_lua=use_lua, resources_path=parsed.resources)
         return 0
 
     # Set random seed if provided

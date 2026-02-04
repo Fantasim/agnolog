@@ -70,6 +70,7 @@ class LogTypeMetadata:
         description: Human-readable description
         text_template: Printf-style template for text output
         tags: Optional tags for filtering/organization
+        merge_groups: Optional merge groups for templates that can be merged together
     """
 
     name: str
@@ -79,6 +80,7 @@ class LogTypeMetadata:
     description: str
     text_template: str
     tags: tuple = field(default_factory=tuple)
+    merge_groups: tuple = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         """Validate metadata after initialization."""

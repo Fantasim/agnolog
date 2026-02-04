@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Dungeon completed",
         text_template = "[{timestamp}] DUNGEON_CLEAR: {party_leader}'s party completed {dungeon_name} in {time_taken}",
-        tags = {"combat", "dungeon", "completion"}
+        tags = {"combat", "dungeon", "completion"},
+        merge_groups = {"instance_runs"}
     },
 
     generate = function(ctx, args)

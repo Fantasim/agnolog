@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Quest accepted",
         text_template = "[{timestamp}] QUEST_ACCEPT: {char_name} accepted \"{quest_name}\"",
-        tags = {"player", "quest"}
+        tags = {"player", "quest"},
+        merge_groups = {"quests"}
     },
 
     generate = function(ctx, args)

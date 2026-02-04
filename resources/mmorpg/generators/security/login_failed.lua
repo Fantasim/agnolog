@@ -9,7 +9,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Failed login attempt",
         text_template = "[{timestamp}] LOGIN FAILED: {username} from {ip} reason: {reason}",
-        tags = {"security", "auth", "failed"}
+        tags = {"security", "auth", "failed"},
+        merge_groups = {"auth_failures"}
     },
 
     reasons = {

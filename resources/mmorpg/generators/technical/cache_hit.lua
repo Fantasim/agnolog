@@ -8,7 +8,8 @@ return {
         recurrence = "VERY_FREQUENT",
         description = "Cache hit",
         text_template = "[{timestamp}] CACHE_HIT: {cache_key} ({cache_type}, age: {age}ms)",
-        tags = {"technical", "cache", "hit"}
+        tags = {"technical", "cache", "hit"},
+        merge_groups = {"cache_ops"}
     },
 
     generate = function(ctx, args)

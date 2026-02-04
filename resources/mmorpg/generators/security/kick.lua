@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Player kicked",
         text_template = "[{timestamp}] KICK: {admin} kicked {target} (reason: {reason})",
-        tags = {"security", "admin", "kick"}
+        tags = {"security", "admin", "kick"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

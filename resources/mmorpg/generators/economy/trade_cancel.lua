@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Trade cancelled",
         text_template = "[{timestamp}] TRADE_CANCEL: {char_name} cancelled trade (reason: {reason})",
-        tags = {"economy", "trade", "player"}
+        tags = {"economy", "trade", "player"},
+        merge_groups = {"player_trades"}
     },
 
     generate = function(ctx, args)

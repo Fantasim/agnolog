@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "CPU usage metrics",
         text_template = "[{timestamp}] CPU: {cpu_percent}% (avg: {cpu_avg}%, cores: {cpu_cores})",
-        tags = {"server", "performance", "cpu"}
+        tags = {"server", "performance", "cpu"},
+        merge_groups = {"server_metrics"}
     },
 
     generate = function(ctx, args)

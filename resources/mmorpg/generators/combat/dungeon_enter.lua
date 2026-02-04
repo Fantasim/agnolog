@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Dungeon entered",
         text_template = "[{timestamp}] DUNGEON_ENTER: {party_leader}'s party entered {dungeon_name} ({party_size} players)",
-        tags = {"combat", "dungeon", "party"}
+        tags = {"combat", "dungeon", "party"},
+        merge_groups = {"instance_runs"}
     },
 
     generate = function(ctx, args)

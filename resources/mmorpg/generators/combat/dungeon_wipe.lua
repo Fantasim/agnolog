@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Party wipe",
         text_template = "[{timestamp}] WIPE: Party wiped in {dungeon_name} at {boss_name}",
-        tags = {"combat", "dungeon", "wipe"}
+        tags = {"combat", "dungeon", "wipe"},
+        merge_groups = {"instance_runs"}
     },
 
     generate = function(ctx, args)

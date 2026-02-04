@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Trade chat message",
         text_template = "[{timestamp}] [TRADE] {char_name}: {message}",
-        tags = {"player", "chat", "trade"}
+        tags = {"player", "chat", "trade"},
+        merge_groups = {"chat"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Monster killed",
         text_template = "[{timestamp}] MOB_KILL: {char_name} killed {mob_name} (+{xp} XP)",
-        tags = {"combat", "kill", "monster"}
+        tags = {"combat", "kill", "monster"},
+        merge_groups = {"kills"}
     },
 
     generate = function(ctx, args)

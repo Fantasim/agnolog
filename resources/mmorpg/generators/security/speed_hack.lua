@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Speed hack detected",
         text_template = "[{timestamp}] SPEED_HACK: {char_name} moved {distance}u in {time}ms (max: {max_distance}u)",
-        tags = {"security", "cheat", "speed"}
+        tags = {"security", "cheat", "speed"},
+        merge_groups = {"security_violations"}
     },
 
     generate = function(ctx, args)

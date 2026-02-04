@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Quest completed",
         text_template = "[{timestamp}] QUEST_COMPLETE: {char_name} completed \"{quest_name}\" (+{xp} XP, +{gold}g)",
-        tags = {"player", "quest", "reward"}
+        tags = {"player", "quest", "reward"},
+        merge_groups = {"quests"}
     },
 
     generate = function(ctx, args)

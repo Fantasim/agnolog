@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Battleground joined",
         text_template = "[{timestamp}] BG_JOIN: {char_name} joined {bg_name} (queue time: {queue_time}s)",
-        tags = {"combat", "battleground", "pvp"}
+        tags = {"combat", "battleground", "pvp"},
+        merge_groups = {"battlegrounds"}
     },
 
     generate = function(ctx, args)

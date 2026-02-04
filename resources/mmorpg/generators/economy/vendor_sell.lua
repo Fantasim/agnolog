@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Item sold to vendor",
         text_template = "[{timestamp}] VENDOR_SELL: {char_name} sold {item_name} x{quantity} for {price}g",
-        tags = {"economy", "vendor", "item"}
+        tags = {"economy", "vendor", "item"},
+        merge_groups = {"vendor_transactions"}
     },
 
     generate = function(ctx, args)

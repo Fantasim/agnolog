@@ -9,7 +9,8 @@ return {
         recurrence = "NORMAL",
         description = "Player login event",
         text_template = "[{timestamp}] LOGIN: {username} ({char_name}) from {ip} (region: {region})",
-        tags = {"auth", "player", "session"}
+        tags = {"auth", "player", "session"},
+        merge_groups = {"sessions"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "General error",
         text_template = "[{timestamp}] ERROR: {error_code} - {message}",
-        tags = {"technical", "error", "system"}
+        tags = {"technical", "error", "system"},
+        merge_groups = {"errors"}
     },
 
     generate = function(ctx, args)

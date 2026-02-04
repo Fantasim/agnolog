@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Arena match started",
         text_template = "[{timestamp}] ARENA_START: {team1} vs {team2} in {arena} ({bracket})",
-        tags = {"combat", "arena", "pvp"}
+        tags = {"combat", "arena", "pvp"},
+        merge_groups = {"arena"}
     },
 
     generate = function(ctx, args)

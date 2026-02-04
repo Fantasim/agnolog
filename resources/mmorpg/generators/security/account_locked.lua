@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Account locked due to failed attempts",
         text_template = "[{timestamp}] ACCOUNT_LOCKED: {username} after {attempts} failed attempts (unlock: {unlock_time}min)",
-        tags = {"security", "auth", "lock"}
+        tags = {"security", "auth", "lock"},
+        merge_groups = {"auth_failures"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Battleground concluded",
         text_template = "[{timestamp}] BG_END: {bg_name} - {winner} wins (score: {score})",
-        tags = {"combat", "battleground", "pvp"}
+        tags = {"combat", "battleground", "pvp"},
+        merge_groups = {"battlegrounds"}
     },
 
     generate = function(ctx, args)

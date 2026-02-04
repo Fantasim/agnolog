@@ -327,3 +327,115 @@ class TestLoghubCSVFormatterRepr:
         assert "LoghubCSVFormatter" in result
         assert "component" in result
         assert "templates" in result
+
+
+class TestLoghubCSVFormatterMergeGroups:
+    """Tests for merge group functionality."""
+
+    def test_merge_group_included_in_templates(self, reset_registry):
+        """Should include merge group in template output."""
+        registry = LogTypeRegistry()
+
+        metadata = LogTypeMetadata(
+            name="test.grouped",
+            category="TEST",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test grouped",
+            text_template="[{timestamp}] GROUPED: {message}",
+            merge_groups=("test_group",),
+        )
+        registry.register("test.grouped", metadata, DummyGenerator)
+
+        formatter = LoghubCSVFormatter(registry=registry)
+        templates = formatter.get_templates()
+
+        assert len(templates) == 1
+        assert templates[0][2] == "test_group"
+
+    def test_multiple_merge_groups_comma_separated(self, reset_registry):
+        """Should join multiple merge groups with commas."""
+        registry = LogTypeRegistry()
+
+        metadata = LogTypeMetadata(
+            name="test.multi_group",
+            category="TEST",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test multi group",
+            text_template="[{timestamp}] MULTI: {message}",
+            merge_groups=("group_a", "group_b"),
+        )
+        registry.register("test.multi_group", metadata, DummyGenerator)
+
+        formatter = LoghubCSVFormatter(registry=registry)
+        templates = formatter.get_templates()
+
+        assert len(templates) == 1
+        assert templates[0][2] == "group_a,group_b"
+
+    def test_no_merge_group_returns_empty_string(self, formatter):
+        """Should return empty string for templates without merge group."""
+        templates = formatter.get_templates()
+
+        # All test fixtures don't have merge_group
+        for event_id, event_template, merge_groups in templates:
+            assert merge_groups == ""
+
+    def test_templates_csv_includes_merge_group_column(self, formatter):
+        """Should include MergeGroups column in CSV output."""
+        result = formatter.format_templates_csv()
+        lines = result.split("\n")
+
+        # Check header has 3 columns
+        reader = csv.reader(io.StringIO(lines[0]))
+        header = next(reader)
+        assert tuple(header) == LOGHUB_TEMPLATE_COLUMNS
+        assert "MergeGroups" in header
+
+        # Check data rows have 3 columns
+        reader = csv.reader(io.StringIO(lines[1]))
+        row = next(reader)
+        assert len(row) == 3
+
+    def test_templates_csv_with_merge_groups(self, reset_registry):
+        """Should output merge groups in templates CSV."""
+        registry = LogTypeRegistry()
+
+        metadata1 = LogTypeMetadata(
+            name="test.login",
+            category="PLAYER",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test login",
+            text_template="[{timestamp}] LOGIN: {username}",
+            merge_groups=("session_events", "auth_events"),
+        )
+        registry.register("test.login", metadata1, DummyGenerator)
+
+        metadata2 = LogTypeMetadata(
+            name="test.logout",
+            category="PLAYER",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test logout",
+            text_template="[{timestamp}] LOGOUT: {username}",
+            merge_groups=("session_events",),
+        )
+        registry.register("test.logout", metadata2, DummyGenerator)
+
+        formatter = LoghubCSVFormatter(registry=registry)
+        result = formatter.format_templates_csv()
+
+        # Parse CSV
+        reader = csv.DictReader(io.StringIO(result))
+        rows = list(reader)
+
+        assert len(rows) == 2
+
+        # Find rows by EventTemplate content
+        login_row = next(r for r in rows if "LOGIN" in r["EventTemplate"])
+        logout_row = next(r for r in rows if "LOGOUT" in r["EventTemplate"])
+
+        assert login_row["MergeGroups"] == "session_events,auth_events"
+        assert logout_row["MergeGroups"] == "session_events"

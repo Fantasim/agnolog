@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Malformed packet received",
         text_template = "[{timestamp}] PKT_BAD: Malformed {packet_type} from {client} ({reason})",
-        tags = {"technical", "network", "error"}
+        tags = {"technical", "network", "error"},
+        merge_groups = {"packets"}
     },
 
     generate = function(ctx, args)

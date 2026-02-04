@@ -121,6 +121,33 @@ class TestLogTypeMetadata:
         )
         assert meta.category == "FINANCE"
 
+    def test_merge_groups_defaults_to_empty(self):
+        """Should default merge_groups to empty tuple."""
+        meta = LogTypeMetadata(
+            name="test.type",
+            category="TEST",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test",
+            text_template="test",
+        )
+        assert meta.merge_groups == ()
+
+    def test_merge_groups_can_be_set(self):
+        """Should accept merge_groups value."""
+        meta = LogTypeMetadata(
+            name="test.type",
+            category="TEST",
+            severity=LogSeverity.INFO,
+            recurrence=RecurrencePattern.NORMAL,
+            description="Test",
+            text_template="test",
+            merge_groups=("session_events", "auth_events"),
+        )
+        assert meta.merge_groups == ("session_events", "auth_events")
+        assert "session_events" in meta.merge_groups
+        assert "auth_events" in meta.merge_groups
+
 
 class TestLogEntry:
     """Tests for LogEntry dataclass."""

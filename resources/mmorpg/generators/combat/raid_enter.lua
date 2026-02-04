@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Raid entered",
         text_template = "[{timestamp}] RAID_ENTER: {raid_leader}'s raid entered {raid_name} ({raid_size} players)",
-        tags = {"combat", "raid", "party"}
+        tags = {"combat", "raid", "party"},
+        merge_groups = {"instance_runs"}
     },
 
     generate = function(ctx, args)

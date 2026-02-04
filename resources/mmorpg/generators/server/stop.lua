@@ -8,7 +8,8 @@ return {
         recurrence = "RARE",
         description = "Server shutdown",
         text_template = "[{timestamp}] SERVER_STOP: {server_id} shutdown (reason: {reason}, uptime: {uptime_hours}h)",
-        tags = {"server", "lifecycle", "shutdown"}
+        tags = {"server", "lifecycle", "shutdown"},
+        merge_groups = {"server_state"}
     },
 
     generate = function(ctx, args)

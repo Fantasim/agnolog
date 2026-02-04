@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Exception caught",
         text_template = "[{timestamp}] EXCEPTION: {exception_type}: {message} at {location}",
-        tags = {"technical", "exception", "error"}
+        tags = {"technical", "exception", "error"},
+        merge_groups = {"errors"}
     },
 
     generate = function(ctx, args)

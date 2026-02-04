@@ -8,7 +8,8 @@ return {
         recurrence = "VERY_FREQUENT",
         description = "Packet received",
         text_template = "[{timestamp}] PKT_RECV: {packet_type} from {client} ({size}b)",
-        tags = {"technical", "network", "packet"}
+        tags = {"technical", "network", "packet"},
+        merge_groups = {"packets"}
     },
 
     generate = function(ctx, args)

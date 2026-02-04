@@ -9,7 +9,8 @@ return {
         recurrence = "NORMAL",
         description = "Network connection established",
         text_template = "[{timestamp}] CONN OPEN: {ip}:{port} protocol:{protocol}",
-        tags = {"network", "connection"}
+        tags = {"network", "connection"},
+        merge_groups = {"connections"}
     },
 
     generate = function(ctx, args)

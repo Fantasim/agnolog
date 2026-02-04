@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Trade completed",
         text_template = "[{timestamp}] TRADE: {char1} <-> {char2}: {gold_exchanged}g, {items_exchanged} items",
-        tags = {"economy", "trade", "player"}
+        tags = {"economy", "trade", "player"},
+        merge_groups = {"player_trades"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Connection timeout",
         text_template = "[{timestamp}] CONN_TIMEOUT: {client_ip} after {timeout}ms (last_activity: {last_activity}s ago)",
-        tags = {"technical", "network", "timeout"}
+        tags = {"technical", "network", "timeout"},
+        merge_groups = {"connections"}
     },
 
     generate = function(ctx, args)

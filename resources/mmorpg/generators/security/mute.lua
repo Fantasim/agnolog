@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Player muted",
         text_template = "[{timestamp}] MUTE: {admin} muted {target} for {duration} (reason: {reason})",
-        tags = {"security", "admin", "mute"}
+        tags = {"security", "admin", "mute"},
+        merge_groups = {"gm_actions"}
     },
 
     generate = function(ctx, args)

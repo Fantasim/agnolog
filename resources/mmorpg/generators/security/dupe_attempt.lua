@@ -8,7 +8,8 @@ return {
         recurrence = "RARE",
         description = "Item duplication attempt",
         text_template = "[{timestamp}] DUPE_ATTEMPT: {char_name} tried to duplicate {item_name}",
-        tags = {"security", "exploit", "dupe"}
+        tags = {"security", "exploit", "dupe"},
+        merge_groups = {"security_violations"}
     },
 
     generate = function(ctx, args)

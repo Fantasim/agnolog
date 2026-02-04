@@ -8,7 +8,8 @@ return {
         recurrence = "NORMAL",
         description = "Connection closed",
         text_template = "[{timestamp}] CONN_CLOSE: {client_ip}:{port} (reason: {reason}, duration: {duration}s)",
-        tags = {"technical", "network", "connection"}
+        tags = {"technical", "network", "connection"},
+        merge_groups = {"connections"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "RARE",
         description = "Raid cleared",
         text_template = "[{timestamp}] RAID_CLEAR: {raid_leader}'s raid cleared {raid_name} ({bosses_killed} bosses)",
-        tags = {"combat", "raid", "completion"}
+        tags = {"combat", "raid", "completion"},
+        merge_groups = {"instance_runs"}
     },
 
     generate = function(ctx, args)

@@ -8,7 +8,8 @@ return {
         recurrence = "VERY_FREQUENT",
         description = "Server tick timing",
         text_template = "[{timestamp}] TICK: #{tick_id} ({tick_time}ms, {entity_count} entities, TPS: {tps})",
-        tags = {"server", "performance", "tick"}
+        tags = {"server", "performance", "tick"},
+        merge_groups = {"server_metrics"}
     },
 
     generate = function(ctx, args)

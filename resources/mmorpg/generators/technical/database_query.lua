@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Database query executed",
         text_template = "[{timestamp}] DB_QUERY: {query_type} ({duration}ms, {rows} rows)",
-        tags = {"technical", "database", "query"}
+        tags = {"technical", "database", "query"},
+        merge_groups = {"db_ops"}
     },
 
     generate = function(ctx, args)

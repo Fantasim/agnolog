@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Quest abandoned",
         text_template = "[{timestamp}] QUEST_ABANDON: {char_name} abandoned \"{quest_name}\"",
-        tags = {"player", "quest"}
+        tags = {"player", "quest"},
+        merge_groups = {"quests"}
     },
 
     generate = function(ctx, args)

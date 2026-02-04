@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Buff applied",
         text_template = "[{timestamp}] BUFF: {target} gained {buff_name} from {source} ({duration}s)",
-        tags = {"combat", "buff", "aura"}
+        tags = {"combat", "buff", "aura"},
+        merge_groups = {"combat_effects"}
     },
 
     generate = function(ctx, args)

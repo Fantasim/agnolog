@@ -8,7 +8,8 @@ return {
         recurrence = "FREQUENT",
         description = "Gold spent",
         text_template = "[{timestamp}] GOLD_SPEND: {char_name} -{amount}g (target: {target})",
-        tags = {"economy", "gold", "transaction"}
+        tags = {"economy", "gold", "transaction"},
+        merge_groups = {"gold_flow"}
     },
 
     generate = function(ctx, args)

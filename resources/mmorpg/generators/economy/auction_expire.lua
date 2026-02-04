@@ -8,7 +8,8 @@ return {
         recurrence = "INFREQUENT",
         description = "Auction expired",
         text_template = "[{timestamp}] AUCTION_EXPIRE: {char_name}'s [{rarity}] {item_name} expired (no bids)",
-        tags = {"economy", "auction", "item"}
+        tags = {"economy", "auction", "item"},
+        merge_groups = {"auction_house"}
     },
 
     generate = function(ctx, args)

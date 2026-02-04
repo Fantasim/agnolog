@@ -8,7 +8,8 @@ return {
         recurrence = "RARE",
         description = "Server restart",
         text_template = "[{timestamp}] SERVER_RESTART: {server_id} restarting (countdown: {countdown}s)",
-        tags = {"server", "lifecycle", "restart"}
+        tags = {"server", "lifecycle", "restart"},
+        merge_groups = {"server_state"}
     },
 
     generate = function(ctx, args)

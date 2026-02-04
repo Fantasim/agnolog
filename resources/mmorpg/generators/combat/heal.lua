@@ -8,7 +8,8 @@ return {
         recurrence = "VERY_FREQUENT",
         description = "Healing done",
         text_template = "[{timestamp}] HEAL: {healer} healed {target} for {amount} ({skill}) [{is_crit}]",
-        tags = {"combat", "healing", "player"}
+        tags = {"combat", "healing", "player"},
+        merge_groups = {"combat_effects"}
     },
 
     generate = function(ctx, args)

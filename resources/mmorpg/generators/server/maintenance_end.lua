@@ -8,7 +8,8 @@ return {
         recurrence = "RARE",
         description = "Maintenance completed",
         text_template = "[{timestamp}] MAINTENANCE_END: Maintenance completed ({actual_duration} min)",
-        tags = {"server", "maintenance", "uptime"}
+        tags = {"server", "maintenance", "uptime"},
+        merge_groups = {"server_state"}
     },
 
     generate = function(ctx, args)
