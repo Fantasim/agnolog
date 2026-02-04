@@ -7,9 +7,9 @@ Tests that all registered generators produce valid log entries.
 import pytest
 from datetime import datetime
 
-from mmofakelog.core.factory import LogFactory
-from mmofakelog.core.registry import LogTypeRegistry
-from mmofakelog.core.types import LogEntry
+from agnolog.core.factory import LogFactory
+from agnolog.core.registry import LogTypeRegistry
+from agnolog.core.types import LogEntry
 
 
 @pytest.fixture

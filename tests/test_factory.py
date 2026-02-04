@@ -7,16 +7,16 @@ Tests the LogFactory class for creating log entries.
 import pytest
 from datetime import datetime
 
-from mmofakelog.core.factory import LogFactory
-from mmofakelog.core.registry import LogTypeRegistry
-from mmofakelog.core.types import (
+from agnolog.core.factory import LogFactory
+from agnolog.core.registry import LogTypeRegistry
+from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
-from mmofakelog.core.errors import LogTypeNotFoundError, GeneratorNotFoundError
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.core.errors import LogTypeNotFoundError, GeneratorNotFoundError
+from agnolog.generators.base import BaseLogGenerator
 
 
 class SimpleGenerator(BaseLogGenerator):

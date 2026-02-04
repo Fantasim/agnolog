@@ -1,13 +1,14 @@
-# mmofakelog
+# agnolog
 
-A Python program that generates 100+ realistic MMORPG server log types with varied formats and smart recurrence patterns.
+Theme-agnostic fake log generator. Python engine + Lua generators + YAML data.
 
 ## Features
 
-- **104 log types** across 6 categories (Player, Server, Security, Economy, Combat, Technical)
+- **100+ log types** - Fully configurable via Lua generators
 - **Multiple output formats**: JSON and human-readable text
-- **Realistic timing patterns**: Very frequent (packets) to rare (server restarts)
-- **Extensible design**: Easy to add new log types via decorator registration
+- **Realistic timing patterns**: Very frequent to rare events
+- **Theme-agnostic**: Swap YAML/Lua files to generate any kind of logs
+- **Extensible design**: Easy to add new log types via Lua or Python
 
 ## Installation
 
@@ -19,28 +20,30 @@ pip install -e .
 
 ```bash
 # Generate 100 JSON logs to stdout
-mmofakelog -n 100 -f json
+agnolog -n 100 -f json
 
 # Generate text logs to file
-mmofakelog -n 1000 -f text -o server.log
+agnolog -n 1000 -f text -o server.log
 
 # List all available log types
-mmofakelog --list-types
+agnolog --list-types
 
 # Filter by category
-mmofakelog --categories player combat
+agnolog --categories player combat
 ```
 
 ## Log Categories
 
-| Category | Count | Examples |
-|----------|-------|----------|
-| Player | 25 | login, level_up, chat, quest_complete |
-| Server | 15 | start, stop, cpu_usage, world_save |
-| Security | 14 | login_failed, speed_hack, admin.ban |
-| Economy | 15 | gold_gain, trade_complete, auction_buy |
-| Combat | 20 | damage_dealt, boss_kill, pvp_death |
-| Technical | 15 | connection_open, latency, database_query |
+Categories are dynamic and defined in Lua generators. Default theme includes:
+
+| Category | Examples |
+|----------|----------|
+| Player | login, level_up, chat, quest_complete |
+| Server | start, stop, cpu_usage, world_save |
+| Security | login_failed, speed_hack, admin.ban |
+| Economy | gold_gain, trade_complete, auction_buy |
+| Combat | damage_dealt, boss_kill, pvp_death |
+| Technical | connection_open, latency, database_query |
 
 ## Output Formats
 
@@ -57,9 +60,9 @@ mmofakelog --categories player combat
 ## Adding New Log Types
 
 ```python
-from mmofakelog.core.registry import register_log_type
-from mmofakelog.core.types import LogSeverity, RecurrencePattern
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.core.registry import register_log_type
+from agnolog.core.types import LogSeverity, RecurrencePattern
+from agnolog.generators.base import BaseLogGenerator
 
 @register_log_type(
     name="player.custom_event",
@@ -77,12 +80,12 @@ class CustomEventGenerator(BaseLogGenerator):
 ## CLI Options
 
 ```
-usage: mmofakelog [-h] [-n COUNT] [-f {json,text}] [-o OUTPUT]
-                  [--categories CATEGORIES] [--types TYPES]
-                  [--exclude-types EXCLUDE] [--start-time TIME]
-                  [--duration SECONDS] [--time-scale SCALE]
-                  [--seed SEED] [--pretty] [--quiet]
-                  [--list-types] [--version]
+usage: agnolog [-h] [-n COUNT] [-f {json,text}] [-o OUTPUT]
+               [--categories CATEGORIES] [--types TYPES]
+               [--exclude-types EXCLUDE] [--start-time TIME]
+               [--duration SECONDS] [--time-scale SCALE]
+               [--seed SEED] [--pretty] [--quiet]
+               [--list-types] [--version]
 
 Options:
   -n, --count         Number of log entries to generate
@@ -110,7 +113,7 @@ pip install -e ".[dev]"
 pytest
 
 # Run tests with coverage
-pytest --cov=mmofakelog
+pytest --cov=agnolog
 ```
 
 ## License

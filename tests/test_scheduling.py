@@ -8,17 +8,17 @@ import pytest
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock, patch
 
-from mmofakelog.scheduling import LogScheduler, RecurrenceCalculator, get_recurrence_rate
-from mmofakelog.scheduling.scheduler import ScheduledEvent
-from mmofakelog.core.factory import LogFactory
-from mmofakelog.core.registry import LogTypeRegistry
-from mmofakelog.core.types import (
+from agnolog.scheduling import LogScheduler, RecurrenceCalculator, get_recurrence_rate
+from agnolog.scheduling.scheduler import ScheduledEvent
+from agnolog.core.factory import LogFactory
+from agnolog.core.registry import LogTypeRegistry
+from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.generators.base import BaseLogGenerator
 
 
 class DummyGenerator(BaseLogGenerator):

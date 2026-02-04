@@ -5,9 +5,9 @@ Ensures all exception types are properly defined and work correctly.
 """
 
 import pytest
-from mmofakelog.core.errors import (
+from agnolog.core.errors import (
     # Base
-    MMOFakeLogError,
+    AgnologError,
     # Configuration
     ConfigurationError,
     MissingConfigError,
@@ -48,35 +48,35 @@ from mmofakelog.core.errors import (
 )
 
 
-class TestMMOFakeLogError:
+class TestAgnologError:
     """Tests for base exception class."""
 
     def test_basic_initialization(self):
-        error = MMOFakeLogError("Test error")
+        error = AgnologError("Test error")
         assert error.message == "Test error"
         assert error.details == {}
 
     def test_with_details(self):
-        error = MMOFakeLogError("Test error", {"key": "value"})
+        error = AgnologError("Test error", {"key": "value"})
         assert error.details == {"key": "value"}
 
     def test_str_without_details(self):
-        error = MMOFakeLogError("Test error")
+        error = AgnologError("Test error")
         assert str(error) == "Test error"
 
     def test_str_with_details(self):
-        error = MMOFakeLogError("Test error", {"key": "value"})
+        error = AgnologError("Test error", {"key": "value"})
         assert "Test error" in str(error)
         assert "key='value'" in str(error)
 
     def test_repr(self):
-        error = MMOFakeLogError("Test error", {"key": "value"})
+        error = AgnologError("Test error", {"key": "value"})
         repr_str = repr(error)
-        assert "MMOFakeLogError" in repr_str
+        assert "AgnologError" in repr_str
         assert "Test error" in repr_str
 
     def test_is_exception(self):
-        error = MMOFakeLogError("Test error")
+        error = AgnologError("Test error")
         assert isinstance(error, Exception)
 
 
@@ -85,7 +85,7 @@ class TestConfigurationErrors:
 
     def test_configuration_error_inherits(self):
         error = ConfigurationError("Config error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_missing_config_error(self):
         error = MissingConfigError("API_KEY")
@@ -117,7 +117,7 @@ class TestRegistryErrors:
 
     def test_registry_error_inherits(self):
         error = RegistryError("Registry error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_log_type_not_found_error(self):
         error = LogTypeNotFoundError("player.invalid")
@@ -147,7 +147,7 @@ class TestGeneratorErrors:
 
     def test_generator_error_inherits(self):
         error = GeneratorError("Generator error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_data_generation_error(self):
         error = DataGenerationError("player.login", "Random failure")
@@ -180,7 +180,7 @@ class TestFormatterErrors:
 
     def test_formatter_error_inherits(self):
         error = FormatterError("Formatter error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_template_error(self):
         error = TemplateError(
@@ -218,7 +218,7 @@ class TestOutputErrors:
 
     def test_output_error_inherits(self):
         error = OutputError("Output error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_file_write_error(self):
         error = FileWriteError("/path/to/file.log", "Disk full")
@@ -251,7 +251,7 @@ class TestSchedulingErrors:
 
     def test_scheduling_error_inherits(self):
         error = SchedulingError("Scheduling error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_invalid_pattern_error(self):
         error = InvalidPatternError("INVALID")
@@ -276,7 +276,7 @@ class TestDataErrors:
 
     def test_data_error_inherits(self):
         error = DataError("Data error")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_data_not_found_error(self):
         error = DataNotFoundError("Item", "sword_of_doom")
@@ -294,7 +294,7 @@ class TestValidationError:
 
     def test_validation_error_inherits(self):
         error = ValidationError("level", 100, "must be <= 60")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_validation_error_fields(self):
         error = ValidationError("level", 100, "must be <= 60")
@@ -312,7 +312,7 @@ class TestErrorHierarchy:
     """Tests for exception inheritance hierarchy."""
 
     def test_all_errors_inherit_from_base(self):
-        """All custom errors should inherit from MMOFakeLogError."""
+        """All custom errors should inherit from AgnologError."""
         error_classes = [
             ConfigurationError,
             RegistryError,
@@ -324,14 +324,14 @@ class TestErrorHierarchy:
         ]
         for cls in error_classes:
             error = cls("test")
-            assert isinstance(error, MMOFakeLogError)
+            assert isinstance(error, AgnologError)
 
         # ValidationError has a different signature
         error = ValidationError("field", "value", "constraint")
-        assert isinstance(error, MMOFakeLogError)
+        assert isinstance(error, AgnologError)
 
     def test_can_catch_all_with_base(self):
-        """Should be able to catch all errors with MMOFakeLogError."""
+        """Should be able to catch all errors with AgnologError."""
         errors_to_test = [
             MissingConfigError("key"),
             LogTypeNotFoundError("type"),
@@ -344,5 +344,5 @@ class TestErrorHierarchy:
         for error in errors_to_test:
             try:
                 raise error
-            except MMOFakeLogError:
+            except AgnologError:
                 pass  # Should catch

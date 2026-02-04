@@ -8,8 +8,8 @@ import json
 import pytest
 from datetime import datetime
 
-from mmofakelog.formatters.json_formatter import JSONFormatter
-from mmofakelog.core.types import LogEntry, LogSeverity
+from agnolog.formatters.json_formatter import JSONFormatter
+from agnolog.core.types import LogEntry, LogSeverity
 
 
 @pytest.fixture

@@ -1,15 +1,15 @@
 # Adding New Resources
 
-This guide explains how to add new log types and data to mmofakelog using the resource system.
+This guide explains how to add new log types and data to agnolog using the resource system.
 
 ## Overview
 
-mmofakelog uses a data-driven architecture:
+agnolog uses a data-driven architecture:
 - **YAML files** for static data (names, items, zones, constants)
 - **Lua scripts** for log generators (the logic that creates log entries)
 
 ```
-mmofakelog/resources/
+agnolog/resources/
 ├── data/           # YAML data files
 │   ├── names/      # Player names, guild names, NPCs
 │   ├── items/      # Weapons, armor, consumables
@@ -354,7 +354,7 @@ After adding new resources, validate them:
 make validate
 
 # Or directly:
-python -m mmofakelog validate
+python -m agnolog validate
 ```
 
 This checks:
@@ -368,10 +368,10 @@ Generate logs with your new type:
 
 ```bash
 # Generate and filter to your type
-python -m mmofakelog -n 10 --types economy.bank_deposit
+python -m agnolog -n 10 --types economy.bank_deposit
 
 # List all types to verify registration
-python -m mmofakelog --list-types | grep bank
+python -m agnolog --list-types | grep bank
 ```
 
 ## Tips and Best Practices

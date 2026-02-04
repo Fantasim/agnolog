@@ -9,7 +9,7 @@ import os
 from io import StringIO
 from unittest.mock import patch, MagicMock
 
-from mmofakelog.output import (
+from agnolog.output import (
     StreamOutputHandler,
     FileOutputHandler,
     RotatingFileHandler,

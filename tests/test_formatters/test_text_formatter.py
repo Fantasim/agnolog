@@ -7,15 +7,15 @@ Tests the TextFormatter class.
 import pytest
 from datetime import datetime
 
-from mmofakelog.formatters.text_formatter import TextFormatter, ColorTextFormatter
-from mmofakelog.core.registry import LogTypeRegistry
-from mmofakelog.core.types import (
+from agnolog.formatters.text_formatter import TextFormatter, ColorTextFormatter
+from agnolog.core.registry import LogTypeRegistry
+from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.generators.base import BaseLogGenerator
 
 
 class DummyGenerator(BaseLogGenerator):

@@ -8,8 +8,8 @@ import pytest
 from datetime import datetime
 from typing import Any, Dict
 
-from mmofakelog.generators.base import BaseLogGenerator
-from mmofakelog.core.types import (
+from agnolog.generators.base import BaseLogGenerator
+from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,

@@ -1,10 +1,10 @@
 """
-Tests for mmofakelog.core.constants module.
+Tests for agnolog.core.constants module.
 
 Ensures all constants are properly defined and have valid values.
 """
 
-from mmofakelog.core.constants import (
+from agnolog.core.constants import (
     # Version
     VERSION,
     PACKAGE_NAME,
@@ -43,7 +43,7 @@ class TestVersionConstants:
         assert all(p.isdigit() for p in parts[:2])
 
     def test_package_name(self):
-        assert PACKAGE_NAME == "mmofakelog"
+        assert PACKAGE_NAME == "agnolog"
 
 
 class TestDefaultConstants:

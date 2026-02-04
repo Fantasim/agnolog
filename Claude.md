@@ -1,4 +1,4 @@
-# mmofakelog Development Guide
+# Agnolog Development Guide
 
 Theme-agnostic fake log generator. Python engine + Lua generators + YAML data.
 
@@ -25,7 +25,7 @@ YAML Data (theme-specific)
 1. **Zero hardcoded theme content in Python** - All theme data in YAML, all log types in Lua
 2. **Zero hardcoded values** - All magic numbers/strings go in `core/constants.py`
 3. **Categories are dynamic** - Discovered from loaded generators, not hardcoded
-4. **All errors inherit** `MMOFakeLogError` - Add new types in `core/errors.py`
+4. **All errors inherit** `AgnologError` - Add new types in `core/errors.py`
 5. **Log everything** - Every function that can fail needs logging
 6. **Test everything** - No PR without tests
 7. **Remove deprecated code immediately** - When you see `DEPRECATED` comments or `DeprecationWarning`, remove that code entirely (class, function, imports, tests). Don't keep backwards compatibility shims.
@@ -48,7 +48,7 @@ return {
 
 Access categories dynamically:
 ```python
-from mmofakelog.core.registry import get_registry
+from agnolog.core.registry import get_registry
 
 registry = get_registry()
 categories = registry.get_categories()  # Returns ['combat', 'economy', 'player', ...]
@@ -81,13 +81,13 @@ Generic utilities (no theme data):
 
 | What | Where |
 |------|-------|
-| Constants | `mmofakelog/core/constants.py` |
-| Errors | `mmofakelog/core/errors.py` |
-| Registry | `mmofakelog/core/registry.py` |
-| Lua sandbox | `mmofakelog/core/lua_runtime.py` |
-| Theme data | `mmofakelog/resources/data/*.yaml` |
-| Generators | `mmofakelog/resources/generators/**/*.lua` |
-| Logging utils | `mmofakelog/logutils/internal_logger.py` |
+| Constants | `agnolog/core/constants.py` |
+| Errors | `agnolog/core/errors.py` |
+| Registry | `agnolog/core/registry.py` |
+| Lua sandbox | `agnolog/core/lua_runtime.py` |
+| Theme data | `agnolog/resources/data/*.yaml` |
+| Generators | `agnolog/resources/generators/**/*.lua` |
+| Logging utils | `agnolog/logutils/internal_logger.py` |
 | Test fixtures | `tests/conftest.py` |
 
 ## Adding New Themes
@@ -115,7 +115,7 @@ timeout = 30
 categories = ["player", "server"]  # DON'T hardcode categories!
 
 # GOOD
-from mmofakelog.core.constants import DEFAULT_TIMEOUT
+from agnolog.core.constants import DEFAULT_TIMEOUT
 categories = registry.get_categories()  # Dynamic!
 ```
 
@@ -133,7 +133,7 @@ class NewSpecificError(ParentCategoryError):
 
 **Using errors:**
 ```python
-from mmofakelog.core.errors import SpecificError
+from agnolog.core.errors import SpecificError
 
 try:
     risky_operation()
@@ -146,7 +146,7 @@ except SomeException as e:
 
 **Import:**
 ```python
-from mmofakelog.logutils.internal_logger import get_internal_logger
+from agnolog.logutils.internal_logger import get_internal_logger
 logger = get_internal_logger()
 ```
 
@@ -217,7 +217,7 @@ make lint        # Ruff linting
 make format      # Auto-format code
 
 # CLI
-mmofakelog --list-categories    # Show available categories (dynamic)
-mmofakelog --list-types         # Show all log types
-mmofakelog -n 100 -f text       # Generate 100 text logs
+agnolog --list-categories    # Show available categories (dynamic)
+agnolog --list-types         # Show all log types
+agnolog -n 100 -f text       # Generate 100 text logs
 ```

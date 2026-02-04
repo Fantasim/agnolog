@@ -2,7 +2,7 @@
 
 # Default target
 help:
-	@echo "mmofakelog - Fake Log Generator"
+	@echo "agnolog - Theme-agnostic Fake Log Generator"
 	@echo ""
 	@echo "Usage: make <target>"
 	@echo ""
@@ -41,35 +41,35 @@ test:
 	python -m pytest tests/ -v
 
 test-cov:
-	python -m pytest tests/ -v --cov=mmofakelog --cov-report=term-missing --cov-report=html
+	python -m pytest tests/ -v --cov=agnolog --cov-report=term-missing --cov-report=html
 
 test-quick:
 	python -m pytest tests/ -q
 
 # Code quality
 lint:
-	ruff check mmofakelog tests
+	ruff check agnolog tests
 
 format:
-	ruff format mmofakelog tests
-	ruff check --fix mmofakelog tests
+	ruff format agnolog tests
+	ruff check --fix agnolog tests
 
 # Validation
 validate:
-	python -m mmofakelog validate
+	python -m agnolog validate
 
 # Running
 run:
-	python -m mmofakelog -n 100 --pretty
+	python -m agnolog -n 100 --pretty
 
 run-text:
-	python -m mmofakelog -n 100 -f text
+	python -m agnolog -n 100 -f text
 
 run-many:
-	python -m mmofakelog -n 1000
+	python -m agnolog -n 1000
 
 list:
-	python -m mmofakelog --list-types
+	python -m agnolog --list-types
 
 # Building
 build: clean

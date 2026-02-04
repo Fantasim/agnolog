@@ -6,14 +6,14 @@ import pytest
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
 
-from mmofakelog.core.registry import LogTypeRegistry, register_lua_generators
-from mmofakelog.core.types import (
+from agnolog.core.registry import LogTypeRegistry, register_lua_generators
+from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.generators.base import BaseLogGenerator
 
 
 def _ensure_generators_registered():

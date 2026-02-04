@@ -9,7 +9,7 @@ import sys
 from io import StringIO
 from unittest.mock import patch
 
-from mmofakelog.cli import main, parse_categories
+from agnolog.cli import main, parse_categories
 
 
 class TestParseCategories:

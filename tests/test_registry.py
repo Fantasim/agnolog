@@ -5,22 +5,22 @@ Tests the LogTypeRegistry class and register_log_type decorator.
 """
 
 import pytest
-from mmofakelog.core.registry import (
+from agnolog.core.registry import (
     LogTypeRegistry,
     register_log_type,
     get_registry,
 )
-from mmofakelog.core.types import (
+from agnolog.core.types import (
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
-from mmofakelog.core.errors import (
+from agnolog.core.errors import (
     DuplicateLogTypeError,
     InvalidLogTypeError,
     LogTypeNotFoundError,
 )
-from mmofakelog.generators.base import BaseLogGenerator
+from agnolog.generators.base import BaseLogGenerator
 
 
 class DummyGenerator(BaseLogGenerator):

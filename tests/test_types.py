@@ -6,7 +6,7 @@ Tests all enums, dataclasses, and protocols.
 
 import pytest
 from datetime import datetime
-from mmofakelog.core.types import (
+from agnolog.core.types import (
     LogSeverity,
     LogFormat,
     RecurrencePattern,
