@@ -16,11 +16,14 @@ Usage:
 """
 
 from agnolog.formatters.base import BaseFormatter
+from agnolog.formatters.csv_formatter import LoghubCSVFormatter, template_to_loghub
 from agnolog.formatters.json_formatter import JSONFormatter
 from agnolog.formatters.text_formatter import TextFormatter
 
 __all__ = [
     "BaseFormatter",
     "JSONFormatter",
+    "LoghubCSVFormatter",
     "TextFormatter",
+    "template_to_loghub",
 ]

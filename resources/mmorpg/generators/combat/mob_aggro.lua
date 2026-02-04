@@ -15,8 +15,17 @@ return {
         local zones = {"Elwynn Forest", "Westfall", "Duskwood"}
         if ctx.data.world and ctx.data.world.leveling_zones then
             zones = {}
-            for _, z in ipairs(ctx.data.world.leveling_zones) do
-                table.insert(zones, z.name or z)
+            -- leveling_zones has low_level, mid_level, high_level sub-tables
+            for _, level_category in pairs(ctx.data.world.leveling_zones) do
+                if type(level_category) == "table" then
+                    for _, z in ipairs(level_category) do
+                        table.insert(zones, z.name or z)
+                    end
+                end
+            end
+            -- Fallback if no zones found
+            if #zones == 0 then
+                zones = {"Elwynn Forest", "Westfall", "Duskwood"}
             end
         end
 

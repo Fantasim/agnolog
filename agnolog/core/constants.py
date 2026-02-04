@@ -5,7 +5,7 @@ Contains default values and configuration constants.
 Theme-specific data is loaded from YAML files.
 """
 
-from typing import Dict, Final
+from typing import Dict, Final, Tuple
 
 # =============================================================================
 # VERSION AND METADATA
@@ -53,3 +53,20 @@ INTERNAL_LOG_FORMAT: Final[str] = "[%(asctime)s] [%(levelname)s] %(name)s: %(mes
 INTERNAL_LOG_DATE_FORMAT: Final[str] = "%Y-%m-%d %H:%M:%S"
 INTERNAL_LOG_LEVEL: Final[str] = "INFO"
 INTERNAL_LOGGER_NAME: Final[str] = "agnolog.internal"
+
+# =============================================================================
+# LOGHUB CSV FORMAT CONFIGURATION
+# =============================================================================
+LOGHUB_PLACEHOLDER: Final[str] = "<*>"
+LOGHUB_CSV_COLUMNS: Final[Tuple[str, ...]] = (
+    "LineId",
+    "Date",
+    "Day",
+    "Time",
+    "Component",
+    "Pid",
+    "Content",
+    "EventId",
+    "EventTemplate",
+)
+LOGHUB_TEMPLATE_COLUMNS: Final[Tuple[str, ...]] = ("EventId", "EventTemplate")

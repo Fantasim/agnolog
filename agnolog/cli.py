@@ -11,17 +11,22 @@ Usage:
 """
 
 import argparse
+import logging
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from agnolog.core.registry import LogTypeRegistry
+    from agnolog.scheduling import LogScheduler
 
 from agnolog.core.config import Config
 from agnolog.core.constants import DEFAULT_LOG_COUNT, DEFAULT_TIME_SCALE, VERSION
 from agnolog.core.factory import LogFactory
 from agnolog.core.registry import get_registry, register_lua_generators
 from agnolog.core.types import LogFormat
-from agnolog.formatters import JSONFormatter, TextFormatter
+from agnolog.formatters import JSONFormatter, LoghubCSVFormatter, TextFormatter
 from agnolog.logutils import setup_internal_logging, get_internal_logger
 from agnolog.output import FileOutputHandler, StreamOutputHandler
 from agnolog.scheduling import LogScheduler
@@ -167,6 +172,102 @@ def validate_resources(resources_path: Optional[str] = None) -> int:
         return 0
 
 
+def _generate_loghub_output(
+    parsed: argparse.Namespace,
+    scheduler: "LogScheduler",
+    registry: "LogTypeRegistry",
+    logger: logging.Logger,
+) -> int:
+    """
+    Generate logs in loghub format (3 files).
+
+    Creates:
+    - PREFIX.log: Raw text logs
+    - PREFIX_structured.csv: Structured CSV with templates
+    - PREFIX_templates.csv: Unique templates list
+    """
+    from datetime import timedelta
+
+    prefix = parsed.loghub
+    log_path = f"{prefix}.log"
+    structured_path = f"{prefix}_structured.csv"
+    templates_path = f"{prefix}_templates.csv"
+
+    if not parsed.quiet:
+        print(f"Generating loghub output:", file=sys.stderr)
+        print(f"  - {log_path}", file=sys.stderr)
+        print(f"  - {structured_path}", file=sys.stderr)
+        print(f"  - {templates_path}", file=sys.stderr)
+
+    # Create formatters
+    text_formatter = TextFormatter(registry=registry)
+    csv_formatter = LoghubCSVFormatter(
+        registry=registry,
+        component=parsed.server_id or "Server",
+    )
+
+    # Create output handlers
+    log_handler = FileOutputHandler(log_path)
+    structured_handler = FileOutputHandler(structured_path)
+
+    # Write CSV header
+    structured_handler.write(csv_formatter.format_header())
+
+    # Determine time range
+    if parsed.start_time:
+        try:
+            start_time = datetime.fromisoformat(parsed.start_time)
+        except ValueError:
+            print(f"Error: Invalid start time format: {parsed.start_time}", file=sys.stderr)
+            return 1
+    else:
+        start_time = datetime.now()
+
+    end_time = start_time + timedelta(seconds=parsed.duration)
+
+    # Generate logs
+    try:
+        count = 0
+        for entry in scheduler.generate_range(start_time, end_time, max_logs=parsed.count):
+            # Write to .log file
+            text_output = text_formatter.format(entry)
+            log_handler.write(text_output)
+
+            # Write to _structured.csv
+            csv_output = csv_formatter.format(entry)
+            structured_handler.write(csv_output)
+
+            count += 1
+
+        log_handler.close()
+        structured_handler.close()
+
+        # Write templates.csv
+        templates_content = csv_formatter.format_templates_csv()
+        with open(templates_path, "w", encoding="utf-8") as f:
+            f.write(templates_content)
+            f.write("\n")
+
+        if not parsed.quiet:
+            print(f"Generated {count} log entries", file=sys.stderr)
+            print(f"Created {len(csv_formatter.get_templates())} unique templates", file=sys.stderr)
+
+        return 0
+
+    except KeyboardInterrupt:
+        if not parsed.quiet:
+            print("\nInterrupted", file=sys.stderr)
+        log_handler.close()
+        structured_handler.close()
+        return 130
+
+    except Exception as e:
+        logger.exception(f"Error during generation: {e}")
+        if not parsed.quiet:
+            print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+
 def main(args: Optional[List[str]] = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -207,6 +308,14 @@ Examples:
         type=str,
         default=None,
         help="Output file (default: stdout)",
+    )
+
+    parser.add_argument(
+        "--loghub",
+        type=str,
+        metavar="PREFIX",
+        default=None,
+        help="Output in loghub format: PREFIX.log, PREFIX_structured.csv, PREFIX_templates.csv",
     )
 
     parser.add_argument(
@@ -393,6 +502,15 @@ Examples:
     # Exclude types if specified
     if parsed.exclude_types:
         scheduler.disable_log_types(parsed.exclude_types)
+
+    # Handle loghub output mode
+    if parsed.loghub:
+        return _generate_loghub_output(
+            parsed=parsed,
+            scheduler=scheduler,
+            registry=registry,
+            logger=logger,
+        )
 
     # Setup formatter
     if parsed.format == "json":

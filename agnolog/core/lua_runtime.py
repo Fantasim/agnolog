@@ -356,11 +356,20 @@ class LuaGeneratorUtils:
 
     def item_name(self) -> str:
         """Generate a random item name from loaded data."""
-        prefixes = self._get_data("items", "item_prefixes", default=[])
+        prefix_data = self._get_data("items", "item_prefixes", default={})
         weapons = self._get_data("items", "weapon_types", default=[])
         armor = self._get_data("items", "armor_types", default=[])
 
-        # Get suffix list
+        # Get prefix list (item_prefixes may be nested by rarity)
+        prefixes = []
+        if isinstance(prefix_data, dict):
+            for prefix_list in prefix_data.values():
+                if isinstance(prefix_list, list):
+                    prefixes.extend(prefix_list)
+        elif isinstance(prefix_data, list):
+            prefixes = prefix_data
+
+        # Get suffix list (item_suffixes may be nested by type)
         suffix_data = self._get_data("items", "item_suffixes", default={})
         suffixes = []
         if isinstance(suffix_data, dict):

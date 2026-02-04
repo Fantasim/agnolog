@@ -17,12 +17,15 @@ return {
             "Eye of the Storm", "Strand of the Ancients"
         }
 
-        if ctx.data.world and ctx.data.world.battlegrounds then
+        -- battlegrounds.yaml has data.battlegrounds.battlegrounds as the list
+        local bg_data = ctx.data.world and ctx.data.world.battlegrounds and ctx.data.world.battlegrounds.battlegrounds
+        if bg_data then
             battlegrounds = {}
-            for _, bg in ipairs(ctx.data.world.battlegrounds) do
-                if bg.type ~= "arena" then
-                    table.insert(battlegrounds, bg.name or bg)
-                end
+            for _, bg in ipairs(bg_data) do
+                table.insert(battlegrounds, bg.name or bg)
+            end
+            if #battlegrounds == 0 then
+                battlegrounds = {"Warsong Gulch", "Arathi Basin", "Alterac Valley"}
             end
         end
 

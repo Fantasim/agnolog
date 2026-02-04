@@ -25,10 +25,15 @@ return {
         local consumables = {"Health Potion", "Mana Potion", "Bandage", "Food", "Water",
             "Reagent", "Arrows", "Bullets", "Fishing Bait", "Repair Bot"}
 
-        if ctx.data.items and ctx.data.items.consumables then
+        -- consumables.yaml has nested structure: data.consumables.consumables
+        local cons_data = ctx.data.items and ctx.data.items.consumables and ctx.data.items.consumables.consumables
+        if cons_data then
             consumables = {}
-            for _, c in ipairs(ctx.data.items.consumables) do
+            for _, c in ipairs(cons_data) do
                 table.insert(consumables, c.name or c)
+            end
+            if #consumables == 0 then
+                consumables = {"Health Potion", "Mana Potion", "Bandage", "Food", "Water"}
             end
         end
 

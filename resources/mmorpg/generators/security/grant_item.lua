@@ -17,7 +17,10 @@ return {
         if ctx.data.items and ctx.data.items.rarities then
             rarities = {}
             for _, r in ipairs(ctx.data.items.rarities) do
-                table.insert(rarities, r.name or r)
+                table.insert(rarities, r.id or r.name or r)
+            end
+            if #rarities == 0 then
+                rarities = {"Common", "Uncommon", "Rare", "Epic", "Legendary"}
             end
         end
 

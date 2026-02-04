@@ -15,10 +15,15 @@ return {
         local mob_types = {"wolves", "bandits", "undead", "elementals", "demons",
             "beasts", "humanoids", "giants", "dragonkin", "aberrations"}
 
-        if ctx.data.monsters and ctx.data.monsters.monster_types then
+        -- monster_types.yaml has types as a sub-key
+        local types_data = ctx.data.monsters and ctx.data.monsters.monster_types and ctx.data.monsters.monster_types.types
+        if types_data then
             mob_types = {}
-            for _, mt in ipairs(ctx.data.monsters.monster_types) do
+            for _, mt in ipairs(types_data) do
                 table.insert(mob_types, mt.name or mt)
+            end
+            if #mob_types == 0 then
+                mob_types = {"wolves", "bandits", "undead", "elementals", "demons"}
             end
         end
 
@@ -31,10 +36,18 @@ return {
                     table.insert(zones, z.name or z)
                 end
             end
+            -- leveling_zones has low_level, mid_level, high_level sub-tables
             if ctx.data.world.leveling_zones then
-                for _, z in ipairs(ctx.data.world.leveling_zones) do
-                    table.insert(zones, z.name or z)
+                for _, level_category in pairs(ctx.data.world.leveling_zones) do
+                    if type(level_category) == "table" then
+                        for _, z in ipairs(level_category) do
+                            table.insert(zones, z.name or z)
+                        end
+                    end
                 end
+            end
+            if #zones == 0 then
+                zones = {"Elwynn Forest", "Westfall", "Duskwood", "Redridge"}
             end
         end
 

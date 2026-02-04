@@ -14,10 +14,18 @@ return {
     generate = function(ctx, args)
         local zones = {"Stranglethorn Vale", "Hillsbrad Foothills", "Ashenvale", "The Barrens"}
 
+        -- leveling_zones has low_level, mid_level, high_level sub-tables
         if ctx.data.world and ctx.data.world.leveling_zones then
             zones = {}
-            for _, z in ipairs(ctx.data.world.leveling_zones) do
-                table.insert(zones, z.name or z)
+            for _, level_category in pairs(ctx.data.world.leveling_zones) do
+                if type(level_category) == "table" then
+                    for _, z in ipairs(level_category) do
+                        table.insert(zones, z.name or z)
+                    end
+                end
+            end
+            if #zones == 0 then
+                zones = {"Stranglethorn Vale", "Hillsbrad Foothills", "Ashenvale", "The Barrens"}
             end
         end
 
