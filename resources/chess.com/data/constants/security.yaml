@@ -1,110 +1,109 @@
 # Security and anti-cheat constants
-security:
-  # Login attempt limits
-  login:
-    max_attempts: 5
-    lockout_duration_minutes: 15
-    suspicious_threshold: 3
-    ip_ban_threshold: 10
+# Login attempt limits
+login:
+  max_attempts: 5
+  lockout_duration_minutes: 15
+  suspicious_threshold: 3
+  ip_ban_threshold: 10
 
-  # Session management
-  session:
-    max_duration_hours: 24
-    idle_timeout_minutes: 60
-    max_concurrent_sessions: 3
-    token_length: 64
+# Session management
+session:
+  max_duration_hours: 24
+  idle_timeout_minutes: 60
+  max_concurrent_sessions: 3
+  token_length: 64
 
-  # Fair play thresholds
-  fair_play:
-    accuracy:
-      suspicious_threshold: 95
-      critical_threshold: 98
-      master_expected: 85
-      amateur_expected: 70
+# Fair play thresholds
+fair_play:
+  accuracy:
+    suspicious_threshold: 95
+    critical_threshold: 98
+    master_expected: 85
+    amateur_expected: 70
 
-    move_time:
-      suspicious_avg_seconds: 5
-      instant_move_threshold_ms: 100
-      suspicious_consistency: 0.95
+  move_time:
+    suspicious_avg_seconds: 5
+    instant_move_threshold_ms: 100
+    suspicious_consistency: 0.95
 
-    pattern_detection:
-      engine_correlation_threshold: 0.85
-      suspicious_game_count: 3
-      critical_game_count: 5
+  pattern_detection:
+    engine_correlation_threshold: 0.85
+    suspicious_game_count: 3
+    critical_game_count: 5
 
-  # Ban types and durations
-  ban_types:
-    - type: "temporary"
-      durations: [1, 7, 30, 90]  # days
+# Ban types and durations
+ban_types:
+  - type: "temporary"
+    durations: [1, 7, 30, 90]  # days
 
-    - type: "permanent"
-      duration: null
+  - type: "permanent"
+    duration: null
 
-    - type: "shadow"
-      description: "Limited matchmaking"
+  - type: "shadow"
+    description: "Limited matchmaking"
 
-    - type: "chat"
-      durations: [1, 3, 7, 30]  # days
+  - type: "chat"
+    durations: [1, 3, 7, 30]  # days
 
-  # Ban reasons
-  ban_reasons:
-    - "engine_assistance"
-    - "multiple_accounts"
-    - "sandbagging"
-    - "stalling"
-    - "inappropriate_chat"
-    - "harassment"
-    - "account_sharing"
-    - "rating_manipulation"
-    - "fair_play_violation"
-    - "terms_of_service_violation"
+# Ban reasons
+ban_reasons:
+  - "engine_assistance"
+  - "multiple_accounts"
+  - "sandbagging"
+  - "stalling"
+  - "inappropriate_chat"
+  - "harassment"
+  - "account_sharing"
+  - "rating_manipulation"
+  - "fair_play_violation"
+  - "terms_of_service_violation"
 
-  # Violation severity levels
-  violation_severity:
-    minor:
-      weight: 1
-      actions: ["warning", "temporary_ban_1d"]
+# Violation severity levels
+violation_severity:
+  minor:
+    weight: 1
+    actions: ["warning", "temporary_ban_1d"]
 
-    moderate:
-      weight: 3
-      actions: ["temporary_ban_7d", "rating_adjustment"]
+  moderate:
+    weight: 3
+    actions: ["temporary_ban_7d", "rating_adjustment"]
 
-    major:
-      weight: 7
-      actions: ["temporary_ban_30d", "title_revoked"]
+  major:
+    weight: 7
+    actions: ["temporary_ban_30d", "title_revoked"]
 
-    critical:
-      weight: 10
-      actions: ["permanent_ban", "tournament_ban"]
+  critical:
+    weight: 10
+    actions: ["permanent_ban", "tournament_ban"]
 
-  # Alert thresholds
-  alerts:
-    failed_login_threshold: 5
-    suspicious_move_count: 10
-    rapid_account_creation: 5  # per IP per hour
-    unusual_win_rate: 90  # percentage
-    rating_gain_threshold: 200  # in 24 hours
+# Alert thresholds
+alerts:
+  failed_login_threshold: 5
+  suspicious_move_count: 10
+  rapid_account_creation: 5  # per IP per hour
+  unusual_win_rate: 90  # percentage
+  rating_gain_threshold: 200  # in 24 hours
 
-  # IP blacklist categories
-  ip_blacklist:
-    - "vpn"
-    - "proxy"
-    - "tor"
-    - "datacenter"
-    - "known_cheater"
-    - "bot_network"
+# IP blacklist categories
+ip_blacklist:
+  - "vpn"
+  - "proxy"
+  - "tor"
+  - "datacenter"
+  - "known_cheater"
+  - "bot_network"
 
-  # Security events to log
-  logged_events:
-    - "login_success"
-    - "login_failure"
-    - "logout"
-    - "password_change"
-    - "email_change"
-    - "suspicious_activity"
-    - "ban_issued"
-    - "ban_lifted"
-    - "violation_detected"
-    - "account_locked"
-    - "account_unlocked"
-    - "ip_blocked"
+# Security events to log
+logged_events:
+  - "login_success"
+  - "login_failure"
+  - "logout"
+  - "password_change"
+  - "email_change"
+  - "suspicious_activity"
+  - "ban_issued"
+  - "ban_lifted"
+  - "violation_detected"
+  - "account_locked"
+  - "account_unlocked"
+  - "ip_blocked"

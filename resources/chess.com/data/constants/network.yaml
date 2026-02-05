@@ -1,81 +1,80 @@
 # Network and connection constants
-network:
-  # WebSocket settings
-  websocket:
-    protocol_version: "13"
-    ping_interval_seconds: 30
-    timeout_seconds: 60
-    max_reconnect_attempts: 5
-    reconnect_delay_seconds: 2
+# WebSocket settings
+websocket:
+  protocol_version: "13"
+  ping_interval_seconds: 30
+  timeout_seconds: 60
+  max_reconnect_attempts: 5
+  reconnect_delay_seconds: 2
 
-  # API settings
-  api:
-    version: "v1"
-    rate_limit_per_minute: 300
-    rate_limit_per_hour: 10000
-    timeout_seconds: 30
-    retry_attempts: 3
+# API settings
+api:
+  version: "v1"
+  rate_limit_per_minute: 300
+  rate_limit_per_hour: 10000
+  timeout_seconds: 30
+  retry_attempts: 3
 
-  # Connection types
-  connection_types:
-    - "websocket"
-    - "http"
-    - "https"
-    - "api"
-    - "streaming"
+# Connection types
+connection_types:
+  - "websocket"
+  - "http"
+  - "https"
+  - "api"
+  - "streaming"
 
-  # HTTP status codes (common)
-  http_status:
-    success:
-      - 200  # OK
-      - 201  # Created
-      - 204  # No Content
-    client_error:
-      - 400  # Bad Request
-      - 401  # Unauthorized
-      - 403  # Forbidden
-      - 404  # Not Found
-      - 409  # Conflict
-      - 429  # Too Many Requests
-    server_error:
-      - 500  # Internal Server Error
-      - 502  # Bad Gateway
-      - 503  # Service Unavailable
-      - 504  # Gateway Timeout
+# HTTP status codes (common)
+http_status:
+  success:
+    - 200  # OK
+    - 201  # Created
+    - 204  # No Content
+  client_error:
+    - 400  # Bad Request
+    - 401  # Unauthorized
+    - 403  # Forbidden
+    - 404  # Not Found
+    - 409  # Conflict
+    - 429  # Too Many Requests
+  server_error:
+    - 500  # Internal Server Error
+    - 502  # Bad Gateway
+    - 503  # Service Unavailable
+    - 504  # Gateway Timeout
 
-  # Latency ranges (milliseconds)
-  latency:
-    excellent:
-      min: 0
-      max: 50
-    good:
-      min: 50
-      max: 100
-    fair:
-      min: 100
-      max: 200
-    poor:
-      min: 200
-      max: 500
-    very_poor:
-      min: 500
-      max: 2000
+# Latency ranges (milliseconds)
+latency:
+  excellent:
+    min: 0
+    max: 50
+  good:
+    min: 50
+    max: 100
+  fair:
+    min: 100
+    max: 200
+  poor:
+    min: 200
+    max: 500
+  very_poor:
+    min: 500
+    max: 2000
 
-  # Endpoints
-  endpoints:
-    - "/api/game/start"
-    - "/api/game/move"
-    - "/api/game/end"
-    - "/api/user/login"
-    - "/api/user/logout"
-    - "/api/user/profile"
-    - "/api/matchmaking/queue"
-    - "/api/matchmaking/cancel"
-    - "/api/puzzle/fetch"
-    - "/api/puzzle/submit"
-    - "/api/analysis/request"
-    - "/api/club/join"
-    - "/api/friend/request"
-    - "/ws/game"
-    - "/ws/chat"
-    - "/ws/live"
+# Endpoints
+endpoints:
+  - "/api/game/start"
+  - "/api/game/move"
+  - "/api/game/end"
+  - "/api/user/login"
+  - "/api/user/logout"
+  - "/api/user/profile"
+  - "/api/matchmaking/queue"
+  - "/api/matchmaking/cancel"
+  - "/api/puzzle/fetch"
+  - "/api/puzzle/submit"
+  - "/api/analysis/request"
+  - "/api/club/join"
+  - "/api/friend/request"
+  - "/ws/game"
+  - "/ws/chat"
+  - "/ws/live"

@@ -1,110 +1,109 @@
 # ELO rating system constants
-elo:
-  # Starting ratings
-  starting_rating: 1200
-  provisional_games: 10
+# Starting ratings
+starting_rating: 1200
+provisional_games: 10
 
-  # K-factors (rating volatility)
-  k_factor:
-    new_player: 40
-    regular: 32
-    established: 24
-    titled: 16
+# K-factors (rating volatility)
+k_factor:
+  new_player: 40
+  regular: 32
+  established: 24
+  titled: 16
 
-  # Rating bounds
-  min_rating: 100
-  max_rating: 3500
+# Rating bounds
+min_rating: 100
+max_rating: 3500
 
-  # Rating ranges and labels
-  rating_ranges:
-    beginner:
-      min: 0
-      max: 800
-      label: "Beginner"
-      percentile: 10
+# Rating ranges and labels
+rating_ranges:
+  beginner:
+    min: 0
+    max: 800
+    label: "Beginner"
+    percentile: 10
 
-    novice:
-      min: 800
-      max: 1000
-      label: "Novice"
-      percentile: 20
+  novice:
+    min: 800
+    max: 1000
+    label: "Novice"
+    percentile: 20
 
-    intermediate:
-      min: 1000
-      max: 1200
-      label: "Intermediate"
-      percentile: 35
+  intermediate:
+    min: 1000
+    max: 1200
+    label: "Intermediate"
+    percentile: 35
 
-    average:
-      min: 1200
-      max: 1400
-      label: "Average"
-      percentile: 50
+  average:
+    min: 1200
+    max: 1400
+    label: "Average"
+    percentile: 50
 
-    good:
-      min: 1400
-      max: 1600
-      label: "Good"
-      percentile: 65
+  good:
+    min: 1400
+    max: 1600
+    label: "Good"
+    percentile: 65
 
-    very_good:
-      min: 1600
-      max: 1800
-      label: "Very Good"
-      percentile: 75
+  very_good:
+    min: 1600
+    max: 1800
+    label: "Very Good"
+    percentile: 75
 
-    excellent:
-      min: 1800
-      max: 2000
-      label: "Excellent"
-      percentile: 85
+  excellent:
+    min: 1800
+    max: 2000
+    label: "Excellent"
+    percentile: 85
 
-    advanced:
-      min: 2000
-      max: 2200
-      label: "Advanced"
-      percentile: 92
+  advanced:
+    min: 2000
+    max: 2200
+    label: "Advanced"
+    percentile: 92
 
-    expert:
-      min: 2200
-      max: 2400
-      label: "Expert"
-      percentile: 96
+  expert:
+    min: 2200
+    max: 2400
+    label: "Expert"
+    percentile: 96
 
-    master:
-      min: 2400
-      max: 2600
-      label: "Master"
-      percentile: 98
+  master:
+    min: 2400
+    max: 2600
+    label: "Master"
+    percentile: 98
 
-    international_master:
-      min: 2600
-      max: 2800
-      label: "International Master"
-      percentile: 99
+  international_master:
+    min: 2600
+    max: 2800
+    label: "International Master"
+    percentile: 99
 
-    grandmaster:
-      min: 2800
-      max: 3000
-      label: "Grandmaster"
-      percentile: 99.5
+  grandmaster:
+    min: 2800
+    max: 3000
+    label: "Grandmaster"
+    percentile: 99.5
 
-    super_gm:
-      min: 3000
-      max: 3500
-      label: "Super GM"
-      percentile: 99.9
+  super_gm:
+    min: 3000
+    max: 3500
+    label: "Super GM"
+    percentile: 99.9
 
-  # Rating change parameters
-  rating_change:
-    min_change: 1
-    max_change: 40
-    typical_change: 8
-    upset_multiplier: 1.5
+# Rating change parameters
+rating_change:
+  min_change: 1
+  max_change: 40
+  typical_change: 8
+  upset_multiplier: 1.5
 
-  # Performance calculations
-  performance:
-    exceptional_threshold: 95  # Accuracy percentage
-    good_threshold: 85
-    average_threshold: 70
-    poor_threshold: 50
+# Performance calculations
+performance:
+  exceptional_threshold: 95  # Accuracy percentage
+  good_threshold: 85
+  average_threshold: 70
+  poor_threshold: 50

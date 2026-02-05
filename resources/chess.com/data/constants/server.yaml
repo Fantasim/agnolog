@@ -1,104 +1,103 @@
 # Server infrastructure constants
 # Performance metrics
-performance:
-    cpu:
-      idle: [5, 20]
-      normal: [20, 50]
-      busy: [50, 75]
-      critical: [75, 95]
+cpu:
+  idle: [5, 20]
+  normal: [20, 50]
+  busy: [50, 75]
+  critical: [75, 95]
 
-    memory:
-      low: [10, 30]
-      normal: [30, 60]
-      high: [60, 80]
-      critical: [80, 95]
+memory:
+  low: [10, 30]
+  normal: [30, 60]
+  high: [60, 80]
+  critical: [80, 95]
 
-    disk:
-      low: [10, 40]
-      normal: [40, 70]
-      high: [70, 85]
-      critical: [85, 95]
+disk:
+  low: [10, 40]
+  normal: [40, 70]
+  high: [70, 85]
+  critical: [85, 95]
 
-  # Game server capacity
-  capacity:
-    max_concurrent_games: 50000
-    max_concurrent_users: 500000
-    typical_concurrent_games: 25000
-    typical_concurrent_users: 150000
-    max_games_per_server: 1000
-    target_cpu_usage: 60
-    target_memory_usage: 70
+# Game server capacity
+capacity:
+max_concurrent_games: 50000
+max_concurrent_users: 500000
+typical_concurrent_games: 25000
+typical_concurrent_users: 150000
+max_games_per_server: 1000
+target_cpu_usage: 60
+target_memory_usage: 70
 
-  # Response times (milliseconds)
-  response_time:
-    api_call:
-      target: 100
-      warning: 500
-      critical: 2000
+# Response times (milliseconds)
+response_time:
+api_call:
+  target: 100
+  warning: 500
+  critical: 2000
 
-    database_query:
-      target: 50
-      warning: 200
-      critical: 1000
+database_query:
+  target: 50
+  warning: 200
+  critical: 1000
 
-    move_processing:
-      target: 10
-      warning: 50
-      critical: 200
+move_processing:
+  target: 10
+  warning: 50
+  critical: 200
 
-    matchmaking:
-      target: 5000
-      warning: 15000
-      critical: 30000
+matchmaking:
+  target: 5000
+  warning: 15000
+  critical: 30000
 
-  # Server regions
-  regions:
-    - code: "us-east"
-      name: "US East"
-      location: "Virginia"
+# Server regions
+regions:
+- code: "us-east"
+  name: "US East"
+  location: "Virginia"
 
-    - code: "us-west"
-      name: "US West"
-      location: "California"
+- code: "us-west"
+  name: "US West"
+  location: "California"
 
-    - code: "eu-west"
-      name: "EU West"
-      location: "Ireland"
+- code: "eu-west"
+  name: "EU West"
+  location: "Ireland"
 
-    - code: "eu-central"
-      name: "EU Central"
-      location: "Germany"
+- code: "eu-central"
+  name: "EU Central"
+  location: "Germany"
 
-    - code: "asia-east"
-      name: "Asia East"
-      location: "Singapore"
+- code: "asia-east"
+  name: "Asia East"
+  location: "Singapore"
 
-    - code: "asia-south"
-      name: "Asia South"
-      location: "India"
+- code: "asia-south"
+  name: "Asia South"
+  location: "India"
 
-    - code: "sa-east"
-      name: "South America East"
-      location: "Brazil"
+- code: "sa-east"
+  name: "South America East"
+  location: "Brazil"
 
-  # Database settings
-  database:
-    connection_pool_size: [50, 200]
-    max_connections: 1000
-    query_timeout_seconds: 30
-    slow_query_threshold_ms: 1000
+# Database settings
+database:
+connection_pool_size: [50, 200]
+max_connections: 1000
+query_timeout_seconds: 30
+slow_query_threshold_ms: 1000
 
-  # Cache settings
-  cache:
-    hit_rate_target: 85
-    ttl_seconds:
-      user_data: 300
-      game_data: 60
-      leaderboard: 600
-      static_content: 3600
+# Cache settings
+cache:
+hit_rate_target: 85
+ttl_seconds:
+  user_data: 300
+  game_data: 60
+  leaderboard: 600
+  static_content: 3600
 
-  # Maintenance windows
-  maintenance:
-    typical_duration_minutes: [30, 120]
-    scheduled_days: ["Sunday", "Wednesday"]
-    scheduled_hour_utc: 4
+# Maintenance windows
+maintenance:
+typical_duration_minutes: [30, 120]
+scheduled_days: ["Sunday", "Wednesday"]
+scheduled_hour_utc: 4

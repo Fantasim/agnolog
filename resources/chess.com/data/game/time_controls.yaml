@@ -1,113 +1,112 @@
 # Chess.com time control formats
-time_controls:
-  # Bullet (under 3 minutes)
-  bullet:
-    - name: "Bullet 1+0"
-      display: "1 min"
-      initial_seconds: 60
-      increment_seconds: 0
-      category: "bullet"
+# Bullet (under 3 minutes)
+bullet:
+  - name: "Bullet 1+0"
+    display: "1 min"
+    initial_seconds: 60
+    increment_seconds: 0
+    category: "bullet"
 
-    - name: "Bullet 1+1"
-      display: "1|1"
-      initial_seconds: 60
-      increment_seconds: 1
-      category: "bullet"
+  - name: "Bullet 1+1"
+    display: "1|1"
+    initial_seconds: 60
+    increment_seconds: 1
+    category: "bullet"
 
-    - name: "Bullet 2+1"
-      display: "2|1"
-      initial_seconds: 120
-      increment_seconds: 1
-      category: "bullet"
+  - name: "Bullet 2+1"
+    display: "2|1"
+    initial_seconds: 120
+    increment_seconds: 1
+    category: "bullet"
 
-  # Blitz (3-10 minutes)
-  blitz:
-    - name: "Blitz 3+0"
-      display: "3 min"
-      initial_seconds: 180
-      increment_seconds: 0
-      category: "blitz"
+# Blitz (3-10 minutes)
+blitz:
+  - name: "Blitz 3+0"
+    display: "3 min"
+    initial_seconds: 180
+    increment_seconds: 0
+    category: "blitz"
 
-    - name: "Blitz 3+2"
-      display: "3|2"
-      initial_seconds: 180
-      increment_seconds: 2
-      category: "blitz"
+  - name: "Blitz 3+2"
+    display: "3|2"
+    initial_seconds: 180
+    increment_seconds: 2
+    category: "blitz"
 
-    - name: "Blitz 5+0"
-      display: "5 min"
-      initial_seconds: 300
-      increment_seconds: 0
-      category: "blitz"
+  - name: "Blitz 5+0"
+    display: "5 min"
+    initial_seconds: 300
+    increment_seconds: 0
+    category: "blitz"
 
-    - name: "Blitz 5+3"
-      display: "5|3"
-      initial_seconds: 300
-      increment_seconds: 3
-      category: "blitz"
+  - name: "Blitz 5+3"
+    display: "5|3"
+    initial_seconds: 300
+    increment_seconds: 3
+    category: "blitz"
 
-  # Rapid (10-60 minutes)
-  rapid:
-    - name: "Rapid 10+0"
-      display: "10 min"
-      initial_seconds: 600
-      increment_seconds: 0
-      category: "rapid"
+# Rapid (10-60 minutes)
+rapid:
+  - name: "Rapid 10+0"
+    display: "10 min"
+    initial_seconds: 600
+    increment_seconds: 0
+    category: "rapid"
 
-    - name: "Rapid 10+5"
-      display: "10|5"
-      initial_seconds: 600
-      increment_seconds: 5
-      category: "rapid"
+  - name: "Rapid 10+5"
+    display: "10|5"
+    initial_seconds: 600
+    increment_seconds: 5
+    category: "rapid"
 
-    - name: "Rapid 15+10"
-      display: "15|10"
-      initial_seconds: 900
-      increment_seconds: 10
-      category: "rapid"
+  - name: "Rapid 15+10"
+    display: "15|10"
+    initial_seconds: 900
+    increment_seconds: 10
+    category: "rapid"
 
-    - name: "Rapid 30+0"
-      display: "30 min"
-      initial_seconds: 1800
-      increment_seconds: 0
-      category: "rapid"
+  - name: "Rapid 30+0"
+    display: "30 min"
+    initial_seconds: 1800
+    increment_seconds: 0
+    category: "rapid"
 
-  # Classical (over 60 minutes)
-  classical:
-    - name: "Classical 30+20"
-      display: "30|20"
-      initial_seconds: 1800
-      increment_seconds: 20
-      category: "classical"
+# Classical (over 60 minutes)
+classical:
+  - name: "Classical 30+20"
+    display: "30|20"
+    initial_seconds: 1800
+    increment_seconds: 20
+    category: "classical"
 
-    - name: "Classical 60+0"
-      display: "60 min"
-      initial_seconds: 3600
-      increment_seconds: 0
-      category: "classical"
+  - name: "Classical 60+0"
+    display: "60 min"
+    initial_seconds: 3600
+    increment_seconds: 0
+    category: "classical"
 
-    - name: "Classical 90+30"
-      display: "90|30"
-      initial_seconds: 5400
-      increment_seconds: 30
-      category: "classical"
+  - name: "Classical 90+30"
+    display: "90|30"
+    initial_seconds: 5400
+    increment_seconds: 30
+    category: "classical"
 
-  # Daily (correspondence)
-  daily:
-    - name: "Daily 1 day"
-      display: "1 day/move"
-      initial_seconds: 86400
-      increment_seconds: 0
-      category: "daily"
+# Daily (correspondence)
+daily:
+  - name: "Daily 1 day"
+    display: "1 day/move"
+    initial_seconds: 86400
+    increment_seconds: 0
+    category: "daily"
 
-    - name: "Daily 3 days"
-      display: "3 days/move"
-      initial_seconds: 259200
-      increment_seconds: 0
-      category: "daily"
+  - name: "Daily 3 days"
+    display: "3 days/move"
+    initial_seconds: 259200
+    increment_seconds: 0
+    category: "daily"
 
-    - name: "Daily 7 days"
-      display: "7 days/move"
-      initial_seconds: 604800
-      increment_seconds: 0
-      category: "daily"
+  - name: "Daily 7 days"
+    display: "7 days/move"
+    initial_seconds: 604800
+    increment_seconds: 0
+    category: "daily"

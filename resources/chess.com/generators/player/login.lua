@@ -5,7 +5,7 @@ return {
         severity = "INFO",
         recurrence = "VERY_FREQUENT",
         description = "Player logs into Chess.com",
-        text_template = "[{timestamp}] LOGIN: {username} logged in from {country} ({ip_address})",
+        text_template = "[{timestamp}] LOGIN: {username} logged in from {country_code} ({ip_address})",
         tags = {"player", "login", "session"},
         merge_groups = {"sessions"}
     },

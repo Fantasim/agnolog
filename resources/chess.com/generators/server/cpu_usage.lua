@@ -10,9 +10,10 @@ return {
         merge_groups = {"server_metrics"}
     },
     generate = function(ctx, args)
-        local constants = ctx.data.constants.server.performance.cpu
+        -- Get CPU constants with fallback
+        local cpu_data = (ctx.data.constants and ctx.data.constants.server and ctx.data.constants.server.performance and ctx.data.constants.server.performance.cpu) or {idle = {5, 20}, critical = {75, 95}}
         local cpu_percent = ctx.random.gauss(40, 15)
-        cpu_percent = math.max(constants.idle[1], math.min(constants.critical[2], cpu_percent))
+        cpu_percent = math.max(cpu_data.idle[1], math.min(cpu_data.critical[2], cpu_percent))
 
         return {
             server_id = ctx.random.choice({"game-server-01", "game-server-02", "game-server-03", "api-server-01"}),

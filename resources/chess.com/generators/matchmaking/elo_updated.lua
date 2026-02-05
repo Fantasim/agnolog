@@ -5,7 +5,7 @@ return {
         severity = "INFO",
         recurrence = "VERY_FREQUENT",
         description = "Player's ELO rating updated after game",
-        text_template = "[{timestamp}] ELO_UPDATE: {username} {old_elo} -> {new_elo} ({change:+d})",
+        text_template = "[{timestamp}] ELO_UPDATE: {username} {old_elo} -> {new_elo} ({change})",
         tags = {"matchmaking", "elo", "rating"},
         merge_groups = {"elo_changes"}
     },
