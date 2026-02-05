@@ -1,0 +1,28 @@
+version: "1.0"
+metadata:
+  description: "Exchange venues and market segments"
+
+data:
+  exchanges:
+    - name: "Binance"
+      regions: [GLOBAL]
+      segments: [SPOT, FUTURES, MARGIN]
+
+    - name: "Coinbase"
+      regions: [US, EU]
+      segments: [SPOT]
+
+    - name: "Kraken"
+      regions: [GLOBAL]
+      segments: [SPOT, FUTURES]
+
+    - name: "Bybit"
+      regions: [GLOBAL]
+      segments: [FUTURES, OPTIONS]
+
+  market_segments:
+    - SPOT
+    - MARGIN
+    - FUTURES
+    - PERPETUAL
+    - OPTIONS

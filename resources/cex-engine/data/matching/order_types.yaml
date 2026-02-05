@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Supported order types in the matching engine"
+
+data:
+  order_types:
+    - LIMIT
+    - MARKET
+    - STOP_LOSS
+    - STOP_LOSS_LIMIT
+    - TAKE_PROFIT
+    - TAKE_PROFIT_LIMIT
+    - LIMIT_MAKER
+    - IMMEDIATE_OR_CANCEL
+    - FILL_OR_KILL
+    - POST_ONLY
+    - REDUCE_ONLY
+
+  execution_flags:
+    - IOC        # Immediate or Cancel
+    - FOK        # Fill or Kill
+    - GTC        # Good Till Cancel
+    - GTD        # Good Till Date
+    - DAY        # Day order
+    - POST_ONLY  # Reject if would cross
+    - HIDDEN     # Don't show in book

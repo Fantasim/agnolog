@@ -1,0 +1,29 @@
+version: "1.0"
+metadata:
+  description: "Matching engine constants and limits"
+
+data:
+  performance:
+    target_latency_us: 50         # Target matching latency in microseconds
+    max_latency_us: 500           # SLA threshold
+    throughput_per_second: 100000 # Orders per second capacity
+
+  order_book:
+    max_price_levels: 1000
+    max_orders_per_level: 10000
+    snapshot_interval_ms: 100
+
+  order_limits:
+    max_quantity_decimal_places: 8
+    max_price_decimal_places: 8
+    max_notional_usd: 10000000
+    min_notional_usd: 10
+
+  matching_cycles:
+    continuous: true
+    auction_frequency_ms: null
+    batch_size: 1000
+
+  timestamps:
+    precision: nanosecond
+    clock_source: TAI

@@ -1,0 +1,42 @@
+version: "1.0"
+metadata:
+  description: "Trading fee tiers based on 30-day volume"
+
+data:
+  tiers:
+    - tier: VIP_0
+      volume_30d_min: 0
+      volume_30d_max: 50000
+      maker_fee: 0.0010
+      taker_fee: 0.0010
+
+    - tier: VIP_1
+      volume_30d_min: 50000
+      volume_30d_max: 500000
+      maker_fee: 0.0009
+      taker_fee: 0.0010
+
+    - tier: VIP_2
+      volume_30d_min: 500000
+      volume_30d_max: 5000000
+      maker_fee: 0.0008
+      taker_fee: 0.0010
+
+    - tier: VIP_3
+      volume_30d_min: 5000000
+      volume_30d_max: 50000000
+      maker_fee: 0.0006
+      taker_fee: 0.0008
+
+    - tier: VIP_4
+      volume_30d_min: 50000000
+      volume_30d_max: null
+      maker_fee: 0.0004
+      taker_fee: 0.0006
+
+  special_programs:
+    - program: MARKET_MAKER
+      maker_fee: -0.0001  # Rebate
+      taker_fee: 0.0005
+      min_volume: 1000000
+      uptime_requirement: 0.95

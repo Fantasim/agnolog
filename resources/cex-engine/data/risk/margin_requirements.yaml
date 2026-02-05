@@ -1,0 +1,31 @@
+version: "1.0"
+metadata:
+  description: "Margin requirements and position limits"
+
+data:
+  initial_margin:
+    BTC/USDT: 0.05      # 20x leverage
+    ETH/USDT: 0.10      # 10x leverage
+    SOL/USDT: 0.20      # 5x leverage
+    default: 0.33       # 3x leverage
+
+  maintenance_margin:
+    BTC/USDT: 0.025
+    ETH/USDT: 0.05
+    SOL/USDT: 0.10
+    default: 0.15
+
+  liquidation_fee: 0.005
+
+  position_limits:
+    - tier: RETAIL
+      max_position_usd: 100000
+      max_leverage: 20
+
+    - tier: PROFESSIONAL
+      max_position_usd: 1000000
+      max_leverage: 50
+
+    - tier: INSTITUTIONAL
+      max_position_usd: 50000000
+      max_leverage: 100

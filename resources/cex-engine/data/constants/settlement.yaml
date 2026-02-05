@@ -1,0 +1,21 @@
+version: "1.0"
+metadata:
+  description: "Settlement and clearing constants"
+
+data:
+  settlement_cycles:
+    - T+0  # Immediate settlement
+    - T+1  # Next day
+    - T+2  # Two days
+
+  default_cycle: T+0
+
+  netting:
+    enabled: true
+    frequency_ms: 1000
+    multilateral: true
+
+  clearing:
+    batch_size: 10000
+    timeout_ms: 5000
+    retry_attempts: 3

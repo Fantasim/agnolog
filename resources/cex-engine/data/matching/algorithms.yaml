@@ -1,0 +1,18 @@
+version: "1.0"
+metadata:
+  description: "Order matching algorithms used by the engine"
+
+data:
+  algorithms:
+    - id: FIFO
+      name: "First In First Out"
+      description: "Price-time priority - earliest orders at same price match first"
+
+    - id: PRO_RATA
+      name: "Pro-Rata"
+      description: "Volume-weighted allocation across orders at same price"
+
+    - id: FIFO_LMM
+      name: "FIFO with Lead Market Maker"
+      description: "LMM gets priority allocation, remainder is FIFO"
+      lmm_allocation: 0.40
