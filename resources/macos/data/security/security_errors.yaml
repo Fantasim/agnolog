@@ -1,0 +1,33 @@
+version: "1.0"
+metadata:
+  description: "Security framework error codes"
+
+data:
+  errSec_codes:
+    -25291: "errSecItemNotFound"
+    -25293: "errSecInvalidOwnerEdit"
+    -25294: "errSecTrustNotAvailable"
+    -25295: "errSecReadOnlyAttr"
+    -25299: "errSecNoSuchKeychain"
+    -25300: "errSecAuthFailed"
+    -67585: "errSecCSInternalError"
+    -67808: "errSecCSUnsigned"
+    -67809: "errSecCSSignatureFailed"
+    -67810: "errSecCSSignatureNotVerifiable"
+    -67811: "errSecCSSignatureUnsupported"
+    -67812: "errSecCSBadDictionaryFormat"
+    -67062: "errSecCSResourceDirectoryFailed"
+    -67030: "errSecCSReqFailed"
+    -67049: "errSecCSStaticCodeNotFound"
+
+  error_descriptions:
+    Authentication_Failed: "Authentication failed"
+    Authorization_Denied: "Authorization denied"
+    Trust_Evaluation_Failed: "Trust evaluation failed"
+    Certificate_Expired: "Certificate has expired"
+    Certificate_Revoked: "Certificate has been revoked"
+    Invalid_Certificate: "Invalid certificate"
+    Code_Signing_Failed: "Code signature verification failed"
+    Sandbox_Violation: "Sandbox policy violation"
+    Keychain_Locked: "Keychain is locked"
+    Item_Not_Found: "Item not found in keychain"

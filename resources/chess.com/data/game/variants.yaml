@@ -1,0 +1,46 @@
+# Chess game variants available on Chess.com
+variants:
+  - id: "standard"
+    name: "Standard Chess"
+    description: "Traditional chess with standard rules"
+    popularity: 85
+
+  - id: "chess960"
+    name: "Chess960 (Fischer Random)"
+    description: "Randomized starting position"
+    popularity: 8
+
+  - id: "bughouse"
+    name: "Bughouse"
+    description: "Team chess with piece drops"
+    popularity: 3
+
+  - id: "crazyhouse"
+    name: "Crazyhouse"
+    description: "Captured pieces can be dropped"
+    popularity: 2
+
+  - id: "king_of_the_hill"
+    name: "King of the Hill"
+    description: "King must reach the center"
+    popularity: 1
+
+  - id: "three_check"
+    name: "Three-Check"
+    description: "Win by giving check three times"
+    popularity: 1
+
+  - id: "atomic"
+    name: "Atomic"
+    description: "Captures cause explosions"
+    popularity: 1
+
+  - id: "antichess"
+    name: "Antichess (Losing Chess)"
+    description: "Lose all your pieces to win"
+    popularity: 1
+
+  - id: "horde"
+    name: "Horde"
+    description: "Black vs. White's pawn army"
+    popularity: 1

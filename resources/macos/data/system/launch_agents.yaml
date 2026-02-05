@@ -1,0 +1,29 @@
+version: "1.0"
+metadata:
+  description: "LaunchAgent and LaunchDaemon identifiers"
+
+data:
+  launch_daemons:
+    - com.apple.xpc.launchd
+    - com.apple.metadata.mds
+    - com.apple.syslogd
+    - com.apple.newsyslog
+    - com.apple.auditd
+    - com.apple.kextd
+    - com.apple.dynamic_pager
+    - com.apple.system.logger
+    - com.apple.CoreServices.appleeventsd
+    - org.cups.cupsd
+
+  launch_agents:
+    - com.apple.bird
+    - com.apple.Dock.agent
+    - com.apple.Finder
+    - com.apple.mdworker
+    - com.apple.notificationcenterui.agent
+    - com.apple.pbs
+    - com.apple.rcd
+    - com.apple.speech.synthesisserver
+    - com.apple.Spotlight
+    - com.apple.universalaccessd
+    - com.apple.UserEventAgent-Aqua

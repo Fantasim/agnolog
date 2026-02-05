@@ -512,6 +512,40 @@ class LuaGeneratorUtils:
 
         return f"Skill_{random.randint(100, 999)}"
 
+    def windows_username(self) -> str:
+        """Generate Windows-style username."""
+        local_users = self._get_data("security", "usernames", "local_users", default=["User"])
+        if random.random() < 0.2:  # 20% system accounts
+            return random.choice(local_users)
+
+        prefixes = self._get_data("security", "usernames", "user_prefixes", default=["User"])
+        suffixes = self._get_data("security", "usernames", "user_suffixes", default=[""])
+        return f"{random.choice(prefixes)}{random.choice(suffixes)}"
+
+    def windows_domain(self) -> str:
+        """Generate Windows domain/workgroup name."""
+        workgroups = self._get_data("security", "domains", "workgroups", default=["WORKGROUP"])
+        if random.random() < 0.3:  # 30% workgroup
+            return random.choice(workgroups)
+
+        prefixes = self._get_data("security", "domains", "domain_prefixes", default=["DOMAIN"])
+        suffixes = self._get_data("security", "domains", "domain_suffixes", default=[""])
+        return f"{random.choice(prefixes)}{random.choice(suffixes)}"
+
+    def windows_computer(self) -> str:
+        """Generate Windows computer name."""
+        prefixes = self._get_data("network", "workstations", "prefixes", default=["DESKTOP"])
+        suffixes = self._get_data("network", "workstations", "suffixes", default=["01"])
+        return f"{random.choice(prefixes)}-{random.choice(suffixes)}"
+
+    def guid(self) -> str:
+        """Generate Windows GUID (uppercase with braces)."""
+        return '{%s}' % str(uuid.uuid4()).upper()
+
+    def sid(self) -> str:
+        """Generate Windows SID."""
+        return f"S-1-5-21-{random.randint(1000000000, 9999999999)}-{random.randint(1000000000, 9999999999)}-{random.randint(1000000000, 9999999999)}-{random.randint(1000, 9999)}"
+
 
 class LuaSandbox:
     """
@@ -642,6 +676,12 @@ class LuaSandbox:
         ctx["gen"]["guild_name"] = self._context.gen.guild_name
         ctx["gen"]["zone_name"] = self._context.gen.zone_name
         ctx["gen"]["skill_name"] = self._context.gen.skill_name
+        # Windows-specific utilities
+        ctx["gen"]["windows_username"] = self._context.gen.windows_username
+        ctx["gen"]["windows_domain"] = self._context.gen.windows_domain
+        ctx["gen"]["windows_computer"] = self._context.gen.windows_computer
+        ctx["gen"]["guid"] = self._context.gen.guid
+        ctx["gen"]["sid"] = self._context.gen.sid
 
         # Inject data (convert Python dict to Lua table recursively)
         ctx["data"] = self._python_to_lua(self._context.data)

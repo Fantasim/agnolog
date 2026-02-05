@@ -1,0 +1,55 @@
+version: "1.0"
+metadata:
+  description: "macOS subsystem identifiers for unified logging"
+
+data:
+  - com.apple.launchd
+  - com.apple.kernel
+  - com.apple.loginwindow
+  - com.apple.securityd
+  - com.apple.SecurityServer
+  - com.apple.networkd
+  - com.apple.NetworkExtension
+  - com.apple.fseventsd
+  - com.apple.cfprefsd
+  - com.apple.CoreFoundation
+  - com.apple.SoftwareUpdate
+  - com.apple.installer
+  - com.apple.diskmanagement
+  - com.apple.diskarbitrationd
+  - com.apple.powerd
+  - com.apple.apsd
+  - com.apple.WindowServer
+  - com.apple.Finder
+  - com.apple.Safari
+  - com.apple.Mail
+  - com.apple.Messages
+  - com.apple.notifyd
+  - com.apple.UserEventAgent
+  - com.apple.coreduetd
+  - com.apple.WiFiManager
+  - com.apple.airport.wps
+  - com.apple.IOKit
+  - com.apple.bluetooth
+  - com.apple.audio
+  - com.apple.CoreAudio
+  - com.apple.CrashReporter
+  - com.apple.FileProvider
+  - com.apple.CloudKit
+  - com.apple.icloud
+  - com.apple.mDNSResponder
+  - com.apple.configd
+  - com.apple.trustd
+  - com.apple.sysmond
+  - com.apple.systemstats
+  - com.apple.opendirectoryd
+  - com.apple.mediaremoted
+  - com.apple.TouchBarServer
+  - com.apple.airplay
+  - com.apple.coreauthd
+  - com.apple.ReportCrash
+  - com.apple.SubmitDiagInfo
+  - com.apple.xpc
+  - com.apple.mach
+  - com.apple.bsd
+  - com.apple.security.audit

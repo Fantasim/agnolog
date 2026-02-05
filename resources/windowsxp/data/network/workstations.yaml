@@ -1,0 +1,44 @@
+version: "1.0"
+metadata:
+  description: "Workstation naming patterns"
+
+data:
+  prefixes:
+    - "DESKTOP"
+    - "WKS"
+    - "PC"
+    - "LAPTOP"
+    - "COMPUTER"
+    - "WORKSTATION"
+    - "WIN"
+    - "XP"
+    - "CLIENT"
+    - "USER"
+
+  suffixes:
+    - "01"
+    - "02"
+    - "03"
+    - "04"
+    - "05"
+    - "10"
+    - "20"
+    - "100"
+    - "A"
+    - "B"
+    - "C"
+    - "1"
+    - "2"
+    - "3"
+
+  departments:
+    - "IT"
+    - "HR"
+    - "SALES"
+    - "ACCOUNTING"
+    - "ADMIN"
+    - "ENG"
+    - "FINANCE"
+    - "MKT"
+    - "SUPPORT"
+    - "DEV"

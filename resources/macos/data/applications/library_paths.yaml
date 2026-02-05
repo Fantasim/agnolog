@@ -1,0 +1,37 @@
+version: "1.0"
+metadata:
+  description: "Framework and library paths"
+
+data:
+  system_frameworks:
+    - /System/Library/Frameworks/Foundation.framework
+    - /System/Library/Frameworks/AppKit.framework
+    - /System/Library/Frameworks/CoreFoundation.framework
+    - /System/Library/Frameworks/CoreData.framework
+    - /System/Library/Frameworks/CoreGraphics.framework
+    - /System/Library/Frameworks/Security.framework
+    - /System/Library/Frameworks/IOKit.framework
+    - /System/Library/Frameworks/CoreServices.framework
+    - /System/Library/Frameworks/ApplicationServices.framework
+    - /System/Library/Frameworks/WebKit.framework
+    - /System/Library/Frameworks/CloudKit.framework
+    - /System/Library/Frameworks/Network.framework
+
+  private_frameworks:
+    - /System/Library/PrivateFrameworks/ApplePushService.framework
+    - /System/Library/PrivateFrameworks/FileProvider.framework
+    - /System/Library/PrivateFrameworks/DiskArbitration.framework
+    - /System/Library/PrivateFrameworks/ServiceManagement.framework
+    - /System/Library/PrivateFrameworks/SecurityFoundation.framework
+    - /System/Library/PrivateFrameworks/LaunchServices.framework
+
+  dylibs:
+    - /usr/lib/libSystem.B.dylib
+    - /usr/lib/libc++.1.dylib
+    - /usr/lib/libobjc.A.dylib
+    - /usr/lib/libz.1.dylib
+    - /usr/lib/libsqlite3.dylib
+    - /usr/lib/libicucore.A.dylib
+    - /usr/lib/libxml2.2.dylib
+    - /usr/lib/libcrypto.dylib
+    - /usr/lib/libssl.dylib

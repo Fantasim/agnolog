@@ -1,0 +1,107 @@
+version: "1.0"
+metadata:
+  description: "Windows XP services for event generation"
+
+data:
+  services:
+    # Critical system services
+    - name: "EventLog"
+      display_name: "Event Log"
+      startup_type: "Automatic"
+      critical: true
+    - name: "PlugPlay"
+      display_name: "Plug and Play"
+      startup_type: "Automatic"
+      critical: true
+    - name: "RpcSs"
+      display_name: "Remote Procedure Call (RPC)"
+      startup_type: "Automatic"
+      critical: true
+    - name: "lanmanserver"
+      display_name: "Server"
+      startup_type: "Automatic"
+      critical: false
+    - name: "lanmanworkstation"
+      display_name: "Workstation"
+      startup_type: "Automatic"
+      critical: false
+    - name: "W32Time"
+      display_name: "Windows Time"
+      startup_type: "Automatic"
+      critical: false
+    - name: "DHCP"
+      display_name: "DHCP Client"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Dnscache"
+      display_name: "DNS Client"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Spooler"
+      display_name: "Print Spooler"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Browser"
+      display_name: "Computer Browser"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Netlogon"
+      display_name: "Net Logon"
+      startup_type: "Manual"
+      critical: false
+    - name: "wuauserv"
+      display_name: "Automatic Updates"
+      startup_type: "Automatic"
+      critical: false
+    - name: "wscsvc"
+      display_name: "Security Center"
+      startup_type: "Automatic"
+      critical: false
+    - name: "WmdmPmSN"
+      display_name: "Portable Media Serial Number Service"
+      startup_type: "Manual"
+      critical: false
+    - name: "AudioSrv"
+      display_name: "Windows Audio"
+      startup_type: "Automatic"
+      critical: false
+    - name: "WZCSVC"
+      display_name: "Wireless Zero Configuration"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Schedule"
+      display_name: "Task Scheduler"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Themes"
+      display_name: "Themes"
+      startup_type: "Automatic"
+      critical: false
+    - name: "LmHosts"
+      display_name: "TCP/IP NetBIOS Helper"
+      startup_type: "Automatic"
+      critical: false
+    - name: "Messenger"
+      display_name: "Messenger"
+      startup_type: "Automatic"
+      critical: false
+    - name: "TapiSrv"
+      display_name: "Telephony"
+      startup_type: "Manual"
+      critical: false
+    - name: "SSDPSRV"
+      display_name: "SSDP Discovery Service"
+      startup_type: "Manual"
+      critical: false
+    - name: "upnphost"
+      display_name: "Universal Plug and Play Device Host"
+      startup_type: "Manual"
+      critical: false
+    - name: "CryptSvc"
+      display_name: "Cryptographic Services"
+      startup_type: "Automatic"
+      critical: false
+    - name: "SamSs"
+      display_name: "Security Accounts Manager"
+      startup_type: "Automatic"
+      critical: true

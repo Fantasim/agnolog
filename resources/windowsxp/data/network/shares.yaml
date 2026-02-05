@@ -1,0 +1,21 @@
+version: "1.0"
+metadata:
+  description: "Network share names"
+
+data:
+  shares:
+    - "C$"
+    - "D$"
+    - "ADMIN$"
+    - "IPC$"
+    - "NETLOGON"
+    - "SYSVOL"
+    - "Public"
+    - "Shared"
+    - "Documents"
+    - "Software"
+    - "Backup"
+    - "Data"
+    - "Files"
+    - "Users"
+    - "Print$"

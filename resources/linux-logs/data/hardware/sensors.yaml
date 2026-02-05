@@ -1,0 +1,52 @@
+version: "1.0"
+metadata:
+  description: "Hardware sensor types and thresholds"
+
+data:
+  temperature_zones:
+    - CPU
+    - GPU
+    - Motherboard
+    - Chipset
+    - HDD
+    - SSD
+    - NVME
+    - Ambient
+    - DIMM
+    - PSU
+
+  temperature_thresholds:
+    normal_max: 70
+    warning_min: 75
+    critical_min: 85
+    shutdown_min: 95
+
+  fan_types:
+    - "CPU Fan"
+    - "System Fan 1"
+    - "System Fan 2"
+    - "System Fan 3"
+    - "GPU Fan"
+    - "PSU Fan"
+    - "Chassis Fan"
+
+  smart_attributes:
+    - "Raw_Read_Error_Rate"
+    - "Spin_Up_Time"
+    - "Start_Stop_Count"
+    - "Reallocated_Sector_Ct"
+    - "Seek_Error_Rate"
+    - "Power_On_Hours"
+    - "Spin_Retry_Count"
+    - "Temperature_Celsius"
+    - "Reallocated_Event_Count"
+    - "Current_Pending_Sector"
+    - "Offline_Uncorrectable"
+    - "UDMA_CRC_Error_Count"
+
+  voltage_rails:
+    - "+12V"
+    - "+5V"
+    - "+3.3V"
+    - "VCore"
+    - "VDIMM"

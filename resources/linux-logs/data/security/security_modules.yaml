@@ -1,0 +1,72 @@
+version: "1.0"
+metadata:
+  description: "Linux security modules and policies"
+
+data:
+  selinux_modes:
+    - enforcing
+    - permissive
+    - disabled
+
+  selinux_contexts:
+    - unconfined_u:unconfined_r:unconfined_t
+    - system_u:system_r:kernel_t
+    - system_u:system_r:init_t
+    - system_u:system_r:sshd_t
+    - system_u:system_r:httpd_t
+    - user_u:user_r:user_t
+    - staff_u:staff_r:staff_t
+
+  selinux_permissions:
+    - read
+    - write
+    - execute
+    - append
+    - create
+    - delete
+    - getattr
+    - setattr
+    - lock
+    - relabelfrom
+    - relabelto
+    - transition
+    - associate
+    - quotaon
+    - mount
+    - remount
+    - unmount
+
+  apparmor_modes:
+    - enforce
+    - complain
+    - disabled
+    - kill
+    - unconfined
+
+  apparmor_profiles:
+    - /usr/sbin/nginx
+    - /usr/sbin/apache2
+    - /usr/sbin/named
+    - /usr/sbin/mysqld
+    - /usr/bin/docker
+    - /usr/lib/snapd/snap-confine
+    - /usr/sbin/cups-browsed
+    - /usr/sbin/cupsd
+    - /usr/bin/evince
+
+  capabilities:
+    - CAP_CHOWN
+    - CAP_DAC_OVERRIDE
+    - CAP_FOWNER
+    - CAP_KILL
+    - CAP_NET_ADMIN
+    - CAP_NET_BIND_SERVICE
+    - CAP_NET_RAW
+    - CAP_SETGID
+    - CAP_SETUID
+    - CAP_SYS_ADMIN
+    - CAP_SYS_BOOT
+    - CAP_SYS_MODULE
+    - CAP_SYS_PTRACE
+    - CAP_SYS_RAWIO
+    - CAP_SYS_TIME

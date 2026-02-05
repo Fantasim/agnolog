@@ -1,0 +1,44 @@
+version: "1.0"
+metadata:
+  description: "IOKit class names"
+
+data:
+  - IOService
+  - IOResources
+  - IOPlatformExpertDevice
+  - IOACPIPlatformDevice
+  - IOPCIDevice
+  - IOPCIBridge
+  - IOUSBDevice
+  - IOUSBInterface
+  - IOUSBHostDevice
+  - IOUSBHostInterface
+  - IOBlockStorageDevice
+  - IOMedia
+  - IOPartitionScheme
+  - IOAHCIDevice
+  - IOAHCIBlockStorageDevice
+  - IONVMeController
+  - IOGraphicsDevice
+  - IOFramebuffer
+  - IODisplayConnect
+  - IOHIDDevice
+  - IOHIDKeyboard
+  - IOHIDPointing
+  - IOHIKeyboard
+  - IOHIPointing
+  - IOAudioDevice
+  - IOAudioEngine
+  - IOBluetoothDevice
+  - IOBluetoothL2CAPChannel
+  - IONetworkController
+  - IOEthernetController
+  - IO80211Controller
+  - IOThunderboltController
+  - IOThunderboltPort
+  - IOFireWireController
+  - IOPowerManagement
+  - IOPMrootDomain
+  - AppleNVRAM
+  - AppleSMC
+  - AppleRTC

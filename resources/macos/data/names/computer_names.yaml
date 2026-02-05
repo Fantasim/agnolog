@@ -1,0 +1,18 @@
+version: "1.0"
+metadata:
+  description: "Computer name patterns"
+
+data:
+  - John's MacBook Pro
+  - Sarah's iMac
+  - Mike's MacBook Air
+  - Office Mac Mini
+  - Development Machine
+  - Test MacBook
+  - Admin's Mac
+  - Home Computer
+  - Work MacBook
+  - MacBook-Pro-2023
+  - iMac-27
+  - Mac-Studio
+  - MacBook-Air-M2

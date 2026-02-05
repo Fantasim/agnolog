@@ -1,0 +1,49 @@
+version: "1.0"
+metadata:
+  description: "File permissions and modes"
+
+data:
+  permission_modes:
+    - "0755"
+    - "0644"
+    - "0777"
+    - "0700"
+    - "0600"
+    - "0666"
+    - "0400"
+    - "0444"
+
+  permission_strings:
+    - "drwxr-xr-x"
+    - "-rw-r--r--"
+    - "drwxrwxrwx"
+    - "drwx------"
+    - "-rw-------"
+    - "-rw-rw-rw-"
+    - "-r--------"
+    - "-r--r--r--"
+
+  flags:
+    - uchg
+    - uappnd
+    - schg
+    - sappnd
+    - sunlnk
+    - archived
+    - hidden
+    - nodump
+    - opaque
+
+  acl_permissions:
+    - read
+    - write
+    - execute
+    - delete
+    - append
+    - readattr
+    - writeattr
+    - readextattr
+    - writeextattr
+    - readsecurity
+    - writesecurity
+    - chown

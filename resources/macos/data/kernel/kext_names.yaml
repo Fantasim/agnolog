@@ -1,0 +1,39 @@
+version: "1.0"
+metadata:
+  description: "Kernel extension names"
+
+data:
+  - com.apple.kext.AMDRadeonX4000
+  - com.apple.kext.AMDRadeonX5000
+  - com.apple.kext.AMDRadeonX6000
+  - com.apple.driver.AppleIntelCPUPowerManagement
+  - com.apple.driver.AppleACPIPlatform
+  - com.apple.driver.AppleAPIC
+  - com.apple.driver.AppleRTC
+  - com.apple.driver.AppleSMC
+  - com.apple.driver.AppleHDA
+  - com.apple.driver.AppleAHCIPort
+  - com.apple.driver.AppleUSBXHCI
+  - com.apple.driver.AppleUSBEHCI
+  - com.apple.driver.AppleThunderboltDPInAdapter
+  - com.apple.driver.AppleThunderboltHAL
+  - com.apple.driver.AppleFileSystemDriver
+  - com.apple.filesystems.apfs
+  - com.apple.filesystems.hfs
+  - com.apple.driver.AppleBluetoothMultitouch
+  - com.apple.driver.AppleIntelGraphicsFramebuffer
+  - com.apple.driver.AppleSDXC
+  - com.apple.driver.AppleBCM5701Ethernet
+  - com.apple.driver.AirPortBrcm4360
+  - com.apple.driver.AppleIntelWifiAdapter
+  - com.apple.iokit.IOAHCIFamily
+  - com.apple.iokit.IOUSBHostFamily
+  - com.apple.iokit.IONetworkingFamily
+  - com.apple.iokit.IOGraphicsFamily
+  - com.apple.iokit.IOSCSIArchitectureModelFamily
+  - com.apple.iokit.IOStorageFamily
+  - com.apple.iokit.IOBluetoothFamily
+  - com.apple.iokit.IOThunderboltFamily
+  - com.apple.security.sandbox
+  - com.apple.security.quarantine
+  - com.apple.nke.applicationfirewall

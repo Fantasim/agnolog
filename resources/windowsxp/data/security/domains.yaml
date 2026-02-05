@@ -1,0 +1,32 @@
+version: "1.0"
+metadata:
+  description: "Windows XP domain and workgroup names"
+
+data:
+  workgroups:
+    - "WORKGROUP"
+    - "MSHOME"
+    - "HOME"
+    - "OFFICE"
+    - "WORKGROUP1"
+    - "WORKGROUP2"
+
+  domain_prefixes:
+    - "CORP"
+    - "DOMAIN"
+    - "COMPANY"
+    - "OFFICE"
+    - "ENTERPRISE"
+    - "AD"
+    - "INTERNAL"
+    - "NET"
+    - "BUSINESS"
+    - "ADMIN"
+
+  domain_suffixes:
+    - ""
+    - "LOCAL"
+    - "LAN"
+    - "NET"
+    - "CORP"
+    - "INC"

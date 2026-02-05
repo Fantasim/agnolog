@@ -1,0 +1,139 @@
+version: "1.0"
+metadata:
+  description: "macOS error codes and status values"
+
+data:
+  errno_codes:
+    1:
+      name: EPERM
+      description: "Operation not permitted"
+    2:
+      name: ENOENT
+      description: "No such file or directory"
+    3:
+      name: ESRCH
+      description: "No such process"
+    4:
+      name: EINTR
+      description: "Interrupted system call"
+    5:
+      name: EIO
+      description: "Input/output error"
+    6:
+      name: ENXIO
+      description: "Device not configured"
+    13:
+      name: EACCES
+      description: "Permission denied"
+    14:
+      name: EFAULT
+      description: "Bad address"
+    16:
+      name: EBUSY
+      description: "Resource busy"
+    17:
+      name: EEXIST
+      description: "File exists"
+    20:
+      name: ENOTDIR
+      description: "Not a directory"
+    21:
+      name: EISDIR
+      description: "Is a directory"
+    22:
+      name: EINVAL
+      description: "Invalid argument"
+    23:
+      name: ENFILE
+      description: "Too many open files in system"
+    24:
+      name: EMFILE
+      description: "Too many open files"
+    28:
+      name: ENOSPC
+      description: "No space left on device"
+    30:
+      name: EROFS
+      description: "Read-only file system"
+    60:
+      name: ETIMEDOUT
+      description: "Operation timed out"
+
+  osstatus_codes:
+    0:
+      name: noErr
+      description: "No error"
+    -1:
+      name: paramErr
+      description: "Parameter error"
+    -43:
+      name: fnfErr
+      description: "File not found"
+    -50:
+      name: paramErr
+      description: "Error in parameter list"
+    -108:
+      name: memFullErr
+      description: "Not enough memory"
+    -120:
+      name: dirNFErr
+      description: "Directory not found"
+    -128:
+      name: userCanceledErr
+      description: "User canceled"
+    -5000:
+      name: afpAccessDenied
+      description: "Access denied"
+    -25291:
+      name: errSecItemNotFound
+      description: "The item cannot be found"
+    -25293:
+      name: errSecInvalidOwnerEdit
+      description: "Invalid attempt to change owner"
+    -25300:
+      name: errSecAuthFailed
+      description: "Authorization/authentication failed"
+
+  mach_error_codes:
+    0:
+      name: KERN_SUCCESS
+      description: "Success"
+    1:
+      name: KERN_INVALID_ADDRESS
+      description: "Invalid address"
+    2:
+      name: KERN_PROTECTION_FAILURE
+      description: "Protection failure"
+    3:
+      name: KERN_NO_SPACE
+      description: "No space available"
+    4:
+      name: KERN_INVALID_ARGUMENT
+      description: "Invalid argument"
+    5:
+      name: KERN_FAILURE
+      description: "General failure"
+    6:
+      name: KERN_RESOURCE_SHORTAGE
+      description: "Resource shortage"
+    7:
+      name: KERN_NOT_RECEIVER
+      description: "Not receiver"
+    8:
+      name: KERN_NO_ACCESS
+      description: "No access"
+
+  http_codes:
+    200: "OK"
+    201: "Created"
+    204: "No Content"
+    301: "Moved Permanently"
+    302: "Found"
+    304: "Not Modified"
+    400: "Bad Request"
+    401: "Unauthorized"
+    403: "Forbidden"
+    404: "Not Found"
+    500: "Internal Server Error"
+    502: "Bad Gateway"
+    503: "Service Unavailable"

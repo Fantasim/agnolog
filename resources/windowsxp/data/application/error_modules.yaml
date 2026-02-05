@@ -1,0 +1,50 @@
+version: "1.0"
+metadata:
+  description: "COM error sources and application error info"
+
+data:
+  com_services:
+    - "EventSystem"
+    - "SENS"
+    - "COMSysApp"
+    - "SwPrv"
+    - "VSS"
+    - "clr_optimization_v2.0.50727_32"
+    - "WMI"
+
+  dcom_clsids:
+    - "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}"
+    - "{D63B10C5-BB46-4990-A94F-E40B9D520160}"
+    - "{0002DF01-0000-0000-C000-000000000046}"
+    - "{000C101C-0000-0000-C000-000000000046}"
+    - "{F3130CDB-AA52-4C3A-AB32-85FFC23AF9C1}"
+
+  error_messages:
+    - "The service cannot be started, either because it is disabled or because it has no enabled devices associated with it."
+    - "Access is denied."
+    - "The service did not respond to the start or control request in a timely fashion."
+    - "The specified service does not exist as an installed service."
+    - "A system shutdown is in progress."
+
+  exception_codes:
+    - "0xc0000005"  # Access violation
+    - "0xc0000409"  # Stack buffer overrun
+    - "0xc000001d"  # Illegal instruction
+    - "0xc0000094"  # Integer divide by zero
+    - "0xc000008e"  # Floating point divide by zero
+    - "0xc00000fd"  # Stack overflow
+    - "0xe0434f4d"  # .NET runtime error
+
+  sidebyside_manifests:
+    - "Microsoft.Windows.Common-Controls"
+    - "Microsoft.VC80.CRT"
+    - "Microsoft.VC90.CRT"
+    - "Microsoft.VC80.MFC"
+    - "Microsoft.MSXML2"
+
+  sidebyside_versions:
+    - "6.0.0.0"
+    - "8.0.50727.42"
+    - "8.0.50727.762"
+    - "9.0.21022.8"
+    - "4.20.9870.0"

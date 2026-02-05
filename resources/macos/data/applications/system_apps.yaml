@@ -1,0 +1,51 @@
+version: "1.0"
+metadata:
+  description: "Built-in macOS applications"
+
+data:
+  - Finder
+  - Safari
+  - Mail
+  - Messages
+  - FaceTime
+  - Calendar
+  - Contacts
+  - Notes
+  - Reminders
+  - Photos
+  - Music
+  - TV
+  - Podcasts
+  - News
+  - Books
+  - App Store
+  - Maps
+  - Stocks
+  - Weather
+  - Voice Memos
+  - Home
+  - Shortcuts
+  - Freeform
+  - Preview
+  - TextEdit
+  - QuickTime Player
+  - Time Machine
+  - Terminal
+  - Console
+  - Activity Monitor
+  - Disk Utility
+  - System Settings
+  - Keychain Access
+  - Migration Assistant
+  - Screenshot
+  - Font Book
+  - Grapher
+  - Calculator
+  - Dictionary
+  - Chess
+  - Stickies
+  - VoiceOver Utility
+  - Audio MIDI Setup
+  - ColorSync Utility
+  - Digital Color Meter
+  - Script Editor

@@ -1,0 +1,42 @@
+version: "1.0"
+metadata:
+  description: "Volume types and names"
+
+data:
+  volume_types:
+    - APFS
+    - HFS+
+    - ExFAT
+    - FAT32
+    - NTFS
+    - SMB
+    - NFS
+    - AFP
+
+  volume_names:
+    - Macintosh HD
+    - Macintosh HD - Data
+    - Preboot
+    - Recovery
+    - VM
+    - Time Machine
+    - External HD
+    - USB Drive
+    - Backup Drive
+    - SSD
+    - Data
+    - Storage
+    - Archive
+    - Media
+
+  mount_flags:
+    - ro
+    - rw
+    - noexec
+    - nosuid
+    - nodev
+    - nobrowse
+    - journaled
+    - local
+    - async
+    - sync

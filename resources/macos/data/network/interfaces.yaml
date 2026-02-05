@@ -1,0 +1,52 @@
+version: "1.0"
+metadata:
+  description: "Network interface names on macOS"
+
+data:
+  ethernet:
+    - en0
+    - en1
+    - en2
+    - en3
+    - en4
+    - en5
+
+  wifi:
+    - en0
+    - en1
+
+  loopback:
+    - lo0
+
+  vpn:
+    - utun0
+    - utun1
+    - utun2
+    - utun3
+    - utun4
+    - ppp0
+    - ipsec0
+
+  bridge:
+    - bridge0
+    - bridge1
+    - bridge100
+    - bridge101
+
+  thunderbolt:
+    - bridge100
+    - bridge101
+
+  virtual:
+    - vmnet1
+    - vmnet8
+    - vnic0
+    - vnic1
+
+  cellular:
+    - pdp_ip0
+    - pdp_ip1
+
+  firewire:
+    - fw0
+    - fw1

@@ -1,0 +1,85 @@
+version: "1.0"
+metadata:
+  description: "Common macOS process names"
+
+data:
+  system_processes:
+    - kernel_task
+    - launchd
+    - loginwindow
+    - WindowServer
+    - Finder
+    - SystemUIServer
+    - Dock
+    - securityd
+    - notifyd
+    - distnoted
+    - configd
+    - mDNSResponder
+    - fseventsd
+    - cfprefsd
+    - powerd
+    - coreduetd
+    - UserEventAgent
+    - trustd
+    - sysmond
+    - systemstats
+    - opendirectoryd
+    - coreauthd
+    - apsd
+    - ReportCrash
+    - SubmitDiagInfo
+    - diskarbitrationd
+    - diskmanagementd
+    - installd
+    - softwareupdated
+    - mediaremoted
+    - bluetoothd
+    - TouchBarServer
+    - airplayuitagent
+    - AirPlayXPCHelper
+
+  user_processes:
+    - Safari
+    - Mail
+    - Messages
+    - Terminal
+    - TextEdit
+    - Preview
+    - QuickTime Player
+    - Music
+    - Photos
+    - Calendar
+    - Contacts
+    - Notes
+    - Reminders
+    - Maps
+    - FaceTime
+    - App Store
+    - System Settings
+    - Activity Monitor
+    - Disk Utility
+    - Console
+    - Keychain Access
+    - Migration Assistant
+    - Time Machine
+
+  developer_processes:
+    - Xcode
+    - com.apple.dt.Xcode
+    - com.apple.dt.xctest
+    - xcrun
+    - git
+    - git-credential-osxkeychain
+    - clang
+    - lldb
+    - instruments
+    - python3
+    - ruby
+    - perl
+    - bash
+    - zsh
+    - vim
+    - emacs
+    - node
+    - npm

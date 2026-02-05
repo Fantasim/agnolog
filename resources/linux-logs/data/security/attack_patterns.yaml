@@ -1,0 +1,66 @@
+version: "1.0"
+metadata:
+  description: "Common attack patterns and indicators"
+
+data:
+  attack_types:
+    - port_scan
+    - brute_force
+    - sql_injection
+    - path_traversal
+    - xss
+    - csrf
+    - ddos
+    - privilege_escalation
+    - directory_traversal
+    - command_injection
+    - buffer_overflow
+    - man_in_the_middle
+
+  suspicious_ports:
+    - 23
+    - 135
+    - 139
+    - 445
+    - 1433
+    - 3389
+    - 4444
+    - 5900
+    - 8888
+    - 31337
+
+  blacklisted_countries:
+    - CN
+    - RU
+    - KP
+    - IR
+    - VN
+    - BR
+    - IN
+
+  virus_names:
+    - "Trojan.Generic"
+    - "Backdoor.SSH.Kaiten"
+    - "Linux.Exploit.Lotoor"
+    - "Linux.Trojan.Mirai"
+    - "Linux.DDoS.XorDDoS"
+    - "Rootkit.Linux.Agent"
+    - "Linux.Malware.Agent"
+
+  intrusion_signatures:
+    - "WEB-ATTACKS directory traversal"
+    - "SCAN nmap XMAS"
+    - "SCAN nmap TCP"
+    - "EXPLOIT SQL injection"
+    - "MALWARE-CNC botnet traffic"
+    - "WEB-IIS unicode directory traversal"
+
+  fail2ban_jails:
+    - sshd
+    - apache-auth
+    - apache-badbots
+    - nginx-http-auth
+    - postfix
+    - dovecot
+    - recidive
+    - mysqld-auth

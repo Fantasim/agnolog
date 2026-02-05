@@ -1,0 +1,58 @@
+version: "1.0"
+metadata:
+  description: "Hostname patterns and domain names"
+
+data:
+  prefixes:
+    - web
+    - db
+    - app
+    - cache
+    - lb
+    - api
+    - worker
+    - mail
+    - dns
+    - proxy
+    - gateway
+    - backup
+    - monitor
+    - log
+    - test
+    - dev
+    - prod
+    - staging
+
+  suffixes:
+    - "01"
+    - "02"
+    - "03"
+    - "04"
+    - "05"
+    - prod
+    - dev
+    - staging
+    - qa
+    - uat
+    - east
+    - west
+    - central
+    - primary
+    - secondary
+
+  domains:
+    - example.com
+    - example.net
+    - example.org
+    - local
+    - internal
+    - corp
+    - localdomain
+
+  tlds:
+    - com
+    - net
+    - org
+    - io
+    - dev
+    - local

@@ -1,0 +1,21 @@
+version: "1.0"
+metadata:
+  description: "File system event types"
+
+data:
+  - Created
+  - Removed
+  - Modified
+  - Renamed
+  - OwnerModified
+  - InodeMetaMod
+  - FinderInfoMod
+  - ChangeOwner
+  - XattrMod
+  - IsFile
+  - IsDir
+  - IsSymlink
+  - IsHardlink
+  - ItemCloned
+  - ItemFinderInfoMod
+  - ItemIsLastHardlink

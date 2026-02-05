@@ -1,0 +1,55 @@
+# Game ending types
+endgame_types:
+  # Decisive results
+  decisive:
+    - type: "checkmate"
+      winner_determined: true
+      description: "King is in checkmate"
+      weight: 35
+
+    - type: "resignation"
+      winner_determined: true
+      description: "Player resigned"
+      weight: 40
+
+    - type: "timeout"
+      winner_determined: true
+      description: "Player ran out of time"
+      weight: 15
+
+    - type: "abandonment"
+      winner_determined: true
+      description: "Player abandoned the game"
+      weight: 5
+
+  # Draws
+  draw:
+    - type: "stalemate"
+      winner_determined: false
+      description: "King is not in check but has no legal moves"
+      weight: 1
+
+    - type: "insufficient_material"
+      winner_determined: false
+      description: "Not enough pieces to checkmate"
+      weight: 1
+
+    - type: "threefold_repetition"
+      winner_determined: false
+      description: "Same position repeated three times"
+      weight: 1
+
+    - type: "fifty_move_rule"
+      winner_determined: false
+      description: "50 moves without pawn move or capture"
+      weight: 0.5
+
+    - type: "draw_agreement"
+      winner_determined: false
+      description: "Players agreed to a draw"
+      weight: 5
+
+    - type: "timeout_vs_insufficient"
+      winner_determined: false
+      description: "One player timed out but opponent lacks mating material"
+      weight: 0.5

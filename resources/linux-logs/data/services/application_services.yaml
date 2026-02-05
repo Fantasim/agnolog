@@ -1,0 +1,52 @@
+version: "1.0"
+metadata:
+  description: "Common application and web services"
+
+data:
+  web_servers:
+    - httpd
+    - apache2
+    - nginx
+    - lighttpd
+    - caddy
+
+  database_servers:
+    - mysqld
+    - mariadb
+    - postgres
+    - postgresql
+    - redis-server
+    - mongod
+    - mongodb
+    - cassandra
+    - elasticsearch
+
+  mail_services:
+    - postfix
+    - dovecot
+    - sendmail
+    - exim4
+    - courier
+
+  monitoring:
+    - collectd
+    - telegraf
+    - node_exporter
+    - prometheus
+    - grafana-server
+    - zabbix-agent
+    - nagios
+
+  containers:
+    - dockerd
+    - docker
+    - containerd
+    - podman
+    - kubelet
+
+  web_apps:
+    - php-fpm
+    - uwsgi
+    - gunicorn
+    - node
+    - java

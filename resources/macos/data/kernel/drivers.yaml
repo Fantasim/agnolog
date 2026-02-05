@@ -1,0 +1,50 @@
+version: "1.0"
+metadata:
+  description: "System drivers"
+
+data:
+  graphics:
+    - AppleIntelGraphics
+    - AMDRadeon
+    - NVIDIAGeForce
+    - AppleM1GPU
+    - AppleM2GPU
+
+  storage:
+    - AppleAHCI
+    - AppleNVMe
+    - AppleSDXC
+    - AppleAPFSDriver
+
+  network:
+    - AirPortBrcm4360
+    - AppleIntelWifi
+    - AppleBCM5701Ethernet
+    - AppleIntel8254XEthernet
+
+  usb:
+    - AppleUSBXHCI
+    - AppleUSBEHCI
+    - AppleUSBOHCI
+    - AppleUSBHub
+
+  bluetooth:
+    - AppleBluetoothHostController
+    - BroadcomBluetoothHostController
+    - IOBluetoothHCIController
+
+  audio:
+    - AppleHDA
+    - AppleGFXHDA
+    - AppleVirtualAudioDevice
+
+  input:
+    - AppleMultitouch
+    - AppleTopCase
+    - AppleKeyboard
+    - AppleBluetoothMultitouch
+
+  thunderbolt:
+    - AppleThunderboltHAL
+    - AppleThunderboltDPAdapter
+    - AppleThunderboltPCIAdapter

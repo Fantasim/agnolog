@@ -1,0 +1,59 @@
+version: "1.0"
+metadata:
+  description: "Authentication methods and failure reasons"
+
+data:
+  auth_methods:
+    - password
+    - publickey
+    - keyboard-interactive
+    - gssapi-with-mic
+    - hostbased
+    - none
+
+  ssh_key_types:
+    - RSA
+    - DSA
+    - ECDSA
+    - ED25519
+
+  failure_reasons:
+    - "Invalid user"
+    - "Failed password"
+    - "Connection closed by authenticating user"
+    - "Received disconnect"
+    - "preauth"
+    - "Did not receive identification string"
+    - "Unable to negotiate"
+    - "maximum authentication attempts exceeded"
+    - "Account locked"
+    - "Password expired"
+    - "Permission denied"
+    - "No supported authentication methods available"
+    - "Too many authentication failures"
+
+  pam_services:
+    - sshd
+    - sudo
+    - login
+    - su
+    - cron
+    - systemd-user
+    - passwd
+    - chfn
+    - chsh
+    - gdm
+    - lightdm
+
+  pam_types:
+    - auth
+    - account
+    - password
+    - session
+
+  disconnect_reasons:
+    - "11: disconnected by user"
+    - "2: protocol error"
+    - "3: key exchange failed"
+    - "10: connection lost"
+    - "14: no more sessions"

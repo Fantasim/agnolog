@@ -1,0 +1,51 @@
+version: "1.0"
+metadata:
+  description: "Common Windows XP applications"
+
+data:
+  applications:
+    - name: "iexplore.exe"
+      display_name: "Internet Explorer"
+      version_range: ["6.0.2900.2180", "7.0.5730.13", "8.0.6001.18702"]
+    - name: "WINWORD.EXE"
+      display_name: "Microsoft Word"
+      version_range: ["11.0.5604.0", "11.0.8206.0", "12.0.4518.1014"]
+    - name: "EXCEL.EXE"
+      display_name: "Microsoft Excel"
+      version_range: ["11.0.5612.0", "11.0.8211.0", "12.0.4518.1014"]
+    - name: "OUTLOOK.EXE"
+      display_name: "Microsoft Outlook"
+      version_range: ["11.0.5510.0", "11.0.8206.0", "12.0.4518.1014"]
+    - name: "POWERPNT.EXE"
+      display_name: "Microsoft PowerPoint"
+      version_range: ["11.0.5703.0", "11.0.8206.0", "12.0.4518.1014"]
+    - name: "wmplayer.exe"
+      display_name: "Windows Media Player"
+      version_range: ["9.0.0.2980", "10.0.0.3646", "11.0.5721.5230"]
+    - name: "explorer.exe"
+      display_name: "Windows Explorer"
+      version_range: ["6.0.2900.2180", "6.0.2900.5512"]
+    - name: "AcroRd32.exe"
+      display_name: "Adobe Reader"
+      version_range: ["7.0.0.0", "8.1.2.0", "9.0.0.0"]
+    - name: "firefox.exe"
+      display_name: "Mozilla Firefox"
+      version_range: ["2.0.0.20", "3.0.19", "3.6.28"]
+    - name: "msnmsgr.exe"
+      display_name: "Windows Live Messenger"
+      version_range: ["7.5.0324", "8.1.0178", "8.5.1302"]
+    - name: "MSACCESS.EXE"
+      display_name: "Microsoft Access"
+      version_range: ["11.0.5614.0", "11.0.8206.0"]
+    - name: "winamp.exe"
+      display_name: "Winamp"
+      version_range: ["5.0.0.0", "5.5.0.0", "5.6.0.0"]
+    - name: "notepad.exe"
+      display_name: "Notepad"
+      version_range: ["5.1.2600.0", "5.1.2600.5512"]
+    - name: "calc.exe"
+      display_name: "Calculator"
+      version_range: ["5.1.2600.0", "5.1.2600.5512"]
+    - name: "mspaint.exe"
+      display_name: "Paint"
+      version_range: ["5.1.2600.0", "5.1.2600.5512"]

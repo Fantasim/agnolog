@@ -1,0 +1,66 @@
+version: "1.0"
+metadata:
+  description: "macOS file types and extensions"
+
+data:
+  executables:
+    - .app
+    - .bundle
+    - .framework
+    - .dylib
+    - .kext
+
+  documents:
+    - .pdf
+    - .doc
+    - .docx
+    - .pages
+    - .txt
+    - .rtf
+
+  images:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+    - .heic
+    - .tiff
+    - .svg
+
+  audio:
+    - .mp3
+    - .m4a
+    - .aac
+    - .wav
+    - .aiff
+
+  video:
+    - .mp4
+    - .mov
+    - .m4v
+    - .avi
+    - .mkv
+
+  archives:
+    - .zip
+    - .tar
+    - .gz
+    - .dmg
+    - .pkg
+    - .mpkg
+
+  config:
+    - .plist
+    - .conf
+    - .cfg
+    - .yaml
+    - .json
+    - .xml
+
+  system:
+    - .log
+    - .crash
+    - .diag
+    - .ips
+    - .db
+    - .sqlite

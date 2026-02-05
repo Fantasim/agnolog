@@ -1,0 +1,48 @@
+version: "1.0"
+metadata:
+  description: "Application bundle identifiers"
+
+data:
+  apple_apps:
+    - com.apple.finder
+    - com.apple.Safari
+    - com.apple.mail
+    - com.apple.MobileSMS
+    - com.apple.FaceTime
+    - com.apple.iCal
+    - com.apple.AddressBook
+    - com.apple.Notes
+    - com.apple.reminders
+    - com.apple.Photos
+    - com.apple.Music
+    - com.apple.TV
+    - com.apple.News
+    - com.apple.iBooksX
+    - com.apple.AppStore
+    - com.apple.Maps
+    - com.apple.stocks
+    - com.apple.weather
+    - com.apple.VoiceMemos
+    - com.apple.Home
+    - com.apple.shortcuts
+    - com.apple.freeform
+    - com.apple.Preview
+    - com.apple.TextEdit
+    - com.apple.QuickTimePlayerX
+    - com.apple.systempreferences
+    - com.apple.keychainaccess
+    - com.apple.Terminal
+    - com.apple.Console
+    - com.apple.ActivityMonitor
+    - com.apple.DiskUtility
+
+  third_party_patterns:
+    - com.google.Chrome
+    - com.microsoft.VSCode
+    - com.docker.docker
+    - com.jetbrains.intellij
+    - org.mozilla.firefox
+    - com.spotify.client
+    - com.slack.Slack
+    - us.zoom.xos
+    - com.tinyspeck.slackmacgap

@@ -1,0 +1,64 @@
+version: "1.0"
+metadata:
+  description: "Hardware device types and identifiers"
+
+data:
+  block_devices:
+    - sda
+    - sdb
+    - sdc
+    - sdd
+    - hda
+    - hdb
+    - nvme0n1
+    - nvme1n1
+    - nvme2n1
+    - vda
+    - vdb
+    - xvda
+    - xvdb
+    - mmcblk0
+    - mmcblk1
+    - sr0
+    - sr1
+
+  device_types:
+    - disk
+    - partition
+    - usb
+    - pci
+    - network
+    - graphics
+    - audio
+    - input
+    - storage
+    - bluetooth
+    - wireless
+
+  usb_classes:
+    - "Mass Storage"
+    - "Human Interface Device"
+    - "Communications"
+    - "Audio"
+    - "Video"
+    - "Printer"
+    - "Hub"
+    - "Wireless Controller"
+    - "Miscellaneous"
+
+  pci_devices:
+    - "VGA compatible controller"
+    - "Ethernet controller"
+    - "Network controller"
+    - "SATA controller"
+    - "USB controller"
+    - "Audio device"
+    - "PCI bridge"
+    - "RAID bus controller"
+
+  raid_levels:
+    - RAID0
+    - RAID1
+    - RAID5
+    - RAID6
+    - RAID10

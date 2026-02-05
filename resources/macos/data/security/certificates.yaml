@@ -1,0 +1,36 @@
+version: "1.0"
+metadata:
+  description: "Certificate types and issuers"
+
+data:
+  certificate_types:
+    - X.509
+    - SSL/TLS
+    - Code Signing
+    - S/MIME
+    - Root CA
+    - Intermediate CA
+    - User
+    - Server
+
+  issuers:
+    - Apple Inc.
+    - Apple Worldwide Developer Relations
+    - Apple Root CA
+    - DigiCert
+    - Let's Encrypt
+    - VeriSign
+    - GlobalSign
+    - Comodo
+    - Thawte
+    - GeoTrust
+
+  purposes:
+    - Code Signing
+    - SSL Server
+    - SSL Client
+    - S/MIME
+    - Time Stamping
+    - OCSP Signing
+    - Email Protection
+    - Any Purpose

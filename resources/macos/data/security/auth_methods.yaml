@@ -1,0 +1,17 @@
+version: "1.0"
+metadata:
+  description: "Authentication methods on macOS"
+
+data:
+  - password
+  - Touch ID
+  - Face ID
+  - certificate
+  - Kerberos
+  - smart card
+  - biometric
+  - token
+  - SSH key
+  - two-factor
+  - Apple Watch
+  - iCloud password

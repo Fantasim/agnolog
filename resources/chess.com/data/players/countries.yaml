@@ -1,0 +1,238 @@
+# Country codes and names for Chess.com players
+# Based on ISO 3166-1 alpha-2 codes
+countries:
+  # Top chess-playing countries
+  - code: "RU"
+    name: "Russia"
+    region: "Europe"
+    weight: 15
+
+  - code: "US"
+    name: "United States"
+    region: "Americas"
+    weight: 20
+
+  - code: "IN"
+    name: "India"
+    region: "Asia"
+    weight: 18
+
+  - code: "CN"
+    name: "China"
+    region: "Asia"
+    weight: 12
+
+  - code: "UA"
+    name: "Ukraine"
+    region: "Europe"
+    weight: 8
+
+  - code: "FR"
+    name: "France"
+    region: "Europe"
+    weight: 7
+
+  - code: "DE"
+    name: "Germany"
+    region: "Europe"
+    weight: 7
+
+  - code: "GB"
+    name: "United Kingdom"
+    region: "Europe"
+    weight: 6
+
+  - code: "ES"
+    name: "Spain"
+    region: "Europe"
+    weight: 5
+
+  - code: "IT"
+    name: "Italy"
+    region: "Europe"
+    weight: 5
+
+  - code: "PL"
+    name: "Poland"
+    region: "Europe"
+    weight: 5
+
+  - code: "NL"
+    name: "Netherlands"
+    region: "Europe"
+    weight: 4
+
+  - code: "AR"
+    name: "Argentina"
+    region: "Americas"
+    weight: 4
+
+  - code: "BR"
+    name: "Brazil"
+    region: "Americas"
+    weight: 6
+
+  - code: "TR"
+    name: "Turkey"
+    region: "Europe"
+    weight: 4
+
+  - code: "IR"
+    name: "Iran"
+    region: "Asia"
+    weight: 4
+
+  - code: "AM"
+    name: "Armenia"
+    region: "Asia"
+    weight: 3
+
+  - code: "AZ"
+    name: "Azerbaijan"
+    region: "Asia"
+    weight: 3
+
+  - code: "GE"
+    name: "Georgia"
+    region: "Asia"
+    weight: 2
+
+  - code: "IS"
+    name: "Iceland"
+    region: "Europe"
+    weight: 2
+
+  - code: "NO"
+    name: "Norway"
+    region: "Europe"
+    weight: 3
+
+  - code: "SE"
+    name: "Sweden"
+    region: "Europe"
+    weight: 3
+
+  - code: "CZ"
+    name: "Czech Republic"
+    region: "Europe"
+    weight: 3
+
+  - code: "HU"
+    name: "Hungary"
+    region: "Europe"
+    weight: 3
+
+  - code: "RO"
+    name: "Romania"
+    region: "Europe"
+    weight: 2
+
+  - code: "RS"
+    name: "Serbia"
+    region: "Europe"
+    weight: 2
+
+  - code: "IL"
+    name: "Israel"
+    region: "Asia"
+    weight: 3
+
+  - code: "CA"
+    name: "Canada"
+    region: "Americas"
+    weight: 5
+
+  - code: "MX"
+    name: "Mexico"
+    region: "Americas"
+    weight: 3
+
+  - code: "CU"
+    name: "Cuba"
+    region: "Americas"
+    weight: 2
+
+  - code: "VN"
+    name: "Vietnam"
+    region: "Asia"
+    weight: 3
+
+  - code: "PH"
+    name: "Philippines"
+    region: "Asia"
+    weight: 3
+
+  - code: "ID"
+    name: "Indonesia"
+    region: "Asia"
+    weight: 3
+
+  - code: "AU"
+    name: "Australia"
+    region: "Oceania"
+    weight: 3
+
+  - code: "NZ"
+    name: "New Zealand"
+    region: "Oceania"
+    weight: 1
+
+  - code: "EG"
+    name: "Egypt"
+    region: "Africa"
+    weight: 2
+
+  - code: "ZA"
+    name: "South Africa"
+    region: "Africa"
+    weight: 2
+
+  - code: "NG"
+    name: "Nigeria"
+    region: "Africa"
+    weight: 1
+
+  - code: "JP"
+    name: "Japan"
+    region: "Asia"
+    weight: 2
+
+  - code: "KR"
+    name: "South Korea"
+    region: "Asia"
+    weight: 2
+
+  - code: "BD"
+    name: "Bangladesh"
+    region: "Asia"
+    weight: 2
+
+  - code: "UZ"
+    name: "Uzbekistan"
+    region: "Asia"
+    weight: 2
+
+  - code: "KZ"
+    name: "Kazakhstan"
+    region: "Asia"
+    weight: 2
+
+  - code: "VE"
+    name: "Venezuela"
+    region: "Americas"
+    weight: 1
+
+  - code: "CO"
+    name: "Colombia"
+    region: "Americas"
+    weight: 2
+
+  - code: "PE"
+    name: "Peru"
+    region: "Americas"
+    weight: 1
+
+  - code: "CL"
+    name: "Chile"
+    region: "Americas"
+    weight: 2

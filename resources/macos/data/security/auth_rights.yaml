@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Authorization rights and rules"
+
+data:
+  - system.preferences
+  - system.preferences.datetime
+  - system.preferences.energysaver
+  - system.preferences.network
+  - system.preferences.printing
+  - system.preferences.security
+  - system.preferences.sharing
+  - system.preferences.softwareupdate
+  - system.preferences.startupdisk
+  - system.preferences.timemachine
+  - system.privilege.admin
+  - system.privilege.taskport
+  - com.apple.ServiceManagement.daemons.modify
+  - com.apple.ServiceManagement.blesshelper
+  - com.apple.trust-settings.admin
+  - com.apple.builtin.policyd-install-sw
+  - com.apple.trust-settings.user
+  - com.apple.opendirectoryd.linkidentity
+  - security.authorizationdb.update
+  - system.install.software
+  - system.install.app-store-software

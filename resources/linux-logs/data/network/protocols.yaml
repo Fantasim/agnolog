@@ -1,0 +1,61 @@
+version: "1.0"
+metadata:
+  description: "Network protocols and ports"
+
+data:
+  common_ports:
+    ssh: 22
+    telnet: 23
+    smtp: 25
+    dns: 53
+    http: 80
+    pop3: 110
+    imap: 143
+    https: 443
+    smtps: 465
+    imaps: 993
+    pop3s: 995
+    mysql: 3306
+    postgres: 5432
+    redis: 6379
+    mongodb: 27017
+    elasticsearch: 9200
+    http_alt: 8080
+    squid: 3128
+    ldap: 389
+    ldaps: 636
+
+  protocols:
+    - TCP
+    - UDP
+    - ICMP
+    - IGMP
+    - SCTP
+    - GRE
+
+  interfaces:
+    - eth0
+    - eth1
+    - eth2
+    - ens33
+    - ens160
+    - ens192
+    - enp0s3
+    - enp0s8
+    - wlan0
+    - wlan1
+    - wlp2s0
+    - lo
+    - docker0
+    - br0
+    - virbr0
+    - tun0
+    - tap0
+
+  interface_types:
+    - ethernet
+    - wireless
+    - loopback
+    - bridge
+    - tunnel
+    - virtual

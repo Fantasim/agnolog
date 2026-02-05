@@ -1,0 +1,30 @@
+version: "1.0"
+metadata:
+  description: "App entitlements and capabilities"
+
+data:
+  - com.apple.security.app-sandbox
+  - com.apple.security.network.client
+  - com.apple.security.network.server
+  - com.apple.security.files.user-selected.read-only
+  - com.apple.security.files.user-selected.read-write
+  - com.apple.security.files.downloads.read-write
+  - com.apple.security.assets.pictures.read-write
+  - com.apple.security.assets.music.read-write
+  - com.apple.security.assets.movies.read-write
+  - com.apple.security.device.camera
+  - com.apple.security.device.microphone
+  - com.apple.security.device.usb
+  - com.apple.security.device.bluetooth
+  - com.apple.security.print
+  - com.apple.security.automation.apple-events
+  - com.apple.security.personal-information.addressbook
+  - com.apple.security.personal-information.calendars
+  - com.apple.security.personal-information.location
+  - com.apple.security.personal-information.photos-library
+  - keychain-access-groups
+  - com.apple.developer.healthkit
+  - com.apple.developer.icloud-container-identifiers
+  - com.apple.developer.icloud-services
+  - com.apple.developer.ubiquity-container-identifiers
+  - com.apple.developer.ubiquity-kvstore-identifier

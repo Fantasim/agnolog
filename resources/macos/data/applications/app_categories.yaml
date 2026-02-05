@@ -1,0 +1,27 @@
+version: "1.0"
+metadata:
+  description: "Application categories"
+
+data:
+  - Productivity
+  - Development
+  - Graphics & Design
+  - Business
+  - Education
+  - Entertainment
+  - Finance
+  - Health & Fitness
+  - Lifestyle
+  - Medical
+  - Music
+  - News
+  - Photo & Video
+  - Reference
+  - Social Networking
+  - Sports
+  - Travel
+  - Utilities
+  - Weather
+  - Games
+  - Communication
+  - Security

@@ -1,0 +1,52 @@
+version: "1.0"
+metadata:
+  description: "Hardware components and identifiers"
+
+data:
+  disk_devices:
+    - "\\Device\\Harddisk0\\DR0"
+    - "\\Device\\Harddisk0\\DR1"
+    - "\\Device\\Harddisk1\\DR2"
+    - "\\Device\\Harddisk1\\DR3"
+    - "\\Device\\CdRom0"
+    - "\\Device\\CdRom1"
+    - "\\Device\\Floppy0"
+
+  disk_controllers:
+    - "\\Device\\Ide\\IdePort0"
+    - "\\Device\\Ide\\IdePort1"
+    - "\\Device\\Ide\\IdePort2"
+    - "\\Device\\Scsi\\SiI3132r0"
+    - "\\Device\\Scsi\\Adaptec1"
+    - "\\Device\\RaidPort0"
+
+  network_adapters:
+    - "Realtek RTL8139 Family PCI Fast Ethernet NIC"
+    - "Intel(R) PRO/1000 MT Network Connection"
+    - "3Com 3C920 Integrated Fast Ethernet Controller"
+    - "Broadcom NetXtreme Gigabit Ethernet"
+    - "NVIDIA nForce Networking Controller"
+    - "VIA Rhine II Fast Ethernet Adapter"
+    - "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+    - "Marvell Yukon 88E8001/8003/8010 PCI Gigabit Ethernet Controller"
+
+  mac_address_prefixes:
+    - "00:0C:29"  # VMware
+    - "00:50:56"  # VMware
+    - "00:1C:42"  # Parallels
+    - "08:00:27"  # VirtualBox
+    - "00:0A:95"  # Intel
+    - "00:E0:4C"  # Realtek
+    - "00:03:FF"  # Microsoft
+    - "00:13:D4"  # 3Com
+    - "00:0D:88"  # D-Link
+
+  physical_drives:
+    - "\\\\.\\PHYSICALDRIVE0"
+    - "\\\\.\\PHYSICALDRIVE1"
+
+  volume_paths:
+    - "\\\\?\\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\\"
+    - "C:\\"
+    - "D:\\"
+    - "E:\\"

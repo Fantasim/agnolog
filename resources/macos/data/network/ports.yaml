@@ -1,0 +1,56 @@
+version: "1.0"
+metadata:
+  description: "Common network service ports"
+
+data:
+  well_known:
+    - port: 20
+      service: FTP Data
+    - port: 21
+      service: FTP Control
+    - port: 22
+      service: SSH
+    - port: 23
+      service: Telnet
+    - port: 25
+      service: SMTP
+    - port: 53
+      service: DNS
+    - port: 67
+      service: DHCP Server
+    - port: 68
+      service: DHCP Client
+    - port: 80
+      service: HTTP
+    - port: 110
+      service: POP3
+    - port: 123
+      service: NTP
+    - port: 143
+      service: IMAP
+    - port: 443
+      service: HTTPS
+    - port: 445
+      service: SMB
+    - port: 587
+      service: SMTP Submission
+    - port: 993
+      service: IMAPS
+    - port: 995
+      service: POP3S
+
+  apple_services:
+    - port: 5223
+      service: Apple Push Notification
+    - port: 2195
+      service: APNS
+    - port: 2196
+      service: APNS Feedback
+    - port: 5353
+      service: mDNS
+    - port: 548
+      service: AFP
+    - port: 3283
+      service: Apple Remote Desktop
+    - port: 5900
+      service: VNC

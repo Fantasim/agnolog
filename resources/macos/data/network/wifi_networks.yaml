@@ -1,0 +1,25 @@
+version: "1.0"
+metadata:
+  description: "Sample WiFi network SSIDs"
+
+data:
+  - HomeNetwork
+  - OfficeWiFi
+  - Guest-WiFi
+  - Starbucks WiFi
+  - attwifi
+  - xfinitywifi
+  - CoffeeShop-Guest
+  - Airport WiFi
+  - Hotel-Guest
+  - Corporate-5G
+  - Corporate-2.4G
+  - NETGEAR-5G
+  - Linksys-5G
+  - TP-Link_5GHz
+  - MySpectrumWiFi
+  - TELUS-WiFi
+  - Rogers-WiFi
+  - Bell-WiFi
+  - iPhone Hotspot
+  - AndroidAP

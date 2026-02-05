@@ -1,0 +1,112 @@
+# Chess titles (FIDE and Chess.com specific)
+fide_titles:
+  # Grandmaster titles
+  - code: "GM"
+    name: "Grandmaster"
+    rating_threshold: 2500
+    color: "#FF6B6B"
+    prestige: 10
+
+  - code: "WGM"
+    name: "Woman Grandmaster"
+    rating_threshold: 2300
+    color: "#FF6B6B"
+    prestige: 9
+
+  # International Master titles
+  - code: "IM"
+    name: "International Master"
+    rating_threshold: 2400
+    color: "#FFA500"
+    prestige: 8
+
+  - code: "WIM"
+    name: "Woman International Master"
+    rating_threshold: 2200
+    color: "#FFA500"
+    prestige: 7
+
+  # FIDE Master titles
+  - code: "FM"
+    name: "FIDE Master"
+    rating_threshold: 2300
+    color: "#9B59B6"
+    prestige: 6
+
+  - code: "WFM"
+    name: "Woman FIDE Master"
+    rating_threshold: 2100
+    color: "#9B59B6"
+    prestige: 5
+
+  # Candidate Master titles
+  - code: "CM"
+    name: "Candidate Master"
+    rating_threshold: 2200
+    color: "#3498DB"
+    prestige: 4
+
+  - code: "WCM"
+    name: "Woman Candidate Master"
+    rating_threshold: 2000
+    color: "#3498DB"
+    prestige: 3
+
+  # National Master (not FIDE, but common)
+  - code: "NM"
+    name: "National Master"
+    rating_threshold: 2200
+    color: "#27AE60"
+    prestige: 3
+
+# Chess.com specific titles
+site_titles:
+  - code: "Staff"
+    name: "Chess.com Staff"
+    color: "#E74C3C"
+    admin: true
+
+  - code: "Streamer"
+    name: "Chess.com Streamer"
+    color: "#9B59B6"
+    admin: false
+
+  - code: "Verified"
+    name: "Verified Player"
+    color: "#3498DB"
+    admin: false
+
+  - code: "Content"
+    name: "Content Creator"
+    color: "#F39C12"
+    admin: false
+
+# Special achievement titles
+achievement_titles:
+  - code: "Legend"
+    name: "Chess Legend"
+    description: "Top 100 player worldwide"
+
+  - code: "Bullet"
+    name: "Bullet Specialist"
+    description: "Top rated in bullet"
+
+  - code: "Blitz"
+    name: "Blitz Master"
+    description: "Top rated in blitz"
+
+  - code: "Rapid"
+    name: "Rapid Expert"
+    description: "Top rated in rapid"
+
+  - code: "Daily"
+    name: "Daily Champion"
+    description: "Top rated in daily chess"
+
+  - code: "Puzzle"
+    name: "Puzzle Rush Master"
+    description: "Top puzzle solver"
+
+  - code: "Tournament"
+    name: "Tournament Victor"
+    description: "Major tournament winner"

@@ -1,0 +1,63 @@
+version: "1.0"
+metadata:
+  description: "Important system paths on macOS"
+
+data:
+  system_directories:
+    - /System
+    - /System/Library
+    - /System/Library/Frameworks
+    - /System/Library/PrivateFrameworks
+    - /System/Library/CoreServices
+    - /System/Library/Extensions
+    - /System/Library/LaunchDaemons
+    - /System/Library/LaunchAgents
+    - /System/Applications
+    - /usr
+    - /usr/bin
+    - /usr/sbin
+    - /usr/lib
+    - /usr/libexec
+    - /usr/local
+    - /bin
+    - /sbin
+
+  library_directories:
+    - /Library
+    - /Library/Application Support
+    - /Library/Caches
+    - /Library/Frameworks
+    - /Library/LaunchDaemons
+    - /Library/LaunchAgents
+    - /Library/Logs
+    - /Library/Preferences
+    - /Library/StartupItems
+
+  user_directories:
+    - /Users
+    - ~/Library
+    - ~/Library/Application Support
+    - ~/Library/Caches
+    - ~/Library/Preferences
+    - ~/Library/Logs
+    - ~/Desktop
+    - ~/Documents
+    - ~/Downloads
+    - ~/Pictures
+    - ~/Music
+    - ~/Movies
+    - ~/Public
+
+  var_directories:
+    - /private/var
+    - /private/var/log
+    - /private/var/tmp
+    - /private/var/db
+    - /private/var/run
+    - /private/var/folders
+
+  temp_directories:
+    - /tmp
+    - /var/tmp
+    - /private/tmp
+    - ~/Library/Caches

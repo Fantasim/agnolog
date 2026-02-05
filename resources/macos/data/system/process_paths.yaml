@@ -1,0 +1,43 @@
+version: "1.0"
+metadata:
+  description: "Process executable paths on macOS"
+
+data:
+  system_paths:
+    - /sbin/launchd
+    - /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow
+    - /System/Library/CoreServices/WindowServer
+    - /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+    - /System/Library/CoreServices/SystemUIServer.app/Contents/MacOS/SystemUIServer
+    - /System/Library/CoreServices/Dock.app/Contents/MacOS/Dock
+    - /usr/libexec/securityd
+    - /usr/sbin/notifyd
+    - /usr/sbin/distnoted
+    - /usr/sbin/configd
+    - /usr/sbin/mDNSResponder
+    - /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/Support/fseventsd
+    - /usr/sbin/cfprefsd
+    - /System/Library/CoreServices/powerd.bundle/powerd
+    - /usr/libexec/coreduetd
+    - /usr/libexec/UserEventAgent
+    - /usr/libexec/trustd
+    - /usr/libexec/sysmond
+    - /usr/libexec/opendirectoryd
+    - /usr/libexec/coreauthd
+    - /System/Library/PrivateFrameworks/ApplePushService.framework/apsd
+    - /System/Library/CoreServices/ReportCrash
+    - /System/Library/PrivateFrameworks/DiskArbitration.framework/Versions/A/Resources/diskarbitrationd
+
+  application_paths:
+    - /System/Applications/Safari.app/Contents/MacOS/Safari
+    - /System/Applications/Mail.app/Contents/MacOS/Mail
+    - /System/Applications/Messages.app/Contents/MacOS/Messages
+    - /System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal
+    - /System/Applications/TextEdit.app/Contents/MacOS/TextEdit
+    - /System/Applications/Preview.app/Contents/MacOS/Preview
+    - /System/Applications/Music.app/Contents/MacOS/Music
+    - /System/Applications/Photos.app/Contents/MacOS/Photos
+    - /System/Applications/Calendar.app/Contents/MacOS/Calendar
+    - /System/Applications/Contacts.app/Contents/MacOS/Contacts
+    - /System/Applications/App Store.app/Contents/MacOS/App Store
+    - /Applications/Xcode.app/Contents/MacOS/Xcode

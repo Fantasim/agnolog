@@ -1,0 +1,33 @@
+version: "1.0"
+metadata:
+  description: "Windows logon types and descriptions"
+
+data:
+  logon_types:
+    2:
+      name: "Interactive"
+      description: "User logged on to this computer"
+    3:
+      name: "Network"
+      description: "Network logon (SMB, etc.)"
+    4:
+      name: "Batch"
+      description: "Batch logon type"
+    5:
+      name: "Service"
+      description: "Service started by SCM"
+    7:
+      name: "Unlock"
+      description: "Workstation unlock"
+    8:
+      name: "NetworkCleartext"
+      description: "Network logon with cleartext credentials"
+    9:
+      name: "NewCredentials"
+      description: "RunAs with different credentials"
+    10:
+      name: "RemoteInteractive"
+      description: "Terminal Services/RDP"
+    11:
+      name: "CachedInteractive"
+      description: "Logon with cached credentials"

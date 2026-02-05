@@ -1,0 +1,48 @@
+version: "1.0"
+metadata:
+  description: "Windows logon failure subcodes and reasons"
+
+data:
+  failure_subcodes:
+    "0xC0000064":
+      description: "User name does not exist"
+      event_id: 529
+    "0xC000006A":
+      description: "User name is correct but password is wrong"
+      event_id: 529
+    "0xC000006D":
+      description: "Bad user name or password"
+      event_id: 529
+    "0xC000006E":
+      description: "Account restriction"
+      event_id: 530
+    "0xC000006F":
+      description: "Invalid logon hours"
+      event_id: 531
+    "0xC0000070":
+      description: "Invalid workstation"
+      event_id: 533
+    "0xC0000071":
+      description: "Password expired"
+      event_id: 535
+    "0xC0000072":
+      description: "Account disabled"
+      event_id: 533
+    "0xC0000193":
+      description: "Account expiration"
+      event_id: 532
+    "0xC0000224":
+      description: "User must change password at next logon"
+      event_id: 535
+    "0xC0000234":
+      description: "Account locked out"
+      event_id: 539
+
+  common_reasons:
+    - "Bad user name or password"
+    - "Account restriction"
+    - "Invalid logon hours"
+    - "Invalid workstation"
+    - "Password expired"
+    - "Account disabled"
+    - "Account locked out"

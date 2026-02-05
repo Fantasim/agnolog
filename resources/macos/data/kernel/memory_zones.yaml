@@ -1,0 +1,34 @@
+version: "1.0"
+metadata:
+  description: "Kernel memory zones"
+
+data:
+  - kalloc.16
+  - kalloc.32
+  - kalloc.48
+  - kalloc.64
+  - kalloc.80
+  - kalloc.128
+  - kalloc.256
+  - kalloc.512
+  - kalloc.1024
+  - kalloc.2048
+  - kalloc.4096
+  - kalloc.8192
+  - kalloc.large
+  - vm.objects
+  - vm.map.entries
+  - vm.map.kentry
+  - vm.map.copies
+  - ipc.ports
+  - ipc.vouchers
+  - mbuf
+  - mbuf_cl
+  - mbuf_bigcl
+  - mbuf_16kcl
+  - zinit
+  - zones
+  - fileproc
+  - vnodes
+  - namecache
+  - ncache.strings

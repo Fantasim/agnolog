@@ -1,0 +1,30 @@
+version: "1.0"
+metadata:
+  description: "Network protocols"
+
+data:
+  - TCP
+  - UDP
+  - ICMP
+  - HTTP
+  - HTTPS
+  - FTP
+  - SFTP
+  - SSH
+  - SMTP
+  - POP3
+  - IMAP
+  - DNS
+  - DHCP
+  - NTP
+  - SNMP
+  - LDAP
+  - SMB
+  - AFP
+  - VPN
+  - IPSec
+  - L2TP
+  - PPTP
+  - OpenVPN
+  - mDNS
+  - Bonjour

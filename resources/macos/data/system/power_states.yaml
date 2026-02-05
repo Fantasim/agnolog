@@ -1,0 +1,35 @@
+version: "1.0"
+metadata:
+  description: "System power states and events"
+
+data:
+  power_states:
+    - Active
+    - Idle
+    - Sleep
+    - Dark Wake
+    - Maintenance Wake
+    - Hibernate
+    - Shutdown
+    - Restart
+    - Standby
+
+  wake_reasons:
+    - User Activity
+    - Network Access
+    - RTC Alarm
+    - USB Device
+    - Power Button
+    - Lid Open
+    - Scheduled Wake
+    - Bluetooth Device
+    - Thunderbolt Device
+    - Maintenance
+
+  sleep_reasons:
+    - User Idle
+    - Low Battery
+    - Scheduled Sleep
+    - Lid Closed
+    - User Command
+    - Thermal Event

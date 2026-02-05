@@ -1,0 +1,28 @@
+version: "1.0"
+metadata:
+  description: "Keychain item types"
+
+data:
+  item_classes:
+    - Internet password
+    - Application password
+    - Generic password
+    - Certificate
+    - Public key
+    - Private key
+    - Symmetric key
+    - Identity
+    - Secure note
+
+  keychains:
+    - login.keychain-db
+    - System.keychain
+    - iCloud Keychain
+    - Local Items
+
+  access_controls:
+    - AllowAll
+    - Authenticate
+    - AuthenticateUI
+    - ApplicationPassword
+    - TouchID

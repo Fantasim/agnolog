@@ -1,0 +1,54 @@
+version: "1.0"
+metadata:
+  description: "Linux system limits and thresholds"
+
+data:
+  cpu:
+    max_cores: 128
+    typical_cores: 8
+    load_avg_thresholds:
+      low: 0.5
+      medium: 1.0
+      high: 2.0
+      critical: 4.0
+    frequency_min_mhz: 800
+    frequency_max_mhz: 5000
+    temperature_normal_max: 70
+    temperature_warning: 80
+    temperature_critical: 90
+
+  memory:
+    warning_threshold_percent: 80
+    critical_threshold_percent: 95
+    oom_score_min: -1000
+    oom_score_max: 1000
+    swap_warning_percent: 50
+    swap_critical_percent: 90
+
+  disk:
+    warning_threshold_percent: 85
+    critical_threshold_percent: 95
+    inode_warning_percent: 90
+    inode_critical_percent: 98
+    io_latency_warning_ms: 100
+    io_latency_critical_ms: 500
+
+  network:
+    tcp_max_connections: 65535
+    udp_max_connections: 65535
+    default_mtu: 1500
+    jumbo_frame_mtu: 9000
+    default_ttl: 64
+    max_packet_size: 65535
+
+  process:
+    max_pid: 32768
+    max_pid_extended: 4194304
+    max_open_files_default: 1024
+    max_open_files_hard: 65536
+    max_threads: 32768
+
+  boot:
+    typical_boot_time_min_sec: 5
+    typical_boot_time_max_sec: 60
+    firmware_timeout_sec: 10

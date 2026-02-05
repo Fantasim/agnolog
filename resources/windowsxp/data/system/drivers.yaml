@@ -1,0 +1,56 @@
+version: "1.0"
+metadata:
+  description: "Windows XP device drivers"
+
+data:
+  disk_drivers:
+    - "atapi"
+    - "disk"
+    - "PartMgr"
+    - "ftdisk"
+    - "dmio"
+    - "iaStor"
+    - "pciide"
+    - "intelide"
+    - "viaide"
+
+  network_drivers:
+    - "Tcpip"
+    - "Afd"
+    - "NetBT"
+    - "Srv"
+    - "MRxSmb"
+    - "Rdbss"
+    - "Redirector"
+    - "RTL8139"
+    - "E1000"
+    - "NE2000"
+    - "Netbt"
+    - "Ndis"
+
+  filesystem_drivers:
+    - "Ntfs"
+    - "Fastfat"
+    - "Cdfs"
+    - "Fips"
+    - "MountMgr"
+
+  usb_drivers:
+    - "usbhub"
+    - "usbstor"
+    - "usbohci"
+    - "usbuhci"
+    - "usbehci"
+    - "HidUsb"
+
+  other_drivers:
+    - "Serial"
+    - "Parport"
+    - "Floppy"
+    - "Cdrom"
+    - "i8042prt"
+    - "mouclass"
+    - "kbdclass"
+    - "VgaSave"
+    - "Beep"
+    - "Null"

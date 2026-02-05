@@ -1,0 +1,20 @@
+version: "1.0"
+metadata:
+  description: "CPU-related events"
+
+data:
+  - CPU throttling
+  - Thermal pressure
+  - Power management
+  - P-state change
+  - C-state change
+  - Turbo boost
+  - Speed step
+  - Core parking
+  - Hyper-threading
+  - Context switch
+  - Interrupt handling
+  - System call
+  - Exception handling
+  - Scheduler tick
+  - Load average update

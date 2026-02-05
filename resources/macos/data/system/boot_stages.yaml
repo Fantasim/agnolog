@@ -1,0 +1,14 @@
+version: "1.0"
+metadata:
+  description: "macOS boot process stages"
+
+data:
+  - BootROM
+  - EFI
+  - Boot Loader
+  - Kernel
+  - launchd init
+  - System Daemons
+  - User Space
+  - Login Window
+  - User Session

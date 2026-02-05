@@ -1,0 +1,25 @@
+version: "1.0"
+metadata:
+  description: "macOS network services and features"
+
+data:
+  - WiFi
+  - Ethernet
+  - Bluetooth PAN
+  - Thunderbolt Bridge
+  - VPN (L2TP)
+  - VPN (IKEv2)
+  - VPN (Cisco IPSec)
+  - DNS
+  - DHCP
+  - mDNSResponder
+  - Firewall
+  - Internet Sharing
+  - AirDrop
+  - AirPlay
+  - Handoff
+  - Personal Hotspot
+  - Network Time
+  - Proxy
+  - IPv6
+  - NAT

@@ -1,0 +1,27 @@
+version: "1.0"
+metadata:
+  description: "Common macOS mount points"
+
+data:
+  - /
+  - /System
+  - /System/Volumes/Data
+  - /System/Volumes/Preboot
+  - /System/Volumes/VM
+  - /System/Volumes/Update
+  - /System/Volumes/Hardware
+  - /Volumes/Macintosh HD
+  - /Volumes/Macintosh HD - Data
+  - /Volumes/Time Machine
+  - /Volumes/External
+  - /Volumes/USB Drive
+  - /Volumes/Backup
+  - /private/tmp
+  - /private/var
+  - /dev
+  - /Network
+  - /home
+  - /Users
+  - /Library
+  - /System/Library
+  - /Applications

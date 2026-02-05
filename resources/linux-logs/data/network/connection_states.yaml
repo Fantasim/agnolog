@@ -1,0 +1,47 @@
+version: "1.0"
+metadata:
+  description: "TCP connection states and network status"
+
+data:
+  tcp_states:
+    - ESTABLISHED
+    - SYN_SENT
+    - SYN_RECV
+    - FIN_WAIT1
+    - FIN_WAIT2
+    - TIME_WAIT
+    - CLOSE
+    - CLOSE_WAIT
+    - LAST_ACK
+    - LISTEN
+    - CLOSING
+
+  dhcp_events:
+    - DISCOVER
+    - OFFER
+    - REQUEST
+    - ACK
+    - NAK
+    - DECLINE
+    - RELEASE
+    - INFORM
+
+  connection_events:
+    - connect
+    - disconnect
+    - timeout
+    - refused
+    - reset
+    - established
+    - closed
+
+  dns_record_types:
+    - A
+    - AAAA
+    - CNAME
+    - MX
+    - NS
+    - PTR
+    - SOA
+    - TXT
+    - SRV

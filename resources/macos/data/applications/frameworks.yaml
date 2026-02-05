@@ -1,0 +1,56 @@
+version: "1.0"
+metadata:
+  description: "macOS frameworks and libraries"
+
+data:
+  public_frameworks:
+    - Foundation
+    - AppKit
+    - UIKit
+    - CoreFoundation
+    - CoreData
+    - CoreGraphics
+    - CoreImage
+    - CoreAnimation
+    - CoreText
+    - CoreVideo
+    - CoreAudio
+    - CoreMedia
+    - CoreML
+    - CoreLocation
+    - CoreBluetooth
+    - AVFoundation
+    - AVKit
+    - QuartzCore
+    - Metal
+    - MetalKit
+    - SceneKit
+    - SpriteKit
+    - GameKit
+    - GameController
+    - WebKit
+    - SafariServices
+    - CloudKit
+    - StoreKit
+    - PassKit
+    - HealthKit
+    - HomeKit
+    - EventKit
+    - Contacts
+    - MapKit
+    - Network
+    - Security
+    - CryptoKit
+    - Combine
+    - SwiftUI
+
+  private_frameworks:
+    - ApplePushService
+    - FileProvider
+    - DiskArbitration
+    - ServiceManagement
+    - IOKit
+    - CoreServices
+    - ApplicationServices
+    - SecurityFoundation
+    - LaunchServices

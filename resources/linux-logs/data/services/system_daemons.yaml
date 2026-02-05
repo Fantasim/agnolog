@@ -1,0 +1,55 @@
+version: "1.0"
+metadata:
+  description: "Common system daemons and services"
+
+data:
+  init_services:
+    - systemd
+    - systemd-journald
+    - systemd-logind
+    - systemd-networkd
+    - systemd-resolved
+    - systemd-timesyncd
+    - systemd-udevd
+
+  core_services:
+    - sshd
+    - cron
+    - rsyslogd
+    - dbus-daemon
+    - udevd
+    - atd
+    - anacron
+    - acpid
+    - bluetoothd
+    - avahi-daemon
+
+  network_services:
+    - NetworkManager
+    - dhclient
+    - dhcpd
+    - named
+    - bind9
+    - chronyd
+    - ntpd
+    - openvpn
+    - wpa_supplicant
+
+  storage_services:
+    - multipathd
+    - lvm2-monitor
+    - lvm2-lvmetad
+    - mdadm
+    - smartd
+    - iscsid
+
+  service_descriptions:
+    sshd: "OpenSSH Daemon"
+    cron: "Command Scheduler"
+    nginx: "A high performance web server"
+    apache2: "The Apache HTTP Server"
+    mysqld: "MySQL Database Server"
+    postgres: "PostgreSQL Database Server"
+    redis-server: "Advanced key-value store"
+    NetworkManager: "Network Manager"
+    systemd-journald: "Journal Service"

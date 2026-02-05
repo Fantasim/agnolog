@@ -1,0 +1,54 @@
+version: "1.0"
+metadata:
+  description: "Application crash and exception types"
+
+data:
+  mach_exceptions:
+    - EXC_BAD_ACCESS (SIGSEGV)
+    - EXC_BAD_ACCESS (SIGBUS)
+    - EXC_BAD_INSTRUCTION (SIGILL)
+    - EXC_ARITHMETIC (SIGFPE)
+    - EXC_EMULATION (SIGEMT)
+    - EXC_SOFTWARE (SIGPIPE)
+    - EXC_BREAKPOINT (SIGTRAP)
+    - EXC_SYSCALL
+    - EXC_MACH_SYSCALL
+    - EXC_RPC_ALERT
+    - EXC_CRASH (SIGABRT)
+    - EXC_CRASH (SIGKILL)
+    - EXC_CRASH (SIGQUIT)
+    - EXC_RESOURCE
+    - EXC_GUARD
+
+  termination_reasons:
+    - Namespace SIGNAL
+    - Namespace CODESIGNING
+    - Namespace LIBSYSTEM
+    - Namespace DYLD
+    - Namespace JETSAM
+    - Namespace RUNNINGBOARD
+    - Namespace ASSERTIOND
+    - Namespace SPRINGBOARD
+    - Namespace SECURITY
+    - Namespace SANDBOX
+
+  exception_codes:
+    - "0x0000000000000000"
+    - "0x000000000badacce"
+    - "0x00000000deadbeef"
+    - "0x0000000000000001"
+    - "0x0000000000000002"
+
+  crash_reasons:
+    - Segmentation fault
+    - Bus error
+    - Illegal instruction
+    - Abort trap
+    - Floating point exception
+    - Stack overflow
+    - Memory access violation
+    - Out of memory
+    - Deadlock detected
+    - Assertion failure
+    - Unhandled exception
+    - Watchdog timeout

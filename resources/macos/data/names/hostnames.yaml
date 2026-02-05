@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Hostname patterns"
+
+data:
+  prefixes:
+    - MacBook
+    - iMac
+    - Mac-mini
+    - Mac-Studio
+    - Mac-Pro
+    - MacBook-Pro
+    - MacBook-Air
+
+  suffixes:
+    - local
+    - home
+    - office
+    - work
+    - dev
+    - test
+
+  generic:
+    - localhost
+    - localhost.localdomain
+    - broadcasthost

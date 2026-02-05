@@ -1,0 +1,50 @@
+version: "1.0"
+metadata:
+  description: "System daemon and service identifiers"
+
+data:
+  - com.apple.audio.coreaudiod
+  - com.apple.bluetoothd
+  - com.apple.cfprefsd.daemon
+  - com.apple.CoreAuthentication.daemon
+  - com.apple.coreduetd
+  - com.apple.CoreLocationAgent
+  - com.apple.CrashReporterSupportHelper
+  - com.apple.diskarbitrationd
+  - com.apple.diskmanagementd
+  - com.apple.familycircled
+  - com.apple.findmydeviced
+  - com.apple.fontd
+  - com.apple.fseventsd
+  - com.apple.iCloudHelper
+  - com.apple.installd
+  - com.apple.locationd
+  - com.apple.logind
+  - com.apple.mDNSResponder
+  - com.apple.mdmclient
+  - com.apple.metadata.mds
+  - com.apple.netbiosd
+  - com.apple.networkd
+  - com.apple.notificationcenterui
+  - com.apple.opendirectoryd
+  - com.apple.parentalcontrols.check
+  - com.apple.powerd
+  - com.apple.preferences.timezone.admintool
+  - com.apple.ReportCrash
+  - com.apple.security.authd
+  - com.apple.security.syspolicyd
+  - com.apple.securityd
+  - com.apple.siri
+  - com.apple.softwareupdated
+  - com.apple.spindump
+  - com.apple.syslogd
+  - com.apple.systemstats
+  - com.apple.tccd
+  - com.apple.trustd
+  - com.apple.usbmuxd
+  - com.apple.UserEventAgent-System
+  - com.apple.ViewBridgeAuxiliary
+  - com.apple.warmd
+  - com.apple.wifiFirmwareLoader
+  - com.apple.wifivelocityd
+  - com.apple.WindowServer

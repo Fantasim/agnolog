@@ -1,0 +1,37 @@
+version: "1.0"
+metadata:
+  description: "Network-related error codes"
+
+data:
+  errno_network:
+    ENETDOWN: "Network is down"
+    ENETUNREACH: "Network is unreachable"
+    ENETRESET: "Network dropped connection on reset"
+    ECONNABORTED: "Software caused connection abort"
+    ECONNRESET: "Connection reset by peer"
+    ENOBUFS: "No buffer space available"
+    EISCONN: "Socket is already connected"
+    ENOTCONN: "Socket is not connected"
+    ESHUTDOWN: "Can't send after socket shutdown"
+    ETIMEDOUT: "Operation timed out"
+    ECONNREFUSED: "Connection refused"
+    EHOSTDOWN: "Host is down"
+    EHOSTUNREACH: "No route to host"
+
+  dns_errors:
+    - Host not found
+    - No address associated with hostname
+    - DNS query timeout
+    - Server failure
+    - Non-existent domain
+    - Query refused
+
+  wifi_errors:
+    - Association failed
+    - Authentication failed
+    - Connection timeout
+    - DHCP timeout
+    - Weak signal
+    - Network not found
+    - Wrong password
+    - IP configuration failed

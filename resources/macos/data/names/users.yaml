@@ -1,0 +1,35 @@
+version: "1.0"
+metadata:
+  description: "Common macOS usernames"
+
+data:
+  - admin
+  - user
+  - root
+  - daemon
+  - nobody
+  - _securityagent
+  - _analyticsd
+  - _appleevents
+  - _aps
+  - _assetcache
+  - _coreaudiod
+  - _displaypolicyd
+  - _mdnsresponder
+  - _nsurlsessiond
+  - _windowserver
+  - john
+  - jane
+  - mike
+  - sarah
+  - alex
+  - chris
+  - david
+  - emily
+  - james
+  - lisa
+  - michael
+  - jessica
+  - robert
+  - jennifer
+  - william

@@ -1,0 +1,42 @@
+version: "1.0"
+metadata:
+  description: "System constants for Windows XP"
+
+data:
+  version:
+    nt_version: "5.1"
+    build_numbers:
+      - "2600"
+    service_packs:
+      - "Service Pack 3"
+      - "Service Pack 2"
+      - "Service Pack 1"
+    product_name: "Microsoft Windows XP"
+
+  timeouts:
+    service_start_timeout_ms: 30000
+    service_stop_timeout_ms: 20000
+    disk_timeout_seconds: 120
+    network_timeout_seconds: 60
+    rpc_timeout_ms: 5000
+
+  memory:
+    min_available_mb: 64
+    warning_threshold_mb: 128
+    pool_tag_length: 4
+
+  disk:
+    sector_size: 512
+    max_retries: 4
+    bad_block_threshold: 10
+
+  network:
+    tcp_connection_limit: 10  # XP SP2 limit
+    max_workgroup_announcements: 3
+    netbios_timeout_seconds: 30
+
+  registry_paths:
+    - "HKEY_LOCAL_MACHINE\\SOFTWARE"
+    - "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services"
+    - "HKEY_CURRENT_USER\\Software"
+    - "HKEY_CLASSES_ROOT"

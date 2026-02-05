@@ -1,0 +1,21 @@
+version: "1.0"
+metadata:
+  description: "Windows event types"
+
+data:
+  event_types:
+    1:
+      name: "Error"
+      description: "A significant problem"
+    2:
+      name: "Warning"
+      description: "Not necessarily significant"
+    4:
+      name: "Information"
+      description: "Successful operation"
+    8:
+      name: "Success Audit"
+      description: "Audited security access attempt that was successful"
+    16:
+      name: "Failure Audit"
+      description: "Audited security access attempt that failed"
