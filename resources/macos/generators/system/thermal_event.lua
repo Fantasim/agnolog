@@ -1,6 +1,3 @@
--- System Thermal Event Generator
--- Generates thermal pressure event log entries
-
 return {
     metadata = {
         name = "system.thermal_event",
@@ -12,27 +9,19 @@ return {
         tags = {"system", "thermal", "temperature"},
         merge_groups = {"power_events"}
     },
-
     generate = function(ctx, args)
-        local thermal_levels = {
-            {name = "nominal", severity = "Default"},
-            {name = "moderate", severity = "Default"},
-            {name = "heavy", severity = "Default"},
-            {name = "critical", severity = "Error"}
-        }
-
-        local level = ctx.random.weighted(thermal_levels, {0.70, 0.20, 0.08, 0.02})
-
+        local thermal_level = ctx.random.choice({"nominal", "moderate", "heavy", "critical"})
+        local level_severity = (thermal_level == "critical" or thermal_level == "heavy") and "Error" or "Default"
+        
         return {
             process = "kernel",
             pid = 0,
-            level = level.severity,
+            level = level_severity,
             subsystem = "com.apple.kernel",
             category = "thermal",
-            thermal_level = level.name,
+            thermal_level = thermal_level,
             cpu_temp = ctx.random.int(40, 100),
-            gpu_temp = ctx.random.int(35, 95),
-            throttling = level.name == "critical" or level.name == "heavy"
+            gpu_temp = ctx.random.int(35, 95)
         }
     end
 }
