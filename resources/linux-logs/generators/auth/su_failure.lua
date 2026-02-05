@@ -16,7 +16,7 @@ return {
     generate = function(ctx, args)
         return {
             pid = ctx.random.int(500, 32768),
-            source_user = ctx.gen.username(),
+            source_user = ctx.gen.player_name(),
             target_user = "root",
             tty = ctx.random.choice({"pts/0", "pts/1"})
         }

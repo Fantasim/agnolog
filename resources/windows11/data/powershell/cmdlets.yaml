@@ -1,0 +1,53 @@
+version: "1.0"
+metadata:
+  description: "Common PowerShell cmdlets for script execution logs"
+
+data:
+  common:
+    - Get-Process
+    - Get-Service
+    - Get-EventLog
+    - Get-ChildItem
+    - Get-Content
+    - Set-Content
+    - Copy-Item
+    - Remove-Item
+    - New-Item
+    - Test-Path
+    - Get-Location
+    - Set-Location
+    - Get-Date
+    - Write-Output
+    - Write-Host
+    - Select-Object
+    - Where-Object
+    - ForEach-Object
+    - Sort-Object
+    - Measure-Object
+
+  administrative:
+    - Get-ADUser
+    - Get-ADComputer
+    - Get-ADGroup
+    - New-ADUser
+    - Set-ADUser
+    - Restart-Computer
+    - Stop-Computer
+    - Invoke-Command
+    - Enter-PSSession
+    - Get-WmiObject
+    - Get-CimInstance
+    - Get-NetAdapter
+    - Get-NetIPConfiguration
+    - New-PSSession
+    - Remove-PSSession
+
+  security:
+    - Get-Credential
+    - ConvertTo-SecureString
+    - Set-ExecutionPolicy
+    - Get-ExecutionPolicy
+    - Get-Acl
+    - Set-Acl
+    - Test-Connection
+    - Get-AuthenticodeSignature

@@ -28,10 +28,10 @@ return {
         }
 
         local ttys = {"pts/0", "pts/1", "pts/2", "tty1", "tty2"}
-        local pwds = {"/home/" .. ctx.gen.username(), "/root", "/var/log", "/etc", "/opt"}
+        local pwds = {"/home/" .. ctx.gen.player_name(), "/root", "/var/log", "/etc", "/opt"}
 
         return {
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             tty = ctx.random.choice(ttys),
             pwd = ctx.random.choice(pwds),
             command = ctx.random.choice(commands)

@@ -26,7 +26,7 @@ return {
             tty = ctx.random.choice(ttys),
             ruser = "",
             rhost = ctx.gen.ip_address(),
-            user = ctx.gen.username()
+            user = ctx.gen.player_name()
         }
     end
 }

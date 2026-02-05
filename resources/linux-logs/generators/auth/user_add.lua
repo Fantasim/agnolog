@@ -15,7 +15,7 @@ return {
 
     generate = function(ctx, args)
         local shells = {"/bin/bash", "/bin/sh", "/bin/zsh", "/usr/bin/fish", "/bin/false", "/usr/sbin/nologin"}
-        local user = ctx.gen.username()
+        local user = ctx.gen.player_name()
 
         return {
             pid = ctx.random.int(500, 32768),

@@ -1,0 +1,56 @@
+version: "1.0"
+metadata:
+  description: "Windows event provider names for various log channels"
+
+data:
+  - name: "Microsoft-Windows-Security-Auditing"
+    channel: "Security"
+    description: "Security auditing events"
+
+  - name: "Service Control Manager"
+    channel: "System"
+    description: "Service lifecycle events"
+
+  - name: "Microsoft-Windows-Kernel-Power"
+    channel: "System"
+    description: "Power management and shutdown events"
+
+  - name: "Microsoft-Windows-TaskScheduler"
+    channel: "Microsoft-Windows-TaskScheduler/Operational"
+    description: "Task Scheduler operational events"
+
+  - name: "Microsoft-Windows-PowerShell"
+    channel: "Microsoft-Windows-PowerShell/Operational"
+    description: "PowerShell execution events"
+
+  - name: "Microsoft-Windows-Windows Defender"
+    channel: "Microsoft-Windows-Windows Defender/Operational"
+    description: "Windows Defender antimalware events"
+
+  - name: "Microsoft-Windows-Windows Firewall With Advanced Security"
+    channel: "Microsoft-Windows-Windows Firewall With Advanced Security/Firewall"
+    description: "Windows Firewall events"
+
+  - name: "Microsoft-Windows-WMI-Activity"
+    channel: "Microsoft-Windows-WMI-Activity/Operational"
+    description: "WMI operational events"
+
+  - name: "Microsoft-Windows-DNS-Client"
+    channel: "Microsoft-Windows-DNS-Client/Operational"
+    description: "DNS client events"
+
+  - name: "Microsoft-Windows-WindowsUpdateClient"
+    channel: "System"
+    description: "Windows Update client events"
+
+  - name: "Application Error"
+    channel: "Application"
+    description: "Application crash events"
+
+  - name: "Windows Error Reporting"
+    channel: "Application"
+    description: "Error reporting events"
+
+  - name: "MsiInstaller"
+    channel: "Application"
+    description: "Windows Installer events"

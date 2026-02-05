@@ -22,10 +22,15 @@ return {
         local gcc_major = ctx.random.int(9, 13)
         local gcc_minor = ctx.random.int(0, 5)
 
+        -- Build hostname from YAML data
+        local prefixes = ctx.data.network.hostnames.prefixes or {"server"}
+        local suffixes = ctx.data.network.hostnames.suffixes or {"01"}
+        local hostname = ctx.random.choice(prefixes) .. "-" .. ctx.random.choice(suffixes)
+
         return {
             boot_offset = string.format("%d.%06d", ctx.random.int(0, 5), ctx.random.int(0, 999999)),
             kernel_version = string.format("%d.%d.%d-%d-generic", major, minor, patch, build),
-            hostname = ctx.gen.hostname(),
+            hostname = hostname,
             gcc_version = string.format("%d.%d.0", gcc_major, gcc_minor),
             build_date = string.format("SMP %s", os.date("%a %b %d %H:%M:%S UTC %Y"))
         }

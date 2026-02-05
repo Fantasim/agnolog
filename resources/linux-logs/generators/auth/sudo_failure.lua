@@ -25,11 +25,11 @@ return {
         local attempts = ctx.random.int(1, 3)
 
         return {
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             attempts = attempts,
             plural = attempts > 1 and "s" or "",
             tty = ctx.random.choice(ttys),
-            pwd = "/home/" .. ctx.gen.username(),
+            pwd = "/home/" .. ctx.gen.player_name(),
             command = ctx.random.choice(commands)
         }
     end

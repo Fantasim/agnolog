@@ -27,7 +27,7 @@ return {
             pid = ctx.random.int(500, 5000),
             attempts = ctx.random.int(1, 5),
             tty = ctx.random.choice(ttys),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             reason = ctx.random.choice(reasons)
         }
     end

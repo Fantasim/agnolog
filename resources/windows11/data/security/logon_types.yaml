@@ -1,0 +1,40 @@
+version: "1.0"
+metadata:
+  description: "Windows logon type definitions for Event 4624/4625"
+
+data:
+  - id: 2
+    name: "Interactive"
+    description: "A user logged on to this computer"
+
+  - id: 3
+    name: "Network"
+    description: "A user or computer logged on to this computer from the network"
+
+  - id: 4
+    name: "Batch"
+    description: "Batch logon type is used by batch servers"
+
+  - id: 5
+    name: "Service"
+    description: "A service was started by the Service Control Manager"
+
+  - id: 7
+    name: "Unlock"
+    description: "This workstation was unlocked"
+
+  - id: 8
+    name: "NetworkCleartext"
+    description: "A user logged on to this computer from the network with cleartext credentials"
+
+  - id: 9
+    name: "NewCredentials"
+    description: "A caller cloned its current token and specified new credentials for outbound connections"
+
+  - id: 10
+    name: "RemoteInteractive"
+    description: "A user logged on to this computer remotely using Terminal Services or Remote Desktop"
+
+  - id: 11
+    name: "CachedInteractive"
+    description: "A user logged on to this computer with cached credentials"

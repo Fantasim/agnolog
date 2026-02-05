@@ -1,0 +1,41 @@
+version: "1.0"
+metadata:
+  description: "Windows computer naming patterns for workstations and servers"
+
+data:
+  workstation_prefixes:
+    - DESKTOP
+    - WS
+    - PC
+    - LAPTOP
+    - NB
+    - CORP
+    - WIN11
+
+  server_prefixes:
+    - SRV
+    - DC
+    - FS
+    - SQL
+    - WEB
+    - APP
+    - EXCH
+    - HV
+    - AD
+    - DNS
+    - DHCP
+
+  departments:
+    - IT
+    - HR
+    - SALES
+    - FINANCE
+    - LEGAL
+    - ADMIN
+    - DEV
+    - MARKETING
+    - SUPPORT
+    - EXEC
+
+  # Hex suffix patterns for DESKTOP-XXXXXX style names
+  hex_chars: "0123456789ABCDEF"

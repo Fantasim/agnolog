@@ -14,11 +14,11 @@ return {
     },
 
     generate = function(ctx, args)
-        local target_users = {"root", ctx.gen.username()}
+        local target_users = {"root", ctx.gen.player_name()}
 
         return {
             pid = ctx.random.int(500, 32768),
-            source_user = ctx.gen.username(),
+            source_user = ctx.gen.player_name(),
             target_user = ctx.random.choice(target_users),
             tty = ctx.random.choice({"pts/0", "pts/1", "tty1"})
         }

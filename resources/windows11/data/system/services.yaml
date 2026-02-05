@@ -1,0 +1,84 @@
+version: "1.0"
+metadata:
+  description: "Common Windows services for event generation"
+
+data:
+  - name: "Spooler"
+    display_name: "Print Spooler"
+    service_type: "Win32 Service"
+
+  - name: "wuauserv"
+    display_name: "Windows Update"
+    service_type: "Win32 Service"
+
+  - name: "WinDefend"
+    display_name: "Windows Defender Antivirus Service"
+    service_type: "Win32 Service"
+
+  - name: "Dhcp"
+    display_name: "DHCP Client"
+    service_type: "Win32 Service"
+
+  - name: "Dnscache"
+    display_name: "DNS Client"
+    service_type: "Win32 Service"
+
+  - name: "EventLog"
+    display_name: "Windows Event Log"
+    service_type: "Win32 Service"
+
+  - name: "Schedule"
+    display_name: "Task Scheduler"
+    service_type: "Win32 Service"
+
+  - name: "W32Time"
+    display_name: "Windows Time"
+    service_type: "Win32 Service"
+
+  - name: "WinRM"
+    display_name: "Windows Remote Management (WS-Management)"
+    service_type: "Win32 Service"
+
+  - name: "BITS"
+    display_name: "Background Intelligent Transfer Service"
+    service_type: "Win32 Service"
+
+  - name: "RpcSs"
+    display_name: "Remote Procedure Call (RPC)"
+    service_type: "Win32 Service"
+
+  - name: "LanmanServer"
+    display_name: "Server"
+    service_type: "Win32 Service"
+
+  - name: "LanmanWorkstation"
+    display_name: "Workstation"
+    service_type: "Win32 Service"
+
+  - name: "Netlogon"
+    display_name: "Netlogon"
+    service_type: "Win32 Service"
+
+  - name: "mpssvc"
+    display_name: "Windows Defender Firewall"
+    service_type: "Win32 Service"
+
+  - name: "WSearch"
+    display_name: "Windows Search"
+    service_type: "Win32 Service"
+
+  - name: "AudioSrv"
+    display_name: "Windows Audio"
+    service_type: "Win32 Service"
+
+  - name: "Themes"
+    display_name: "Themes"
+    service_type: "Win32 Service"
+
+  - name: "MSSQLSERVER"
+    display_name: "SQL Server (MSSQLSERVER)"
+    service_type: "Win32 Service"
+
+  - name: "VSS"
+    display_name: "Volume Shadow Copy"
+    service_type: "Win32 Service"

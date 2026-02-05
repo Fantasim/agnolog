@@ -19,7 +19,7 @@ return {
         return {
             service = ctx.random.choice(pam_services),
             pid = ctx.random.int(500, 32768),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             uid = ctx.random.int(0, 60000)
         }
     end

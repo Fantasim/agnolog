@@ -1,0 +1,319 @@
+version: "1.0"
+metadata:
+  description: "Windows Event ID definitions organized by log channel"
+
+data:
+  security:
+    4624:
+      description: "An account was successfully logged on"
+      level: "Information"
+      task_category: "Logon"
+
+    4625:
+      description: "An account failed to log on"
+      level: "Information"
+      task_category: "Logon"
+
+    4634:
+      description: "An account was logged off"
+      level: "Information"
+      task_category: "Logoff"
+
+    4672:
+      description: "Special privileges assigned to new logon"
+      level: "Information"
+      task_category: "Special Logon"
+
+    4698:
+      description: "A scheduled task was created"
+      level: "Information"
+      task_category: "Scheduled Task"
+
+    4699:
+      description: "A scheduled task was deleted"
+      level: "Information"
+      task_category: "Scheduled Task"
+
+    4700:
+      description: "A scheduled task was enabled"
+      level: "Information"
+      task_category: "Scheduled Task"
+
+    4701:
+      description: "A scheduled task was disabled"
+      level: "Information"
+      task_category: "Scheduled Task"
+
+    4702:
+      description: "A scheduled task was updated"
+      level: "Information"
+      task_category: "Scheduled Task"
+
+    4719:
+      description: "System audit policy was changed"
+      level: "Information"
+      task_category: "Policy Change"
+
+    4728:
+      description: "A member was added to a security-enabled global group"
+      level: "Information"
+      task_category: "Security Group Management"
+
+    4740:
+      description: "A user account was locked out"
+      level: "Information"
+      task_category: "User Account Management"
+
+    4735:
+      description: "A security-enabled local group was changed"
+      level: "Information"
+      task_category: "Security Group Management"
+
+  system:
+    6005:
+      description: "The Event log service was started"
+      level: "Information"
+      task_category: "None"
+
+    6006:
+      description: "The Event log service was stopped"
+      level: "Information"
+      task_category: "None"
+
+    6008:
+      description: "The previous system shutdown was unexpected"
+      level: "Error"
+      task_category: "None"
+
+    7034:
+      description: "A service terminated unexpectedly"
+      level: "Error"
+      task_category: "None"
+
+    7036:
+      description: "The service entered the running/stopped state"
+      level: "Information"
+      task_category: "None"
+
+    7040:
+      description: "The start type of a service was changed"
+      level: "Information"
+      task_category: "None"
+
+    7000:
+      description: "A driver failed to load during startup"
+      level: "Error"
+      task_category: "None"
+
+    7026:
+      description: "The following boot-start or system-start drivers failed to load"
+      level: "Error"
+      task_category: "None"
+
+    41:
+      description: "The system has rebooted without cleanly shutting down first"
+      level: "Critical"
+      task_category: "Kernel-Power"
+
+  application:
+    1000:
+      description: "Application Error"
+      level: "Error"
+      task_category: "Application Crash"
+
+    1001:
+      description: "Windows Error Reporting"
+      level: "Information"
+      task_category: "None"
+
+    1002:
+      description: "Application Hang"
+      level: "Error"
+      task_category: "Application Hang"
+
+    11707:
+      description: "Installation completed successfully"
+      level: "Information"
+      task_category: "MsiInstaller"
+
+    11708:
+      description: "Installation failed"
+      level: "Error"
+      task_category: "MsiInstaller"
+
+    11724:
+      description: "Application removal completed successfully"
+      level: "Information"
+      task_category: "MsiInstaller"
+
+  task_scheduler:
+    100:
+      description: "Task started"
+      level: "Information"
+      task_category: "Task started"
+
+    102:
+      description: "Task completed"
+      level: "Information"
+      task_category: "Task completed"
+
+    103:
+      description: "Task failed"
+      level: "Error"
+      task_category: "Task failed"
+
+    106:
+      description: "Task registered"
+      level: "Information"
+      task_category: "Task registered"
+
+    107:
+      description: "Task triggered"
+      level: "Information"
+      task_category: "Task triggered"
+
+    140:
+      description: "Task updated"
+      level: "Information"
+      task_category: "Task updated"
+
+    141:
+      description: "Task deleted"
+      level: "Information"
+      task_category: "Task deleted"
+
+  powershell:
+    400:
+      description: "Engine state is changed from None to Available"
+      level: "Information"
+      task_category: "Engine Lifecycle"
+
+    403:
+      description: "Engine state is changed from Available to Stopped"
+      level: "Information"
+      task_category: "Engine Lifecycle"
+
+    600:
+      description: "Provider Lifecycle"
+      level: "Information"
+      task_category: "Provider Lifecycle"
+
+    4103:
+      description: "Module logging"
+      level: "Information"
+      task_category: "Execute a Remote Command"
+
+    4104:
+      description: "Script block logging"
+      level: "Information"
+      task_category: "Execute a Remote Command"
+
+  defender:
+    1000:
+      description: "Antimalware scan started"
+      level: "Information"
+      task_category: "None"
+
+    1001:
+      description: "Antimalware scan finished"
+      level: "Information"
+      task_category: "None"
+
+    1002:
+      description: "Antimalware scan was stopped before completion"
+      level: "Warning"
+      task_category: "None"
+
+    1116:
+      description: "Antimalware platform detected malware or other potentially unwanted software"
+      level: "Warning"
+      task_category: "None"
+
+    1117:
+      description: "Antimalware platform performed an action to protect your system"
+      level: "Information"
+      task_category: "None"
+
+    2000:
+      description: "Antimalware signature updated"
+      level: "Information"
+      task_category: "None"
+
+    5001:
+      description: "Real-time protection is disabled"
+      level: "Warning"
+      task_category: "None"
+
+  windows_update:
+    19:
+      description: "Installation ready / Installation successful"
+      level: "Information"
+      task_category: "None"
+
+    20:
+      description: "Installation failure"
+      level: "Error"
+      task_category: "None"
+
+    17:
+      description: "Installation ready"
+      level: "Information"
+      task_category: "None"
+
+  firewall:
+    2004:
+      description: "A rule has been added to the Windows Firewall exception list"
+      level: "Information"
+      task_category: "None"
+
+    2005:
+      description: "A rule has been modified in the Windows Firewall exception list"
+      level: "Information"
+      task_category: "None"
+
+    2042:
+      description: "Windows Firewall service started"
+      level: "Information"
+      task_category: "None"
+
+    5152:
+      description: "The Windows Filtering Platform blocked a packet"
+      level: "Information"
+      task_category: "None"
+
+    5157:
+      description: "The Windows Filtering Platform blocked a connection"
+      level: "Information"
+      task_category: "None"
+
+  dns_client:
+    1014:
+      description: "DNS query failed"
+      level: "Warning"
+      task_category: "None"
+
+    3006:
+      description: "DNS cache was flushed"
+      level: "Information"
+      task_category: "None"
+
+    3020:
+      description: "DNS query sent"
+      level: "Information"
+      task_category: "None"
+
+  wmi:
+    11:
+      description: "WMI operation started"
+      level: "Information"
+      task_category: "None"
+
+    12:
+      description: "WMI operation completed"
+      level: "Information"
+      task_category: "None"
+
+    10:
+      description: "WMI provider failure"
+      level: "Error"
+      task_category: "None"

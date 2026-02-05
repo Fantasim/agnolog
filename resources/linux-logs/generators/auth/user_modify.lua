@@ -28,7 +28,7 @@ return {
 
         return {
             pid = ctx.random.int(500, 32768),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             change_description = ctx.random.choice(changes)
         }
     end

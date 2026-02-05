@@ -1,0 +1,44 @@
+version: "1.0"
+metadata:
+  description: "Sample malware and threat names for Windows Defender events"
+
+data:
+  trojans:
+    - "Trojan:Win32/Wacatac.B!ml"
+    - "Trojan:Win32/Casdet!rfn"
+    - "Trojan:Win32/Emotet.A"
+    - "Trojan:Win32/AgentTesla"
+    - "Trojan:Win32/Tnega!MTB"
+    - "Trojan:Win32/Phonzy.A!ml"
+    - "Trojan:Win32/Zpevdo.A"
+
+  adware:
+    - "Adware:Win32/Keygen"
+    - "Adware:Win32/Pirrit"
+    - "Adware:MSIL/Adposhel"
+    - "Adware:Win32/Diplugem"
+
+  pua:
+    - "PUA:Win32/Presenoker"
+    - "PUA:Win32/Vigua.A"
+    - "PUA:Win32/Somoto"
+    - "PUA:Win32/InstallCore"
+
+  ransomware:
+    - "Ransom:Win32/WannaCrypt"
+    - "Ransom:Win32/Cerber"
+    - "Ransom:Win32/Ryuk"
+    - "Ransom:Win32/Sodinokibi"
+    - "Ransom:Win32/Lockbit"
+
+  worms:
+    - "Worm:Win32/Conficker"
+    - "Worm:Win32/Gamarue"
+    - "Worm:VBS/Jenxcus"
+
+  generic:
+    - "Behavior:Win32/Hive.ZY"
+    - "Backdoor:Win32/Tnega!MTB"
+    - "VirTool:Win32/Obfuscator"
+    - "HackTool:Win32/Mimikatz"
+    - "Exploit:Win32/CVE-2021-26855"

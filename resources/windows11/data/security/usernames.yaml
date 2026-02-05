@@ -1,0 +1,73 @@
+version: "1.0"
+metadata:
+  description: "Windows username patterns for local and domain accounts"
+
+data:
+  local_users:
+    - Administrator
+    - Guest
+    - DefaultAccount
+    - WDAGUtilityAccount
+    - SYSTEM
+    - LOCAL SERVICE
+    - NETWORK SERVICE
+
+  user_prefixes:
+    - john
+    - sarah
+    - mike
+    - jennifer
+    - david
+    - lisa
+    - robert
+    - mary
+    - james
+    - patricia
+    - michael
+    - linda
+    - william
+    - elizabeth
+    - richard
+    - barbara
+    - joseph
+    - susan
+    - thomas
+    - jessica
+    - charles
+    - karen
+    - daniel
+    - nancy
+    - matthew
+    - betty
+    - anthony
+    - margaret
+    - mark
+    - sandra
+
+  user_suffixes:
+    - .smith
+    - .johnson
+    - .williams
+    - .brown
+    - .jones
+    - .davis
+    - .miller
+    - .wilson
+    - .moore
+    - .taylor
+    - ""
+
+  admin_patterns:
+    - "adm_{username}"
+    - "{username}_admin"
+    - "{username}.admin"
+
+  service_accounts:
+    - svc_backup
+    - svc_sql
+    - svc_web
+    - svc_monitoring
+    - svc_exchange
+    - svc_sharepoint
+    - svc_reports
+    - svc_app

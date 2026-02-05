@@ -17,7 +17,7 @@ return {
         return {
             pid = ctx.random.int(500, 5000),
             session_id = ctx.random.int(1, 9999),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             seat = "seat0",
             vt = ctx.random.int(1, 7)
         }

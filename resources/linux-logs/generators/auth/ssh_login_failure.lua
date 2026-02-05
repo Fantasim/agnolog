@@ -18,7 +18,7 @@ return {
         local failure_reasons = ctx.data.users.authentication.failure_reasons or {"Failed password", "Invalid user"}
 
         return {
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             method = ctx.random.choice(auth_methods),
             ip = ctx.gen.ip_address(),
             port = ctx.random.int(1024, 65535),

@@ -30,7 +30,7 @@ return {
 
         return {
             reason = ctx.random.choice(reasons),
-            initiated_by = ctx.gen.username()
+            initiated_by = ctx.gen.player_name()
         }
     end
 }

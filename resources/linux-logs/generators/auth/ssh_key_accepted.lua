@@ -18,7 +18,7 @@ return {
 
         return {
             pid = ctx.random.int(1000, 32768),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             ip = ctx.gen.ip_address(),
             port = ctx.random.int(1024, 65535),
             key_type = ctx.random.choice(key_types),

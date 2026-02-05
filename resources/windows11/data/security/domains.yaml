@@ -1,0 +1,26 @@
+version: "1.0"
+metadata:
+  description: "Windows domain and workgroup names"
+
+data:
+  workgroups:
+    - WORKGROUP
+    - MSHOME
+
+  domain_prefixes:
+    - CORP
+    - CONTOSO
+    - FABRIKAM
+    - ADATUM
+    - NORTHWIND
+    - TAILSPIN
+    - WINGTIP
+
+  domain_suffixes:
+    - ""
+    - "-DOMAIN"
+
+  well_known_domains:
+    - "NT AUTHORITY"
+    - "NT SERVICE"
+    - "BUILTIN"

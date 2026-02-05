@@ -14,9 +14,14 @@ return {
     },
 
     generate = function(ctx, args)
+        -- Build hostname from YAML data
+        local prefixes = ctx.data.network.hostnames.prefixes or {"server"}
+        local suffixes = ctx.data.network.hostnames.suffixes or {"01"}
+        local hostname = ctx.random.choice(prefixes) .. "-" .. ctx.random.choice(suffixes)
+
         return {
             pid = ctx.random.int(1000, 32768),
-            hostname = ctx.gen.hostname(),
+            hostname = hostname,
             ip = ctx.gen.ip_address(),
             attempts = ctx.random.int(10, 100)
         }

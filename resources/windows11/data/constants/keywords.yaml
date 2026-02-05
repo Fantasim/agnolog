@@ -1,0 +1,13 @@
+version: "1.0"
+metadata:
+  description: "Windows Event keywords (hex flag values)"
+
+data:
+  audit_success: "0x8020000000000000"
+  audit_failure: "0x8010000000000000"
+  classic: "0x80000000000000"
+  response_time: "0x8000000000000000"
+  correlation_hint: "0x4000000000000000"
+  sqm: "0x2000000000000000"
+  wdi_diagnostic: "0x1000000000000000"
+  wdi_context: "0x800000000000000"

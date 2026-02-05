@@ -16,7 +16,7 @@ return {
     generate = function(ctx, args)
         return {
             pid = ctx.random.int(500, 32768),
-            user = ctx.gen.username(),
+            user = ctx.gen.player_name(),
             attempts = ctx.random.int(3, 10),
             from_ip = ctx.gen.ip_address()
         }

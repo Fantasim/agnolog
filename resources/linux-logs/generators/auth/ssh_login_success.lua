@@ -19,7 +19,7 @@ return {
 
         local user
         if ctx.random.float(0, 1) < 0.8 then
-            user = ctx.gen.username()
+            user = ctx.gen.player_name()
         else
             user = ctx.random.choice(system_users)
         end

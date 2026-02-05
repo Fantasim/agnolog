@@ -1,0 +1,36 @@
+version: "1.0"
+metadata:
+  description: "Windows workstation and computer naming patterns"
+
+data:
+  prefixes:
+    - DESKTOP
+    - WS
+    - PC
+    - LAPTOP
+    - NB
+    - CORP
+    - WIN11
+    - CLIENT
+
+  suffixes:
+    - "01"
+    - "02"
+    - "10"
+    - "15"
+    - "20"
+    - "25"
+    - "42"
+    - "99"
+    - "100"
+    - "A1B2C3"
+    - "XYZ123"
+    - "ABC456"
+    - "DEF789"
+
+  # User-based patterns
+  user_based_prefixes:
+    - JOHN-PC
+    - SARAH-LAPTOP
+    - MIKE-DESKTOP
+    - LISA-NB

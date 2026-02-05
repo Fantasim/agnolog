@@ -16,8 +16,8 @@ return {
     generate = function(ctx, args)
         return {
             pid = ctx.random.int(500, 32768),
-            user = ctx.gen.username(),
-            changed_by = ctx.gen.username()
+            user = ctx.gen.player_name(),
+            changed_by = ctx.gen.player_name()
         }
     end
 }
