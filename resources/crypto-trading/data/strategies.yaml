@@ -1,0 +1,34 @@
+version: "1.0"
+metadata:
+  description: "Trading strategies and algorithms"
+
+data:
+  strategy_types:
+    - grid_trading
+    - dca
+    - arbitrage
+    - mean_reversion
+    - momentum
+    - scalping
+    - trend_following
+    - breakout
+    - market_making
+    - pairs_trading
+
+  signal_types:
+    - golden_cross
+    - death_cross
+    - rsi_oversold
+    - rsi_overbought
+    - macd_crossover
+    - bollinger_breakout
+    - volume_spike
+    - support_bounce
+    - resistance_rejection
+    - trend_continuation
+
+  trend_directions:
+    - bullish
+    - bearish
+    - neutral
+    - reversal

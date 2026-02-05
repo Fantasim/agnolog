@@ -1,0 +1,18 @@
+version: "1.0"
+metadata:
+  description: "Cryptocurrency exchanges and trading platforms"
+
+data:
+  exchanges:
+    - Binance
+    - Coinbase Pro
+    - Kraken
+    - Bybit
+    - KuCoin
+    - OKX
+    - Gate.io
+    - Bitfinex
+    - Huobi
+    - Gemini
+    - Bitstamp
+    - Crypto.com
