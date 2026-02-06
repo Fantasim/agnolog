@@ -1,0 +1,43 @@
+Agnolog v{{VERSION}}
+
+Build Information
+=================
+Version:     {{VERSION}}
+Platform:    {{PLATFORM}}
+Build Date:  {{BUILD_DATE}}
+Python:      {{PYTHON_VERSION}}
+Commit:      {{COMMIT}}
+Commit Full: {{COMMIT_FULL}}
+Repository:  {{REPO_URL}}
+
+Platforms Built
+===============
+- Linux AMD64 (x86_64)
+- macOS AMD64 (Intel x86_64)
+- macOS ARM64 (Apple Silicon)
+- Windows AMD64 (x86_64)
+
+Build Process
+=============
+1. Dependencies: pip install + lupa C extension compilation
+2. Bundling: PyInstaller --onefile with resources embedded
+3. Resources: 8 themes (YAML data + Lua generators) bundled
+4. Optimization: stripped symbols, excluded unused packages
+
+Included Themes
+===============
+mmorpg, linux-logs, macos, windows11, windowsxp, crypto-trading, cex-engine, chess.com
+
+Verify Authenticity
+===================
+Repository: {{REPO_URL}}
+Commit:     {{REPO_URL}}/commit/{{COMMIT_FULL}}
+
+Clone, checkout the commit, and build locally:
+  git clone {{REPO_URL}}.git
+  cd logsimulator
+  git checkout {{COMMIT_FULL}}
+  pip install -e ".[dev]"
+  make build-binary
+
+Compare SHA256 checksums with SHA256SUMS.txt from the release.

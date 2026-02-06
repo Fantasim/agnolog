@@ -29,6 +29,7 @@ YAML Data (theme-specific, external)
 5. **Log everything** - Every function that can fail needs logging
 6. **Test everything** - No PR without tests
 7. **Remove deprecated code immediately** - When you see `DEPRECATED` comments or `DeprecationWarning`, remove that code entirely (class, function, imports, tests). Don't keep backwards compatibility shims.
+8. **Version lives in `scripts/.config.json`** - Run `make sync-version` after changing it
 
 ## Theme-Agnostic Design
 
@@ -89,6 +90,13 @@ Generic utilities (no theme data):
 | Generators | `resources/<theme>/generators/**/*.lua` (external) |
 | Logging utils | `agnolog/logutils/internal_logger.py` |
 | Test fixtures | `tests/conftest.py` |
+| Version config | `scripts/.config.json` (single source of truth) |
+| Release scripts | `scripts/release.sh`, `scripts/release-status.sh`, `scripts/release-clean.sh` |
+| Shared config loader | `scripts/common/load-config.sh` |
+| Release workflow | `.github/workflows/release.yml` |
+| Changelog | `docs/CHANGELOG.md` |
+| PyInstaller spec | `agnolog.spec` |
+| Release templates | `docs/templates/release-notes.md`, `docs/templates/build-info.txt` |
 
 ## Adding New Themes
 
@@ -251,6 +259,72 @@ make test          # All tests
 make test-cov      # With coverage (must stay >80%)
 ```
 
+## Version Management
+
+**Single source of truth:** `scripts/.config.json`
+
+```json
+{
+  "app_name": "agnolog",
+  "app_display_name": "Agnolog",
+  "version": "1.0.0",
+  "repo_url": "https://github.com/Fantasim/logsimulator"
+}
+```
+
+**Changing the version:**
+1. Edit `scripts/.config.json` — this is the only place to change version
+2. Run `make sync-version` — updates `pyproject.toml` and `constants.py` automatically
+3. Never edit version directly in `pyproject.toml` or `constants.py`
+
+**The release script verifies all three match** before allowing a release.
+
+## Release Workflow
+
+Releases create standalone binaries for 4 platforms via GitHub Actions.
+
+**Step-by-step release process:**
+1. Update version in `scripts/.config.json`
+2. Add changelog entry in `docs/CHANGELOG.md` under `## [X.Y.Z] - YYYY-MM-DD`
+3. Run `make sync-version` to propagate version
+4. Commit all changes
+5. Run `make release` — validates, runs tests, creates tag, pushes to trigger CI
+6. Monitor with `make release-status`
+
+**If a release fails:**
+1. Fix the issue
+2. Run `make release-clean` — removes tag and GitHub release
+3. Run `make release` again
+
+**Release pipeline (GitHub Actions):**
+```
+Tag push v*.*.* → validate → test & lint → build (4 platforms) → publish GitHub Release
+```
+
+**Platforms built:**
+- Linux x86_64 (ubuntu-latest)
+- macOS Intel (macos-13)
+- macOS Apple Silicon (macos-latest)
+- Windows x86_64 (windows-latest)
+
+## Binary Distribution
+
+Standalone binaries are built with PyInstaller and bundle the Python interpreter, all dependencies, and all resource themes.
+
+**PyInstaller config:** `agnolog.spec` (checked into repo)
+
+**How frozen detection works in `agnolog/cli.py`:**
+- `sys.frozen` is `True` when running as a PyInstaller binary
+- `sys._MEIPASS` points to the temp extraction directory with bundled resources
+- `--resources` becomes optional (defaults to bundled resources)
+- `--theme <name>` resolves to `{bundled_resources}/<name>`
+
+**Testing locally:**
+```bash
+make build-binary       # Build the binary
+make build-binary-test  # Build + verify it works
+```
+
 ## Git Workflow
 
 **Always commit after completing a task.** Don't wait for the user to ask.
@@ -276,10 +350,12 @@ Before every commit, verify:
 - [ ] Logging at DEBUG (entry), INFO (success), ERROR (failure)
 - [ ] Tests written and passing (`make test`)
 - [ ] `make check` passes (lint + test + validate)
+- [ ] If version changed: `make sync-version` was run
 
 ## Quick Commands
 
 ```bash
+# Development
 make check        # Full validation (lint, test, validate)
 make test-cov     # Tests with coverage report
 make validate     # Validate YAML/Lua resources
@@ -288,9 +364,18 @@ make format       # Auto-format code
 make run          # Generate 100 logs (uses default RESOURCES)
 make merge-groups # Show merge groups for DB schema validation
 
-# CLI (--resources is required)
-python -m agnolog --resources ./resources/mmorpg --list-types
-python -m agnolog --resources ./resources/mmorpg --show-merge-groups
+# CLI (--resources or --theme required in dev mode)
+python -m agnolog --theme mmorpg --list-types
 python -m agnolog --resources ./resources/mmorpg -n 100 -f text
 make run RESOURCES=./resources/mmorpg  # Override default
+
+# Binary building
+make build-binary       # Build standalone binary with PyInstaller
+make build-binary-test  # Build + verify binary works
+
+# Releasing
+make sync-version    # Sync version from scripts/.config.json to pyproject.toml + constants.py
+make release         # Validate, tag, push (triggers GitHub Actions)
+make release-status  # Check GitHub Actions workflow progress
+make release-clean   # Clean up failed release (remove tag + GitHub release)
 ```

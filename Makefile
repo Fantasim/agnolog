@@ -1,4 +1,5 @@
-.PHONY: help install dev test lint format validate run clean build publish docs
+.PHONY: help install dev test lint format validate run clean build publish docs \
+       release release-status release-clean sync-version build-binary build-binary-test
 
 # Resources path (override with: make run RESOURCES=/path/to/resources)
 RESOURCES ?= ./resources/mmorpg
@@ -27,14 +28,21 @@ help:
 	@echo "  list        List all available log types"
 	@echo "  merge-groups Show merge groups for DB schema validation"
 	@echo ""
+	@echo "Building:"
+	@echo "  build          Build Python package"
+	@echo "  build-binary   Build standalone binary (PyInstaller)"
+	@echo "  build-binary-test  Build binary and verify it works"
+	@echo "  clean          Remove build artifacts"
+	@echo ""
+	@echo "Release:"
+	@echo "  release         Create release (validate + tag + push)"
+	@echo "  release-status  Check GitHub Actions workflow status"
+	@echo "  release-clean   Clean up failed release"
+	@echo "  sync-version    Sync version from scripts/.config.json"
+	@echo ""
 	@echo "Documentation:"
 	@echo "  docs        Show documentation location"
 	@echo "  docs-open   Open docs in browser (Linux)"
-	@echo ""
-	@echo "Building:"
-	@echo "  build       Build package"
-	@echo "  clean       Remove build artifacts"
-	@echo "  publish     Publish to PyPI (requires credentials)"
 
 # Installation
 install:
@@ -94,6 +102,7 @@ build: clean
 clean:
 	rm -rf build/
 	rm -rf dist/
+	rm -rf release/
 	rm -rf *.egg-info/
 	rm -rf .pytest_cache/
 	rm -rf .ruff_cache/
@@ -104,6 +113,38 @@ clean:
 
 publish: build
 	python -m twine upload dist/*
+
+# Binary building (PyInstaller)
+build-binary:
+	pip install pyinstaller
+	pyinstaller agnolog.spec
+	@echo ""
+	@echo "Binary built: dist/agnolog"
+
+build-binary-test: build-binary
+	@echo ""
+	@echo "Verifying binary..."
+	./dist/agnolog --theme mmorpg --list-types
+	@echo ""
+	./dist/agnolog --theme mmorpg -n 10 -f text
+	@echo ""
+	@echo "Binary verification passed!"
+
+# Release
+release:
+	@bash scripts/release.sh
+
+release-status:
+	@bash scripts/release-status.sh
+
+release-clean:
+	@bash scripts/release-clean.sh
+
+sync-version:
+	@VERSION=$$(jq -r '.version' scripts/.config.json) && \
+	sed -i "s/^version = .*/version = \"$$VERSION\"/" pyproject.toml && \
+	sed -i "s/^VERSION: Final\[str\] = .*/VERSION: Final[str] = \"$$VERSION\"/" agnolog/core/constants.py && \
+	echo "Synced version to $$VERSION in pyproject.toml and constants.py"
 
 # Documentation
 docs:

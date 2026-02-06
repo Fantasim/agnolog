@@ -1,0 +1,315 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+env:
+  PYTHON_VERSION: '3.12'
+  APP_NAME: agnolog
+  APP_DISPLAY_NAME: Agnolog
+
+jobs:
+  # ============================================================================
+  # Job 1: Validate that the tag matches scripts/.config.json version
+  # ============================================================================
+  validate:
+    name: Validate Release Tag
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.config.outputs.version }}
+      tag: ${{ steps.config.outputs.tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read config version
+        id: config
+        run: |
+          VERSION=$(jq -r '.version' scripts/.config.json)
+          TAG="v${VERSION}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "Config version: ${VERSION}"
+          echo "Git tag: ${GITHUB_REF_NAME}"
+
+      - name: Validate tag matches config
+        run: |
+          CONFIG_TAG="v$(jq -r '.version' scripts/.config.json)"
+          if [[ "$GITHUB_REF_NAME" != "$CONFIG_TAG" ]]; then
+            echo "::error::Tag ($GITHUB_REF_NAME) does not match config version ($CONFIG_TAG)"
+            exit 1
+          fi
+
+      - name: Check for existing release
+        run: |
+          if gh release view "$GITHUB_REF_NAME" &>/dev/null; then
+            echo "::error::Release $GITHUB_REF_NAME already exists"
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  # ============================================================================
+  # Job 2: Run tests and linting
+  # ============================================================================
+  test:
+    name: Test & Lint
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run linter
+        run: ruff check agnolog tests
+
+      - name: Run tests
+        run: python -m pytest tests/ -v
+
+  # ============================================================================
+  # Job 3: Build standalone binaries (native runners per platform)
+  # ============================================================================
+  build:
+    name: Build ${{ matrix.platform.label }}
+    needs: [validate, test]
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { label: linux-amd64,   runner: ubuntu-latest,  archive: tar.gz, os: linux }
+          - { label: macos-amd64,   runner: macos-13,       archive: tar.gz, os: darwin }
+          - { label: macos-arm64,   runner: macos-latest,   archive: tar.gz, os: darwin }
+          - { label: windows-amd64, runner: windows-latest, archive: zip,    os: windows }
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install pyinstaller
+
+      - name: Build binary
+        run: pyinstaller agnolog.spec
+
+      - name: Verify binary works (Unix)
+        if: matrix.platform.os != 'windows'
+        run: |
+          chmod +x dist/agnolog
+          ./dist/agnolog --version
+          ./dist/agnolog --list-themes
+          ./dist/agnolog --theme mmorpg --list-types
+
+      - name: Verify binary works (Windows)
+        if: matrix.platform.os == 'windows'
+        run: |
+          dist\agnolog.exe --version
+          dist\agnolog.exe --list-themes
+          dist\agnolog.exe --theme mmorpg --list-types
+        shell: cmd
+
+      - name: Generate platform README (Unix)
+        if: matrix.platform.os != 'windows'
+        run: |
+          PLATFORM_DIR="release/${APP_NAME}-v${VERSION}-${{ matrix.platform.label }}"
+          mkdir -p "$PLATFORM_DIR"
+          COMMIT_SHA=$(git rev-parse HEAD)
+          REPO_URL="https://github.com/${{ github.repository }}"
+
+          case "${{ matrix.platform.os }}" in
+            linux)  TEMPLATE="docs/templates/get-started-linux.md" ;;
+            darwin) TEMPLATE="docs/templates/get-started-macos.md" ;;
+          esac
+
+          if [[ -f "$TEMPLATE" ]]; then
+            sed -e "s|{{VERSION}}|${VERSION}|g" \
+                -e "s|{{REPO_URL}}|${REPO_URL}|g" \
+                -e "s|{{COMMIT_SHA}}|${COMMIT_SHA}|g" \
+                "$TEMPLATE" > "$PLATFORM_DIR/README.md"
+          fi
+
+          # Copy binary
+          cp dist/agnolog "$PLATFORM_DIR/"
+
+      - name: Generate platform README (Windows)
+        if: matrix.platform.os == 'windows'
+        shell: bash
+        run: |
+          PLATFORM_DIR="release/${APP_NAME}-v${VERSION}-${{ matrix.platform.label }}"
+          mkdir -p "$PLATFORM_DIR"
+          COMMIT_SHA=$(git rev-parse HEAD)
+          REPO_URL="https://github.com/${{ github.repository }}"
+          TEMPLATE="docs/templates/get-started-windows.md"
+
+          if [[ -f "$TEMPLATE" ]]; then
+            sed -e "s|{{VERSION}}|${VERSION}|g" \
+                -e "s|{{REPO_URL}}|${REPO_URL}|g" \
+                -e "s|{{COMMIT_SHA}}|${COMMIT_SHA}|g" \
+                "$TEMPLATE" > "$PLATFORM_DIR/README.md"
+          fi
+
+          # Copy binary
+          cp dist/agnolog.exe "$PLATFORM_DIR/"
+
+      - name: Generate BUILD_INFO.txt
+        shell: bash
+        run: |
+          PLATFORM_DIR="release/${APP_NAME}-v${VERSION}-${{ matrix.platform.label }}"
+          COMMIT_SHA=$(git rev-parse HEAD)
+          COMMIT_SHORT=$(git rev-parse --short HEAD)
+          REPO_URL="https://github.com/${{ github.repository }}"
+          PYTHON_VER=$(python --version 2>&1)
+
+          sed -e "s|{{VERSION}}|${VERSION}|g" \
+              -e "s|{{PLATFORM}}|${{ matrix.platform.label }}|g" \
+              -e "s|{{BUILD_DATE}}|$(date -u '+%Y-%m-%dT%H:%M:%SZ')|g" \
+              -e "s|{{PYTHON_VERSION}}|${PYTHON_VER}|g" \
+              -e "s|{{COMMIT}}|${COMMIT_SHORT}|g" \
+              -e "s|{{COMMIT_FULL}}|${COMMIT_SHA}|g" \
+              -e "s|{{REPO_URL}}|${REPO_URL}|g" \
+              docs/templates/build-info.txt > "$PLATFORM_DIR/BUILD_INFO.txt"
+
+      - name: Create archive (Unix)
+        if: matrix.platform.os != 'windows'
+        run: |
+          PLATFORM_DIR="${APP_NAME}-v${VERSION}-${{ matrix.platform.label }}"
+          cd release
+          tar -czf "${PLATFORM_DIR}.tar.gz" "${PLATFORM_DIR}/"
+          sha256sum "${PLATFORM_DIR}.tar.gz" > "${PLATFORM_DIR}.sha256"
+
+      - name: Create archive (Windows)
+        if: matrix.platform.os == 'windows'
+        shell: bash
+        run: |
+          PLATFORM_DIR="${APP_NAME}-v${VERSION}-${{ matrix.platform.label }}"
+          cd release
+          7z a -tzip "${PLATFORM_DIR}.zip" "${PLATFORM_DIR}/"
+          sha256sum "${PLATFORM_DIR}.zip" > "${PLATFORM_DIR}.sha256"
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.platform.label }}
+          path: |
+            release/*.tar.gz
+            release/*.zip
+            release/*.sha256
+          retention-days: 1
+
+  # ============================================================================
+  # Job 4: Publish GitHub Release with all artifacts
+  # ============================================================================
+  publish:
+    name: Publish GitHub Release
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+      TAG: ${{ needs.validate.outputs.tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+          pattern: release-*
+          merge-multiple: true
+
+      - name: Consolidate checksums
+        run: |
+          cd artifacts
+          cat *.sha256 > SHA256SUMS.txt 2>/dev/null || true
+          rm -f *.sha256
+          echo "=== SHA256 Checksums ==="
+          cat SHA256SUMS.txt
+
+      - name: Generate release notes
+        run: |
+          COMMIT_SHA=$(git rev-parse HEAD)
+          COMMIT_SHORT=$(git rev-parse --short HEAD)
+          REPO_URL="https://github.com/${{ github.repository }}"
+          NOTES_FILE="artifacts/RELEASE_NOTES.md"
+
+          # Extract changelog for this version
+          CHANGELOG=$(awk -v version="$VERSION" '
+              /^## \[/ {
+                  if ($0 ~ "\\[" version "\\]") {
+                      in_section = 1
+                      next
+                  } else if (in_section) {
+                      exit
+                  }
+              }
+              in_section { print }
+          ' docs/CHANGELOG.md 2>/dev/null || echo "")
+
+          if [[ -z "$CHANGELOG" ]]; then
+              CHANGELOG="Release v${VERSION}"
+          fi
+
+          # First pass: replace simple placeholders
+          sed -e "s|{{VERSION}}|${VERSION}|g" \
+              -e "s|{{REPO_URL}}|${REPO_URL}|g" \
+              -e "s|{{COMMIT_SHA}}|${COMMIT_SHA}|g" \
+              -e "s|{{COMMIT_SHORT}}|${COMMIT_SHORT}|g" \
+              docs/templates/release-notes.md > /tmp/release_notes_tmp.md
+
+          # Replace {{CHANGELOG}} placeholder (may contain newlines)
+          awk -v changelog="$CHANGELOG" '{gsub(/\{\{CHANGELOG\}\}/, changelog)}1' \
+              /tmp/release_notes_tmp.md > /tmp/release_notes_tmp2.md
+
+          # Replace {{CHECKSUMS}} placeholder with file content
+          awk '
+            /\{\{CHECKSUMS\}\}/ {
+              while ((getline line < "artifacts/SHA256SUMS.txt") > 0) {
+                print line
+              }
+              close("artifacts/SHA256SUMS.txt")
+              next
+            }
+            {print}
+          ' /tmp/release_notes_tmp2.md > "$NOTES_FILE"
+
+          echo "=== Release Notes Generated ==="
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: "${{ env.APP_DISPLAY_NAME }} ${{ env.TAG }}"
+          body_path: artifacts/RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/*.tar.gz
+            artifacts/*.zip
+            artifacts/SHA256SUMS.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

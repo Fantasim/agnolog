@@ -27,6 +27,7 @@ wheels/
 # PyInstaller
 *.manifest
 *.spec
+!agnolog.spec
 
 # Installer logs
 pip-log.txt
@@ -82,3 +83,4 @@ Thumbs.db
 # Project specific
 *.log
 /output/
+/release/

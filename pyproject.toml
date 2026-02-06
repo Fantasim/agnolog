@@ -35,14 +35,15 @@ dev = [
     "pytest-asyncio>=0.21.0",
     "mypy>=1.0.0",
     "ruff>=0.1.0",
+    "pyinstaller>=6.0.0",
 ]
 
 [project.scripts]
 agnolog = "agnolog.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/louis/agnolog"
-Repository = "https://github.com/louis/agnolog"
+Homepage = "https://github.com/Fantasim/logsimulator"
+Repository = "https://github.com/Fantasim/logsimulator"
 
 [build-system]
 requires = ["hatchling"]

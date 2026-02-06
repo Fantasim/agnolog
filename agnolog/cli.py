@@ -1,17 +1,18 @@
 """
 Command-line interface for the Agnolog Fake Log Generator.
 
-Resources are external to the package and must be provided via --resources.
+When running as a standalone binary, resources are bundled and --theme selects one.
+When running as a Python package, --resources must be provided.
 
 Usage:
-    agnolog --resources /path/to/resources -n 100
-    agnolog --resources ~/mygame/resources -f text -o out.log
-    agnolog --resources ./resources --list-types
-    agnolog --resources ./resources validate
+    agnolog --theme mmorpg -n 100              (binary: use bundled theme)
+    agnolog --resources /path/to/resources -n 100  (dev: external resources)
+    agnolog --list-themes                      (binary: show bundled themes)
 """
 
 import argparse
 import logging
+import os
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -30,6 +31,88 @@ from agnolog.formatters import JSONFormatter, LoghubCSVFormatter, TextFormatter
 from agnolog.logutils import setup_internal_logging, get_internal_logger
 from agnolog.output import FileOutputHandler, StreamOutputHandler
 from agnolog.scheduling import LogScheduler
+
+
+def is_frozen() -> bool:
+    """Check if running as a PyInstaller frozen binary."""
+    return getattr(sys, 'frozen', False)
+
+
+def get_bundled_resources_path() -> Optional[str]:
+    """Get path to bundled resources directory when running as frozen executable."""
+    if is_frozen():
+        base = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
+        resources_dir = os.path.join(base, 'resources')
+        if os.path.isdir(resources_dir):
+            return resources_dir
+    return None
+
+
+def get_theme_path(theme_name: str) -> Optional[str]:
+    """Resolve a theme name to its resource directory path."""
+    bundled = get_bundled_resources_path()
+    if bundled:
+        theme_dir = os.path.join(bundled, theme_name)
+        if os.path.isdir(theme_dir):
+            return theme_dir
+    return None
+
+
+def list_themes() -> None:
+    """List available bundled themes."""
+    bundled = get_bundled_resources_path()
+    if not bundled:
+        print("No bundled themes available (not running as binary).", file=sys.stderr)
+        return
+
+    print(f"\nAvailable themes:")
+    print(f"{'=' * 40}")
+    for entry in sorted(os.listdir(bundled)):
+        theme_dir = os.path.join(bundled, entry)
+        if os.path.isdir(theme_dir):
+            # Count generators
+            gen_dir = os.path.join(theme_dir, 'generators')
+            gen_count = 0
+            if os.path.isdir(gen_dir):
+                for root, _dirs, files in os.walk(gen_dir):
+                    gen_count += sum(1 for f in files if f.endswith('.lua'))
+            print(f"  {entry:<25} ({gen_count} generators)")
+    print()
+
+
+def resolve_resources_path(parsed: argparse.Namespace) -> Optional[str]:
+    """Resolve the final resources path from --theme or --resources."""
+    if parsed.resources:
+        return parsed.resources
+
+    if parsed.theme:
+        theme_path = get_theme_path(parsed.theme)
+        if theme_path:
+            return theme_path
+        # If not frozen but --theme used, try local resources/
+        local_path = os.path.join('resources', parsed.theme)
+        if os.path.isdir(local_path):
+            return local_path
+        print(f"Error: Theme '{parsed.theme}' not found.", file=sys.stderr)
+        if is_frozen():
+            print("Use --list-themes to see available themes.", file=sys.stderr)
+        return None
+
+    # No --resources and no --theme: use default bundled theme if frozen
+    if is_frozen():
+        default_theme = get_theme_path('mmorpg')
+        if default_theme:
+            return default_theme
+        # Fall back to first available theme
+        bundled = get_bundled_resources_path()
+        if bundled:
+            for entry in sorted(os.listdir(bundled)):
+                theme_dir = os.path.join(bundled, entry)
+                if os.path.isdir(theme_dir):
+                    return theme_dir
+
+    print("Error: --resources or --theme is required.", file=sys.stderr)
+    return None
 
 
 def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[str]]:
@@ -356,15 +439,16 @@ def _generate_loghub_output(
 def main(args: Optional[List[str]] = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="Generate realistic MMORPG server logs",
+        description="Generate realistic fake server logs",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  agnolog --resources ./res -n 100                   Generate 100 logs (JSON to stdout)
-  agnolog --resources ./res -n 1000 -f text -o out.log  Generate text logs to file
+  agnolog --theme mmorpg -n 100                      Generate 100 logs (JSON to stdout)
+  agnolog --theme linux-logs -n 1000 -f text -o out.log  Generate text logs to file
   agnolog --resources ./res --categories player combat  Filter to specific categories
   agnolog --resources ./res --loghub output -n 1000  Generate loghub format (3 files)
-  agnolog --resources ./res --list-types             List all available log types
+  agnolog --list-themes                              List available themes
+  agnolog --theme mmorpg --list-types                List all log types in a theme
   agnolog --resources ./res validate                 Validate all resources
         """,
     )
@@ -499,8 +583,21 @@ Examples:
     parser.add_argument(
         "--resources",
         type=str,
-        required=True,
+        default=None,
         help="Path to resources directory (contains data/ and generators/ subdirectories)",
+    )
+
+    parser.add_argument(
+        "--theme",
+        type=str,
+        default=None,
+        help="Theme name to use (resolves to bundled or local resources/<name>)",
+    )
+
+    parser.add_argument(
+        "--list-themes",
+        action="store_true",
+        help="List available bundled themes and exit",
     )
 
     parser.add_argument(
@@ -526,26 +623,36 @@ Examples:
 
     parsed = parser.parse_args(args)
 
+    # Handle list-themes early (no resources needed)
+    if parsed.list_themes:
+        list_themes()
+        return 0
+
+    # Resolve resources path from --resources or --theme
+    resources_path = resolve_resources_path(parsed)
+    if resources_path is None:
+        return 1
+
     # Handle validate subcommand
     if parsed.command == "validate":
-        return validate_resources(parsed.resources)
+        return validate_resources(resources_path)
 
     # Determine whether to use Lua
     use_lua = parsed.use_lua and not parsed.use_python
 
     # Handle list-types early
     if parsed.list_types:
-        list_types(use_lua=use_lua, resources_path=parsed.resources)
+        list_types(use_lua=use_lua, resources_path=resources_path)
         return 0
 
     # Handle list-categories early
     if parsed.list_categories:
-        list_categories(use_lua=use_lua, resources_path=parsed.resources)
+        list_categories(use_lua=use_lua, resources_path=resources_path)
         return 0
 
     # Handle show-merge-groups early
     if parsed.show_merge_groups:
-        show_merge_groups(use_lua=use_lua, resources_path=parsed.resources)
+        show_merge_groups(use_lua=use_lua, resources_path=resources_path)
         return 0
 
     # Set random seed if provided
@@ -567,7 +674,7 @@ Examples:
     # Load Lua generators if enabled
     if use_lua:
         try:
-            lua_count = register_lua_generators(parsed.resources)
+            lua_count = register_lua_generators(resources_path)
             logger.info(f"Loaded {lua_count} Lua generators")
         except Exception as e:
             logger.warning(f"Failed to load Lua generators: {e}")
