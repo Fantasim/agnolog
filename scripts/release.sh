@@ -69,7 +69,13 @@ fi
 
 echo ""
 echo -e "${BOLD}${CYAN}Running tests...${NC}"
-PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+if [ -x "$REPO_ROOT/.venv/bin/python3" ]; then
+    PYTHON="$REPO_ROOT/.venv/bin/python3"
+elif [ -x "$REPO_ROOT/.venv/bin/python" ]; then
+    PYTHON="$REPO_ROOT/.venv/bin/python"
+else
+    PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+fi
 if ! "$PYTHON" -m pytest "$REPO_ROOT/tests/" -v 2>&1; then
     echo -e "${RED}Tests failed! Fix them before releasing.${NC}"
     exit 1
