@@ -4,15 +4,13 @@ Tests for agnolog.output module.
 Tests output handlers for file and stream output.
 """
 
-import pytest
-import os
 from io import StringIO
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 
 from agnolog.output import (
-    StreamOutputHandler,
     FileOutputHandler,
     RotatingFileHandler,
+    StreamOutputHandler,
 )
 
 

@@ -16,39 +16,37 @@ import os
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from agnolog.core.registry import LogTypeRegistry
     from agnolog.scheduling import LogScheduler
 
-from agnolog.core.config import Config
 from agnolog.core.constants import DEFAULT_LOG_COUNT, DEFAULT_TIME_SCALE, VERSION
 from agnolog.core.factory import LogFactory
 from agnolog.core.registry import get_registry, register_lua_generators
-from agnolog.core.types import LogFormat
 from agnolog.formatters import JSONFormatter, LoghubCSVFormatter, TextFormatter
-from agnolog.logutils import setup_internal_logging, get_internal_logger
+from agnolog.logutils import get_internal_logger, setup_internal_logging
 from agnolog.output import FileOutputHandler, StreamOutputHandler
 from agnolog.scheduling import LogScheduler
 
 
 def is_frozen() -> bool:
     """Check if running as a PyInstaller frozen binary."""
-    return getattr(sys, 'frozen', False)
+    return getattr(sys, "frozen", False)
 
 
-def get_bundled_resources_path() -> Optional[str]:
+def get_bundled_resources_path() -> str | None:
     """Get path to bundled resources directory when running as frozen executable."""
     if is_frozen():
-        base = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
-        resources_dir = os.path.join(base, 'resources')
+        base = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
+        resources_dir = os.path.join(base, "resources")
         if os.path.isdir(resources_dir):
             return resources_dir
     return None
 
 
-def get_theme_path(theme_name: str) -> Optional[str]:
+def get_theme_path(theme_name: str) -> str | None:
     """Resolve a theme name to its resource directory path."""
     bundled = get_bundled_resources_path()
     if bundled:
@@ -65,22 +63,22 @@ def list_themes() -> None:
         print("No bundled themes available (not running as binary).", file=sys.stderr)
         return
 
-    print(f"\nAvailable themes:")
+    print("\nAvailable themes:")
     print(f"{'=' * 40}")
     for entry in sorted(os.listdir(bundled)):
         theme_dir = os.path.join(bundled, entry)
         if os.path.isdir(theme_dir):
             # Count generators
-            gen_dir = os.path.join(theme_dir, 'generators')
+            gen_dir = os.path.join(theme_dir, "generators")
             gen_count = 0
             if os.path.isdir(gen_dir):
                 for root, _dirs, files in os.walk(gen_dir):
-                    gen_count += sum(1 for f in files if f.endswith('.lua'))
+                    gen_count += sum(1 for f in files if f.endswith(".lua"))
             print(f"  {entry:<25} ({gen_count} generators)")
     print()
 
 
-def resolve_resources_path(parsed: argparse.Namespace) -> Optional[str]:
+def resolve_resources_path(parsed: argparse.Namespace) -> str | None:
     """Resolve the final resources path from --theme or --resources."""
     if parsed.resources:
         return parsed.resources
@@ -90,7 +88,7 @@ def resolve_resources_path(parsed: argparse.Namespace) -> Optional[str]:
         if theme_path:
             return theme_path
         # If not frozen but --theme used, try local resources/
-        local_path = os.path.join('resources', parsed.theme)
+        local_path = os.path.join("resources", parsed.theme)
         if os.path.isdir(local_path):
             return local_path
         print(f"Error: Theme '{parsed.theme}' not found.", file=sys.stderr)
@@ -100,7 +98,7 @@ def resolve_resources_path(parsed: argparse.Namespace) -> Optional[str]:
 
     # No --resources and no --theme: use default bundled theme if frozen
     if is_frozen():
-        default_theme = get_theme_path('mmorpg')
+        default_theme = get_theme_path("mmorpg")
         if default_theme:
             return default_theme
         # Fall back to first available theme
@@ -115,7 +113,7 @@ def resolve_resources_path(parsed: argparse.Namespace) -> Optional[str]:
     return None
 
 
-def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[str]]:
+def parse_categories(category_strs: list[str] | None) -> list[str] | None:
     """Parse category strings to uppercase category names."""
     if not category_strs:
         return None
@@ -125,7 +123,7 @@ def parse_categories(category_strs: Optional[List[str]]) -> Optional[List[str]]:
     return categories if categories else None
 
 
-def list_types(use_lua: bool = True, resources_path: Optional[str] = None) -> None:
+def list_types(use_lua: bool = True, resources_path: str | None = None) -> None:
     """List all available log types."""
     # Import Python generators to register them
     from agnolog import generators  # noqa
@@ -160,7 +158,7 @@ def list_types(use_lua: bool = True, resources_path: Optional[str] = None) -> No
                     print(f"  {log_type:<35} {meta.recurrence.name:<15}")
 
 
-def list_categories(use_lua: bool = True, resources_path: Optional[str] = None) -> None:
+def list_categories(use_lua: bool = True, resources_path: str | None = None) -> None:
     """List all available categories."""
     # Import Python generators to register them
     from agnolog import generators  # noqa
@@ -175,18 +173,17 @@ def list_categories(use_lua: bool = True, resources_path: Optional[str] = None) 
     registry = get_registry()
     summary = registry.categories_summary()
 
-    print(f"\nAvailable Categories")
+    print("\nAvailable Categories")
     print(f"{'=' * 40}")
     for category in sorted(summary.keys(), key=str.lower):
         print(f"  {category.lower():<20} ({summary[category]} log types)")
     print()
 
 
-def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None) -> None:
+def show_merge_groups(use_lua: bool = True, resources_path: str | None = None) -> None:
     """Show merge groups in LLM-readable format for validation."""
     # Import Python generators to register them
     from agnolog import generators  # noqa
-    from typing import Dict, List, Tuple
 
     # Load Lua generators if requested
     if use_lua:
@@ -198,8 +195,8 @@ def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None
     registry = get_registry()
 
     # Group templates by merge_group
-    groups: Dict[str, List[Tuple[str, str]]] = {}  # group -> [(name, template), ...]
-    ungrouped: List[Tuple[str, str]] = []
+    groups: dict[str, list[tuple[str, str]]] = {}  # group -> [(name, template), ...]
+    ungrouped: list[tuple[str, str]] = []
 
     for name, meta in registry.all_metadata().items():
         if meta.merge_groups:
@@ -217,13 +214,17 @@ def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None
     print("Review the merge groups below and validate whether templates are grouped correctly.")
     print()
     print("A **merge group** defines templates that could **share a single database table**.")
-    print("The goal is pragmatic schema design - only group templates that naturally belong together.")
+    print(
+        "The goal is pragmatic schema design - only group templates that naturally belong together."
+    )
     print()
     print("## Design Principles")
     print()
     print("Templates should be in the same merge group ONLY if they satisfy ALL of these:")
     print()
-    print("1. **Same grain** - One row represents the same \"thing\" (e.g., one transaction, one session)")
+    print(
+        '1. **Same grain** - One row represents the same "thing" (e.g., one transaction, one session)'
+    )
     print("2. **Schema overlap** - Templates share most core fields")
     print("3. **Query together** - Analysts would JOIN or UNION these in the same queries")
     print("4. **Don't force it** - Leave templates ungrouped if they're unique enough")
@@ -267,10 +268,10 @@ def show_merge_groups(use_lua: bool = True, resources_path: Optional[str] = None
     print("If changes are needed, specify which templates to move and why.")
 
 
-def validate_resources(resources_path: Optional[str] = None) -> int:
+def validate_resources(resources_path: str | None = None) -> int:
     """Validate all YAML and Lua resources."""
+    from agnolog.core.lua_runtime import LUPA_AVAILABLE, LuaSandbox
     from agnolog.core.resource_loader import ResourceLoader
-    from agnolog.core.lua_runtime import LuaSandbox, LUPA_AVAILABLE
 
     print(f"\nMMORPG Fake Log Generator v{VERSION}")
     print(f"{'=' * 50}")
@@ -362,7 +363,7 @@ def _generate_loghub_output(
     templates_path = f"{prefix}_templates.csv"
 
     if not parsed.quiet:
-        print(f"Generating loghub output:", file=sys.stderr)
+        print("Generating loghub output:", file=sys.stderr)
         print(f"  - {log_path}", file=sys.stderr)
         print(f"  - {structured_path}", file=sys.stderr)
         print(f"  - {templates_path}", file=sys.stderr)
@@ -436,7 +437,7 @@ def _generate_loghub_output(
         return 1
 
 
-def main(args: Optional[List[str]] = None) -> int:
+def main(args: list[str] | None = None) -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
         description="Generate realistic fake server logs",
@@ -454,27 +455,31 @@ Examples:
     )
 
     parser.add_argument(
-        "-v", "--version",
+        "-v",
+        "--version",
         action="version",
         version=f"agnolog {VERSION}",
     )
 
     parser.add_argument(
-        "-n", "--count",
+        "-n",
+        "--count",
         type=int,
         default=DEFAULT_LOG_COUNT,
         help=f"Number of log entries to generate (default: {DEFAULT_LOG_COUNT})",
     )
 
     parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         choices=["json", "text", "ndjson"],
         default="json",
         help="Output format (default: json)",
     )
 
     parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         type=str,
         default=None,
         help="Output file (default: stdout)",
@@ -658,6 +663,7 @@ Examples:
     # Set random seed if provided
     if parsed.seed is not None:
         import random
+
         random.seed(parsed.seed)
 
     # Setup internal logging

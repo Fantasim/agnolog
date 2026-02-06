@@ -5,7 +5,7 @@ Useful for console output and piping to other tools.
 """
 
 import sys
-from typing import Optional, TextIO
+from typing import TextIO
 
 from agnolog.output.base import BaseOutputHandler
 
@@ -27,7 +27,7 @@ class StreamOutputHandler(BaseOutputHandler):
 
     def __init__(
         self,
-        stream: Optional[TextIO] = None,
+        stream: TextIO | None = None,
         add_newline: bool = True,
         auto_flush: bool = True,
     ) -> None:

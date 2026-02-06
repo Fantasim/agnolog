@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 import yaml
 
@@ -29,9 +29,9 @@ class ResourceLoader:
         zones = loader.get("world.zones")
     """
 
-    _instance: Optional[ResourceLoader] = None
+    _instance: ResourceLoader | None = None
 
-    def __new__(cls, resource_path: Optional[Path] = None) -> ResourceLoader:
+    def __new__(cls, resource_path: Path | None = None) -> ResourceLoader:
         """Ensure singleton instance (can be reset with new path)."""
         if cls._instance is None or resource_path is not None:
             instance = super().__new__(cls)
@@ -39,7 +39,7 @@ class ResourceLoader:
             cls._instance = instance
         return cls._instance
 
-    def __init__(self, resource_path: Optional[Path] = None) -> None:
+    def __init__(self, resource_path: Path | None = None) -> None:
         """
         Initialize the resource loader.
 
@@ -61,8 +61,8 @@ class ResourceLoader:
 
         self._resource_path = resource_path
         self._data_path = resource_path / "data"
-        self._cache: Dict[str, Any] = {}
-        self._all_data: Optional[Dict[str, Any]] = None
+        self._cache: dict[str, Any] = {}
+        self._all_data: dict[str, Any] | None = None
         self._initialized = True
 
     @classmethod
@@ -97,7 +97,7 @@ class ResourceLoader:
         if not file_path.exists():
             raise FileNotFoundError(f"Resource file not found: {file_path}")
 
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             return yaml.safe_load(f)
 
     def _path_to_key(self, file_path: Path) -> str:
@@ -177,7 +177,7 @@ class ResourceLoader:
             return content["data"]
         return content
 
-    def load_all(self) -> Dict[str, Any]:
+    def load_all(self) -> dict[str, Any]:
         """
         Load all YAML files into a nested dictionary.
 
@@ -208,7 +208,7 @@ class ResourceLoader:
 
         return self._all_data
 
-    def load_all_nested(self) -> Dict[str, Any]:
+    def load_all_nested(self) -> dict[str, Any]:
         """
         Load all YAML files into a nested structure.
 
@@ -219,7 +219,7 @@ class ResourceLoader:
             Nested dictionary structure
         """
         flat = self.load_all()
-        nested: Dict[str, Any] = {}
+        nested: dict[str, Any] = {}
 
         for key, value in flat.items():
             parts = key.split(".")
@@ -232,7 +232,7 @@ class ResourceLoader:
 
         return nested
 
-    def list_resources(self, category: Optional[str] = None) -> List[str]:
+    def list_resources(self, category: str | None = None) -> list[str]:
         """
         List available resource keys.
 
@@ -253,7 +253,7 @@ class ResourceLoader:
 
         return sorted(keys)
 
-    def reload(self, key: Optional[str] = None) -> None:
+    def reload(self, key: str | None = None) -> None:
         """
         Reload resources from disk.
 
@@ -268,7 +268,7 @@ class ResourceLoader:
             if self._all_data and key in self._all_data:
                 del self._all_data[key]
 
-    def validate(self) -> List[str]:
+    def validate(self) -> list[str]:
         """
         Validate all resource files.
 
@@ -292,7 +292,7 @@ class ResourceLoader:
         return errors
 
 
-def get_resource_loader(resource_path: Optional[Path] = None) -> ResourceLoader:
+def get_resource_loader(resource_path: Path | None = None) -> ResourceLoader:
     """
     Get the global resource loader instance.
 

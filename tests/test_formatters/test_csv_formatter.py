@@ -6,10 +6,10 @@ Tests the LoghubCSVFormatter class and template_to_loghub function.
 
 import csv
 import io
-import pytest
 from datetime import datetime
 
-from agnolog.formatters.csv_formatter import LoghubCSVFormatter, template_to_loghub
+import pytest
+
 from agnolog.core.constants import LOGHUB_CSV_COLUMNS, LOGHUB_TEMPLATE_COLUMNS
 from agnolog.core.registry import LogTypeRegistry
 from agnolog.core.types import (
@@ -18,6 +18,7 @@ from agnolog.core.types import (
     LogTypeMetadata,
     RecurrencePattern,
 )
+from agnolog.formatters.csv_formatter import LoghubCSVFormatter, template_to_loghub
 from agnolog.generators.base import BaseLogGenerator
 
 

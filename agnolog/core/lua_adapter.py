@@ -10,7 +10,7 @@ from __future__ import annotations
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Type
+from typing import Any
 
 from agnolog.core.types import (
     LogEntry,
@@ -40,7 +40,7 @@ RECURRENCE_MAP = {
 }
 
 
-def metadata_from_lua(lua_metadata: Dict[str, Any]) -> LogTypeMetadata:
+def metadata_from_lua(lua_metadata: dict[str, Any]) -> LogTypeMetadata:
     """
     Convert Lua metadata dict to LogTypeMetadata.
 
@@ -141,8 +141,8 @@ class LuaGeneratorAdapter:
         self,
         timestamp: datetime,
         metadata: LogTypeMetadata,
-        server_id: Optional[str] = None,
-        session_id: Optional[str] = None,
+        server_id: str | None = None,
+        session_id: str | None = None,
         **kwargs: Any,
     ) -> LogEntry:
         """
@@ -175,7 +175,7 @@ class LuaGeneratorAdapter:
             session_id=session_id,
         )
 
-    def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def _generate_data(self, **kwargs: Any) -> dict[str, Any]:
         """
         Generate data dict (for compatibility with BaseLogGenerator).
 
@@ -199,7 +199,7 @@ class LuaGeneratorRegistry:
     Works alongside the Python registry for a unified interface.
     """
 
-    _instance: Optional[LuaGeneratorRegistry] = None
+    _instance: LuaGeneratorRegistry | None = None
 
     def __new__(cls) -> LuaGeneratorRegistry:
         """Ensure singleton instance."""
@@ -213,9 +213,9 @@ class LuaGeneratorRegistry:
         if self._initialized:
             return
 
-        self._adapters: Dict[str, LuaGeneratorAdapter] = {}
-        self._metadata: Dict[str, LogTypeMetadata] = {}
-        self._lua_sandbox: Optional[Any] = None
+        self._adapters: dict[str, LuaGeneratorAdapter] = {}
+        self._metadata: dict[str, LogTypeMetadata] = {}
+        self._lua_sandbox: Any | None = None
         self._initialized = True
 
     @classmethod
@@ -234,8 +234,8 @@ class LuaGeneratorRegistry:
 
     def load_generators(
         self,
-        generators_path: Optional[Path] = None,
-        resources_path: Optional[Path] = None,
+        generators_path: Path | None = None,
+        resources_path: Path | None = None,
     ) -> int:
         """
         Load all Lua generators.
@@ -269,7 +269,7 @@ class LuaGeneratorRegistry:
 
         return len(self._adapters)
 
-    def get_adapter(self, name: str) -> Optional[LuaGeneratorAdapter]:
+    def get_adapter(self, name: str) -> LuaGeneratorAdapter | None:
         """
         Get adapter for a generator.
 
@@ -281,7 +281,7 @@ class LuaGeneratorRegistry:
         """
         return self._adapters.get(name)
 
-    def get_metadata(self, name: str) -> Optional[LogTypeMetadata]:
+    def get_metadata(self, name: str) -> LogTypeMetadata | None:
         """
         Get metadata for a generator.
 
@@ -293,11 +293,11 @@ class LuaGeneratorRegistry:
         """
         return self._metadata.get(name)
 
-    def all_types(self) -> List[str]:
+    def all_types(self) -> list[str]:
         """Get all registered generator names."""
         return list(self._adapters.keys())
 
-    def all_metadata(self) -> Dict[str, LogTypeMetadata]:
+    def all_metadata(self) -> dict[str, LogTypeMetadata]:
         """Get all metadata."""
         return dict(self._metadata)
 
@@ -309,33 +309,21 @@ class LuaGeneratorRegistry:
         """Get number of registered generators."""
         return len(self._adapters)
 
-    def get_by_category(self, category: str) -> List[str]:
+    def get_by_category(self, category: str) -> list[str]:
         """Get all generator names in a category."""
-        return [
-            name for name, meta in self._metadata.items()
-            if meta.category == category
-        ]
+        return [name for name, meta in self._metadata.items() if meta.category == category]
 
-    def get_by_recurrence(self, pattern: RecurrencePattern) -> List[str]:
+    def get_by_recurrence(self, pattern: RecurrencePattern) -> list[str]:
         """Get all generator names with a recurrence pattern."""
-        return [
-            name for name, meta in self._metadata.items()
-            if meta.recurrence == pattern
-        ]
+        return [name for name, meta in self._metadata.items() if meta.recurrence == pattern]
 
-    def get_by_severity(self, severity: LogSeverity) -> List[str]:
+    def get_by_severity(self, severity: LogSeverity) -> list[str]:
         """Get all generator names with a severity."""
-        return [
-            name for name, meta in self._metadata.items()
-            if meta.severity == severity
-        ]
+        return [name for name, meta in self._metadata.items() if meta.severity == severity]
 
-    def get_by_tag(self, tag: str) -> List[str]:
+    def get_by_tag(self, tag: str) -> list[str]:
         """Get all generator names with a tag."""
-        return [
-            name for name, meta in self._metadata.items()
-            if tag in meta.tags
-        ]
+        return [name for name, meta in self._metadata.items() if tag in meta.tags]
 
 
 def get_lua_registry() -> LuaGeneratorRegistry:

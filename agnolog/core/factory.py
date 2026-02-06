@@ -8,7 +8,7 @@ abstracting away the complexity of log generation.
 from __future__ import annotations
 
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Type
+from typing import TYPE_CHECKING, Any
 
 from agnolog.core.errors import GeneratorNotFoundError, LogTypeNotFoundError
 from agnolog.core.registry import LogTypeRegistry, get_registry
@@ -33,8 +33,8 @@ class LogFactory:
 
     def __init__(
         self,
-        registry: Optional[LogTypeRegistry] = None,
-        server_id: Optional[str] = None,
+        registry: LogTypeRegistry | None = None,
+        server_id: str | None = None,
     ) -> None:
         """
         Initialize factory with dependencies.
@@ -45,10 +45,10 @@ class LogFactory:
         """
         self._registry = registry or get_registry()
         self._server_id = server_id
-        self._generator_instances: Dict[str, BaseLogGenerator] = {}
+        self._generator_instances: dict[str, BaseLogGenerator] = {}
 
         # Import internal logger lazily to avoid circular imports
-        self._logger: Optional[Any] = None
+        self._logger: Any | None = None
 
     def _get_logger(self) -> Any:
         """Get internal logger, initializing if needed."""
@@ -58,7 +58,7 @@ class LogFactory:
             self._logger = get_internal_logger()
         return self._logger
 
-    def _get_generator(self, log_type: str) -> Optional[BaseLogGenerator]:
+    def _get_generator(self, log_type: str) -> BaseLogGenerator | None:
         """
         Get or create a generator instance for a log type.
 
@@ -85,10 +85,10 @@ class LogFactory:
     def create(
         self,
         log_type: str,
-        timestamp: Optional[datetime] = None,
-        session_id: Optional[str] = None,
+        timestamp: datetime | None = None,
+        session_id: str | None = None,
         **kwargs: Any,
-    ) -> Optional[LogEntry]:
+    ) -> LogEntry | None:
         """
         Create a log entry of the specified type.
 
@@ -120,8 +120,8 @@ class LogFactory:
     def create_or_raise(
         self,
         log_type: str,
-        timestamp: Optional[datetime] = None,
-        session_id: Optional[str] = None,
+        timestamp: datetime | None = None,
+        session_id: str | None = None,
         **kwargs: Any,
     ) -> LogEntry:
         """
@@ -142,9 +142,7 @@ class LogFactory:
         """
         metadata = self._registry.get_metadata(log_type)
         if metadata is None:
-            raise LogTypeNotFoundError(
-                log_type, available=self._registry.all_types()
-            )
+            raise LogTypeNotFoundError(log_type, available=self._registry.all_types())
 
         generator = self._get_generator(log_type)
         if generator is None:
@@ -163,7 +161,7 @@ class LogFactory:
         log_type: str,
         count: int,
         **kwargs: Any,
-    ) -> List[LogEntry]:
+    ) -> list[LogEntry]:
         """
         Create multiple log entries of the same type.
 
@@ -175,7 +173,7 @@ class LogFactory:
         Returns:
             List of generated LogEntry objects
         """
-        entries: List[LogEntry] = []
+        entries: list[LogEntry] = []
         for _ in range(count):
             entry = self.create(log_type, **kwargs)
             if entry is not None:
@@ -184,11 +182,11 @@ class LogFactory:
 
     def create_random(
         self,
-        category: Optional[str] = None,
-        recurrence: Optional[RecurrencePattern] = None,
-        timestamp: Optional[datetime] = None,
+        category: str | None = None,
+        recurrence: RecurrencePattern | None = None,
+        timestamp: datetime | None = None,
         **kwargs: Any,
-    ) -> Optional[LogEntry]:
+    ) -> LogEntry | None:
         """
         Create a random log entry, optionally filtered.
 
@@ -219,7 +217,7 @@ class LogFactory:
         log_type = random.choice(types)
         return self.create(log_type, timestamp=timestamp, **kwargs)
 
-    def get_available_types(self) -> List[str]:
+    def get_available_types(self) -> list[str]:
         """
         Get all available log types.
 
@@ -228,7 +226,7 @@ class LogFactory:
         """
         return self._registry.all_types()
 
-    def get_types_by_category(self, category: str) -> List[str]:
+    def get_types_by_category(self, category: str) -> list[str]:
         """
         Get log types in a category.
 
@@ -245,7 +243,7 @@ class LogFactory:
         self._generator_instances.clear()
         self._get_logger().debug("Generator cache cleared")
 
-    def get_metadata(self, log_type: str) -> Optional[LogTypeMetadata]:
+    def get_metadata(self, log_type: str) -> LogTypeMetadata | None:
         """
         Get metadata for a log type.
 

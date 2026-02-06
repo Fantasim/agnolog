@@ -4,10 +4,11 @@ Tests for agnolog.cli module.
 Tests the command-line interface.
 """
 
-import pytest
 from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
+
+import pytest
 
 from agnolog.cli import main, parse_categories
 
@@ -107,7 +108,7 @@ class TestCLIMain:
 
     def test_generate_with_categories(self, populated_registry):
         """Should filter by categories."""
-        with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
+        with patch("sys.stdout", new_callable=StringIO):
             result = main(["--resources", TEST_RESOURCES, "-n", "10", "--categories", "player"])
 
         assert result == 0
@@ -115,7 +116,17 @@ class TestCLIMain:
     def test_generate_with_types(self, populated_registry):
         """Should filter by specific types."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main(["--resources", TEST_RESOURCES, "-n", "5", "--types", "player.login", "player.logout"])
+            result = main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "5",
+                    "--types",
+                    "player.login",
+                    "player.logout",
+                ]
+            )
 
         assert result == 0
         output = mock_stdout.getvalue()
@@ -127,11 +138,33 @@ class TestCLIMain:
         start_time = "2024-01-15T12:00:00"
 
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout1:
-            main(["--resources", TEST_RESOURCES, "-n", "5", "--seed", "42", "--start-time", start_time])
+            main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "5",
+                    "--seed",
+                    "42",
+                    "--start-time",
+                    start_time,
+                ]
+            )
         output1 = mock_stdout1.getvalue()
 
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout2:
-            main(["--resources", TEST_RESOURCES, "-n", "5", "--seed", "42", "--start-time", start_time])
+            main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "5",
+                    "--seed",
+                    "42",
+                    "--start-time",
+                    start_time,
+                ]
+            )
         output2 = mock_stdout2.getvalue()
 
         # Same seed and start time should produce same output
@@ -147,12 +180,17 @@ class TestCLIMain:
         output_file = tmp_path / "test.log"
 
         with patch("sys.stderr", new_callable=StringIO) as mock_stderr:
-            result = main([
-                "--resources", TEST_RESOURCES,
-                "-n", "5",
-                "-o", str(output_file),
-                "--quiet",
-            ])
+            result = main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "5",
+                    "-o",
+                    str(output_file),
+                    "--quiet",
+                ]
+            )
 
         assert result == 0
         # Should not have progress messages
@@ -180,7 +218,9 @@ class TestCLIOutputFile:
 
         output_file = tmp_path / "test.json"
 
-        result = main(["--resources", TEST_RESOURCES, "-n", "5", "-f", "json", "-o", str(output_file)])
+        result = main(
+            ["--resources", TEST_RESOURCES, "-n", "5", "-f", "json", "-o", str(output_file)]
+        )
 
         assert result == 0
 
@@ -210,16 +250,21 @@ class TestCLIExcludeTypes:
 
     def test_exclude_types(self, populated_registry):
         """--exclude-types should exclude specified types."""
-        with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main([
-                "--resources", TEST_RESOURCES,
-                "-n", "100",
-                "--categories", "player",
-                "--exclude-types", "player.login",
-            ])
+        with patch("sys.stdout", new_callable=StringIO):
+            result = main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "100",
+                    "--categories",
+                    "player",
+                    "--exclude-types",
+                    "player.login",
+                ]
+            )
 
         assert result == 0
-        output = mock_stdout.getvalue()
         # Should not have player.login (though randomness could mean it just didn't appear)
         # At least verify the command succeeded
 
@@ -230,11 +275,16 @@ class TestCLITimeOptions:
     def test_start_time(self, populated_registry):
         """--start-time should set starting time."""
         with patch("sys.stdout", new_callable=StringIO) as mock_stdout:
-            result = main([
-                "--resources", TEST_RESOURCES,
-                "-n", "5",
-                "--start-time", "2024-01-15T12:00:00",
-            ])
+            result = main(
+                [
+                    "--resources",
+                    TEST_RESOURCES,
+                    "-n",
+                    "5",
+                    "--start-time",
+                    "2024-01-15T12:00:00",
+                ]
+            )
 
         assert result == 0
         output = mock_stdout.getvalue()

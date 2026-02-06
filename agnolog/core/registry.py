@@ -8,8 +8,9 @@ This promotes extensibility and maintainability.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Dict, List, Optional, Type, Union
+from typing import TYPE_CHECKING
 
 from agnolog.core.errors import DuplicateLogTypeError, InvalidLogTypeError, LogTypeNotFoundError
 from agnolog.core.types import LogSeverity, LogTypeMetadata, RecurrencePattern
@@ -31,14 +32,14 @@ class LogTypeRegistry:
             print(log_type)
     """
 
-    _instance: Optional[LogTypeRegistry] = None
+    _instance: LogTypeRegistry | None = None
 
     def __new__(cls) -> LogTypeRegistry:
         """Ensure singleton instance."""
         if cls._instance is None:
             cls._instance = super().__new__(cls)
-            cls._instance._registry: Dict[str, LogTypeMetadata] = {}
-            cls._instance._generators: Dict[str, Type[BaseLogGenerator]] = {}
+            cls._instance._registry: dict[str, LogTypeMetadata] = {}
+            cls._instance._generators: dict[str, type[BaseLogGenerator]] = {}
             cls._instance._initialized = True
         return cls._instance
 
@@ -55,7 +56,7 @@ class LogTypeRegistry:
         self,
         name: str,
         metadata: LogTypeMetadata,
-        generator_class: Type[BaseLogGenerator],
+        generator_class: type[BaseLogGenerator],
     ) -> None:
         """
         Register a new log type.
@@ -75,9 +76,7 @@ class LogTypeRegistry:
         if not isinstance(name, str):
             raise InvalidLogTypeError(str(name), "Name must be a string")
         if "." not in name:
-            raise InvalidLogTypeError(
-                name, "Name must be namespaced (e.g., 'player.login')"
-            )
+            raise InvalidLogTypeError(name, "Name must be namespaced (e.g., 'player.login')")
 
         # Check for duplicates
         if name in self._registry:
@@ -102,7 +101,7 @@ class LogTypeRegistry:
             return True
         return False
 
-    def get_metadata(self, name: str) -> Optional[LogTypeMetadata]:
+    def get_metadata(self, name: str) -> LogTypeMetadata | None:
         """
         Get metadata for a log type.
 
@@ -132,7 +131,7 @@ class LogTypeRegistry:
             raise LogTypeNotFoundError(name, available=list(self._registry.keys()))
         return metadata
 
-    def get_generator(self, name: str) -> Optional[Type[BaseLogGenerator]]:
+    def get_generator(self, name: str) -> type[BaseLogGenerator] | None:
         """
         Get generator class for a log type.
 
@@ -144,7 +143,7 @@ class LogTypeRegistry:
         """
         return self._generators.get(name)
 
-    def get_generator_or_raise(self, name: str) -> Type[BaseLogGenerator]:
+    def get_generator_or_raise(self, name: str) -> type[BaseLogGenerator]:
         """
         Get generator class for a log type, raising if not found.
 
@@ -162,7 +161,7 @@ class LogTypeRegistry:
             raise LogTypeNotFoundError(name, available=list(self._generators.keys()))
         return generator
 
-    def get_by_category(self, category: str) -> List[str]:
+    def get_by_category(self, category: str) -> list[str]:
         """
         Get all log types in a category.
 
@@ -172,11 +171,9 @@ class LogTypeRegistry:
         Returns:
             List of log type names in the category
         """
-        return [
-            name for name, meta in self._registry.items() if meta.category == category
-        ]
+        return [name for name, meta in self._registry.items() if meta.category == category]
 
-    def get_by_recurrence(self, pattern: RecurrencePattern) -> List[str]:
+    def get_by_recurrence(self, pattern: RecurrencePattern) -> list[str]:
         """
         Get all log types with a specific recurrence pattern.
 
@@ -186,11 +183,9 @@ class LogTypeRegistry:
         Returns:
             List of log type names with the pattern
         """
-        return [
-            name for name, meta in self._registry.items() if meta.recurrence == pattern
-        ]
+        return [name for name, meta in self._registry.items() if meta.recurrence == pattern]
 
-    def get_by_severity(self, severity: LogSeverity) -> List[str]:
+    def get_by_severity(self, severity: LogSeverity) -> list[str]:
         """
         Get all log types with a specific severity.
 
@@ -200,11 +195,9 @@ class LogTypeRegistry:
         Returns:
             List of log type names with the severity
         """
-        return [
-            name for name, meta in self._registry.items() if meta.severity == severity
-        ]
+        return [name for name, meta in self._registry.items() if meta.severity == severity]
 
-    def get_by_tag(self, tag: str) -> List[str]:
+    def get_by_tag(self, tag: str) -> list[str]:
         """
         Get all log types with a specific tag.
 
@@ -216,7 +209,7 @@ class LogTypeRegistry:
         """
         return [name for name, meta in self._registry.items() if tag in meta.tags]
 
-    def all_types(self) -> List[str]:
+    def all_types(self) -> list[str]:
         """
         Get all registered log type names.
 
@@ -225,7 +218,7 @@ class LogTypeRegistry:
         """
         return list(self._registry.keys())
 
-    def all_metadata(self) -> Dict[str, LogTypeMetadata]:
+    def all_metadata(self) -> dict[str, LogTypeMetadata]:
         """
         Get all registered metadata.
 
@@ -255,19 +248,19 @@ class LogTypeRegistry:
         """
         return name in self._registry
 
-    def categories_summary(self) -> Dict[str, int]:
+    def categories_summary(self) -> dict[str, int]:
         """
         Get a summary of log types by category.
 
         Returns:
             Dictionary mapping category strings to counts
         """
-        summary: Dict[str, int] = {}
+        summary: dict[str, int] = {}
         for meta in self._registry.values():
             summary[meta.category] = summary.get(meta.category, 0) + 1
         return summary
 
-    def get_categories(self) -> List[str]:
+    def get_categories(self) -> list[str]:
         """
         Get all unique categories from registered log types.
 
@@ -290,8 +283,8 @@ def register_log_type(
     recurrence: RecurrencePattern,
     description: str,
     text_template: str,
-    tags: Optional[List[str]] = None,
-) -> Callable[[Type[BaseLogGenerator]], Type[BaseLogGenerator]]:
+    tags: list[str] | None = None,
+) -> Callable[[type[BaseLogGenerator]], type[BaseLogGenerator]]:
     """
     Decorator to register a log generator class.
 
@@ -324,7 +317,7 @@ def register_log_type(
         Decorator function that registers the class
     """
 
-    def decorator(cls: Type[BaseLogGenerator]) -> Type[BaseLogGenerator]:
+    def decorator(cls: type[BaseLogGenerator]) -> type[BaseLogGenerator]:
         registry = LogTypeRegistry()
         metadata = LogTypeMetadata(
             name=name,
@@ -354,7 +347,7 @@ def get_registry() -> LogTypeRegistry:
     return LogTypeRegistry()
 
 
-def register_lua_generators(resources_path: Optional[Union[str, Path]] = None) -> int:
+def register_lua_generators(resources_path: str | Path | None = None) -> int:
     """
     Load and register all Lua generators.
 
@@ -368,7 +361,7 @@ def register_lua_generators(resources_path: Optional[Union[str, Path]] = None) -
     Returns:
         Number of Lua generators registered
     """
-    from agnolog.core.lua_adapter import get_lua_registry, LuaGeneratorAdapter
+    from agnolog.core.lua_adapter import LuaGeneratorAdapter, get_lua_registry
 
     lua_registry = get_lua_registry()
     main_registry = get_registry()

@@ -6,7 +6,6 @@ used interchangeably throughout the application.
 """
 
 from abc import ABC, abstractmethod
-from typing import List
 
 
 class BaseOutputHandler(ABC):
@@ -41,7 +40,7 @@ class BaseOutputHandler(ABC):
         """
         pass
 
-    def write_batch(self, contents: List[str]) -> None:
+    def write_batch(self, contents: list[str]) -> None:
         """
         Write multiple content strings.
 

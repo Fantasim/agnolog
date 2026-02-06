@@ -4,45 +4,44 @@ Tests for agnolog.core.errors module.
 Ensures all exception types are properly defined and work correctly.
 """
 
-import pytest
 from agnolog.core.errors import (
     # Base
     AgnologError,
+    ConfigFileError,
     # Configuration
     ConfigurationError,
-    MissingConfigError,
-    InvalidConfigValueError,
-    ConfigFileError,
-    # Registry
-    RegistryError,
-    LogTypeNotFoundError,
-    DuplicateLogTypeError,
-    InvalidLogTypeError,
-    # Generator
-    GeneratorError,
-    DataGenerationError,
-    MissingFieldError,
-    GeneratorNotFoundError,
-    # Formatter
-    FormatterError,
-    TemplateError,
-    UnsupportedFormatError,
-    SerializationError,
-    # Output
-    OutputError,
-    FileWriteError,
-    FileReadError,
-    PermissionDeniedError,
-    DirectoryNotFoundError,
-    # Scheduling
-    SchedulingError,
-    InvalidPatternError,
-    TimeRangeError,
-    SchedulerNotInitializedError,
     # Data
     DataError,
+    DataGenerationError,
     DataNotFoundError,
+    DirectoryNotFoundError,
+    DuplicateLogTypeError,
+    FileReadError,
+    FileWriteError,
+    # Formatter
+    FormatterError,
+    # Generator
+    GeneratorError,
+    GeneratorNotFoundError,
+    InvalidConfigValueError,
     InvalidDataError,
+    InvalidLogTypeError,
+    InvalidPatternError,
+    LogTypeNotFoundError,
+    MissingConfigError,
+    MissingFieldError,
+    # Output
+    OutputError,
+    PermissionDeniedError,
+    # Registry
+    RegistryError,
+    SchedulerNotInitializedError,
+    # Scheduling
+    SchedulingError,
+    SerializationError,
+    TemplateError,
+    TimeRangeError,
+    UnsupportedFormatError,
     # Validation
     ValidationError,
 )
@@ -165,9 +164,7 @@ class TestGeneratorErrors:
         assert "player.login" in str(error)
 
     def test_missing_field_error_with_available(self):
-        error = MissingFieldError(
-            "player.login", "username", available_fields=["id", "level"]
-        )
+        error = MissingFieldError("player.login", "username", available_fields=["id", "level"])
         assert "id" in str(error)
 
     def test_generator_not_found_error(self):

@@ -5,11 +5,12 @@ Tests the JSONFormatter class.
 """
 
 import json
-import pytest
 from datetime import datetime
 
-from agnolog.formatters.json_formatter import JSONFormatter
+import pytest
+
 from agnolog.core.types import LogEntry, LogSeverity
+from agnolog.formatters.json_formatter import JSONFormatter
 
 
 @pytest.fixture

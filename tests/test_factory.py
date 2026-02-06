@@ -4,9 +4,11 @@ Tests for agnolog.core.factory module.
 Tests the LogFactory class for creating log entries.
 """
 
-import pytest
 from datetime import datetime
 
+import pytest
+
+from agnolog.core.errors import LogTypeNotFoundError
 from agnolog.core.factory import LogFactory
 from agnolog.core.registry import LogTypeRegistry
 from agnolog.core.types import (
@@ -15,7 +17,6 @@ from agnolog.core.types import (
     LogTypeMetadata,
     RecurrencePattern,
 )
-from agnolog.core.errors import LogTypeNotFoundError, GeneratorNotFoundError
 from agnolog.generators.base import BaseLogGenerator
 
 

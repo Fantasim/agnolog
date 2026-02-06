@@ -4,11 +4,11 @@ Tests for all generator categories.
 Tests that all registered generators produce valid log entries.
 """
 
-import pytest
 from datetime import datetime
 
+import pytest
+
 from agnolog.core.factory import LogFactory
-from agnolog.core.registry import LogTypeRegistry
 from agnolog.core.types import LogEntry
 
 
@@ -64,19 +64,13 @@ class TestPlayerGenerators:
         entry = factory.create("player.login")
 
         # Should have player identification
-        assert any(
-            field in entry.data
-            for field in ["username", "character_name", "player_name"]
-        )
+        assert any(field in entry.data for field in ["username", "character_name", "player_name"])
 
     def test_player_level_up_has_level(self, factory):
         """player.level_up should have level info."""
         entry = factory.create("player.level_up")
 
-        assert any(
-            field in entry.data
-            for field in ["level", "new_level", "old_level"]
-        )
+        assert any(field in entry.data for field in ["level", "new_level", "old_level"])
 
     def test_player_chat_has_message(self, factory):
         """Chat events should have message content."""
@@ -126,19 +120,13 @@ class TestServerGenerators:
         """cpu_usage should have percentage."""
         entry = factory.create("server.cpu_usage")
 
-        assert any(
-            field in entry.data
-            for field in ["cpu_percent", "percent", "usage"]
-        )
+        assert any(field in entry.data for field in ["cpu_percent", "percent", "usage"])
 
     def test_server_player_count_has_count(self, factory):
         """player_count should have count."""
         entry = factory.create("server.player_count")
 
-        assert any(
-            field in entry.data
-            for field in ["count", "player_count", "players"]
-        )
+        assert any(field in entry.data for field in ["count", "player_count", "players"])
 
 
 class TestSecurityGenerators:
@@ -175,19 +163,13 @@ class TestSecurityGenerators:
         """login_failed should have failure reason."""
         entry = factory.create("security.login_failed")
 
-        assert any(
-            field in entry.data
-            for field in ["reason", "error", "failure_reason"]
-        )
+        assert any(field in entry.data for field in ["reason", "error", "failure_reason"])
 
     def test_admin_ban_has_target(self, factory):
         """ban should have target info."""
         entry = factory.create("admin.ban")
 
-        assert any(
-            field in entry.data
-            for field in ["target", "username", "player", "banned_user"]
-        )
+        assert any(field in entry.data for field in ["target", "username", "player", "banned_user"])
 
 
 class TestEconomyGenerators:
@@ -225,10 +207,7 @@ class TestEconomyGenerators:
         """gold_gain should have amount."""
         entry = factory.create("economy.gold_gain")
 
-        assert any(
-            field in entry.data
-            for field in ["amount", "gold", "value"]
-        )
+        assert any(field in entry.data for field in ["amount", "gold", "value"])
 
     def test_economy_trade_complete_has_participants(self, factory):
         """trade_complete should have participant info."""
@@ -278,27 +257,20 @@ class TestCombatGenerators:
         """damage_dealt should have damage info."""
         entry = factory.create("combat.damage_dealt")
 
-        assert any(
-            field in entry.data
-            for field in ["damage", "amount", "value"]
-        )
+        assert any(field in entry.data for field in ["damage", "amount", "value"])
 
     def test_combat_heal_has_amount(self, factory):
         """heal should have heal amount."""
         entry = factory.create("combat.heal")
 
-        assert any(
-            field in entry.data
-            for field in ["amount", "heal", "healed"]
-        )
+        assert any(field in entry.data for field in ["amount", "heal", "healed"])
 
     def test_combat_mob_kill_has_target(self, factory):
         """mob_kill should have target info."""
         entry = factory.create("combat.mob_kill")
 
         assert any(
-            field in entry.data
-            for field in ["target", "mob", "enemy", "monster", "mob_name"]
+            field in entry.data for field in ["target", "mob", "enemy", "monster", "mob_name"]
         )
 
 
@@ -337,19 +309,13 @@ class TestTechnicalGenerators:
         """latency should have milliseconds."""
         entry = factory.create("technical.latency")
 
-        assert any(
-            field in entry.data
-            for field in ["latency", "ms", "latency_ms"]
-        )
+        assert any(field in entry.data for field in ["latency", "ms", "latency_ms"])
 
     def test_technical_error_has_message(self, factory):
         """error should have error message."""
         entry = factory.create("technical.error")
 
-        assert any(
-            field in entry.data
-            for field in ["error", "message", "error_message"]
-        )
+        assert any(field in entry.data for field in ["error", "message", "error_message"])
 
 
 class TestAllGeneratorsDataQuality:
@@ -367,7 +333,10 @@ class TestAllGeneratorsDataQuality:
         """Data fields should not be None (except optional ones)."""
         # Some fields are legitimately optional/None
         optional_fields = {
-            "error", "zone", "guild", "target_guild",
+            "error",
+            "zone",
+            "guild",
+            "target_guild",
             "previous_bidder",  # auction_bid: first bid has no previous bidder
             "buyout",  # auction_list: not all auctions have buyout
         }
@@ -400,6 +369,4 @@ class TestGeneratorCount:
         # Use dynamic categories from registry
         for category in populated_registry.get_categories():
             types = populated_registry.get_by_category(category.upper())
-            assert len(types) >= 10, (
-                f"Category {category} has only {len(types)} types"
-            )
+            assert len(types) >= 10, f"Category {category} has only {len(types)} types"

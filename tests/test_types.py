@@ -4,14 +4,16 @@ Tests for agnolog.core.types module.
 Tests all enums, dataclasses, and protocols.
 """
 
-import pytest
 from datetime import datetime
+
+import pytest
+
 from agnolog.core.types import (
-    LogSeverity,
-    LogFormat,
-    RecurrencePattern,
-    LogTypeMetadata,
     LogEntry,
+    LogFormat,
+    LogSeverity,
+    LogTypeMetadata,
+    RecurrencePattern,
 )
 
 

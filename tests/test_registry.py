@@ -5,20 +5,21 @@ Tests the LogTypeRegistry class and register_log_type decorator.
 """
 
 import pytest
+
+from agnolog.core.errors import (
+    DuplicateLogTypeError,
+    InvalidLogTypeError,
+    LogTypeNotFoundError,
+)
 from agnolog.core.registry import (
     LogTypeRegistry,
-    register_log_type,
     get_registry,
+    register_log_type,
 )
 from agnolog.core.types import (
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
-)
-from agnolog.core.errors import (
-    DuplicateLogTypeError,
-    InvalidLogTypeError,
-    LogTypeNotFoundError,
 )
 from agnolog.generators.base import BaseLogGenerator
 

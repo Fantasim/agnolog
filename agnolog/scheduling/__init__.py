@@ -16,8 +16,8 @@ Usage:
         print(entry)
 """
 
+from agnolog.scheduling.patterns import RecurrenceCalculator, get_recurrence_rate
 from agnolog.scheduling.scheduler import LogScheduler
-from agnolog.scheduling.patterns import get_recurrence_rate, RecurrenceCalculator
 
 __all__ = [
     "LogScheduler",

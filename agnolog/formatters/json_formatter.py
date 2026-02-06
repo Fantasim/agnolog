@@ -7,7 +7,7 @@ aggregation systems, analysis tools, and APIs.
 
 import json
 from datetime import datetime
-from typing import Any, List, Optional
+from typing import Any
 
 from agnolog.core.types import LogEntry
 from agnolog.formatters.base import BaseFormatter
@@ -34,7 +34,7 @@ class JSONFormatter(BaseFormatter):
         include_metadata: bool = True,
         sort_keys: bool = False,
         ensure_ascii: bool = False,
-        date_format: Optional[str] = None,
+        date_format: str | None = None,
     ) -> None:
         """
         Initialize JSON formatter.
@@ -114,7 +114,7 @@ class JSONFormatter(BaseFormatter):
             default=str,  # Fallback for any unhandled types
         )
 
-    def format_batch(self, entries: List[LogEntry]) -> str:
+    def format_batch(self, entries: list[LogEntry]) -> str:
         """
         Format multiple entries as a JSON array.
 
@@ -133,7 +133,7 @@ class JSONFormatter(BaseFormatter):
             default=str,
         )
 
-    def format_ndjson(self, entries: List[LogEntry]) -> str:
+    def format_ndjson(self, entries: list[LogEntry]) -> str:
         """
         Format entries as newline-delimited JSON (NDJSON).
 
@@ -161,7 +161,4 @@ class JSONFormatter(BaseFormatter):
         return "\n".join(lines)
 
     def __repr__(self) -> str:
-        return (
-            f"JSONFormatter(pretty={self._pretty}, "
-            f"include_metadata={self._include_metadata})"
-        )
+        return f"JSONFormatter(pretty={self._pretty}, include_metadata={self._include_metadata})"

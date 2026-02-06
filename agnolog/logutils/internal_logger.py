@@ -9,7 +9,6 @@ NOT to be confused with the fake logs being generated.
 
 import logging
 import sys
-from typing import Optional
 
 from agnolog.core.constants import (
     INTERNAL_LOG_DATE_FORMAT,
@@ -19,14 +18,14 @@ from agnolog.core.constants import (
 )
 
 # Module-level logger instance
-_internal_logger: Optional[logging.Logger] = None
+_internal_logger: logging.Logger | None = None
 
 
 def setup_internal_logging(
-    level: Optional[str] = None,
-    log_file: Optional[str] = None,
+    level: str | None = None,
+    log_file: str | None = None,
     quiet: bool = False,
-    format_string: Optional[str] = None,
+    format_string: str | None = None,
 ) -> logging.Logger:
     """
     Setup internal logging for the generator.
@@ -74,7 +73,7 @@ def setup_internal_logging(
             file_handler.setFormatter(formatter)
             file_handler.setLevel(log_level)
             logger.addHandler(file_handler)
-        except (OSError, IOError) as e:
+        except OSError as e:
             # Log to console if file logging fails
             if not quiet:
                 logger.warning(f"Failed to setup file logging to {log_file}: {e}")
@@ -85,7 +84,9 @@ def setup_internal_logging(
     _internal_logger = logger
 
     # Log initial setup message
-    logger.debug(f"Internal logging configured: level={level or INTERNAL_LOG_LEVEL}, file={log_file}")
+    logger.debug(
+        f"Internal logging configured: level={level or INTERNAL_LOG_LEVEL}, file={log_file}"
+    )
 
     return logger
 
@@ -210,9 +211,7 @@ class LogContext:
         duration = time.time() - self._start_time
 
         if exc_type is not None:
-            self.logger.error(
-                f"{self.operation} failed after {duration:.3f}s: {exc_val}"
-            )
+            self.logger.error(f"{self.operation} failed after {duration:.3f}s: {exc_val}")
         else:
             self.logger.log(
                 self.level,

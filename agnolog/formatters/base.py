@@ -6,7 +6,6 @@ used interchangeably throughout the application.
 """
 
 from abc import ABC, abstractmethod
-from typing import List
 
 from agnolog.core.types import LogEntry
 
@@ -37,7 +36,7 @@ class BaseFormatter(ABC):
         pass
 
     @abstractmethod
-    def format_batch(self, entries: List[LogEntry]) -> str:
+    def format_batch(self, entries: list[LogEntry]) -> str:
         """
         Format multiple log entries to string.
 

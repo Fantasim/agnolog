@@ -14,7 +14,7 @@ import random
 import string
 import uuid
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any
 
 try:
     import lupa
@@ -52,7 +52,7 @@ class LuaContext:
     - Built-in generators (ctx.gen.*)
     """
 
-    def __init__(self, data: Dict[str, Any]) -> None:
+    def __init__(self, data: dict[str, Any]) -> None:
         """
         Initialize context with data.
 
@@ -64,7 +64,7 @@ class LuaContext:
         self._gen = LuaGeneratorUtils(data)  # Pass data for theme-driven utilities
 
     @property
-    def data(self) -> Dict[str, Any]:
+    def data(self) -> dict[str, Any]:
         """Read-only access to all data."""
         return self._data
 
@@ -104,7 +104,7 @@ class LuaRandomContext:
             return None
         return random.choice(items)
 
-    def choices(self, items: Any, k: int = 1) -> List[Any]:
+    def choices(self, items: Any, k: int = 1) -> list[Any]:
         """
         Choose k random items with replacement.
 
@@ -158,7 +158,7 @@ class LuaRandomContext:
             return None
         return random.choices(items, weights=weights, k=1)[0]
 
-    def shuffle(self, items: Any) -> List[Any]:
+    def shuffle(self, items: Any) -> list[Any]:
         """
         Return shuffled copy of items.
 
@@ -176,7 +176,7 @@ class LuaRandomContext:
         random.shuffle(result)
         return result
 
-    def sample(self, items: Any, k: int) -> List[Any]:
+    def sample(self, items: Any, k: int) -> list[Any]:
         """
         Random sample without replacement.
 
@@ -206,7 +206,7 @@ class LuaGeneratorUtils:
     YAML/Lua resources.
     """
 
-    def __init__(self, data: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(self, data: dict[str, Any] | None = None) -> None:
         """
         Initialize with data from YAML resources.
 
@@ -263,16 +263,20 @@ class LuaGeneratorUtils:
             if prefix == "192.168":
                 return f"192.168.{random.randint(0, 255)}.{random.randint(1, 254)}"
             elif prefix == "10.0":
-                return f"10.{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(1, 254)}"
+                return (
+                    f"10.{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(1, 254)}"
+                )
             else:
                 return f"172.{random.randint(16, 31)}.{random.randint(0, 255)}.{random.randint(1, 254)}"
         else:
-            first = random.choice([
-                random.randint(1, 9),
-                random.randint(11, 126),
-                random.randint(128, 191),
-                random.randint(192, 223),
-            ])
+            first = random.choice(
+                [
+                    random.randint(1, 9),
+                    random.randint(11, 126),
+                    random.randint(128, 191),
+                    random.randint(192, 223),
+                ]
+            )
             return f"{first}.{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(1, 254)}"
 
     def session_id(self, length: int = 16) -> str:
@@ -281,7 +285,9 @@ class LuaGeneratorUtils:
         random_part = "".join(random.choice(chars) for _ in range(length))
         return f"sess_{random_part}"
 
-    def numeric_id(self, prefix: str = "", min_val: int = 100000000, max_val: int = 999999999) -> str:
+    def numeric_id(
+        self, prefix: str = "", min_val: int = 100000000, max_val: int = 999999999
+    ) -> str:
         """Generate a numeric ID with optional prefix."""
         return f"{prefix}{random.randint(min_val, max_val)}"
 
@@ -317,7 +323,9 @@ class LuaGeneratorUtils:
             if pattern == "adj_noun":
                 return random.choice(adjectives) + random.choice(nouns)
             else:
-                return random.choice(adjectives) + random.choice(nouns) + str(random.randint(1, 999))
+                return (
+                    random.choice(adjectives) + random.choice(nouns) + str(random.randint(1, 999))
+                )
 
         # Fall back to prefix+suffix style (names.player_prefixes/player_suffixes)
         prefixes = self._get_data("names", "player_prefixes", default=[])
@@ -383,7 +391,9 @@ class LuaGeneratorUtils:
         base_items = weapons + armor if weapons or armor else []
 
         if prefixes and base_items and suffixes:
-            return f"{random.choice(prefixes)} {random.choice(base_items)} {random.choice(suffixes)}"
+            return (
+                f"{random.choice(prefixes)} {random.choice(base_items)} {random.choice(suffixes)}"
+            )
         elif prefixes and base_items:
             return f"{random.choice(prefixes)} {random.choice(base_items)}"
         elif base_items:
@@ -540,7 +550,7 @@ class LuaGeneratorUtils:
 
     def guid(self) -> str:
         """Generate Windows GUID (uppercase with braces)."""
-        return '{%s}' % str(uuid.uuid4()).upper()
+        return f"{{{uuid.uuid4()!s}}}".upper()
 
     def sid(self) -> str:
         """Generate Windows SID."""
@@ -586,7 +596,7 @@ class LuaSandbox:
 
     def __init__(
         self,
-        resource_loader: Optional[ResourceLoader] = None,
+        resource_loader: ResourceLoader | None = None,
         timeout_ms: int = 5000,
     ) -> None:
         """
@@ -601,15 +611,14 @@ class LuaSandbox:
         """
         if not LUPA_AVAILABLE:
             raise LuaSandboxError(
-                "Lua support requires the 'lupa' package. "
-                "Install it with: pip install lupa"
+                "Lua support requires the 'lupa' package. Install it with: pip install lupa"
             )
 
         self._timeout_ms = timeout_ms
         self._resource_loader = resource_loader or ResourceLoader()
-        self._lua: Optional[LuaRuntime] = None
-        self._context: Optional[LuaContext] = None
-        self._generators: Dict[str, Any] = {}
+        self._lua: LuaRuntime | None = None
+        self._context: LuaContext | None = None
+        self._generators: dict[str, Any] = {}
         self._initialized = False
 
     def initialize(self) -> None:
@@ -739,7 +748,7 @@ class LuaSandbox:
         else:
             return obj
 
-    def load_generator(self, lua_file: Path) -> Tuple[str, Dict[str, Any]]:
+    def load_generator(self, lua_file: Path) -> tuple[str, dict[str, Any]]:
         """
         Load a generator from a Lua file.
 
@@ -761,7 +770,7 @@ class LuaSandbox:
             raise LuaGeneratorError(f"Generator file not found: {lua_file}")
 
         try:
-            with open(lua_file, "r", encoding="utf-8") as f:
+            with open(lua_file, encoding="utf-8") as f:
                 lua_code = f.read()
 
             # Execute the Lua code to get the generator table
@@ -797,7 +806,7 @@ class LuaSandbox:
         except Exception as e:
             raise LuaGeneratorError(f"Error loading {lua_file}: {e}")
 
-    def load_all_generators(self, generators_path: Optional[Path] = None) -> Dict[str, Dict[str, Any]]:
+    def load_all_generators(self, generators_path: Path | None = None) -> dict[str, dict[str, Any]]:
         """
         Load all Lua generators from the generators directory.
 
@@ -826,7 +835,7 @@ class LuaSandbox:
         logger.info(f"Loaded {len(all_metadata)} Lua generators")
         return all_metadata
 
-    def generate(self, name: str, **kwargs: Any) -> Dict[str, Any]:
+    def generate(self, name: str, **kwargs: Any) -> dict[str, Any]:
         """
         Execute a generator and return the result.
 
@@ -869,7 +878,7 @@ class LuaSandbox:
         except Exception as e:
             raise LuaGeneratorError(f"Error generating {name}: {e}")
 
-    def get_metadata(self, name: str) -> Optional[Dict[str, Any]]:
+    def get_metadata(self, name: str) -> dict[str, Any] | None:
         """
         Get metadata for a loaded generator.
 
@@ -886,7 +895,7 @@ class LuaSandbox:
         metadata = generator["metadata"]
         return self._lua_to_python(metadata) if metadata else None
 
-    def list_generators(self) -> List[str]:
+    def list_generators(self) -> list[str]:
         """List all loaded generator names."""
         return list(self._generators.keys())
 

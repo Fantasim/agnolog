@@ -7,9 +7,9 @@ new events based on their frequency patterns.
 
 import heapq
 import random
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import Dict, Iterator, List, Optional, Set
 
 from agnolog.core.factory import LogFactory
 from agnolog.core.registry import LogTypeRegistry, get_registry
@@ -47,7 +47,7 @@ class LogScheduler(InternalLoggerMixin):
     def __init__(
         self,
         factory: LogFactory,
-        registry: Optional[LogTypeRegistry] = None,
+        registry: LogTypeRegistry | None = None,
         time_scale: float = 1.0,
     ) -> None:
         """
@@ -62,14 +62,14 @@ class LogScheduler(InternalLoggerMixin):
         self._registry = registry or get_registry()
         self._time_scale = time_scale
         self._calculator = RecurrenceCalculator(time_scale)
-        self._event_queue: List[ScheduledEvent] = []
-        self._enabled_types: Set[str] = set()
-        self._type_patterns: Dict[str, RecurrencePattern] = {}
+        self._event_queue: list[ScheduledEvent] = []
+        self._enabled_types: set[str] = set()
+        self._type_patterns: dict[str, RecurrencePattern] = {}
 
     def enable_log_types(
         self,
-        log_types: Optional[List[str]] = None,
-        categories: Optional[List[str]] = None,
+        log_types: list[str] | None = None,
+        categories: list[str] | None = None,
     ) -> None:
         """
         Enable specific log types for generation.
@@ -89,7 +89,8 @@ class LogScheduler(InternalLoggerMixin):
         if categories is not None:
             category_set = set(categories)
             self._enabled_types = {
-                t for t in self._enabled_types
+                t
+                for t in self._enabled_types
                 if self._registry.get_metadata(t).category in category_set  # type: ignore
             }
 
@@ -102,7 +103,7 @@ class LogScheduler(InternalLoggerMixin):
 
         self._log_info(f"Enabled {len(self._enabled_types)} log types")
 
-    def disable_log_types(self, log_types: List[str]) -> None:
+    def disable_log_types(self, log_types: list[str]) -> None:
         """
         Disable specific log types.
 
@@ -149,7 +150,7 @@ class LogScheduler(InternalLoggerMixin):
         self,
         start_time: datetime,
         end_time: datetime,
-        max_logs: Optional[int] = None,
+        max_logs: int | None = None,
     ) -> Iterator[LogEntry]:
         """
         Generate logs within a time range.
@@ -196,7 +197,7 @@ class LogScheduler(InternalLoggerMixin):
     def generate_count(
         self,
         count: int,
-        start_time: Optional[datetime] = None,
+        start_time: datetime | None = None,
     ) -> Iterator[LogEntry]:
         """
         Generate a specific number of logs.
@@ -218,9 +219,9 @@ class LogScheduler(InternalLoggerMixin):
 
     def generate_one(
         self,
-        log_type: Optional[str] = None,
-        timestamp: Optional[datetime] = None,
-    ) -> Optional[LogEntry]:
+        log_type: str | None = None,
+        timestamp: datetime | None = None,
+    ) -> LogEntry | None:
         """
         Generate a single log entry.
 
@@ -242,7 +243,7 @@ class LogScheduler(InternalLoggerMixin):
 
         return self._factory.create(log_type, timestamp=timestamp)
 
-    def get_enabled_types(self) -> List[str]:
+    def get_enabled_types(self) -> list[str]:
         """Get list of enabled log types."""
         return list(self._enabled_types)
 
@@ -265,6 +266,5 @@ class LogScheduler(InternalLoggerMixin):
 
     def __repr__(self) -> str:
         return (
-            f"LogScheduler(enabled_types={len(self._enabled_types)}, "
-            f"time_scale={self._time_scale})"
+            f"LogScheduler(enabled_types={len(self._enabled_types)}, time_scale={self._time_scale})"
         )

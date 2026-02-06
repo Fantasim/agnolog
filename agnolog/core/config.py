@@ -7,7 +7,7 @@ files, and programmatic settings.
 
 import os
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional, Set
+from typing import Any
 
 from agnolog.core.constants import (
     DEFAULT_LOG_COUNT,
@@ -26,7 +26,7 @@ class OutputConfig:
 
     format: LogFormat = LogFormat.JSON
     pretty_print: bool = False
-    output_file: Optional[str] = None
+    output_file: str | None = None
     append_mode: bool = False
     include_metadata: bool = True
     include_server_id: bool = True
@@ -40,9 +40,9 @@ class GenerationConfig:
     count: int = DEFAULT_LOG_COUNT
     time_scale: float = DEFAULT_TIME_SCALE
     server_id: str = DEFAULT_SERVER_ID
-    enabled_categories: Optional[Set[str]] = None  # None means all categories
-    enabled_types: Optional[Set[str]] = None  # None means all types
-    disabled_types: Set[str] = field(default_factory=set)
+    enabled_categories: set[str] | None = None  # None means all categories
+    enabled_types: set[str] | None = None  # None means all types
+    disabled_types: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -50,7 +50,7 @@ class LoggingConfig:
     """Configuration for internal logging."""
 
     level: str = INTERNAL_LOG_LEVEL
-    log_file: Optional[str] = None
+    log_file: str | None = None
     quiet: bool = False
 
 
@@ -107,15 +107,13 @@ class Config:
             ConfigurationError: If any validation fails
         """
         if self.generation.count < 1:
-            raise InvalidConfigValueError(
-                "count", self.generation.count, "positive integer"
-            )
+            raise InvalidConfigValueError("count", self.generation.count, "positive integer")
         if self.generation.time_scale <= 0:
             raise InvalidConfigValueError(
                 "time_scale", self.generation.time_scale, "positive float"
             )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert configuration to dictionary."""
         return {
             "output": {
@@ -136,7 +134,7 @@ class Config:
 
 
 # Global configuration instance
-_global_config: Optional[Config] = None
+_global_config: Config | None = None
 
 
 def get_config() -> Config:

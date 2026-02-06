@@ -11,9 +11,8 @@ Reference: https://github.com/logpai/loghub
 import csv
 import io
 import re
-from typing import Dict, List, Optional, Tuple
 
-from agnolog.core.constants import LOGHUB_CSV_COLUMNS, LOGHUB_TEMPLATE_COLUMNS, LOGHUB_PLACEHOLDER
+from agnolog.core.constants import LOGHUB_CSV_COLUMNS, LOGHUB_PLACEHOLDER, LOGHUB_TEMPLATE_COLUMNS
 from agnolog.core.registry import LogTypeRegistry, get_registry
 from agnolog.core.types import LogEntry
 from agnolog.formatters.base import BaseFormatter
@@ -58,7 +57,7 @@ class LoghubCSVFormatter(BaseFormatter):
 
     def __init__(
         self,
-        registry: Optional[LogTypeRegistry] = None,
+        registry: LogTypeRegistry | None = None,
         component: str = "Server",
         default_pid: int = 1000,
     ) -> None:
@@ -79,7 +78,7 @@ class LoghubCSVFormatter(BaseFormatter):
         self._text_formatter = TextFormatter(registry=self._registry)
 
         # Template mapping: log_type -> (EventId, EventTemplate, MergeGroups)
-        self._template_map: Dict[str, Tuple[str, str, str]] = {}
+        self._template_map: dict[str, tuple[str, str, str]] = {}
         self._line_id = 0
 
         self._build_template_map()
@@ -160,7 +159,7 @@ class LoghubCSVFormatter(BaseFormatter):
         writer.writerow(row)
         return output.getvalue().rstrip("\r\n")
 
-    def format_batch(self, entries: List[LogEntry]) -> str:
+    def format_batch(self, entries: list[LogEntry]) -> str:
         """
         Format multiple entries as CSV rows (no header).
 
@@ -172,7 +171,7 @@ class LoghubCSVFormatter(BaseFormatter):
         """
         return "\n".join(self.format(entry) for entry in entries)
 
-    def format_batch_with_header(self, entries: List[LogEntry]) -> str:
+    def format_batch_with_header(self, entries: list[LogEntry]) -> str:
         """
         Format multiple entries as complete CSV with header.
 
@@ -186,7 +185,7 @@ class LoghubCSVFormatter(BaseFormatter):
         lines.extend(self.format(entry) for entry in entries)
         return "\n".join(lines)
 
-    def get_templates(self) -> List[Tuple[str, str, str]]:
+    def get_templates(self) -> list[tuple[str, str, str]]:
         """
         Get all templates for the templates.csv file.
 

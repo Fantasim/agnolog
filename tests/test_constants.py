@@ -5,28 +5,28 @@ Ensures all constants are properly defined and have valid values.
 """
 
 from agnolog.core.constants import (
-    # Version
-    VERSION,
-    PACKAGE_NAME,
+    DEFAULT_BATCH_SIZE,
+    DEFAULT_LOG_COUNT,
     # Defaults
     DEFAULT_OUTPUT_FORMAT,
-    DEFAULT_LOG_COUNT,
-    DEFAULT_BATCH_SIZE,
     DEFAULT_SERVER_ID,
     DEFAULT_TIME_SCALE,
-    # Recurrence
-    RECURRENCE_WEIGHTS,
-    # Output
-    MAX_LOG_LINE_LENGTH,
     DEFAULT_TIMESTAMP_FORMAT,
-    JSON_INDENT,
-    FILE_ROTATION_SIZE,
-    FILE_ROTATION_COUNT,
     FILE_ENCODING,
+    FILE_ROTATION_COUNT,
+    FILE_ROTATION_SIZE,
     # Logging
     INTERNAL_LOG_FORMAT,
     INTERNAL_LOG_LEVEL,
     INTERNAL_LOGGER_NAME,
+    JSON_INDENT,
+    # Output
+    MAX_LOG_LINE_LENGTH,
+    PACKAGE_NAME,
+    # Recurrence
+    RECURRENCE_WEIGHTS,
+    # Version
+    VERSION,
 )
 
 
@@ -99,6 +99,7 @@ class TestOutputConstants:
 
     def test_timestamp_format_valid(self):
         from datetime import datetime
+
         # Should not raise an error
         datetime.now().strftime(DEFAULT_TIMESTAMP_FORMAT)
 

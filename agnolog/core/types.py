@@ -8,8 +8,7 @@ used throughout the application.
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum, auto
-from typing import Any, Dict, List, Optional
-
+from typing import Any
 
 # =============================================================================
 # ENUMS
@@ -46,10 +45,10 @@ class RecurrencePattern(Enum):
     """
 
     VERY_FREQUENT = auto()  # ~1 per second
-    FREQUENT = auto()       # ~5 per minute
-    NORMAL = auto()         # ~0.5 per minute
-    INFREQUENT = auto()     # ~2 per hour
-    RARE = auto()           # ~1 per day
+    FREQUENT = auto()  # ~5 per minute
+    NORMAL = auto()  # ~0.5 per minute
+    INFREQUENT = auto()  # ~2 per hour
+    RARE = auto()  # ~1 per day
 
 
 # =============================================================================
@@ -104,13 +103,13 @@ class LogEntry:
     timestamp: datetime
     severity: LogSeverity
     category: str  # Flexible string category
-    data: Dict[str, Any]
-    server_id: Optional[str] = None
-    session_id: Optional[str] = None
+    data: dict[str, Any]
+    server_id: str | None = None
+    session_id: str | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for serialization."""
-        result: Dict[str, Any] = {
+        result: dict[str, Any] = {
             "log_type": self.log_type,
             "timestamp": self.timestamp.isoformat(),
             "severity": self.severity.name,

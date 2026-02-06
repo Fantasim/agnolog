@@ -5,8 +5,7 @@ Contains custom exceptions used throughout the application,
 organized by category. Each exception includes helpful context.
 """
 
-from typing import Any, Dict, List, Optional
-
+from typing import Any
 
 # =============================================================================
 # BASE EXCEPTION
@@ -26,7 +25,7 @@ class AgnologError(Exception):
         details: Additional context as a dictionary
     """
 
-    def __init__(self, message: str, details: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(self, message: str, details: dict[str, Any] | None = None) -> None:
         super().__init__(message)
         self.message = message
         self.details = details or {}
@@ -55,7 +54,7 @@ class ConfigurationError(AgnologError):
 class MissingConfigError(ConfigurationError):
     """Raised when a required configuration value is missing."""
 
-    def __init__(self, key: str, hint: Optional[str] = None) -> None:
+    def __init__(self, key: str, hint: str | None = None) -> None:
         message = f"Missing required configuration: {key}"
         if hint:
             message += f". {hint}"
@@ -72,7 +71,7 @@ class InvalidConfigValueError(ConfigurationError):
         key: str,
         value: Any,
         expected: str,
-        hint: Optional[str] = None,
+        hint: str | None = None,
     ) -> None:
         message = f"Invalid value for '{key}': {value!r}. Expected: {expected}"
         if hint:
@@ -112,9 +111,9 @@ class RegistryError(AgnologError):
 class LogTypeNotFoundError(RegistryError):
     """Raised when requesting an unregistered log type."""
 
-    def __init__(self, log_type: str, available: Optional[List[str]] = None) -> None:
+    def __init__(self, log_type: str, available: list[str] | None = None) -> None:
         message = f"Log type not found: {log_type}"
-        details: Dict[str, Any] = {"log_type": log_type}
+        details: dict[str, Any] = {"log_type": log_type}
         if available:
             message += f". Available types: {', '.join(available[:5])}"
             if len(available) > 5:
@@ -163,9 +162,9 @@ class GeneratorError(AgnologError):
 class DataGenerationError(GeneratorError):
     """Raised when data generation fails for a log type."""
 
-    def __init__(self, log_type: str, reason: str, field: Optional[str] = None) -> None:
+    def __init__(self, log_type: str, reason: str, field: str | None = None) -> None:
         message = f"Failed to generate data for '{log_type}': {reason}"
-        details: Dict[str, Any] = {"log_type": log_type, "reason": reason}
+        details: dict[str, Any] = {"log_type": log_type, "reason": reason}
         if field:
             message = f"Failed to generate field '{field}' for '{log_type}': {reason}"
             details["field"] = field
@@ -182,10 +181,10 @@ class MissingFieldError(GeneratorError):
         self,
         log_type: str,
         field: str,
-        available_fields: Optional[List[str]] = None,
+        available_fields: list[str] | None = None,
     ) -> None:
         message = f"Missing required field '{field}' in log type '{log_type}'"
-        details: Dict[str, Any] = {"log_type": log_type, "field": field}
+        details: dict[str, Any] = {"log_type": log_type, "field": field}
         if available_fields:
             message += f". Available fields: {', '.join(available_fields)}"
             details["available_fields"] = available_fields
@@ -223,11 +222,11 @@ class TemplateError(FormatterError):
     def __init__(
         self,
         template: str,
-        missing_keys: List[str],
-        available_keys: Optional[List[str]] = None,
+        missing_keys: list[str],
+        available_keys: list[str] | None = None,
     ) -> None:
         message = f"Template formatting failed. Missing keys: {', '.join(missing_keys)}"
-        details: Dict[str, Any] = {
+        details: dict[str, Any] = {
             "template": template[:100] + "..." if len(template) > 100 else template,
             "missing_keys": missing_keys,
         }
@@ -242,9 +241,9 @@ class TemplateError(FormatterError):
 class UnsupportedFormatError(FormatterError):
     """Raised when output format is not supported."""
 
-    def __init__(self, format_name: str, supported: Optional[List[str]] = None) -> None:
+    def __init__(self, format_name: str, supported: list[str] | None = None) -> None:
         message = f"Unsupported output format: {format_name}"
-        details: Dict[str, Any] = {"format": format_name}
+        details: dict[str, Any] = {"format": format_name}
         if supported:
             message += f". Supported formats: {', '.join(supported)}"
             details["supported"] = supported
@@ -337,9 +336,9 @@ class SchedulingError(AgnologError):
 class InvalidPatternError(SchedulingError):
     """Raised when recurrence pattern is invalid."""
 
-    def __init__(self, pattern: str, valid_patterns: Optional[List[str]] = None) -> None:
+    def __init__(self, pattern: str, valid_patterns: list[str] | None = None) -> None:
         message = f"Invalid recurrence pattern: {pattern}"
-        details: Dict[str, Any] = {"pattern": pattern}
+        details: dict[str, Any] = {"pattern": pattern}
         if valid_patterns:
             message += f". Valid patterns: {', '.join(valid_patterns)}"
             details["valid_patterns"] = valid_patterns

@@ -5,7 +5,7 @@ Produces human-readable printf-style output suitable for
 console display and traditional log files.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Any
 
 from agnolog.core.constants import SHORT_TIMESTAMP_FORMAT
 from agnolog.core.registry import LogTypeRegistry, get_registry
@@ -33,8 +33,8 @@ class TextFormatter(BaseFormatter):
 
     def __init__(
         self,
-        registry: Optional[LogTypeRegistry] = None,
-        timestamp_format: Optional[str] = None,
+        registry: LogTypeRegistry | None = None,
+        timestamp_format: str | None = None,
         include_severity: bool = False,
         include_category: bool = False,
         color_enabled: bool = False,
@@ -57,7 +57,7 @@ class TextFormatter(BaseFormatter):
         self._logger = get_internal_logger()
 
     # ANSI color codes for severity levels
-    SEVERITY_COLORS: Dict[str, str] = {
+    SEVERITY_COLORS: dict[str, str] = {
         "DEBUG": "\033[36m",  # Cyan
         "INFO": "\033[32m",  # Green
         "WARNING": "\033[33m",  # Yellow
@@ -87,9 +87,9 @@ class TextFormatter(BaseFormatter):
             return str(value)
         return str(value)
 
-    def _build_format_dict(self, entry: LogEntry) -> Dict[str, str]:
+    def _build_format_dict(self, entry: LogEntry) -> dict[str, str]:
         """Build the format dictionary for template substitution."""
-        format_dict: Dict[str, str] = {
+        format_dict: dict[str, str] = {
             "timestamp": entry.timestamp.strftime(self._timestamp_format),
             "severity": entry.severity.name,
             "category": entry.category,  # Category is now a string
@@ -109,7 +109,7 @@ class TextFormatter(BaseFormatter):
         return format_dict
 
     def _format_with_template(
-        self, entry: LogEntry, template: str, format_dict: Dict[str, str]
+        self, entry: LogEntry, template: str, format_dict: dict[str, str]
     ) -> str:
         """Format entry using template, handling missing keys gracefully."""
         try:
@@ -123,7 +123,7 @@ class TextFormatter(BaseFormatter):
             )
             return self._format_default(entry, format_dict)
 
-    def _format_default(self, entry: LogEntry, format_dict: Dict[str, str]) -> str:
+    def _format_default(self, entry: LogEntry, format_dict: dict[str, str]) -> str:
         """Format entry using default format."""
         parts = [f"[{format_dict['timestamp']}]"]
 
@@ -163,16 +163,14 @@ class TextFormatter(BaseFormatter):
         metadata = self._registry.get_metadata(entry.log_type)
 
         if metadata and metadata.text_template:
-            result = self._format_with_template(
-                entry, metadata.text_template, format_dict
-            )
+            result = self._format_with_template(entry, metadata.text_template, format_dict)
         else:
             result = self._format_default(entry, format_dict)
 
         # Apply color if enabled
         return self._colorize(result, entry.severity.name)
 
-    def format_batch(self, entries: List[LogEntry]) -> str:
+    def format_batch(self, entries: list[LogEntry]) -> str:
         """
         Format multiple entries as newline-separated text.
 

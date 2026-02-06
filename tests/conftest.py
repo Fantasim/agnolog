@@ -2,13 +2,13 @@
 Pytest fixtures and configuration for agnolog tests.
 """
 
-import pytest
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
+
+import pytest
 
 from agnolog.core.registry import LogTypeRegistry, register_lua_generators
-
 from agnolog.core.types import (
     LogEntry,
     LogSeverity,
@@ -112,7 +112,7 @@ def sample_log_entries(sample_timestamp):
 class SampleGenerator(BaseLogGenerator):
     """Sample generator for testing."""
 
-    def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def _generate_data(self, **kwargs: Any) -> dict[str, Any]:
         return {
             "message": kwargs.get("message", "test message"),
             "value": kwargs.get("value", 42),

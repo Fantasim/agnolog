@@ -5,7 +5,7 @@ Contains default values and configuration constants.
 Theme-specific data is loaded from YAML files.
 """
 
-from typing import Dict, Final, Tuple
+from typing import Final
 
 # =============================================================================
 # VERSION AND METADATA
@@ -27,12 +27,12 @@ DEFAULT_TIME_SCALE: Final[float] = 1.0
 # RECURRENCE WEIGHTS (events per hour at normal rate)
 # These determine how often each log type fires
 # =============================================================================
-RECURRENCE_WEIGHTS: Final[Dict[str, float]] = {
-    "VERY_FREQUENT": 3600.0,    # 1 per second average
-    "FREQUENT": 300.0,          # 5 per minute average
-    "NORMAL": 30.0,             # 0.5 per minute average
-    "INFREQUENT": 2.0,          # 2 per hour average
-    "RARE": 0.04,               # ~1 per day average
+RECURRENCE_WEIGHTS: Final[dict[str, float]] = {
+    "VERY_FREQUENT": 3600.0,  # 1 per second average
+    "FREQUENT": 300.0,  # 5 per minute average
+    "NORMAL": 30.0,  # 0.5 per minute average
+    "INFREQUENT": 2.0,  # 2 per hour average
+    "RARE": 0.04,  # ~1 per day average
 }
 
 # =============================================================================
@@ -58,7 +58,7 @@ INTERNAL_LOGGER_NAME: Final[str] = "agnolog.internal"
 # LOGHUB CSV FORMAT CONFIGURATION
 # =============================================================================
 LOGHUB_PLACEHOLDER: Final[str] = "<*>"
-LOGHUB_CSV_COLUMNS: Final[Tuple[str, ...]] = (
+LOGHUB_CSV_COLUMNS: Final[tuple[str, ...]] = (
     "LineId",
     "Date",
     "Day",
@@ -69,4 +69,4 @@ LOGHUB_CSV_COLUMNS: Final[Tuple[str, ...]] = (
     "EventId",
     "EventTemplate",
 )
-LOGHUB_TEMPLATE_COLUMNS: Final[Tuple[str, ...]] = ("EventId", "EventTemplate", "MergeGroups")
+LOGHUB_TEMPLATE_COLUMNS: Final[tuple[str, ...]] = ("EventId", "EventTemplate", "MergeGroups")

@@ -4,12 +4,10 @@ File output handlers for writing logs to files.
 Supports both simple file output and rotating files.
 """
 
-import os
 from pathlib import Path
-from typing import Optional
 
 from agnolog.core.constants import FILE_ENCODING, FILE_ROTATION_COUNT, FILE_ROTATION_SIZE
-from agnolog.core.errors import FileWriteError, PermissionDeniedError, DirectoryNotFoundError
+from agnolog.core.errors import DirectoryNotFoundError, FileWriteError, PermissionDeniedError
 from agnolog.logutils import get_internal_logger
 from agnolog.output.base import BaseOutputHandler
 
@@ -113,9 +111,7 @@ class FileOutputHandler(BaseOutputHandler):
             try:
                 self._file.flush()
                 self._file.close()
-                self._logger.debug(
-                    f"Closed file: {self._path} ({self._write_count} writes)"
-                )
+                self._logger.debug(f"Closed file: {self._path} ({self._write_count} writes)")
             except OSError as e:
                 self._logger.warning(f"Error closing file {self._path}: {e}")
             finally:

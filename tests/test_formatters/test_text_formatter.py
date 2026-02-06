@@ -4,10 +4,10 @@ Tests for agnolog.formatters.text_formatter module.
 Tests the TextFormatter class.
 """
 
-import pytest
 from datetime import datetime
 
-from agnolog.formatters.text_formatter import TextFormatter, ColorTextFormatter
+import pytest
+
 from agnolog.core.registry import LogTypeRegistry
 from agnolog.core.types import (
     LogEntry,
@@ -15,6 +15,7 @@ from agnolog.core.types import (
     LogTypeMetadata,
     RecurrencePattern,
 )
+from agnolog.formatters.text_formatter import ColorTextFormatter, TextFormatter
 from agnolog.generators.base import BaseLogGenerator
 
 

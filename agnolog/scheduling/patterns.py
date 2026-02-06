@@ -7,7 +7,6 @@ log events based on their recurrence patterns.
 
 import random
 from datetime import timedelta
-from typing import Dict
 
 from agnolog.core.constants import RECURRENCE_WEIGHTS
 from agnolog.core.types import RecurrencePattern
@@ -79,7 +78,7 @@ class RecurrenceCalculator:
 
     def get_weighted_log_type(
         self,
-        available_types: Dict[str, RecurrencePattern],
+        available_types: dict[str, RecurrencePattern],
     ) -> str:
         """
         Select a log type weighted by recurrence frequency.

@@ -4,12 +4,10 @@ Tests for agnolog.scheduling module.
 Tests LogScheduler and RecurrenceCalculator.
 """
 
-import pytest
 from datetime import datetime, timedelta
-from unittest.mock import MagicMock, patch
 
-from agnolog.scheduling import LogScheduler, RecurrenceCalculator, get_recurrence_rate
-from agnolog.scheduling.scheduler import ScheduledEvent
+import pytest
+
 from agnolog.core.factory import LogFactory
 from agnolog.core.registry import LogTypeRegistry
 from agnolog.core.types import (
@@ -19,6 +17,8 @@ from agnolog.core.types import (
     RecurrencePattern,
 )
 from agnolog.generators.base import BaseLogGenerator
+from agnolog.scheduling import LogScheduler, RecurrenceCalculator, get_recurrence_rate
+from agnolog.scheduling.scheduler import ScheduledEvent
 
 
 class DummyGenerator(BaseLogGenerator):
@@ -82,12 +82,10 @@ class TestRecurrenceCalculator:
 
         # Generate many samples
         frequent_intervals = [
-            calc.get_interval(RecurrencePattern.FREQUENT).total_seconds()
-            for _ in range(100)
+            calc.get_interval(RecurrencePattern.FREQUENT).total_seconds() for _ in range(100)
         ]
         rare_intervals = [
-            calc.get_interval(RecurrencePattern.RARE).total_seconds()
-            for _ in range(100)
+            calc.get_interval(RecurrencePattern.RARE).total_seconds() for _ in range(100)
         ]
 
         # Average frequent should be much shorter than rare
@@ -103,6 +101,7 @@ class TestRecurrenceCalculator:
 
         # Fixed seed for reproducibility
         import random
+
         random.seed(42)
         normal_interval = calc_normal.get_interval(RecurrencePattern.NORMAL)
 
@@ -392,9 +391,7 @@ class TestLogSchedulerWithPopulatedRegistry:
         scheduler = LogScheduler(factory=factory, registry=populated_registry)
 
         # Enable only types we know the patterns for
-        scheduler.enable_log_types(
-            log_types=["combat.damage_dealt", "server.restart"]
-        )
+        scheduler.enable_log_types(log_types=["combat.damage_dealt", "server.restart"])
 
         start = datetime.now()
         end = start + timedelta(hours=2)
@@ -403,7 +400,6 @@ class TestLogSchedulerWithPopulatedRegistry:
 
         # Count by type
         damage_count = sum(1 for e in entries if e.log_type == "combat.damage_dealt")
-        restart_count = sum(1 for e in entries if e.log_type == "server.restart")
 
         # Damage (frequent/very_frequent) should appear more than restart (rare)
         # Note: Due to randomness, we just check damage appears at least somewhat

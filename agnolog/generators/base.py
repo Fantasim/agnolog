@@ -7,7 +7,7 @@ the _generate_data method to produce log-specific data.
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any
 
 from agnolog.core.types import LogEntry, LogTypeMetadata
 from agnolog.logutils import InternalLoggerMixin
@@ -33,14 +33,14 @@ class BaseLogGenerator(ABC, InternalLoggerMixin):
     """
 
     # Metadata is set by the @register_log_type decorator
-    _log_type_metadata: Optional[LogTypeMetadata] = None
+    _log_type_metadata: LogTypeMetadata | None = None
 
     def generate(
         self,
         timestamp: datetime,
         metadata: LogTypeMetadata,
-        server_id: Optional[str] = None,
-        session_id: Optional[str] = None,
+        server_id: str | None = None,
+        session_id: str | None = None,
         **kwargs: Any,
     ) -> LogEntry:
         """
@@ -74,7 +74,7 @@ class BaseLogGenerator(ABC, InternalLoggerMixin):
         )
 
     @abstractmethod
-    def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def _generate_data(self, **kwargs: Any) -> dict[str, Any]:
         """
         Generate the data dictionary for this log type.
 

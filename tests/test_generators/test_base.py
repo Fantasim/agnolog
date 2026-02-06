@@ -4,23 +4,24 @@ Tests for agnolog.generators.base module.
 Tests the BaseLogGenerator abstract class.
 """
 
-import pytest
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any
 
-from agnolog.generators.base import BaseLogGenerator
+import pytest
+
 from agnolog.core.types import (
     LogEntry,
     LogSeverity,
     LogTypeMetadata,
     RecurrencePattern,
 )
+from agnolog.generators.base import BaseLogGenerator
 
 
 class ConcreteGenerator(BaseLogGenerator):
     """Concrete implementation for testing."""
 
-    def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def _generate_data(self, **kwargs: Any) -> dict[str, Any]:
         return {
             "message": kwargs.get("message", "test"),
             "value": kwargs.get("value", 100),
@@ -30,7 +31,7 @@ class ConcreteGenerator(BaseLogGenerator):
 class FailingGenerator(BaseLogGenerator):
     """Generator that raises exceptions."""
 
-    def _generate_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def _generate_data(self, **kwargs: Any) -> dict[str, Any]:
         raise RuntimeError("Generation failed")
 
 
