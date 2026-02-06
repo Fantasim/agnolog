@@ -58,7 +58,7 @@ Get-FileHash agnolog.exe -Algorithm SHA256
 **Step 3:** To fully verify, clone and build from source:
 ```bash
 git clone {{REPO_URL}}.git
-cd logsimulator
+cd agnolog
 git checkout {{COMMIT_SHA}}
 pip install -e ".[dev]"
 make build-binary

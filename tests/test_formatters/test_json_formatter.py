@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.formatters.json_formatter module.
+Tests for agnolog.formatters.json_formatter module.
 
 Tests the JSONFormatter class.
 """

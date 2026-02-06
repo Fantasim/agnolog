@@ -81,7 +81,7 @@ get_version_changelog() {
     ' "$changelog_file"
 }
 
-# Get GitHub repo slug from remote URL (e.g., "Fantasim/logsimulator")
+# Get GitHub repo slug from remote URL (e.g., "Fantasim/agnolog")
 get_repo_slug() {
     git -C "$REPO_ROOT" remote get-url origin 2>/dev/null \
         | sed 's/.*github\.com[:/]\(.*\)\.git$/\1/' \

@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.formatters.text_formatter module.
+Tests for agnolog.formatters.text_formatter module.
 
 Tests the TextFormatter class.
 """

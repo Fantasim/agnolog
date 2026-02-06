@@ -456,7 +456,7 @@ Examples:
     parser.add_argument(
         "-v", "--version",
         action="version",
-        version=f"mmofakelog {VERSION}",
+        version=f"agnolog {VERSION}",
     )
 
     parser.add_argument(

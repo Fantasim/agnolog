@@ -1,4 +1,4 @@
-"""Entry point for running mmofakelog as a module: python -m mmofakelog"""
+"""Entry point for running agnolog as a module: python -m agnolog"""
 
 import sys
 

@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.output module.
+Tests for agnolog.output module.
 
 Tests output handlers for file and stream output.
 """

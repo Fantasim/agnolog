@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.core.registry module.
+Tests for agnolog.core.registry module.
 
 Tests the LogTypeRegistry class and register_log_type decorator.
 """

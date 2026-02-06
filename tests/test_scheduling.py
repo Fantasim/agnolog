@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.scheduling module.
+Tests for agnolog.scheduling module.
 
 Tests LogScheduler and RecurrenceCalculator.
 """

@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.core.factory module.
+Tests for agnolog.core.factory module.
 
 Tests the LogFactory class for creating log entries.
 """

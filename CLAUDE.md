@@ -268,7 +268,7 @@ make test-cov      # With coverage (must stay >80%)
   "app_name": "agnolog",
   "app_display_name": "Agnolog",
   "version": "1.0.0",
-  "repo_url": "https://github.com/Fantasim/logsimulator"
+  "repo_url": "https://github.com/Fantasim/agnolog"
 }
 ```
 

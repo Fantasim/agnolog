@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.generators.base module.
+Tests for agnolog.generators.base module.
 
 Tests the BaseLogGenerator abstract class.
 """

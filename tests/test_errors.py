@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.core.errors module.
+Tests for agnolog.core.errors module.
 
 Ensures all exception types are properly defined and work correctly.
 """

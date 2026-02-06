@@ -99,7 +99,7 @@ You can verify these binaries are authentic by reproducing the build locally.
 **Step 1:** Clone and checkout the release commit
 ```bash
 git clone {{REPO_URL}}.git
-cd logsimulator
+cd agnolog
 git checkout {{COMMIT_SHA}}
 ```
 

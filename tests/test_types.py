@@ -1,5 +1,5 @@
 """
-Tests for mmofakelog.core.types module.
+Tests for agnolog.core.types module.
 
 Tests all enums, dataclasses, and protocols.
 """
