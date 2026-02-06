@@ -1,6 +1,13 @@
 .PHONY: help install dev test lint format validate run clean build publish docs \
        release release-status release-clean sync-version build-binary build-binary-test
 
+# Python binary (prefer local .venv, then python3, then python)
+PYTHON ?= $(shell \
+	if [ -x .venv/bin/python3 ]; then echo .venv/bin/python3; \
+	elif [ -x .venv/bin/python ]; then echo .venv/bin/python; \
+	else command -v python3 2>/dev/null || command -v python 2>/dev/null; \
+	fi)
+
 # Resources path (override with: make run RESOURCES=/path/to/resources)
 RESOURCES ?= ./resources/mmorpg
 
@@ -46,20 +53,20 @@ help:
 
 # Installation
 install:
-	pip install -e .
+	$(PYTHON) -m pip install -e .
 
 dev:
-	pip install -e ".[dev]"
+	$(PYTHON) -m pip install -e ".[dev]"
 
 # Testing
 test:
-	python -m pytest tests/ -v
+	$(PYTHON) -m pytest tests/ -v
 
 test-cov:
-	python -m pytest tests/ -v --cov=agnolog --cov-report=term-missing --cov-report=html
+	$(PYTHON) -m pytest tests/ -v --cov=agnolog --cov-report=term-missing --cov-report=html
 
 test-quick:
-	python -m pytest tests/ -q
+	$(PYTHON) -m pytest tests/ -q
 
 # Code quality
 lint:
@@ -71,33 +78,33 @@ format:
 
 # Validation
 validate:
-	python -m agnolog --resources $(RESOURCES) validate
+	$(PYTHON) -m agnolog --resources $(RESOURCES) validate
 
 # Running
 run:
-	python -m agnolog --resources $(RESOURCES) -n 100 --pretty
+	$(PYTHON) -m agnolog --resources $(RESOURCES) -n 100 --pretty
 
 run-text:
-	python -m agnolog --resources $(RESOURCES) -n 100 -f text
+	$(PYTHON) -m agnolog --resources $(RESOURCES) -n 100 -f text
 
 run-many:
-	python -m agnolog --resources $(RESOURCES) -n 1000
+	$(PYTHON) -m agnolog --resources $(RESOURCES) -n 1000
 
 run-loghub:
-	python -m agnolog --resources $(RESOURCES) --loghub output -n 1000
+	$(PYTHON) -m agnolog --resources $(RESOURCES) --loghub output -n 1000
 	@echo ""
 	@echo "Generated files:"
 	@ls -la output.log output_structured.csv output_templates.csv
 
 list:
-	python -m agnolog --resources $(RESOURCES) --list-types
+	$(PYTHON) -m agnolog --resources $(RESOURCES) --list-types
 
 merge-groups:
-	python -m agnolog --resources $(RESOURCES) --show-merge-groups
+	$(PYTHON) -m agnolog --resources $(RESOURCES) --show-merge-groups
 
 # Building
 build: clean
-	python -m build
+	$(PYTHON) -m build
 
 clean:
 	rm -rf build/
@@ -112,12 +119,12 @@ clean:
 	find . -type f -name "*.pyc" -delete 2>/dev/null || true
 
 publish: build
-	python -m twine upload dist/*
+	$(PYTHON) -m twine upload dist/*
 
 # Binary building (PyInstaller)
 build-binary:
-	pip install pyinstaller
-	pyinstaller agnolog.spec
+	$(PYTHON) -m pip install pyinstaller
+	$(PYTHON) -m PyInstaller agnolog.spec
 	@echo ""
 	@echo "Binary built: dist/agnolog"
 

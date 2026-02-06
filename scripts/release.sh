@@ -69,7 +69,8 @@ fi
 
 echo ""
 echo -e "${BOLD}${CYAN}Running tests...${NC}"
-if ! python -m pytest "$REPO_ROOT/tests/" -v 2>&1; then
+PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
+if ! "$PYTHON" -m pytest "$REPO_ROOT/tests/" -v 2>&1; then
     echo -e "${RED}Tests failed! Fix them before releasing.${NC}"
     exit 1
 fi
