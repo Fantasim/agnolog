@@ -16,7 +16,6 @@ Choose the archive for your platform:
 | Platform | Architecture | Download |
 |----------|-------------|----------|
 | Linux | x86_64 | [agnolog-v{{VERSION}}-linux-amd64.tar.gz]({{REPO_URL}}/releases/download/v{{VERSION}}/agnolog-v{{VERSION}}-linux-amd64.tar.gz) |
-| macOS | Intel | [agnolog-v{{VERSION}}-macos-amd64.tar.gz]({{REPO_URL}}/releases/download/v{{VERSION}}/agnolog-v{{VERSION}}-macos-amd64.tar.gz) |
 | macOS | Apple Silicon | [agnolog-v{{VERSION}}-macos-arm64.tar.gz]({{REPO_URL}}/releases/download/v{{VERSION}}/agnolog-v{{VERSION}}-macos-arm64.tar.gz) |
 | Windows | x86_64 | [agnolog-v{{VERSION}}-windows-amd64.zip]({{REPO_URL}}/releases/download/v{{VERSION}}/agnolog-v{{VERSION}}-windows-amd64.zip) |
 

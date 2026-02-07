@@ -92,7 +92,6 @@ jobs:
       matrix:
         platform:
           - { label: linux-amd64,   runner: ubuntu-latest,  archive: tar.gz, os: linux }
-          - { label: macos-amd64,   runner: macos-13,       archive: tar.gz, os: darwin }
           - { label: macos-arm64,   runner: macos-latest,   archive: tar.gz, os: darwin }
           - { label: windows-amd64, runner: windows-latest, archive: zip,    os: windows }
     env:

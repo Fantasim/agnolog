@@ -2,6 +2,7 @@
 # agnolog.spec — PyInstaller spec file for building standalone binary.
 # Usage: pyinstaller agnolog.spec
 
+import sys
 from PyInstaller.utils.hooks import collect_all
 
 block_cipher = None
@@ -69,7 +70,7 @@ exe = EXE(
     name='agnolog',
     debug=False,
     bootloader_ignore_signals=False,
-    strip=True,
+    strip=sys.platform != 'win32',
     upx=False,
     console=True,
     disable_windowed_traceback=False,

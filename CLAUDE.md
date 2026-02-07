@@ -281,7 +281,7 @@ make test-cov      # With coverage (must stay >80%)
 
 ## Release Workflow
 
-Releases create standalone binaries for 4 platforms via GitHub Actions.
+Releases create standalone binaries for 3 platforms via GitHub Actions.
 
 **Step-by-step release process:**
 1. Update version in `scripts/.config.json`
@@ -298,12 +298,11 @@ Releases create standalone binaries for 4 platforms via GitHub Actions.
 
 **Release pipeline (GitHub Actions):**
 ```
-Tag push v*.*.* → validate → test & lint → build (4 platforms) → publish GitHub Release
+Tag push v*.*.* → validate → test & lint → build (3 platforms) → publish GitHub Release
 ```
 
 **Platforms built:**
 - Linux x86_64 (ubuntu-latest)
-- macOS Intel (macos-13)
 - macOS Apple Silicon (macos-latest)
 - Windows x86_64 (windows-latest)
 
