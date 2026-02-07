@@ -1,8 +1,12 @@
-# Agnolog
+<img width="1446" height="733" alt="image" src="https://github.com/user-attachments/assets/884539ca-ae49-4c53-b94b-736b28cff53d" />
 
-Theme-agnostic fake log generator for benchmarking log parsers, testing pipelines, and ML training data.
+<br /> 
 
-## Installation
+### Theme-agnostic fake log generator for benchmarking log parsers, testing pipelines, and ML training data.
+
+<br /> 
+
+# Installation
 
 ```bash
 pip install agnolog
